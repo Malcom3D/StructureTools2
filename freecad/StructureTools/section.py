@@ -25,11 +25,11 @@ class Section:
         obj.addProperty("App::PropertyLinkSub", "ObjectBase", "Base", "Object base").ObjectBase = objectSelected
         
         # Propriedades da seção
-        obj.addProperty("App::PropertyFloat", "MomentInertiaY", "SectionProprety", "Inertia in the local Y axis").MomentInertiaY = 0.00
-        obj.addProperty("App::PropertyFloat", "MomentInertiaZ", "SectionProprety", "Inertia in the local Z axis").MomentInertiaZ = 0.00
-        obj.addProperty("App::PropertyFloat", "MomentInertiaPolar", "SectionProprety", "Polar Moment of Inertia J").MomentInertiaPolar = 0.00
+        obj.addProperty("App::PropertyFloat", "MomentInertiaY", "SectionProprety", "Inertia in the local Y axis").MomentInertiaY = 650000000.00
+        obj.addProperty("App::PropertyFloat", "MomentInertiaZ", "SectionProprety", "Inertia in the local Z axis").MomentInertiaZ = 450000000.00
+        obj.addProperty("App::PropertyFloat", "MomentInertiaPolar", "SectionProprety", "Polar Moment of Inertia J").MomentInertiaPolar = 1100000000.00
         obj.addProperty("App::PropertyFloat", "ProductInertiaYZ", "SectionProprety", "Product of Inertia").ProductInertiaYZ = 0.00
-        obj.addProperty("App::PropertyArea", "AreaSection", "SectionProprety", "Section area").AreaSection = 0.00
+        obj.addProperty("App::PropertyArea", "AreaSection", "SectionProprety", "Section area").AreaSection = 60000.00
 
         obj.addProperty("App::PropertyBool", "ViewSection", "DrawSection", "Ver a seção no membro").ViewSection = False
         obj.addProperty("App::PropertyBool", "ViewFullSection", "DrawSection", "Ver a seção no membro").ViewFullSection = False
