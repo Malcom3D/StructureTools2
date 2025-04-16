@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>StructureTools</name>
+  <description>This is a workbench for FreeCAD that implements a set of tools for modeling and analyzing structural stresses, similar to analysis software such as SAP2000, Cype3D, SkyCiv, EdiLus, among many others.</description>
+  <version>0.0.1</version>
+  <maintainer email="eng.maykowmenezes@gmail.com">Maykow Menezes</maintainer>
+  <license file="LICENSE">LGPL-3.0-or-later</license>
+  <url type="repository" branch="main">https://github.com/maykowsm/StructureTools</url>
+  
+
+  <content>
+    <workbench>
+      <classname>StructureTools Workbench</classname>
+      <version>0.0.1</version>
+      <subdirectory>./</subdirectory>
+      <icon>freecad/StructureTools/resources/icone.svg</icon>
+      <freecadmin>1.0.0</freecadmin>
+      <depend>numpy</depend>
+    </workbench>
+  </content>
+
+</package>
