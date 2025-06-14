@@ -66,8 +66,9 @@ class LoadDistributed:
         subelement = self.getSubelement(obj, obj.ObjectBase[0][1][0])
         if 'Edge' in obj.ObjectBase[0][1][0]:
             k = 1000000
+            if (obj.ScaleDraw > 1):
+                obj.ScaleDraw = 1
             nArrow = int(k * (subelement.Length**(1/1.8))/(obj.ScaleDraw * ((obj.InitialLoading + obj.FinalLoading) / 2))) #calcula o numero de setas com base na distancia do menbro, escala do desenho e media das forças de inicio e fim
-            
             
 
             FEend = obj.FinalLoading / obj.InitialLoading #fator de escala entre as forças 'end' e 'start'

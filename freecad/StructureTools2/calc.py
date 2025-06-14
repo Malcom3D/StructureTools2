@@ -65,9 +65,9 @@ class Calc:
 		obj.addProperty("App::PropertyInteger", "NumPointsDeflection", "NumPoints", "Presizão dos gráficos").NumPointsDeflection = 4
 
 
-	#  Mapeia os nós da estrutura, (inverte o eixo y e z para adequação as coordenadas do sover)
+        #  Maps the structure nodes, (inverts the y and z axis to adapt to the override coordinates)
 	def mapNodes(self, elements, unitLength):	
-		# Varre todos os elementos de linha e adiciona seus vertices à tabela de nodes
+                # Scans all line elements and adds their vertices to the nodes table
 		listNodes = []
 		for element in elements:
 			for edge in element.Shape.Edges:

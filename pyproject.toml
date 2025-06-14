@@ -9,24 +9,24 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "freecad.StructureTools"
+name = "freecad.StructureTools2"
 dynamic = ["version"]
 description = "Workbench for 2d and 3d structural analysis"
 readme = "README.md"
 license = {file = "LICENSE"}
 maintainers = [
-    {name = "Maykow Menezes", email = "eng.maykowmenezes@gmail.com"
+    {name = "Malcom3D", email = "malcom3d.gpl@gmail.com"
     },
 ]
 requires-python = ">=3.8"
-dependencies = ["['numpy','scipy']"]
+dependencies = ["['numpy','scipy','sympy']"]
 
 [project.urls]
-source = "https://www.patreon.com/c/StructureTools"
+source = "https://www.freecad.org"
 
 [tool.setuptools]
-packages = ["freecad", "freecad.StructureTools"]
+packages = ["freecad", "freecad.StructureTools2"]
 include-package-data = true
 
 [tool.setuptools.dynamic]
-version = {attr = "freecad.StructureTools.__version__"}
+version = {attr = "freecad.StructureTools2.__version__"}

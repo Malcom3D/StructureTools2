@@ -25,7 +25,7 @@ from .Pynite_main.FEModel3D import FEModel3D
 # 	print('Instalando dependencias')
 # 	subprocess.check_call(["pip", "install", "PyniteFEA"])
 
-class StructureTools(Gui.Workbench):
+class StructureTools2(Gui.Workbench):
 	"""
 	class which gets initiated at startup of the gui
 	"""
@@ -42,14 +42,14 @@ class StructureTools(Gui.Workbench):
 		This function is called at the first activation of the workbench.
 		here is the place to import all the commands
 		"""
-		from freecad.StructureTools import load_distributed
-		from freecad.StructureTools import load_nodal
-		from freecad.StructureTools import suport
-		from freecad.StructureTools import section
-		from freecad.StructureTools import material
-		from freecad.StructureTools import member
-		from freecad.StructureTools import calc
-		from freecad.StructureTools import diagram
+		from freecad.StructureTools2 import load_distributed
+		from freecad.StructureTools2 import load_nodal
+		from freecad.StructureTools2 import suport
+		from freecad.StructureTools2 import section
+		from freecad.StructureTools2 import material
+		from freecad.StructureTools2 import member
+		from freecad.StructureTools2 import calc
+		from freecad.StructureTools2 import diagram
 
 		
 		import DraftTools, SketcherGui
@@ -72,7 +72,7 @@ class StructureTools(Gui.Workbench):
 
 		App.Console.PrintMessage(translate(
 			"Log",
-			"Workbench StructureTools activated.") + "\n")
+			"Workbench StructureTools2 activated.") + "\n")
 
 	def Deactivated(self):
 		'''
@@ -80,7 +80,7 @@ class StructureTools(Gui.Workbench):
 		'''
 		App.Console.PrintMessage(translate(
 			"Log",
-			"Workbench StructureTools de-activated.") + "\n")
+			"Workbench StructureTools2 de-activated.") + "\n")
 
 
-Gui.addWorkbench(StructureTools())
+Gui.addWorkbench(StructureTools2())
