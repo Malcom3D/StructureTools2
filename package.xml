@@ -9,8 +9,8 @@
 
   <content>
     <workbench>
-      <name>StructureTools Workbench</name>
-      <classname>StructureToolsWorkbench</classname>      
+      <name>StructureTools2 Workbench</name>
+      <classname>StructureTools2Workbench</classname>      
       <description>This is a workbench for FreeCAD that implements a set of tools for modeling and analyzing structural stresses, similar to analysis software such as SAP2000, Cype3D, SkyCiv, EdiLus, among many others.</description>
       <version>0.0.1</version>
       <subdirectory>./</subdirectory>
@@ -19,7 +19,7 @@
       <depend>numpy</depend>
       <depend>scipy</depend>
       <depend>sympy</depend>
-      <tag>StructureTools</tag>
+      <tag>StructureTools2</tag>
     </workbench>
   </content>
 
