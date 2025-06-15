@@ -27,43 +27,46 @@ class SizeTaskPanel:
         # Standard ComboBox
         self.StandardLabel = QtGui.QLabel("Building Standard")
         self.StandardValue = QtGui.QComboBox()
-        self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('')
+        self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('Custom...')
-
-        # Structural Load G1 [ntc2018 Tab. 3.1.I]
-        self.G1LoadLabel = QtGui.QLabel("Structural load G1")
-        self.G1LoadValue = QtGui.QDoubleSpinBox()
-        self.G1LoadValue.setValue(0)
-        self.G1LoadValue.setSuffix(' kN/m²')
-
-        # Structural Load G2 [ntc2018 3.1.3]
-        self.G2LoadLabel = QtGui.QLabel("Structural load G2")
-        self.G2LoadValue = QtGui.QDoubleSpinBox()
-        self.G2LoadValue.setValue(0)
-        self.G2LoadValue.setSuffix(' kN/m²')
-
-        # Structural Load Q1 [ntc2018 Tab. 3.1.II]
-        # - uniformly distributed vertical loads qk
-        # - concentrated vertical loads Qk
-        # - linear horizontal loads Hk
-        self.Q1LoadLabel = QtGui.QLabel("Structural load Q1")
-        self.Q1LoadValue = QtGui.QComboBox()
-        self.Q1LoadValue.addItem('')
-        self.Q1LoadValue.addItem('Cat.A: Areas for domestic and residential activities')
-        self.Q1LoadValue.addItem('Cat.A Common stairs, balconies, landings')
-        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
-        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
-        self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
-        layout.addWidget(self.G1LoadLabel)
-        layout.addWidget(self.G1LoadValue)
-        layout.addWidget(self.G2LoadLabel)
-        layout.addWidget(self.G2LoadValue)
-        layout.addWidget(self.Q1LoadLabel)
-        layout.addWidget(self.Q1LoadValue)
+    def StandardSelect(self, index)
+        print(index)
+        if index == 1:
+            # Structural Load G1 [ntc2018 Tab. 3.1.I]
+            self.G1LoadLabel = QtGui.QLabel("Structural load G1")
+            self.G1LoadValue = QtGui.QDoubleSpinBox()
+            self.G1LoadValue.setValue(0)
+            self.G1LoadValue.setSuffix(' kN/m²')
+
+            # Structural Load G2 [ntc2018 3.1.3]
+            self.G2LoadLabel = QtGui.QLabel("Structural load G2")
+            self.G2LoadValue = QtGui.QDoubleSpinBox()
+            self.G2LoadValue.setValue(0)
+            self.G2LoadValue.setSuffix(' kN/m²')
+
+            # Structural Load Q1 [ntc2018 Tab. 3.1.II]
+            # - uniformly distributed vertical loads qk
+            # - concentrated vertical loads Qk
+            # - linear horizontal loads Hk
+            self.Q1LoadLabel = QtGui.QLabel("Structural load Q1")
+            self.Q1LoadValue = QtGui.QComboBox()
+            self.Q1LoadValue.addItem('')
+            self.Q1LoadValue.addItem('Cat.A: Areas for domestic and residential activities')
+            self.Q1LoadValue.addItem('Cat.A Common stairs, balconies, landings')
+            self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
+            self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
+            self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
+
+            layout.addWidget(self.G1LoadLabel)
+            layout.addWidget(self.G1LoadValue)
+            layout.addWidget(self.G2LoadLabel)
+            layout.addWidget(self.G2LoadValue)
+            layout.addWidget(self.Q1LoadLabel)
+            layout.addWidget(self.Q1LoadValue)
 
         self.form.setLayout(layout)
 
