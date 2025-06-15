@@ -21,8 +21,7 @@ def Size(Standard, G1Load, G2Load, Q1Load):
 
 class SizeTaskPanel:
     def __init__(self, widget, elements):
-        #self.form = widget
-        self.form = [QtGui.QWidget, QtGui.QWidget]
+        self.form = widget
         layout = QtGui.QVBoxLayout()
 
         # Standard ComboBox
@@ -31,13 +30,6 @@ class SizeTaskPanel:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('Custom...')
-
-        layout.addWidget(self.StandardLabel)
-        layout.addWidget(self.StandardValue)
-
-        self.form[0].setLayout(layout)
-
-        layout2 = QtGui.QVBoxLayout()
 
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
@@ -64,14 +56,16 @@ class SizeTaskPanel:
         self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
         self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
 
-        layout2.addWidget(self.G1LoadLabel)
-        layout2.addWidget(self.G1LoadValue)
-        layout2.addWidget(self.G2LoadLabel)
-        layout2.addWidget(self.G2LoadValue)
-        layout2.addWidget(self.Q1LoadLabel)
-        layout2.addWidget(self.Q1LoadValue)
+        layout.addWidget(self.StandardLabel)
+        layout.addWidget(self.StandardValue)
+        layout.addWidget(self.G1LoadLabel)
+        layout.addWidget(self.G1LoadValue)
+        layout.addWidget(self.G2LoadLabel)
+        layout.addWidget(self.G2LoadValue)
+        layout.addWidget(self.Q1LoadLabel)
+        layout.addWidget(self.Q1LoadValue)
 
-        self.form[1].setLayout(layout2)
+        self.form.setLayout(layout)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
