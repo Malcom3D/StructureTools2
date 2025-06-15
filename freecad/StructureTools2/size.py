@@ -22,7 +22,7 @@ def Size(Standard, G1Load, G2Load, Q1Load):
 class SizeTaskPanel:
     def __init__(self, widget, elements):
         self.form = widget
-        layout = QtGui.QHBoxLayout()
+        layout = QtGui.QVBoxLayout()
 
         # Standard ComboBox
         self.StandardLabel = QtGui.QLabel("Building Standard")
@@ -82,8 +82,6 @@ class SizeTaskPanel:
     # commented because this is the default behaviour
     #def reject(self):
     #   FreeCADGui.Control.closeDialog()
-
-
 
 
     def getIcon(self):
