@@ -1,0 +1,18 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <title>size</title>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="null" id="svg_3">
+   <line stroke="#000" id="svg_10" y2="21.70884" x2="0.5" y1="32.25003" x1="13.34576" stroke-width="4" fill="none"/>
+   <line stroke="#000" id="svg_11" y2="31.99905" x2="12.70803" y1="25.85002" x1="32.02222" stroke-width="4" fill="none"/>
+   <line stroke="#000" id="svg_12" y2="32.12454" x2="13.07245" y1="5.14412" x1="13.25466" stroke-width="3" fill="none"/>
+   <line stroke="#000" stroke-dasharray="2,2" id="svg_13" y2="27.60689" x2="27.19368" y1="6.90098" x1="27.28478" stroke-width="2" fill="none"/>
+   <line stroke="#000" stroke-dasharray="2,2" stroke-width="2" id="svg_14" y2="7.27746" x2="27.6492" y1="11.41864" x1="13.34576" fill="none"/>
+   <line stroke="#000" stroke-dasharray="2,2" id="svg_15" y2="11.66962" x2="13.43687" y1="5.26961" x1="4.69082" stroke-width="2" fill="none"/>
+   <line stroke="#000" stroke-dasharray="2,2" id="svg_16" y2="7.15197" x2="27.37588" y1="0.50098" x1="18.72094" stroke-width="2" fill="none"/>
+   <line stroke="#000" stroke-dasharray="2,2" id="svg_17" y2="0.25" x2="18.72094" y1="4.76765" x1="4.69082" stroke-width="2" fill="none"/>
+   <line stroke="#000" stroke-dasharray="2,2" id="svg_18" y2="5.14412" x2="4.4175" y1="25.22257" x1="4.4175" stroke-width="2" fill="none"/>
+  </g>
+ </g>
+
+</svg>
