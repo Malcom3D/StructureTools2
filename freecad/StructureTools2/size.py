@@ -75,12 +75,12 @@ class Ntc2018:
         self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
         self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
 
-        layout.addWidget(self.G1LoadLabel)
-        layout.addWidget(self.G1LoadValue)
-        layout.addWidget(self.G2LoadLabel)
-        layout.addWidget(self.G2LoadValue)
-        layout.addWidget(self.Q1LoadLabel)
-        layout.addWidget(self.Q1LoadValue)
+        layout2.addWidget(self.G1LoadLabel)
+        layout2.addWidget(self.G1LoadValue)
+        layout2.addWidget(self.G2LoadLabel)
+        layout2.addWidget(self.G2LoadValue)
+        layout2.addWidget(self.Q1LoadLabel)
+        layout2.addWidget(self.Q1LoadValue)
 
         self.form.setLayout(layout2)
 
