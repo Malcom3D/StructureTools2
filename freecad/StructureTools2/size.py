@@ -37,52 +37,52 @@ class SizeTaskPanel:
 
         self.form.setLayout(layout)
 
-    def Ntc2018(self, widget):
-            self.form = widget
-            layout2 = QtGui.QVBoxLayout()
-
-            # Structural Load G1 [ntc2018 Tab. 3.1.I]
-            self.G1LoadLabel = QtGui.QLabel("Structural load G1")
-            self.G1LoadValue = QtGui.QDoubleSpinBox()
-            self.G1LoadValue.setValue(0)
-            self.G1LoadValue.setSuffix(' kN/m²')
-
-            # Structural Load G2 [ntc2018 3.1.3]
-            self.G2LoadLabel = QtGui.QLabel("Structural load G2")
-            self.G2LoadValue = QtGui.QDoubleSpinBox()
-            self.G2LoadValue.setValue(0)
-            self.G2LoadValue.setSuffix(' kN/m²')
-
-            # Structural Load Q1 [ntc2018 Tab. 3.1.II]
-            # - uniformly distributed vertical loads qk
-            # - concentrated vertical loads Qk
-            # - linear horizontal loads Hk
-            self.Q1LoadLabel = QtGui.QLabel("Structural load Q1")
-            self.Q1LoadValue = QtGui.QComboBox()
-            self.Q1LoadValue.addItem('')
-            self.Q1LoadValue.addItem('Cat.A: Areas for domestic and residential activities')
-            self.Q1LoadValue.addItem('Cat.A Common stairs, balconies, landings')
-            self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
-            self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
-            self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
-
-            layout.addWidget(self.G1LoadLabel)
-            layout.addWidget(self.G1LoadValue)
-            layout.addWidget(self.G2LoadLabel)
-            layout.addWidget(self.G2LoadValue)
-            layout.addWidget(self.Q1LoadLabel)
-            layout.addWidget(self.Q1LoadValue)
-
-            self.form.setLayout(layout2)
-
     def StandardSelect(self, index):
         if index == 1:
-            #baseWidget = QtGui.QWidget()
-            Standardpanel = Ntc2018(baseWidget)
+            stdWidget = QtGui.QWidget()
+            Standardpanel = Ntc2018(stdWidget)
             # having a panel with a widget in self.form and the accept and 
             # reject functions (if needed), we can open it:
             FreeCADGui.Control.showDialog(Standardpanel)
 
+class Ntc2018:
+    def __init__(self, widget):
+        self.form = widget
+        layout2 = QtGui.QVBoxLayout()
+
+        # Structural Load G1 [ntc2018 Tab. 3.1.I]
+        self.G1LoadLabel = QtGui.QLabel("Structural load G1")
+        self.G1LoadValue = QtGui.QDoubleSpinBox()
+        self.G1LoadValue.setValue(0)
+        self.G1LoadValue.setSuffix(' kN/m²')
+
+        # Structural Load G2 [ntc2018 3.1.3]
+        self.G2LoadLabel = QtGui.QLabel("Structural load G2")
+        self.G2LoadValue = QtGui.QDoubleSpinBox()
+        self.G2LoadValue.setValue(0)
+        self.G2LoadValue.setSuffix(' kN/m²')
+
+        # Structural Load Q1 [ntc2018 Tab. 3.1.II]
+        # - uniformly distributed vertical loads qk
+        # - concentrated vertical loads Qk
+        # - linear horizontal loads Hk
+        self.Q1LoadLabel = QtGui.QLabel("Structural load Q1")
+        self.Q1LoadValue = QtGui.QComboBox()
+        self.Q1LoadValue.addItem('')
+        self.Q1LoadValue.addItem('Cat.A: Areas for domestic and residential activities')
+        self.Q1LoadValue.addItem('Cat.A Common stairs, balconies, landings')
+        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
+        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
+        self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
+
+        layout.addWidget(self.G1LoadLabel)
+        layout.addWidget(self.G1LoadValue)
+        layout.addWidget(self.G2LoadLabel)
+        layout.addWidget(self.G2LoadValue)
+        layout.addWidget(self.Q1LoadLabel)
+        layout.addWidget(self.Q1LoadValue)
+
+        self.form.setLayout(layout2)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
