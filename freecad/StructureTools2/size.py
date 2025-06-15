@@ -570,7 +570,7 @@ static char *size[] = {
 		"""
 
 
-class CommandCalc():
+class CommandSize():
 
     def GetResources(self):
         return {"Pixmap"  : os.path.join(ICONPATH, "icons/size.svg"), # the name of a svg file available in the resources
