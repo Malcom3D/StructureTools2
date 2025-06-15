@@ -21,7 +21,8 @@ def Size(Standard, G1Load, G2Load, Q1Load):
 
 class SizeTaskPanel:
     def __init__(self, widget, elements):
-        self.form = widget
+        #self.form = widget
+        self.form = [QtGui.QWidget, QtGui.QWidget]
         layout = QtGui.QVBoxLayout()
 
         # Standard ComboBox
@@ -30,24 +31,12 @@ class SizeTaskPanel:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('Custom...')
-        self.StandardValue.currentIndexChanged.connect(self.StandardSelect)
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
 
-        self.form.setLayout(layout)
+        self.form[0].setLayout(layout)
 
-    def StandardSelect(self, index):
-        if index == 1:
-            stdWidget = QtGui.QWidget()
-            Standardpanel = Ntc2018(stdWidget)
-            # having a panel with a widget in self.form and the accept and 
-            # reject functions (if needed), we can open it:
-            FreeCADGui.Control.showDialog(Standardpanel)
-
-class Ntc2018:
-    def __init__(self, widget):
-        self.form = widget
         layout2 = QtGui.QVBoxLayout()
 
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
@@ -82,7 +71,7 @@ class Ntc2018:
         layout2.addWidget(self.Q1LoadLabel)
         layout2.addWidget(self.Q1LoadValue)
 
-        self.form.setLayout(layout2)
+        self.form[1].setLayout(layout2)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
