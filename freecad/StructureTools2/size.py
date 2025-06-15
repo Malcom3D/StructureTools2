@@ -1,10 +1,11 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
-from PySide import QtWidgets
+from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
-ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
-
 from sympy import *
+init_printing()
+
+ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 def show_error_message(msg):
     msg_box = QtWidgets.QMessageBox()
@@ -14,330 +15,29 @@ def show_error_message(msg):
     msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     msg_box.exec_()
 
+def MakeSize():
+    doc = FreeCAD.ActiveDocument
+
 class Size:
-	def __init__(self, obj, elements):
-		obj.Proxy = self
-		obj.addProperty("App::PropertyLinkList", "ListElements", "Size", "elements for analysis").ListElements = elements
-		
-		obj.addProperty("App::PropertyString", "LengthUnit", "Calc", "set the length unit for calculation").LengthUnit = 'm'
-		obj.addProperty("App::PropertyString", "ForceUnit", "Calc", "set the length unit for calculation").ForceUnit = 'kN'
+    def __init__(self, widget, obj, elements):
+        self.form = widget
 
-		obj.addProperty("App::PropertyStringList", "NameMembers", "Calc", "name of structure members")
-		obj.addProperty("App::PropertyVectorList", "Nodes", "Calc", "Nodes")
-		obj.addProperty("App::PropertyBool", "selfWeight", "Calc", "Consider self weight").selfWeight = False
+    # Ok and Cancel buttons are created by default in FreeCAD Task Panels
+    # What is done when we click on the ok button.
+    def accept(self):
+        MakeSize()
+        FreeCADGui.Control.closeDialog() #close the dialog
 
-		obj.addProperty("App::PropertyStringList", "MomentY", "ResultMoment", "moment at local Y")
-		obj.addProperty("App::PropertyStringList", "MomentZ", "ResultMoment", "moment at local Z")
-		obj.addProperty("App::PropertyFloatList", "MinMomentY", "ResultMoment", "minimum moment in Y")
-		obj.addProperty("App::PropertyFloatList", "MinMomentZ", "ResultMoment", "minimum moment in Z")
-		obj.addProperty("App::PropertyFloatList", "MaxMomentY", "ResultMoment", "maximum moment in Y")
-		obj.addProperty("App::PropertyFloatList", "MaxMomentZ", "ResultMoment", "maximum moment in Z")
-		obj.addProperty("App::PropertyInteger", "NumPointsMoment", "NumPoints", "Graphics precision").NumPointsMoment = 5
-
-		obj.addProperty("App::PropertyStringList", "AxialForce", "ResultAxial", "Axial Force")
-		obj.addProperty("App::PropertyInteger", "NumPointsAxial", "NumPoints", "Graphics precision").NumPointsAxial = 3
-		
-		obj.addProperty("App::PropertyStringList", "Torque", "ResultTorque", "torque on element")
-		obj.addProperty("App::PropertyFloatList", "MinTorque", "ResultTorque", "minimum torque")
-		obj.addProperty("App::PropertyFloatList", "MaxTorque", "ResultTorque", "maximum torque")
-		obj.addProperty("App::PropertyInteger", "NumPointsTorque", "NumPoints", "Graphics precision").NumPointsTorque = 3
-		
-		obj.addProperty("App::PropertyStringList", "ShearY", "ResultShear", "shear on Y axis")
-		obj.addProperty("App::PropertyFloatList", "MinShearY", "ResultShear", "minimum shear on Y axis")
-		obj.addProperty("App::PropertyFloatList", "MaxShearY", "ResultShear", "maximum shear on Y axis")
-		obj.addProperty("App::PropertyStringList", "ShearZ", "ResultShear", "shear on Z axis")
-		obj.addProperty("App::PropertyFloatList", "MinShearZ", "ResultShear", "minimum shear on Z axis")
-		obj.addProperty("App::PropertyFloatList", "MaxShearZ", "ResultShear", "maximum shear on Z axis")
-		obj.addProperty("App::PropertyInteger", "NumPointsShear", "NumPoints", "Graphics precision").NumPointsShear = 4
-
-		obj.addProperty("App::PropertyStringList", "DeflectionY", "ResultDeflection", "deflection on Y axis")
-		obj.addProperty("App::PropertyFloatList", "MinDeflectionY", "ResultDeflection", "minimum deflection on Y axis")
-		obj.addProperty("App::PropertyFloatList", "MaxDeflectionY", "ResultDeflection", "maximum deflection on Y axis")
-		obj.addProperty("App::PropertyStringList", "DeflectionZ", "ResultDeflection", "deflection on Z axis")
-		obj.addProperty("App::PropertyFloatList", "MinDeflectionZ", "ResultDeflection", "minimum deflection on Z axis")
-		obj.addProperty("App::PropertyFloatList", "MaxDeflectionZ", "ResultDeflection", "maximum deflection on Z axis")
-		obj.addProperty("App::PropertyInteger", "NumPointsDeflection", "NumPoints", "Graphics precision").NumPointsDeflection = 4
+    # What is done when we click on the cancel button.
+    # commented because this is the default behaviour
+    #def reject(self):
+    #   FreeCADGui.Control.closeDialog()
 
 
-        #  Maps the structure nodes, (inverts the y and z axis to adapt to the override coordinates)
-	def mapNodes(self, elements, unitLength):	
-                # Scans all line elements and adds their vertices to the nodes table
-		listNodes = []
-		for element in elements:
-			for edge in element.Shape.Edges:
-				for vertex in edge.Vertexes:
-					node = [round(float(FreeCAD.Units.Quantity(vertex.Point.x,'mm').getValueAs(unitLength)), 2), round(float(FreeCAD.Units.Quantity(vertex.Point.z,'mm').getValueAs(unitLength)),2), round(float(FreeCAD.Units.Quantity(vertex.Point.y,'mm').getValueAs(unitLength)),2)]
-					if not node in listNodes:
-						listNodes.append(node)
-
-		return listNodes
-
-	# suppresses the members of the structure
-	def mapMembers(self, elements, listNodes, unitLength):
-		listMembers = {}
-		for element in elements:
-			for i, edge in enumerate(element.Shape.Edges):
-				listIndexVertex = []
-				for vertex in edge.Vertexes:
-					node = [round(float(FreeCAD.Units.Quantity(vertex.Point.x,'mm').getValueAs(unitLength)), 2), round(float(FreeCAD.Units.Quantity(vertex.Point.z,'mm').getValueAs(unitLength)),2), round(float(FreeCAD.Units.Quantity(vertex.Point.y,'mm').getValueAs(unitLength)),2)]
-					index = listNodes.index(node)
-					listIndexVertex.append(index)
-
-				# validates whether the first node is more self than the second node, if so inverts the nodes of the member (necessary to keep the diagrams facing the correct position)
-				n1 = listIndexVertex[0]
-				n2 = listIndexVertex[1]
-				if listNodes[n1][1] > listNodes[n2][1]:
-					aux = n1
-					n1 = n2
-					n2 = aux
-				listMembers[element.Name + '_' + str(i)] = {
-					'nodes': [str(n1), str(n2)],
-					'material': element.MaterialMember.Name,
-					'section': element.SectionMember.Name,
-					'trussMember': element.TrussMember
-					}
-		
-		return listMembers
-
-	# Creates nodes in the solver model
-	def setNodes(self, model, nodes_map):
-		for i, node in enumerate(nodes_map):
-			model.add_node(str(i), node[0], node[1], node[2])
-		
-		return model
-
-	# Creates nodes in the solver model
-	def setMembers(self, model, members_map,selfWeight):
-		for memberName in list(members_map):			
-			model.add_member(memberName, members_map[memberName]['nodes'][0] , members_map[memberName]['nodes'][1], members_map[memberName]['material'], members_map[memberName]['section'])
-			
-			# considers the self-weight on the bar elements
-			if selfWeight : model.add_member_self_weight('FY', -1) 
-
-			# frees the rotations at the ends of the element in order to emulate the behavior of truss bars
-			if members_map[memberName]['trussMember']: model.def_releases(memberName, Dxi=False, Dyi=False, Dzi=False, Rxi=False, Ryi=True, Rzi=True, Dxj=False, Dyj=False, Dzj=False, Rxj=False, Ryj=True, Rzj=True)
-		
-		return model
-
-	# Creates the loads
-	def setLoads(self, model, loads, nodes_map, unitForce, unitLength):
-		pass
-		for load in loads:
-
-			match load.GlobalDirection:
-				case '+X':
-					axis = 'FX'
-					direction = 1
-
-				case '-X':
-					axis = 'FX'
-					direction = -1
-
-				case '+Y':
-					axis = 'FZ'
-					direction = 1
-
-				case '-Y':
-					axis = 'FZ'
-					direction = -1
-
-				case '+Z':
-					axis = 'FY'
-					direction = 1
-
-				case '-Z':
-					axis = 'FY'
-					direction = -1
-
-			# Validate if the load is distributed
-			if 'Edge' in load.ObjectBase[0][1][0]:
-				initial = float(load.InitialLoading.getValueAs(unitForce))
-				final = float(load.FinalLoading.getValueAs(unitForce))
-
-				subname = int(load.ObjectBase[0][1][0].split('Edge')[1]) - 1
-				name = load.ObjectBase[0][0].Name + '_' + str(subname)
-				model.add_member_dist_load(name, axis, initial * direction, final * direction)
-
-			# Validate if the load is nodal
-			elif 'Vertex' in load.ObjectBase[0][1][0]:
-				numVertex = int(load.ObjectBase[0][1][0].split('Vertex')[1]) - 1
-				vertex = load.ObjectBase[0][0].Shape.Vertexes[numVertex]
-				
-				node = list(filter(lambda element: element == [round(float(FreeCAD.Units.Quantity(vertex.Point.x,'mm').getValueAs(unitLength)), 2), round(float(FreeCAD.Units.Quantity(vertex.Point.z,'mm').getValueAs(unitLength)),2), round(float(FreeCAD.Units.Quantity(vertex.Point.y,'mm').getValueAs(unitLength)),2)], nodes_map))[0]
-				indexNode = nodes_map.index(node)
-
-				# subname = int(load.ObjectBase[0][1][0].split('Vertex')[1]) - 1
-				name = str(indexNode)
-				model.add_node_load(name, axis, float(load.NodalLoading.getValueAs(unitForce)) * direction)
-			
-
-					
-		return model
-
-	# Create the supports
-	def setSuports(self, model, suports, nodes_map, unitLength):
-		for suport in suports:
-			suportvertex = list(suport.ObjectBase[0][0].Shape.Vertexes[int(suport.ObjectBase[0][1][0].split('Vertex')[1])-1].Point)
-			for i, node in enumerate(nodes_map):
-				if round(float(FreeCAD.Units.Quantity(suportvertex[0],'mm').getValueAs(unitLength)),2) == round(node[0],2) and round(float(FreeCAD.Units.Quantity(suportvertex[1],'mm').getValueAs(unitLength)),2) == round(node[2],2) and round(float(FreeCAD.Units.Quantity(suportvertex[2],'mm').getValueAs(unitLength)),2) == round(node[1],2):					
-					name = str(i)
-					model.def_support(name, suport.FixTranslationX, suport.FixTranslationZ, suport.FixTranslationY, suport.FixRotationX, suport.FixRotationZ, suport.FixRotationY)
-					break
-		
-		return model
-
-	def setMaterialAndSections(self, model, lines, unitLength, unitForce):
-		materiais = []
-		sections = []
-		for line in lines:
-			material = line.MaterialMember
-			section = line.SectionMember
-
-			if not material.Name in materiais:
-				density = FreeCAD.Units.Quantity(material.Density).getValueAs('t/m^3') * 10 # Convert the input unit to t/m³ and then convert it to kN//m³
-				density = float(FreeCAD.Units.Quantity(density, 'kN/m^3').getValueAs(unitForce+"/"+unitLength+"^3")) # Convert kN/m³ to the units defined in calc
-				modulusElasticity = float(material.ModulusElasticity.getValueAs(unitForce+"/"+unitLength+"^2"))
-				poissonRatio = float(material.PoissonRatio)
-				G = modulusElasticity / (2 * (1 + poissonRatio))
-				model.add_material(material.Name, modulusElasticity, G, poissonRatio, density)
-				materiais.append(material.Name)
-				
-
-			if not section.Name in sections:
-
-				ang = line.RotationSection.getValueAs('rad')
-				J  = float(FreeCAD.Units.Quantity(section.MomentInertiaPolar, 'mm^4').getValueAs(unitLength+"^4"))
-				A  = float(section.AreaSection.getValueAs(unitLength+"^2"))
-				Iy = float(FreeCAD.Units.Quantity(section.MomentInertiaY, 'mm^4').getValueAs(unitLength+"^4"))
-				Iz = float(FreeCAD.Units.Quantity(section.MomentInertiaZ, 'mm^4').getValueAs(unitLength+"^4"))
-				Iyz = float(FreeCAD.Units.Quantity(section.ProductInertiaYZ, 'mm^4').getValueAs(unitLength+"^4"))
-
-				
-				# Aplica a rotação de eixo
-				RIy = ((Iz + Iy) / 2 ) - ((Iz - Iy) / 2 )*math.cos(2 * ang) + Iyz * math.sin(2 * ang)
-				RIz = ((Iz + Iy) / 2 ) + ((Iz - Iy) / 2 )*math.cos(2 * ang) - Iyz * math.sin(2 * ang)
-				
-				model.add_section(section.Name, A, RIy, RIz, J)
-				sections.append(section.Name)
-		
-		return model
-
-	
-	def execute(self, obj):
-		model = FEModel3D()
-		# Filtra os diferentes tipos de elementos
-		lines = list(filter(lambda element: 'Line' in element.Name or 'Wire' in element.Name, obj.ListElements))
-		loads = list(filter(lambda element: 'Load' in element.Name, obj.ListElements))
-		suports = list(filter(lambda element: 'Suport' in element.Name, obj.ListElements))
-
-		nodes_map = self.mapNodes(lines, obj.LengthUnit)
-		members_map = self.mapMembers(lines, nodes_map, obj.LengthUnit)
-
-		model = self.setMaterialAndSections(model, lines, obj.LengthUnit, obj.ForceUnit)
-		model = self.setNodes(model, nodes_map)
-		model = self.setMembers(model, members_map, obj.selfWeight)
-		model = self.setLoads(model, loads, nodes_map, obj.ForceUnit, obj.LengthUnit)
-		model = self.setSuports(model, suports, nodes_map, obj.LengthUnit)
-
-		model.analyze()
-
-		# Generate the results
-		momentz = []
-		momenty = []
-		mimMomenty = []
-		mimMomentz = []
-		maxMomenty = []
-		maxMomentz = []
-		axial = []
-		torque = []
-		minTorque = []
-		maxTorque = []
-		sheary = []
-		shearz = []
-		minSheary = []
-		maxSheary = []
-		minShearz = []
-		maxShearz = []
-		deflectiony = []
-		minDeflectiony = []
-		maxDeflectiony = []
-		deflectionz = []
-		minDeflectionz = []
-		maxDeflectionz = []
-
-		for name in model.members.keys():			
-			momenty.append(','.join( str(value) for value in model.members[name].moment_array('My', obj.NumPointsMoment)[1]))
-			momentz.append(','.join( str(value) for value in model.members[name].moment_array('Mz', obj.NumPointsMoment)[1]))
-
-			sheary.append(','.join( str(value) for value in model.members[name].shear_array('Fy', obj.NumPointsShear)[1]))
-			shearz.append(','.join( str(value) for value in model.members[name].shear_array('Fz', obj.NumPointsShear)[1]))
-
-			axial.append(','.join( str(value) for value in model.members[name].axial_array(obj.NumPointsAxial)[1]))
-			
-			torque.append(','.join( str(value) for value in model.members[name].torque_array(obj.NumPointsTorque)[1]))
-
-			deflectiony.append(','.join( str(value) for value in model.members[name].deflection_array('dy', obj.NumPointsDeflection)[1]))
-			deflectionz.append(','.join( str(value) for value in model.members[name].deflection_array('dz', obj.NumPointsDeflection)[1]))
-
-			mimMomenty.append(model.members[name].min_moment('My'))
-			mimMomentz.append(model.members[name].min_moment('Mz'))
-			maxMomenty.append(model.members[name].max_moment('My'))
-			maxMomentz.append(model.members[name].max_moment('Mz'))
-
-			minSheary.append(model.members[name].min_shear('Fy'))
-			minShearz.append(model.members[name].min_shear('Fz'))
-			maxSheary.append(model.members[name].max_shear('Fy'))
-			maxShearz.append(model.members[name].max_shear('Fz'))
-
-			minTorque.append(model.members[name].min_torque())
-			maxTorque.append(model.members[name].max_torque())
-
-			minDeflectiony.append(model.members[name].min_deflection('dy'))
-			minDeflectionz.append(model.members[name].min_deflection('dz'))
-			maxDeflectiony.append(model.members[name].max_deflection('dy'))
-			maxDeflectionz.append(model.members[name].max_deflection('dz'))
-			
-			
-
-		obj.NameMembers = model.members.keys()
-		obj.Nodes = [FreeCAD.Vector(node[0], node[2], node[1]) for node in nodes_map]
-		obj.MomentZ = momentz
-		obj.MomentY = momenty
-		obj.MinMomentY = mimMomenty
-		obj.MinMomentZ = mimMomentz
-		obj.MaxMomentY = maxMomenty
-		obj.MaxMomentZ = maxMomentz
-		obj.AxialForce = axial
-		obj.Torque = torque
-		obj.MinTorque = minTorque
-		obj.MaxTorque = maxTorque
-		obj.MinShearY = minSheary
-		obj.MinShearZ = minShearz
-		obj.MaxShearY = maxSheary
-		obj.MaxShearZ = maxShearz
-		obj.ShearY = sheary
-		obj.ShearZ = shearz
-		obj.DeflectionY = deflectiony
-		obj.DeflectionZ = deflectionz
-		obj.MinDeflectionY = minDeflectiony
-		obj.MinDeflectionZ = minDeflectionz
-		obj.MaxDeflectionY = maxDeflectiony
-		obj.MaxDeflectionZ = maxDeflectionz
-		
-	   
 
 
-	def onChanged(self,obj,Parameter):
-		pass
-	
-
-class ViewProviderCalc:
-	def __init__(self, obj):
-		obj.Proxy = self
-	
-
-	def getIcon(self):
-		return """
+    def getIcon(self):
+        return """
 /* XPM */
 static char *size[] = {
 /* columns rows colors chars-per-pixel */
@@ -574,17 +274,26 @@ class CommandSize():
 
     def GetResources(self):
         return {"Pixmap"  : os.path.join(ICONPATH, "icons/size.svg"), # the name of a svg file available in the resources
-                "Accel"   : "Shift+C", # a default shortcut (optional)
+                "Accel"   : "Shift+S", # a default shortcut (optional)
                 "MenuText": "size structure",
                 "ToolTip" : "Size the structure"}
     
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
-        obj = doc.addObject("Part::FeaturePython", "Size")
 
-        objSuport = Calc(obj, selection)
-        ViewProviderCalc(obj.ViewObject)           
+        # what is done when the command is clicked
+        # creates a panel with a dialog
+        baseWidget = QtGui.QWidget()
+        panel = BoxSimpleTaskPanel(baseWidget)
+        # having a panel with a widget in self.form and the accept and 
+        # reject functions (if needed), we can open it:
+        FreeCADGui.Control.showDialog(panel)
+
+#        obj = doc.addObject("Part::FeaturePython", "Size")
+
+#        objSuport = Size(obj, selection)
+#        ViewProviderSize(obj.ViewObject)           
 
         FreeCAD.ActiveDocument.recompute()        
         return

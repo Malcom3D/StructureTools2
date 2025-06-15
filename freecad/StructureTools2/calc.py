@@ -225,7 +225,7 @@ class Calc:
 	
 	def execute(self, obj):
 		model = FEModel3D()
-		# Filtra os diferentes tipos de elementos
+		# Filters different types of elements
 		lines = list(filter(lambda element: 'Line' in element.Name or 'Wire' in element.Name, obj.ListElements))
 		loads = list(filter(lambda element: 'Load' in element.Name, obj.ListElements))
 		suports = list(filter(lambda element: 'Suport' in element.Name, obj.ListElements))
