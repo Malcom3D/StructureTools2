@@ -285,7 +285,7 @@ class CommandSize():
         # what is done when the command is clicked
         # creates a panel with a dialog
         baseWidget = QtGui.QWidget()
-        panel = BoxSimpleTaskPanel(baseWidget)
+        panel = Size(baseWidget)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
