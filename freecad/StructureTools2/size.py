@@ -30,10 +30,12 @@ class SizeTaskPanel:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('Custom...')
+        self.StandardValue.currentIndexChanged(self.StandardSelect)
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
-    def StandardSelect(self, index)
+
+    def StandardSelect(self, index):
         print(index)
         if index == 1:
             # Structural Load G1 [ntc2018 Tab. 3.1.I]
