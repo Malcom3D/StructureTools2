@@ -35,6 +35,8 @@ class SizeTaskPanel:
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
 
+        self.form.setLayout(layout)
+
     def StandardSelect(self, index):
         print(index)
         if index == 1:
@@ -70,7 +72,6 @@ class SizeTaskPanel:
             layout.addWidget(self.Q1LoadLabel)
             layout.addWidget(self.Q1LoadValue)
 
-        self.form.setLayout(layout)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
