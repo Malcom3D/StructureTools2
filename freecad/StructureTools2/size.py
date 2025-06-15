@@ -19,7 +19,7 @@ def MakeSize():
     doc = FreeCAD.ActiveDocument
 
 class Size:
-    def __init__(self, widget, obj, elements):
+    def __init__(self, widget, elements):
         self.form = widget
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
@@ -281,19 +281,18 @@ class CommandSize():
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
+#        obj = doc.addObject("Part::FeaturePython", "Size")
+#        objSuport = Size(obj, selection)
+#        ViewProviderSize(obj.ViewObject)           
 
         # what is done when the command is clicked
         # creates a panel with a dialog
         baseWidget = QtGui.QWidget()
-        panel = Size(baseWidget)
+        panel = Size(baseWidget, selection)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
 
-        obj = doc.addObject("Part::FeaturePython", "Size")
-
-        objSuport = Size(obj, selection)
-#        ViewProviderSize(obj.ViewObject)           
 
         FreeCAD.ActiveDocument.recompute()        
         return
