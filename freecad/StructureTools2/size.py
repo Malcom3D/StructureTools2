@@ -290,9 +290,9 @@ class CommandSize():
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
 
-#        obj = doc.addObject("Part::FeaturePython", "Size")
+        obj = doc.addObject("Part::FeaturePython", "Size")
 
-#        objSuport = Size(obj, selection)
+        objSuport = Size(obj, selection)
 #        ViewProviderSize(obj.ViewObject)           
 
         FreeCAD.ActiveDocument.recompute()        
