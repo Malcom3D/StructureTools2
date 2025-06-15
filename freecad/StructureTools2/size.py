@@ -40,6 +40,9 @@ class SizeTaskPanel:
     def StandardSelect(self, index):
         print(index)
         if index == 1:
+            self.form = widget
+            layout2 = QtGui.QVBoxLayout()
+
             # Structural Load G1 [ntc2018 Tab. 3.1.I]
             self.G1LoadLabel = QtGui.QLabel("Structural load G1")
             self.G1LoadValue = QtGui.QDoubleSpinBox()
@@ -71,6 +74,8 @@ class SizeTaskPanel:
             layout.addWidget(self.G2LoadValue)
             layout.addWidget(self.Q1LoadLabel)
             layout.addWidget(self.Q1LoadValue)
+
+            self.form.setLayout(layout2)
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
