@@ -30,7 +30,7 @@ class SizeTaskPanel:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('Custom...')
-        self.StandardValue.currentIndexChanged(self.StandardSelect)
+        self.StandardValue.currentIndexChanged.connect(self.StandardSelect)
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
