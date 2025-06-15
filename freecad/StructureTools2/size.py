@@ -46,7 +46,7 @@ class SizeTaskPanel:
             # reject functions (if needed), we can open it:
             FreeCADGui.Control.showDialog(Standardpanel)
 
-    def Ntc2018(self, widget)
+    def Ntc2018(self, widget):
             self.form = widget
             layout2 = QtGui.QVBoxLayout()
 
