@@ -681,4 +681,4 @@ class CommandCalc():
         
         return True
 
-FreeCADGui.addCommand("calc", CommandSize())
+FreeCADGui.addCommand("calc", CommandCalc())
