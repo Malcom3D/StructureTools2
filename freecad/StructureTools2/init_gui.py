@@ -29,8 +29,8 @@ class StructureTools2(Gui.Workbench):
 	"""
 	class which gets initiated at startup of the gui
 	"""
-	MenuText = translate("Workbench", "StructureTools")
-	ToolTip = translate("Workbench", "a simple StructureTools")
+	MenuText = translate("Workbench", "StructureTools2")
+	ToolTip = translate("Workbench", "a simple StructureTools2")
 	Icon = os.path.join(ICONPATH, "icone.svg")
 	toolbox = []
 
@@ -60,9 +60,9 @@ class StructureTools2(Gui.Workbench):
 		self.appendToolbar('DraftTools', ["Draft_SelectPlane", "Draft_SetStyle"])
 
 		self.appendToolbar('StructureLoad', ["load_distributed","load_nodal"])
-		self.appendToolbar('StructureTools', ["member", "suport", "section", "material"])
+		self.appendToolbar('StructureTools2', ["member", "suport", "section", "material"])
 		self.appendToolbar('StructureResults', ["calc","diagram"])
-		self.appendMenu('StructureTools',["load_distributed", "load_nodal","member" ,"suport", "section", "material", "calc", "diagram"])
+		self.appendMenu('StructureTools2',["load_distributed", "load_nodal","member" ,"suport", "section", "material", "calc", "diagram"])
 
 	def Activated(self):
 		'''
