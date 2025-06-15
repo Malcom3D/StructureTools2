@@ -40,6 +40,13 @@ class SizeTaskPanel:
     def StandardSelect(self, index):
         print(index)
         if index == 1:
+            #baseWidget = QtGui.QWidget()
+            Standardpanel = Ntc2018(baseWidget)
+            # having a panel with a widget in self.form and the accept and 
+            # reject functions (if needed), we can open it:
+            FreeCADGui.Control.showDialog(Standardpanel)
+
+    def Ntc2018(self, widget)
             self.form = widget
             layout2 = QtGui.QVBoxLayout()
 
