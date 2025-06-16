@@ -118,7 +118,6 @@ class SizeTaskPanel:
         self.Q1LoadLabel.hide()
         self.Q1LoadValue.hide()
 
-            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0)
         self.qkLoadLabel = QtGui.QLabel("qk: 0 kN/m²")
         self.QkLoadLabel = QtGui.QLabel("Qk: 0 kN")
         self.HkLoadLabel = QtGui.QLabel("Hk: 0 kN/m")
