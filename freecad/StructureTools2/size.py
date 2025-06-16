@@ -81,8 +81,8 @@ class SizeTaskPanel:
 
         self.form.setLayout(layout)
 
-    def q1load(self, index):
-        self.Q1LoadValue.currentText(index)
+    def q1load(self, _):
+        self.Q1LoadValue.currentText()
         self.qkLoadLabel.setText("qk: 10 kN/m²")
         self.QkLoadLabel.setText("Qk: 10 kN")
         self.HkLoadLabel.setText("Hk: 10 kN/m")
