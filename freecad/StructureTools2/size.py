@@ -37,7 +37,7 @@ class SizeTaskPanel:
                 l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)
 
                 # if is't parallel to xy-plane
-                dist_alpha = sqrt((x2-x1)**2+(y2-y1))
+                dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
                 alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
                 if not alpha==0:
                     alpha = (pi - alpha)
