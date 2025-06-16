@@ -104,25 +104,22 @@ class SizeTaskPanel:
         # - uniformly distributed vertical loads qk
         # - concentrated vertical loads Qk
         # - linear horizontal loads Hk
-        Q1list = [['', 0, 0, 0], ['Cat.A  Areas for domestic and residential activities', 2.00, 2.00, 1.00], ['Cat.A  Common stairs, balconies, landings', 4.00, 4.00, 2.00], ['Cat.B1 Offices not open to the public', 2.00, 2.00, 1.00], ['Cat.B2 Offices open to the public', 3.00, 2.00, 1.00], ['Cat.B  Common stairs, balconies and landings', 4.00, 4.00, 2.00], ['Cat.C1 Areas with tables', 3.00, 3.00, 1.00], ['Cat.C2 Areas with fixed seating', 4.00, 4.00, 2.00], ['Cat.C3 Environments without obstacles to the movement of people', 5.00, 5.00, 3.00], ['Cat.C4 Areas where physical activities may be carried out', 5.00, 5.00, 3.00], ['Cat.C5 Areas susceptible to large crowds', 5.00, 5.00, 3.00], ['Cat.C Common stairways, balconies and landings', 4.00, 4.00, 2.00]]
 
         self.Q1LoadLabel = QtGui.QLabel("Overload Q1")
         self.Q1LoadValue = QtGui.QComboBox()
-        for i in range(0,10):
-            self.Q1LoadValue.addItem(str(Q1list[0][i]))
 
-#         self.Q1LoadValue.addItem('')
-#        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
-#        self.Q1LoadValue.addItem('Cat.A  Common stairs, balconies, landings')
-#        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
-#        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
-#        self.Q1LoadValue.addItem('Cat.B  Common stairs, balconies and landings')
-#        self.Q1LoadValue.addItem('Cat.C1 Areas with tables')
-#        self.Q1LoadValue.addItem('Cat.C2 Areas with fixed seating')
-#        self.Q1LoadValue.addItem('Cat.C3 Environments without obstacles to the movement of people,')
-#        self.Q1LoadValue.addItem('Cat.C4 Areas where physical activities may be carried out')
-#        self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
-#        self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
+        self.Q1LoadValue.addItem('')
+        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
+        self.Q1LoadValue.addItem('Cat.A  Common stairs, balconies, landings')
+        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
+        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
+        self.Q1LoadValue.addItem('Cat.B  Common stairs, balconies and landings')
+        self.Q1LoadValue.addItem('Cat.C1 Areas with tables')
+        self.Q1LoadValue.addItem('Cat.C2 Areas with fixed seating')
+        self.Q1LoadValue.addItem('Cat.C3 Environments without obstacles to the movement of people,')
+        self.Q1LoadValue.addItem('Cat.C4 Areas where physical activities may be carried out')
+        self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
+        self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
         self.Q1LoadValue.activated.connect(self.q1load)
         self.Q1LoadLabel.hide()
         self.Q1LoadValue.hide()
@@ -172,13 +169,10 @@ class SizeTaskPanel:
 
     def q1load(self, index):
         self.Q1LoadValue.currentText()
-        #Q1list = [[0, 0, 0], [2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
-        qk = 0
-        Qk = 0
-        Hk = 0
-        qk = Q1list[index][0]
-        Qk = Q1list[index][1]
-        Hk = Q1list[index][2]
+        Q1list = [[0, 0, 0], [2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
+        self.qk = Q1list[index][0]
+        self.Qk = Q1list[index][1]
+        self.Hk = Q1list[index][2]
         self.qkLoadLabel.setText('qk: ' + str(qk) + ' kN/m²')
         self.QkLoadLabel.setText('Qk: ' + str(Qk) + ' kN')
         self.HkLoadLabel.setText('Hk: ' + str(Hk) + ' kN/m')
