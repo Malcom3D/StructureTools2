@@ -29,9 +29,8 @@ class SizeTaskPanel:
                 qa=float(str(object.FinalLoading).split(" ")[0])
                 qb=float(str(object.InitialLoading).split(" ")[0])
             elif 'Line' in object.Name:
-                for edge in object.Shape.Edges:
-                    for vertex in edge.Vertexes:
-                        print(round(float(FreeCAD.Units.Quantity(vertex.Point.x,'mm').getValueAs(unitLength)), 2))
+                line = [[object.Start.x, object.Start.y, object.Start.z], [object.End.x, object.End.y, object.End.z]]
+                print(line)
 
         # Standard ComboBox
         self.StandardLabel = QtGui.QLabel("Building Standard")
