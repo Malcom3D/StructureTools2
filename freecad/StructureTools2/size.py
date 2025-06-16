@@ -25,27 +25,38 @@ class SizeTaskPanel:
         layout = QtGui.QVBoxLayout()
 
         for object in selection:
-            if 'Line' in object.Name:
-                line = [[round(object.Start.x, 2), round(object.Start.y, 2), round(object.Start.z, 2)], [round(object.End.x, 2), round(object.End.y, 2), round(object.End.z, 2)]]
-                x1 = round(object.Start.x, 2)
-                y1 = round(object.Start.y, 2)
-                z1 = round(object.Start.z, 2)
-                x2 = round(object.End.x, 2)
-                y2 = round(object.End.y, 2)
-                z2 = round(object.End.z, 2)
+            if 'Load' in object.Name:
+                Owner=object.ObjectBase[0][0]
+                line = [[round(Owner.Start.x, 2), round(Owner.Start.y, 2), round(Owner.Start.z, 2)], [round(Owner.End.x, 2), round(Owner.End.y, 2), round(Owner.End.z, 2)]]
+                x1 = round(Owner.Start.x, 2)
+                y1 = round(Owner.Start.y, 2)
+                z1 = round(Owner.Start.z, 2)
+                x2 = round(Owner.End.x, 2)
+                y2 = round(Owner.End.y, 2)
+                z2 = round(Owner.End.z, 2)
                 l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1))
                 alpha = pi - (functions.elementary.trigonometric.atan2((z2-z1), dist_alpha))
-            elif 'Load' in object.Name:
+                print(Owner)
+
+
+#            if 'Line' in object.Name:
+#                line = [[round(object.Start.x, 2), round(object.Start.y, 2), round(object.Start.z, 2)], [round(object.End.x, 2), round(object.End.y, 2), round(object.End.z, 2)]]
+#                x1 = round(object.Start.x, 2)
+#                y1 = round(object.Start.y, 2)
+#                z1 = round(object.Start.z, 2)
+#                x2 = round(object.End.x, 2)
+#                y2 = round(object.End.y, 2)
+#                z2 = round(object.End.z, 2)
+#                l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)
+#                # if is't parallel to xy-plane
+#                dist_alpha = sqrt((x2-x1)**2+(y2-y1))
+#                alpha = pi - (functions.elementary.trigonometric.atan2((z2-z1), dist_alpha))
+#            elif 'Load' in object.Name:
                 qa=float(str(object.FinalLoading).split(" ")[0])
                 qb=float(str(object.InitialLoading).split(" ")[0])
                 LoadOwner=object.ObjectBase
-
-                print(LoadOwner[0][0].Name)
-                print(LoadOwner[0][0].Label)
-
-
                 Qavr = (((qa+qb)/2)*l)
             if not (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
