@@ -20,7 +20,7 @@ def Size(Standard, G1Load, G2Load, Q1Load):
     print(Standard, G1Load, G2Load, Q1Load)
 
 class SizeTaskPanel:
-    def __init__(self, widget, elements):
+    def __init__(self, widget, selection):
         self.form = widget
         layout = QtGui.QVBoxLayout()
 
