@@ -29,7 +29,7 @@ class SizeTaskPanel:
                 qa=float(str(object.FinalLoading).split(" ")[0])
                 qb=float(str(object.InitialLoading).split(" ")[0])
             elif 'Line' in object.Name:
-                line = [[object.Start.x, object.Start.y, object.Start.z], [object.End.x, object.End.y, object.End.z]]
+                line = [[round(object.Start.x, 2), round(object.Start.y, 2), round(object.Start.z, 2)], [round(object.End.x, 2), round(object.End.y, 2), round(object.End.z, 2)]]
                 print(line)
 
         # Standard ComboBox
