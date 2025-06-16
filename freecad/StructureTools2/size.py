@@ -109,7 +109,7 @@ class SizeTaskPanel:
         self.Q1LoadLabel = QtGui.QLabel("Overload Q1")
         self.Q1LoadValue = QtGui.QComboBox()
         for i in range(0,10):
-            self.Q1LoadValue.addItem(Q1list[0][i])
+            self.Q1LoadValue.addItem(str(Q1list[0][i]))
 
 #         self.Q1LoadValue.addItem('')
 #        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
