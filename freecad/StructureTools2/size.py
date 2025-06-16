@@ -113,11 +113,15 @@ class SizeTaskPanel:
             self.QkLoadLabel.hide()
             self.HkLoadLabel.hide()
 
-    def q1load(self, _):
+    def q1load(self, index):
         self.Q1LoadValue.currentText()
-        self.qkLoadLabel.setText("qk: 10 kN/m²")
-        self.QkLoadLabel.setText("Qk: 10 kN")
-        self.HkLoadLabel.setText("Hk: 10 kN/m")
+        Q1list = [[2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
+        qk = Qlist[index-1][0]
+        Qk = Qlist[index-1][1]
+        Hk = Qlist[index-1][2]
+        self.qkLoadLabel.setText('qk: ' + qk + ' kN/m²')
+        self.QkLoadLabel.setText('Qk: ' + Qk + ' kN')
+        self.HkLoadLabel.setText('Hk: ' + Hk + ' kN/m')
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
