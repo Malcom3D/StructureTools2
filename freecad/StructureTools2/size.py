@@ -35,13 +35,16 @@ class SizeTaskPanel:
                 y2 = round(Owner.End.y, 2)
                 z2 = round(Owner.End.z, 2)
                 l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)
+
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1))
                 alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
                 if not alpha==0:
                     alpha = (pi - alpha)
-                qa=float(str(object.FinalLoading).split(" ")[0])/1000
-                qb=float(str(object.InitialLoading).split(" ")[0])/1000
+                qa = 0
+                qb = 0
+                qa = float(str(object.FinalLoading).split(" ")[0])/1000
+                qb = float(str(object.InitialLoading).split(" ")[0])/1000
                 Qavr = (((qa+qb)/2)*l)
             if (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
@@ -115,6 +118,7 @@ class SizeTaskPanel:
         self.Q1LoadLabel.hide()
         self.Q1LoadValue.hide()
 
+            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0)
         self.qkLoadLabel = QtGui.QLabel("qk: 0 kN/m²")
         self.QkLoadLabel = QtGui.QLabel("Qk: 0 kN")
         self.HkLoadLabel = QtGui.QLabel("Hk: 0 kN/m")
