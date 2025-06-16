@@ -45,8 +45,8 @@ class SizeTaskPanel:
                 LoadOwner=object.ObjectBase
                 Qavr = (((qa+qb)/2)*l)
             if (qa or qb) and not (qa==0 and qb==0):
-                qmax = max(((2*qa+qb)*cos(alpha))/3, (((qa+2*qb)*cos(alpha))/3)
-                qmin = max(((2*qa+qb)*cos(alpha))/3, (((qa+2*qb)*cos(alpha))/3)
+                qmax = max((((2*qa+qb)*cos(alpha))/3), ((((qa+2*qb)*cos(alpha))/3))
+                qmin = max((((2*qa+qb)*cos(alpha))/3), ((((qa+2*qb)*cos(alpha))/3))
                 # Reaction Ra and Rb
                 Ra = (((2*qa+qb)*cos(alpha))*l)/6
                 Rb = (((qa+2*qb)*cos(alpha))*l)/6
