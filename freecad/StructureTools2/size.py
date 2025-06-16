@@ -38,7 +38,7 @@ class SizeTaskPanel:
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1))
                 alpha = pi - (functions.elementary.trigonometric.atan2((z2-z1), dist_alpha))
-                print(line)
+                print(l, alpha)
 
 
 #            if 'Line' in object.Name:
@@ -58,12 +58,13 @@ class SizeTaskPanel:
                 qb=float(str(object.InitialLoading).split(" ")[0])
                 LoadOwner=object.ObjectBase
                 Qavr = (((qa+qb)/2)*l)
+                print(qa, qb, Qavr)
             if not (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
                 qmin = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
                 # Reaction Ra and Rb
-                Ra = (((((2*qa+qb)*cos(alpha))*l))/6)
-                Rb = (((((qa+2*qb)*cos(alpha))*l))/6)
+                Ra = ((((2*qa+qb)*cos(alpha))*l)/6)
+                Rb = ((((qa+2*qb)*cos(alpha))*l)/6)
                 # Shear force
                 Va = Ra
                 Vb = -Rb
