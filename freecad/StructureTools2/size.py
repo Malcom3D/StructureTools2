@@ -25,12 +25,46 @@ class SizeTaskPanel:
         layout = QtGui.QVBoxLayout()
 
         for object in selection:
-            if 'Load' in object.Name:
+            if 'Line' in object.Name:
+                line = [[round(object.Start.x, 2), round(object.Start.y, 2), round(object.Start.z, 2)], [round(object.End.x, 2), round(object.End.y, 2), round(object.End.z, 2)]]
+                x1 = round(object.Start.x, 2)
+                y1 = round(object.Start.y, 2)
+                z1 = round(object.Start.z, 2)
+                x2 = round(object.End.x, 2)
+                y2 = round(object.End.y, 2)
+                z2 = round(object.End.z, 2)
+                l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)
+                # if is't parallel to xy-plane
+                dist_alpha = sqrt((x2-x1)**2+(y2-y1))
+                alpha = pi - (functions.elementary.trigonometric.atan2((z2-z1), dist_alpha))
+            elif 'Load' in object.Name:
                 qa=float(str(object.FinalLoading).split(" ")[0])
                 qb=float(str(object.InitialLoading).split(" ")[0])
-            elif 'Line' in object.Name:
-                line = [[round(object.Start.x, 2), round(object.Start.y, 2), round(object.Start.z, 2)], [round(object.End.x, 2), round(object.End.y, 2), round(object.End.z, 2)]]
-                print(line)
+                Qavr = (((qa+qb)/2)*l)
+                LoadOwner=object.ObjectBase
+                print('LoadOwner: ' + LoadOwner)
+            if not (qa or qb) and not (qa==0 and qb==0):
+                qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+                qmin = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+                # Reaction Ra and Rb
+                Ra = (((2*qa+qb)*cos(alpha))*l))/6)
+                Rb = (((qa+2*qb)*cos(alpha))*l))/6)
+                # Shear force
+                Va = Ra
+                Vb = -Rb
+                if qa==qb:
+                    # Bending moment
+                    x0 = Rational(1, 2)
+                    Mmax = (((qmax))*l**2)/2)
+                else:
+                    z = qmin/qmax
+                    u = 0.577*sqrt(1+z+z**2)
+                    x0 = ((u-1)*l)/(z-1)
+                    # Bending moment
+                    Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
+                # Normal stress
+            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0)
+
 
         # Standard ComboBox
         self.StandardLabel = QtGui.QLabel("Building Standard")
@@ -43,7 +77,10 @@ class SizeTaskPanel:
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
         self.G1LoadValue = QtGui.QDoubleSpinBox()
-        self.G1LoadValue.setValue(0)
+        if Qavr:
+            self.G1LoadValue.setValue(Qavr)
+        else:
+            self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
         self.G1LoadLabel.hide()
         self.G1LoadValue.hide()
