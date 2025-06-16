@@ -30,18 +30,23 @@ class SizeTaskPanel:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.addItem('Custom...')
+        self.StandardValue.activated.connect(self.selectedStandard)
 
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
+        self.G1LoadLabel.hide()
+        self.G1LoadValue.hide()
 
         # Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel("Structural load G2")
         self.G2LoadValue = QtGui.QDoubleSpinBox()
         self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
+        self.G2LoadLabel.hide()
+        self.G2LoadValue.hide()
 
         # Structural Load Q1 [ntc2018 Tab. 3.1.II]
         # - uniformly distributed vertical loads qk
@@ -62,10 +67,15 @@ class SizeTaskPanel:
         self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
         self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
         self.Q1LoadValue.activated.connect(self.q1load)
+        self.Q1LoadLabel.hide()
+        self.Q1LoadValue.hide()
 
         self.qkLoadLabel = QtGui.QLabel("qk: 0 kN/m²")
         self.QkLoadLabel = QtGui.QLabel("Qk: 0 kN")
         self.HkLoadLabel = QtGui.QLabel("Hk: 0 kN/m")
+        self.qkLoadLabel.hide()
+        self.QkLoadLabel.hide()
+        self.HkLoadLabel.hide()
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
@@ -81,6 +91,28 @@ class SizeTaskPanel:
 
         self.form.setLayout(layout)
 
+    def selectedStandard(self, index):
+	if index == 1:
+            self.G1LoadLabel.show()
+            self.G1LoadValue.show()
+            self.G2LoadLabel.show()
+            self.G2LoadValue.show()
+            self.Q1LoadLabel.show()
+            self.Q1LoadValue.show()
+            self.qkLoadLabel.show()
+            self.QkLoadLabel.show()
+            self.HkLoadLabel.show()
+        else:
+            self.G1LoadLabel.hide()
+            self.G1LoadValue.hide()
+            self.G2LoadLabel.hide()
+            self.G2LoadValue.hide()
+            self.Q1LoadLabel.hide()
+            self.Q1LoadValue.hide()
+            self.qkLoadLabel.hide()
+            self.QkLoadLabel.hide()
+            self.HkLoadLabel.hide()
+
     def q1load(self, _):
         self.Q1LoadValue.currentText()
         self.qkLoadLabel.setText("qk: 10 kN/m²")
@@ -91,8 +123,8 @@ class SizeTaskPanel:
     # What is done when we click on the ok button.
     def accept(self):
         Standard = self.StandardValue.currentText()
-        G1Load = self.G1LoadValue.Value()
-        G2Load = self.G2LoadValue.Value()
+        G1Load = self.G1LoadValue.value()
+        G2Load = self.G2LoadValue.value()
         Q1Load = self.Q1LoadValue.currentText()
 
         Size(Standard, G1Load, G2Load, Q1Load)
