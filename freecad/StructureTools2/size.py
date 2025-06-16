@@ -184,9 +184,7 @@ class SizeTaskPanel:
         Standard = self.StandardValue.currentText()
         G1Load = self.G1LoadValue.value()
         G2Load = self.G2LoadValue.value()
-        #Q1Load = [qk, Qk, Hk]
-        Q1Load = 'qk, Qk, Hk'
-        print(qk, Qk, Hk)
+        Q1Load = [qk, Qk, Hk]
 
         Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
