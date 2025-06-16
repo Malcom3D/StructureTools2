@@ -386,7 +386,7 @@ class CommandSize():
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
         for object in selection:
-            print(object.name)
+            print(object.Name)
 #        obj = doc.addObject("Part::FeaturePython", "Size")
 #        objSuport = Size(obj, selection)
 #        ViewProviderSize(obj.ViewObject)           
