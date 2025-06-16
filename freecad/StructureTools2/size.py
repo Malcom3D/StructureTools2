@@ -129,7 +129,7 @@ class SizeTaskPanel:
         Standard = self.StandardValue.currentText()
         G1Load = self.G1LoadValue.value()
         G2Load = self.G2LoadValue.value()
-        Q1Load = self.Q1LoadValue.currentText()
+        Q1Load = [qk, Qk, Hk]
 
         Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
@@ -387,10 +387,10 @@ class CommandSize():
         doc = FreeCAD.ActiveDocument
         for object in selection:
             if 'Load' in object.Name:
-                print(object.FinalLoading)
-                print(object.InitialLoading)
-#                qa=object.FinalLoading
-#                qb=object.InitialLoading
+                print(object.FinalLoading.split(" ")[0])
+                print(object.InitialLoading.split(" ")[0])
+                qa=object.FinalLoading.split(" ")[0]
+                qb=object.InitialLoading.split(" ")[0]
 #        obj = doc.addObject("Part::FeaturePython", "Size")
 #        objSuport = Size(obj, selection)
 #        ViewProviderSize(obj.ViewObject)           
