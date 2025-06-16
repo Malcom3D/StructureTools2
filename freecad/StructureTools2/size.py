@@ -50,11 +50,22 @@ class SizeTaskPanel:
         self.Q1LoadLabel = QtGui.QLabel("Structural load Q1")
         self.Q1LoadValue = QtGui.QComboBox()
         self.Q1LoadValue.addItem('')
-        self.Q1LoadValue.addItem('Cat.A: Areas for domestic and residential activities')
-        self.Q1LoadValue.addItem('Cat.A Common stairs, balconies, landings')
+        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
+        self.Q1LoadValue.addItem('Cat.A  Common stairs, balconies, landings')
         self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
         self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
-        self.Q1LoadValue.addItem('Cat.B Common stairs, balconies and landings')
+        self.Q1LoadValue.addItem('Cat.B  Common stairs, balconies and landings')
+        self.Q1LoadValue.addItem('Cat.C1 Areas with tables')
+        self.Q1LoadValue.addItem('Cat.C2 Areas with fixed seating')
+        self.Q1LoadValue.addItem('Cat.C3 Environments without obstacles to the movement of people,')
+        self.Q1LoadValue.addItem('Cat.C4 Areas where physical activities may be carried out')
+        self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
+        self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
+        self.Q1LoadValue.activated.connect(self.q1load)
+
+        self.qkLoadLabel = QtGui.QLabel("qk: 0 kN/m²")
+        self.QkLoadLabel = QtGui.QLabel("Qk: 0 kN")
+        self.HkLoadLabel = QtGui.QLabel("Hk: 0 kN/m")
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
@@ -64,16 +75,25 @@ class SizeTaskPanel:
         layout.addWidget(self.G2LoadValue)
         layout.addWidget(self.Q1LoadLabel)
         layout.addWidget(self.Q1LoadValue)
+        layout.addWidget(self.qkLoadLabel)
+        layout.addWidget(self.QkLoadLabel)
+        layout.addWidget(self.HkLoadLabel)
 
         self.form.setLayout(layout)
+
+    def q1load(self, index):
+        self.Q1LoadValue.currentText(index)
+        self.qkLoadLabel.setText("qk: 10 kN/m²")
+        self.QkLoadLabel.setText("Qk: 10 kN")
+        self.HkLoadLabel.setText("Hk: 10 kN/m")
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        Standard = self.StandardValue.Value()
+        Standard = self.StandardValue.currentText()
         G1Load = self.G1LoadValue.Value()
         G2Load = self.G2LoadValue.Value()
-        Q1Load = self.Q1LoadValue.Value()
+        Q1Load = self.Q1LoadValue.currentText()
 
         Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
