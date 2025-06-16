@@ -388,7 +388,7 @@ class CommandSize():
         for object in selection:
             if 'Load' in object.Name:
                 print(object.FinalLoading)
-                print=(object.InitialLoading)
+                print(object.InitialLoading)
 #                qa=object.FinalLoading
 #                qb=object.InitialLoading
 #        obj = doc.addObject("Part::FeaturePython", "Size")
