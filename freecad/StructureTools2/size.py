@@ -34,7 +34,7 @@ class SizeTaskPanel:
                 x2 = round(Owner.End.x, 2)
                 y2 = round(Owner.End.y, 2)
                 z2 = round(Owner.End.z, 2)
-                l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)
+                l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
 
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
@@ -44,8 +44,8 @@ class SizeTaskPanel:
                     alpha = (pi - alpha)
                 qa = 0
                 qb = 0
-                qa = float(str(object.FinalLoading).split(" ")[0])/1000
-                qb = float(str(object.InitialLoading).split(" ")[0])/1000
+                qa = float(str(object.FinalLoading).split(" ")[0])/1000000
+                qb = float(str(object.InitialLoading).split(" ")[0])/1000000
                 Qavr = (((qa+qb)/2)*l)
             if (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
