@@ -40,8 +40,8 @@ class SizeTaskPanel:
                 alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
                 if not alpha==0:
                     alpha = (pi - alpha)
-                qa=float(str(object.FinalLoading).split(" ")[0])
-                qb=float(str(object.InitialLoading).split(" ")[0])
+                qa=float(str(object.FinalLoading).split(" ")[0])/1000
+                qb=float(str(object.InitialLoading).split(" ")[0])/1000
                 Qavr = (((qa+qb)/2)*l)
             if (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
