@@ -92,7 +92,7 @@ class SizeTaskPanel:
         self.form.setLayout(layout)
 
     def selectedStandard(self, index):
-	if index == 1:
+        if index == 1:
             self.G1LoadLabel.show()
             self.G1LoadValue.show()
             self.G2LoadLabel.show()
