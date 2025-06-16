@@ -38,15 +38,14 @@ class SizeTaskPanel:
 
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
-                print(z2, z1, dist_alpha)
-                alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
+                #alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
+                alpha = atan2((z2-z1), dist_alpha)
                 if not alpha==0:
                     alpha = (pi - alpha)
                 qa = 0
                 qb = 0
                 qa = float(str(object.FinalLoading).split(" ")[0])/1000
                 qb = float(str(object.InitialLoading).split(" ")[0])/1000
-                print(qa, qb, l)
                 Qavr = (((qa+qb)/2)*l)
             if (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
@@ -68,7 +67,7 @@ class SizeTaskPanel:
                     # Bending moment
                     Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
                 # Normal stress
-            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0)
+            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha)
 
 
         # Standard ComboBox
@@ -82,8 +81,10 @@ class SizeTaskPanel:
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
         self.G1LoadValue = QtGui.QDoubleSpinBox()
+        self.G1LoadValue.setMaximum(99999999999999999999999999.99)
         if Qavr:
             self.G1LoadValue.setValue(Qavr)
+            self.G1LoadValue.setMinimum(Qavr)
         else:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
