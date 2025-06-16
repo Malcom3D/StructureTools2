@@ -116,9 +116,9 @@ class SizeTaskPanel:
     def q1load(self, index):
         self.Q1LoadValue.currentText()
         Q1list = [[2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
-        qk = Qlist[index-1][0]
-        Qk = Qlist[index-1][1]
-        Hk = Qlist[index-1][2]
+        qk = Q1list[index-1][0]
+        Qk = Q1list[index-1][1]
+        Hk = Q1list[index-1][2]
         self.qkLoadLabel.setText('qk: ' + qk + ' kN/m²')
         self.QkLoadLabel.setText('Qk: ' + Qk + ' kN')
         self.HkLoadLabel.setText('Hk: ' + Hk + ' kN/m')
