@@ -55,7 +55,7 @@ class SizeTaskPanel:
                 if qa==qb:
                     # Bending moment
                     x0 = Rational(1, 2)
-                    Mmax = (((qmax))*l**2)/2)
+                    Mmax = (((qmax)*l**2)/2)
                 else:
                     z = qmin/qmax
                     u = 0.577*sqrt(1+z+z**2)
