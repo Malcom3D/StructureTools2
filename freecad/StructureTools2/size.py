@@ -40,8 +40,8 @@ class SizeTaskPanel:
         self.G1LoadLabel.hide()
         self.G1LoadValue.hide()
 
-        # Structural Load G2 [ntc2018 3.1.3]
-        self.G2LoadLabel = QtGui.QLabel("Structural load G2")
+        # Non Structural Load G2 [ntc2018 3.1.3]
+        self.G2LoadLabel = QtGui.QLabel("Non structural load G2")
         self.G2LoadValue = QtGui.QDoubleSpinBox()
         self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
@@ -52,7 +52,7 @@ class SizeTaskPanel:
         # - uniformly distributed vertical loads qk
         # - concentrated vertical loads Qk
         # - linear horizontal loads Hk
-        self.Q1LoadLabel = QtGui.QLabel("Structural load Q1")
+        self.Q1LoadLabel = QtGui.QLabel("Overload Q1")
         self.Q1LoadValue = QtGui.QComboBox()
         self.Q1LoadValue.addItem('')
         self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
