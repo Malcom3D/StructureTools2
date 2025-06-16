@@ -38,7 +38,7 @@ class SizeTaskPanel:
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1))
                 alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
-                if not alfa==0:
+                if not alpha==0:
                     alpha = (pi - alpha)
                 qa=float(str(object.FinalLoading).split(" ")[0])
                 qb=float(str(object.InitialLoading).split(" ")[0])
