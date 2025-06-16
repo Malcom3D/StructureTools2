@@ -67,8 +67,8 @@ class SizeTaskPanel:
                     # Bending moment
                     Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
                 # Normal stress
-            print('qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l')
-            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l)
+            print('qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l, u, z, qmin, qmax')
+            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l, u, z, qmin, qmax)
 
 
         # Standard ComboBox
