@@ -24,6 +24,15 @@ class SizeTaskPanel:
         self.form = widget
         layout = QtGui.QVBoxLayout()
 
+        for object in selection:
+            if 'Load' in object.Name:
+                qa=float(str(object.FinalLoading).split(" ")[0])
+                qb=float(str(object.InitialLoading).split(" ")[0])
+            elif 'Line' in object.Name:
+                for edge in object.Shape.Edges:
+                    for vertex in edge.Vertexes:
+                        print(round(float(FreeCAD.Units.Quantity(vertex.Point.x,'mm').getValueAs(unitLength)), 2))
+
         # Standard ComboBox
         self.StandardLabel = QtGui.QLabel("Building Standard")
         self.StandardValue = QtGui.QComboBox()
@@ -76,6 +85,9 @@ class SizeTaskPanel:
         self.qkLoadLabel.hide()
         self.QkLoadLabel.hide()
         self.HkLoadLabel.hide()
+        qk = 0
+        Qk = 0
+        Hk = 0
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
@@ -385,12 +397,6 @@ class CommandSize():
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
-        for object in selection:
-            if 'Load' in object.Name:
-                print(str(object.FinalLoading).split(" ")[0])
-                print(str(object.InitialLoading).split(" ")[0])
-                qa=float(str(object.FinalLoading).split(" ")[0])
-                qb=float(str(object.InitialLoading).split(" ")[0])
 #        obj = doc.addObject("Part::FeaturePython", "Size")
 #        objSuport = Size(obj, selection)
 #        ViewProviderSize(obj.ViewObject)           
