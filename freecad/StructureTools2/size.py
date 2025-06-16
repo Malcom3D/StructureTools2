@@ -387,10 +387,10 @@ class CommandSize():
         doc = FreeCAD.ActiveDocument
         for object in selection:
             if 'Load' in object.Name:
-                print(object.FinalLoading.split(" ")[0])
-                print(object.InitialLoading.split(" ")[0])
-                qa=object.FinalLoading.split(" ")[0]
-                qb=object.InitialLoading.split(" ")[0]
+                print(str(object.FinalLoading).split(" ")[0])
+                print(str(object.InitialLoading).split(" ")[0])
+                qa=float(str(object.FinalLoading).split(" ")[0])
+                qb=float(str(object.InitialLoading).split(" ")[0])
 #        obj = doc.addObject("Part::FeaturePython", "Size")
 #        objSuport = Size(obj, selection)
 #        ViewProviderSize(obj.ViewObject)           
