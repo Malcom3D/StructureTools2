@@ -128,9 +128,6 @@ class SizeTaskPanel:
         self.qkLoadLabel.hide()
         self.QkLoadLabel.hide()
         self.HkLoadLabel.hide()
-        qk = 0
-        Qk = 0
-        Hk = 0
 
         layout.addWidget(self.StandardLabel)
         layout.addWidget(self.StandardValue)
@@ -171,6 +168,9 @@ class SizeTaskPanel:
     def q1load(self, index):
         self.Q1LoadValue.currentText()
         Q1list = [[0, 0, 0], [2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
+        qk = 0
+        Qk = 0
+        Hk = 0
         qk = Q1list[index][0]
         Qk = Q1list[index][1]
         Hk = Q1list[index][2]
@@ -184,7 +184,9 @@ class SizeTaskPanel:
         Standard = self.StandardValue.currentText()
         G1Load = self.G1LoadValue.value()
         G2Load = self.G2LoadValue.value()
-        Q1Load = [qk, Qk, Hk]
+        #Q1Load = [qk, Qk, Hk]
+        Q1Load = 'qk, Qk, Hk'
+        print(qk, Qk, Hk)
 
         Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
