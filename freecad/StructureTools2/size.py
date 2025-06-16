@@ -40,9 +40,9 @@ class SizeTaskPanel:
             elif 'Load' in object.Name:
                 qa=float(str(object.FinalLoading).split(" ")[0])
                 qb=float(str(object.InitialLoading).split(" ")[0])
-                Qavr = (((qa+qb)/2)*l)
                 LoadOwner=object.ObjectBase
                 print('LoadOwner: ' + LoadOwner)
+                Qavr = (((qa+qb)/2)*l)
             if not (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
                 qmin = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
