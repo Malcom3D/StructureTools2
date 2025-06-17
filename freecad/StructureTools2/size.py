@@ -49,7 +49,7 @@ class SizeTaskPanel:
                 qb = 0
                 qa = float(str(object.FinalLoading).split(' ')[0])/1000000
                 qb = float(str(object.InitialLoading).split(' ')[0])/1000000
-                self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
+                self.Qavr = round((((qa+qb)/2)*cos(alpha)*l), 2)
                 if (qa or qb) and not (qa==0 and qb==0):
                     qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
                     qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
