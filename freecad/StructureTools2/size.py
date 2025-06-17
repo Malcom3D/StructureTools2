@@ -148,7 +148,7 @@ class SizeTaskPanel:
             self.QkLoadLabel.hide()
             self.HkLoadLabel.hide()
 
-    def LinePreCalc(object):
+    def LinePreCalc(self, object):
         Owner=object.ObjectBase[0][0]
         x1 = round(Owner.Start.x, 2)
         y1 = round(Owner.Start.y, 2)
@@ -165,7 +165,7 @@ class SizeTaskPanel:
             alpha = (pi/2 - alpha)
         self.alpha = alpha
 
-    def LoadPreCalc(object):
+    def LoadPreCalc(self, object):
         l = self.l
         alpha = self.alpha
         qa = 0
