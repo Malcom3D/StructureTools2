@@ -160,7 +160,7 @@ class SizeTaskPanel:
         self.StrengthList.append(list(map(set_type, ['D60', '60', '36', '0.6', '32', '10.5', '5.3', '17', '14.3', '1.13', '1.06', '700', '840'])))
         self.StrengthList.append(list(map(set_type, ['D70', '70', '42', '0.6', '34', '13.5', '6.0', '20', '16.8', '1.33', '1.25', '900', '1080'])))
 
-        self.ResistanceLabel = QtGui.QLabel('Strength class')
+        self.StrengthLabel = QtGui.QLabel('Strength class')
         self.StrengthValue = QtGui.QComboBox()
         for i in range(0,len(self.StrengthList[:])):
             self.StrengthValue.addItem(self.StrengthList[i][0])
