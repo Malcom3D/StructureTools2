@@ -19,6 +19,16 @@ def Size(Standard, G1Load, G2Load, Q1Load):
     doc = FreeCAD.ActiveDocument
     print(Standard, G1Load, G2Load, Q1Load)
 
+def set_type(s):
+    """(str)->infered type.
+    Takes a string, inferes the type and returns either a string, int or float.
+    """
+    if s.isnumeric():
+        return int(s)
+    if s.count(".") == 1 and "".join([c for c in s if c!="."]).isnumeric():
+        return float(s)
+    return s
+
 class SizeTaskPanel:
     def __init__(self, widget, selection):
         self.form = widget
@@ -66,9 +76,7 @@ class SizeTaskPanel:
                     # Bending moment
                     Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
                 # Normal stress
-            print('qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l, u, z, qmin, qmax')
-            print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l, u, z, qmin, qmax)
-            print('qa: ', qa)
+            print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax')
 
 
         # Standard ComboBox
@@ -100,26 +108,43 @@ class SizeTaskPanel:
         self.G2LoadLabel.hide()
         self.G2LoadValue.hide()
 
-        # Structural Load Q1 [ntc2018 Tab. 3.1.II]
+        # Overloads by intended use [ntc2018 Tab. 3.1.II]
         # - uniformly distributed vertical loads qk
         # - concentrated vertical loads Qk
         # - linear horizontal loads Hk
 
-        self.Q1LoadLabel = QtGui.QLabel("Overload Q1")
-        self.Q1LoadValue = QtGui.QComboBox()
+        # mapped list ['description', qk, Qk, Hk]
+        Q1mapList = [list(map(set_type, ['', '0.0', '0.0', '0.0']))]
+        Q1mapList.append(list(map(set_type, ['Cat.A  Areas for domestic and residential activities', '2.00', '2.00', '1.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.A  Common stairs, balconies, landings', '4.00, '4.00', '2.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.B1 Offices not open to the public', '2.00', '2.00', '1.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.B2 Offices open to the public', '3.00', '2.00', '1.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.B  Common stairs, balconies and landings', '4.00', '4.00', '2.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.C1 Areas with tables', '3.00', '3.00', '1.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.C2 Areas with fixed seating', '4.00', '4.00', '2.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.C3 Environments without obstacles to the movement of people', '5.00', '5.00', '3.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.C4 Areas where physical activities may be carried out', '5.00', '5.00', '3.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.C5 Areas susceptible to large crowds', '5.00', '5.00', '3.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.C Common stairways, balconies and landings', '4.00', '4.00', '2.00'])))
 
-        self.Q1LoadValue.addItem('')
-        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
-        self.Q1LoadValue.addItem('Cat.A  Common stairs, balconies, landings')
-        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
-        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
-        self.Q1LoadValue.addItem('Cat.B  Common stairs, balconies and landings')
-        self.Q1LoadValue.addItem('Cat.C1 Areas with tables')
-        self.Q1LoadValue.addItem('Cat.C2 Areas with fixed seating')
-        self.Q1LoadValue.addItem('Cat.C3 Environments without obstacles to the movement of people,')
-        self.Q1LoadValue.addItem('Cat.C4 Areas where physical activities may be carried out')
-        self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
-        self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
+
+        self.Q1LoadLabel = QtGui.QLabel("Overloads by intended use Q1")
+        self.Q1LoadValue = QtGui.QComboBox()
+        for i in len(Q1mapList[:]):
+            self.Q1LoadValue.addItem(Q1mapList[i][0])
+   
+#        self.Q1LoadValue.addItem('')
+#        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
+#        self.Q1LoadValue.addItem('Cat.A  Common stairs, balconies, landings')
+#        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
+#        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
+#        self.Q1LoadValue.addItem('Cat.B  Common stairs, balconies and landings')
+#        self.Q1LoadValue.addItem('Cat.C1 Areas with tables')
+#        self.Q1LoadValue.addItem('Cat.C2 Areas with fixed seating')
+#        self.Q1LoadValue.addItem('Cat.C3 Environments without obstacles to the movement of people,')
+#        self.Q1LoadValue.addItem('Cat.C4 Areas where physical activities may be carried out')
+#        self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
+#        self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
         self.Q1LoadValue.activated.connect(self.q1load)
         self.Q1LoadLabel.hide()
         self.Q1LoadValue.hide()
@@ -168,11 +193,15 @@ class SizeTaskPanel:
             self.HkLoadLabel.hide()
 
     def q1load(self, index):
-        self.Q1LoadValue.currentText()
-        Q1list = [[0, 0, 0], [2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
-        self.qk = Q1list[index][0]
-        self.Qk = Q1list[index][1]
-        self.Hk = Q1list[index][2]
+#        Q1list = [[0, 0, 0], [2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
+#        self.qk = Q1list[index][0]
+#        self.Qk = Q1list[index][1]
+#        self.Hk = Q1list[index][2]
+#        self.Q1LoadValue.currentText()
+
+        self.qk = Q1maplist[index][1]
+        self.Qk = Q1maplist[index][2]
+        self.Hk = Q1maplist[index][3]
         self.qkLoadLabel.setText('qk: ' + str(self.qk) + ' kN/m²')
         self.QkLoadLabel.setText('Qk: ' + str(self.Qk) + ' kN')
         self.HkLoadLabel.setText('Hk: ' + str(self.Hk) + ' kN/m')
