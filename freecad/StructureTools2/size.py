@@ -43,9 +43,8 @@ class SizeTaskPanel:
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
                 alpha = atan2((z2-z1), dist_alpha)
-                print('alpha atan2: ', alpha)
                 if not alpha==0:
-                    alpha = (pi - alpha)
+                    alpha = (pi/2 - alpha)
                 qa = 0
                 qb = 0
                 qa = float(str(object.FinalLoading).split(' ')[0])/1000000
