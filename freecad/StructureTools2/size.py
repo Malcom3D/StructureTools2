@@ -27,21 +27,9 @@ def set_type(s):
         return float(s)
     return s
 
-class StdTaskPanel:
-    def __init__(self, widget):
-        self.form = widget
-        layout = QtGui.QVBoxLayout()
-
-        self.StandardLabel = QtGui.QLabel("Building Standard")
-        self.form.setLayout(layout)
-
-    # What is done when we click on the ok button.
-    def accept(self):
-        FreeCADGui.Control.closeDialog() #close the dialog
-
 class SizeTaskPanel:
     def __init__(self, widget, selection):
-        self.form = widget
+        self.form = [widget, QtGui.QDialog()]
         layout = QtGui.QVBoxLayout()
 
         for object in selection:
@@ -466,13 +454,10 @@ class CommandSize():
         # what is done when the command is clicked
         # creates a panel with a dialog
         baseWidget = QtGui.QWidget()
-        stdWidget = QtGui.QWidget()
         panel = SizeTaskPanel(baseWidget, selection)
-        stdpanel = StdTaskPanel(stdWidget)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
-        FreeCADGui.Control.showDialog(stdWidget)
 
 
         FreeCAD.ActiveDocument.recompute()        
