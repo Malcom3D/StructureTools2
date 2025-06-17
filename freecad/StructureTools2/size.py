@@ -97,9 +97,10 @@ class SizeTaskPanel:
             print('entro Qavr ', self.Qavr)
             self.G1LoadValue.setValue(self.Qavr)
             self.G1LoadValue.setMinimum(self.Qavr)
-            print(self.G1LoadValue.value())
         else:
+            print('else Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(0)
+        print(self.G1LoadValue.value())
         self.G1LoadValue.setSuffix(' kN/m²')
         self.G1LoadLabel.hide()
         self.G1LoadValue.hide()
