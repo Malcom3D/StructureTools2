@@ -173,9 +173,8 @@ class SizeTaskPanel:
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
         self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
-        if not (qa==qb):
-            qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
-            qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+        qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+        qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         # Reaction Ra and Rb
         Ra = (((2*qa+qb)*cos(alpha))*l)/6
         Rb = (((qa+2*qb)*cos(alpha))*l)/6
@@ -190,8 +189,10 @@ class SizeTaskPanel:
             z = qmin/qmax
             u = 0.577*sqrt(1+z+z**2)
             x0 = ((u-1)*l)/(z-1)
-        # Bending moment
-        Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
+            # Bending moment
+            Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
+        self.x0 = x0
+        self.Mmax = Mmax
         # Normal stress
 
         print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
