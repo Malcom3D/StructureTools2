@@ -138,7 +138,7 @@ class SizeTaskPanel:
 
     def selectedMaterial(self, index):
         if index == 1:
-            print("Selected Material: self.MaterialValue.currentText())
+            print("Selected Material: ", self.MaterialValue.currentText())
 
     def selectedStandard(self, index):
         if index == 1:
