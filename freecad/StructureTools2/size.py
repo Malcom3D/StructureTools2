@@ -38,7 +38,6 @@ class SizeTaskPanel:
 
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
-                #alpha = functions.elementary.trigonometric.atan2((z2-z1), dist_alpha)
                 alpha = atan2((z2-z1), dist_alpha)
                 if not alpha==0:
                     alpha = (pi - alpha)
@@ -46,7 +45,7 @@ class SizeTaskPanel:
                 qb = 0
                 qa = float(str(object.FinalLoading).split(" ")[0])/1000000
                 qb = float(str(object.InitialLoading).split(" ")[0])/1000000
-                Qavr = (((qa+qb)/2)*l)
+                Qavr = (((qa+qb)/2)*cos(alpha)*l)
             if (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
                 qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
@@ -69,6 +68,7 @@ class SizeTaskPanel:
                 # Normal stress
             print('qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l, u, z, qmin, qmax')
             print(qa, qb, Ra, Rb, Va, Vb, Mmax, x0, alpha, Qavr, l, u, z, qmin, qmax)
+            print('qa: ', qa)
 
 
         # Standard ComboBox
