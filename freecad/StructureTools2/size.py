@@ -94,11 +94,11 @@ class SizeTaskPanel:
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setMaximum(99999999999999999999999999.99)
         if self.Qavr:
-            print('entro Qavr: ', Qavr)
+            print('entro Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(self.Qavr)
             self.G1LoadValue.setMinimum(self.Qavr)
         else:
-            print('else Qavr: ', Qavr)
+            print('else Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
         self.G1LoadLabel.hide()
