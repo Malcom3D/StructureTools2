@@ -30,6 +30,20 @@ def set_type(s):
 class SizeTaskPanel:
     def __init__(self, widget, selection):
         self.form = [widget, QtGui.QDialog()]
+        layoutStd = QtGui.QVBoxLayout()
+        # Standard ComboBox
+        self.StandardLabel = QtGui.QLabel("Building Standard")
+        self.StandardValue = QtGui.QComboBox()
+        self.StandardValue.addItem('')
+        self.StandardValue.addItem('Italy: ntc2018')
+        self.StandardValue.addItem('Custom...')
+        self.StandardValue.activated.connect(self.selectedStandard)
+
+        layoutStd.addWidget(self.StandardLabel)
+        layoutStd.addWidget(self.StandardValue)
+        self.form[0].setLayout(layoutStd)
+
+
         layout = QtGui.QVBoxLayout()
 
         for object in selection:
@@ -75,15 +89,6 @@ class SizeTaskPanel:
                     Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
                 # Normal stress
             print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
-
-
-        # Standard ComboBox
-        self.StandardLabel = QtGui.QLabel("Building Standard")
-        self.StandardValue = QtGui.QComboBox()
-        self.StandardValue.addItem('')
-        self.StandardValue.addItem('Italy: ntc2018')
-        self.StandardValue.addItem('Custom...')
-        self.StandardValue.activated.connect(self.selectedStandard)
 
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
@@ -141,8 +146,6 @@ class SizeTaskPanel:
         self.QkLoadLabel.hide()
         self.HkLoadLabel.hide()
 
-        layout.addWidget(self.StandardLabel)
-        layout.addWidget(self.StandardValue)
         layout.addWidget(self.G1LoadLabel)
         layout.addWidget(self.G1LoadValue)
         layout.addWidget(self.G2LoadLabel)
@@ -153,7 +156,7 @@ class SizeTaskPanel:
         layout.addWidget(self.QkLoadLabel)
         layout.addWidget(self.HkLoadLabel)
 
-        self.form[0].setLayout(layout)
+        self.form[1].setLayout(layout)
 
     def selectedStandard(self, index):
         if index == 1:
