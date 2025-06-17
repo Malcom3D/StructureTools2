@@ -95,8 +95,10 @@ class SizeTaskPanel:
         self.G1LoadValue.setMaximum(99999999999999999999999999.99)
         if self.Qavr:
             print('entro Qavr ', self.Qavr)
-            self.G1LoadValue.setValue(self.Qavr)
-            self.G1LoadValue.setMinimum(self.Qavr)
+            #self.G1LoadValue.setValue(self.Qavr)
+            #self.G1LoadValue.setMinimum(self.Qavr)
+            self.G1LoadValue.setValue(40)
+            #self.G1LoadValue.setMinimum(40)
         else:
             print('else Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(0)
