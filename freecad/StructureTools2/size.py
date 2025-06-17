@@ -111,6 +111,16 @@ class SizeTaskPanel:
         self.QkLoadLabel.hide()
         self.HkLoadLabel.hide()
 
+        self.MaterialLabel = QtGui.QLabel('Material')
+        self.MaterialValue = QtGui.QComboBox()
+        self.MaterialValue.addItem('')
+        self.MaterialValue.addItem('Wood')
+        self.MaterialValue.addItem('Reinforced concrete')
+        self.MaterialValue.addItem('Steel')
+        self.MaterialValue.activated.connect(self.selectedMaterial)
+        self.MaterialLabel.hide()
+        self.MaterialValue.hide()
+
         layout.addWidget(self.G1LoadLabel)
         layout.addWidget(self.G1LoadValue)
         layout.addWidget(self.G2LoadLabel)
@@ -120,9 +130,15 @@ class SizeTaskPanel:
         layout.addWidget(self.qkLoadLabel)
         layout.addWidget(self.QkLoadLabel)
         layout.addWidget(self.HkLoadLabel)
+        layout.addWidget(self.MaterialLabel)
+        layout.addWidget(self.MaterialValue)
 
         self.form[1].setLayout(layout)
         self.form[1].setWindowTitle('ntc2018')
+
+    def selectedMaterial(self, index):
+        if index == 1:
+            print("Selected Material: self.MaterialValue.currentText())
 
     def selectedStandard(self, index):
         if index == 1:
@@ -136,6 +152,8 @@ class SizeTaskPanel:
             self.qkLoadLabel.show()
             self.QkLoadLabel.show()
             self.HkLoadLabel.show()
+            self.MaterialLabel.show()
+            self.MaterialValue.show()
         else:
             self.form[1].setWindowTitle('')
             self.G1LoadLabel.hide()
@@ -147,6 +165,8 @@ class SizeTaskPanel:
             self.qkLoadLabel.hide()
             self.QkLoadLabel.hide()
             self.HkLoadLabel.hide()
+            self.MaterialLabel.hide()
+            self.MaterialValue.hide()
 
     def LinePreCalc(self, object):
         Owner=object.ObjectBase[0][0]
