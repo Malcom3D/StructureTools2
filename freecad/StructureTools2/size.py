@@ -20,9 +20,9 @@ def Size(Standard, G1Load, G2Load, Q1Load):
     print(Standard, G1Load, G2Load, Q1Load)
 
 def set_type(s):
-    """(str)->infered type.
-    Takes a string, inferes the type and returns either a string, int or float.
-    """
+#    """(str)->infered type.
+#    Takes a string, inferes the type and returns either a string, int or float.
+#    """
     if s.isnumeric():
         return int(s)
     if s.count(".") == 1 and "".join([c for c in s if c!="."]).isnumeric():
@@ -76,7 +76,7 @@ class SizeTaskPanel:
                     # Bending moment
                     Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
                 # Normal stress
-            print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax')
+            print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
 
 
         # Standard ComboBox
