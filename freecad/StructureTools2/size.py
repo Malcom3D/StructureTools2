@@ -31,21 +31,19 @@ class SizeTaskPanel:
     def __init__(self, widget, selection):
 #        self.form = [widget, QtGui.QDialog()]
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
+
+        # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
-        # Standard ComboBox
         self.form[0].setWindowTitle("Building Standard")
-#        self.StandardLabel = QtGui.QLabel("Building Standard")
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
-        self.StandardValue.addItem('Custom...')
         self.StandardValue.activated.connect(self.selectedStandard)
 
-#        layoutStd.addWidget(self.StandardLabel)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
-
+        # ntc2018 parameter QDialog
         layout = QtGui.QVBoxLayout()
 
         for object in selection:
@@ -69,7 +67,7 @@ class SizeTaskPanel:
                 qb = 0
                 qa = float(str(object.FinalLoading).split(" ")[0])/1000000
                 qb = float(str(object.InitialLoading).split(" ")[0])/1000000
-                Qavr = (((qa+qb)/2)*cos(alpha)*l)
+                self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
             if (qa or qb) and not (qa==0 and qb==0):
                 qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
                 qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
@@ -97,10 +95,9 @@ class SizeTaskPanel:
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setMaximum(99999999999999999999999999.99)
-        print(Qavr)
-        if Qavr:
-            self.G1LoadValue.setValue(Qavr)
-            self.G1LoadValue.setMinimum(Qavr)
+        if self.Qavr:
+            self.G1LoadValue.setValue(self.Qavr)
+            self.G1LoadValue.setMinimum(self.Qavr)
         else:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
