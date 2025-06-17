@@ -199,9 +199,9 @@ class SizeTaskPanel:
 #        self.Hk = Q1list[index][2]
 #        self.Q1LoadValue.currentText()
 
-        self.qk = Q1maplist[index][1]
-        self.Qk = Q1maplist[index][2]
-        self.Hk = Q1maplist[index][3]
+        self.qk = Q1mapList[index][1]
+        self.Qk = Q1mapList[index][2]
+        self.Hk = Q1mapList[index][3]
         self.qkLoadLabel.setText('qk: ' + str(self.qk) + ' kN/m²')
         self.QkLoadLabel.setText('Qk: ' + str(self.Qk) + ' kN')
         self.HkLoadLabel.setText('Hk: ' + str(self.Hk) + ' kN/m')
