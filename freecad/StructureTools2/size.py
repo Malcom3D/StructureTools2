@@ -29,50 +29,16 @@ def set_type(s):
 
 class SizeTaskPanel:
     def __init__(self, selection):
+        LoadPresence = 0
         for object in selection:
             if 'Load' in object.Name:
-                Owner=object.ObjectBase[0][0]
-                x1 = round(Owner.Start.x, 2)
-                y1 = round(Owner.Start.y, 2)
-                z1 = round(Owner.Start.z, 2)
-                x2 = round(Owner.End.x, 2)
-                y2 = round(Owner.End.y, 2)
-                z2 = round(Owner.End.z, 2)
-                l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
+                LoadPresence = 1
+                LinePreCalc(object)
+                LoadPreCalc(object)
 
-                # if is't parallel to xy-plane
-                dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
-                alpha = atan2((z2-z1), dist_alpha)
-                if not alpha==0:
-                    alpha = (pi/2 - alpha)
-                qa = 0
-                qb = 0
-                qa = float(str(object.FinalLoading).split(' ')[0])/1000000
-                qb = float(str(object.InitialLoading).split(' ')[0])/1000000
-                self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
-                if (qa or qb) and not (qa==0 and qb==0):
-                    qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
-                    qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
-                    # Reaction Ra and Rb
-                    Ra = (((2*qa+qb)*cos(alpha))*l)/6
-                    Rb = (((qa+2*qb)*cos(alpha))*l)/6
-                    # Shear force
-                    Va = Ra
-                    Vb = -Rb
-                    if qa==qb:
-                        # Bending moment
-                        x0 = Rational(1, 2)
-                        Mmax = (((qmax)*l**2)/2)
-                    else:
-                        z = qmin/qmax
-                        u = 0.577*sqrt(1+z+z**2)
-                        x0 = ((u-1)*l)/(z-1)
-                        # Bending moment
-                        Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
-                    # Normal stress
-
-        print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
-
+        for object in selection:
+            if LoadPresence==0 and 'Line' in object.Name:
+                LinePreCalc(object)
 
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
 
@@ -94,13 +60,9 @@ class SizeTaskPanel:
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setMaximum(99999999999999999999999999.99)
         if self.Qavr:
-            print('entro Qavr ', self.Qavr)
-            #self.G1LoadValue.setValue(self.Qavr)
-            #self.G1LoadValue.setMinimum(self.Qavr)
             self.G1LoadValue.setValue(self.Qavr)
             self.G1LoadValue.setMinimum(self.Qavr)
         else:
-            print('else Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(0)
         print(self.G1LoadValue.value())
         self.G1LoadValue.setSuffix(' kN/m²')
@@ -133,7 +95,6 @@ class SizeTaskPanel:
         self.Q1mapList.append(list(map(set_type, ['Cat.C4 Areas where physical activities may be carried out', '5.00', '5.00', '3.00'])))
         self.Q1mapList.append(list(map(set_type, ['Cat.C5 Areas susceptible to large crowds', '5.00', '5.00', '3.00'])))
         self.Q1mapList.append(list(map(set_type, ['Cat.C Common stairways, balconies and landings', '4.00', '4.00', '2.00'])))
-
 
         self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1')
         self.Q1LoadValue = QtGui.QComboBox()
@@ -186,6 +147,54 @@ class SizeTaskPanel:
             self.qkLoadLabel.hide()
             self.QkLoadLabel.hide()
             self.HkLoadLabel.hide()
+
+    def LinePreCalc(object):
+        Owner=object.ObjectBase[0][0]
+        x1 = round(Owner.Start.x, 2)
+        y1 = round(Owner.Start.y, 2)
+        z1 = round(Owner.Start.z, 2)
+        x2 = round(Owner.End.x, 2)
+        y2 = round(Owner.End.y, 2)
+        z2 = round(Owner.End.z, 2)
+        self.l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
+
+        # if is't parallel to xy-plane
+        dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
+        alpha = atan2((z2-z1), dist_alpha)
+        if not alpha==0:
+            alpha = (pi/2 - alpha)
+        self.alpha = alpha
+
+    def LoadPreCalc(object):
+        l = self.l
+        alpha = self.alpha
+        qa = 0
+        qb = 0
+        qa = float(str(object.FinalLoading).split(' ')[0])/1000000
+        qb = float(str(object.InitialLoading).split(' ')[0])/1000000
+        self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
+        if not (qa==qb):
+            qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+            qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+        # Reaction Ra and Rb
+        Ra = (((2*qa+qb)*cos(alpha))*l)/6
+        Rb = (((qa+2*qb)*cos(alpha))*l)/6
+        # Shear force
+        Va = Ra
+        Vb = -Rb
+        if qa==qb:
+            # Bending moment
+            x0 = Rational(1, 2)
+            Mmax = (((qmax)*l**2)/2)
+        else:
+            z = qmin/qmax
+            u = 0.577*sqrt(1+z+z**2)
+            x0 = ((u-1)*l)/(z-1)
+        # Bending moment
+        Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
+        # Normal stress
+
+        print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
 
     def q1load(self, index):
         self.qk = self.Q1mapList[index][1]
