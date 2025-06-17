@@ -29,27 +29,9 @@ def set_type(s):
 
 class SizeTaskPanel:
     def __init__(self, widget, selection):
-#        self.form = [widget, QtGui.QDialog()]
-        self.form = [QtGui.QDialog(), QtGui.QDialog()]
-
-        # Building Standard Selection QDialog
-        layoutStd = QtGui.QVBoxLayout()
-        self.form[0].setWindowTitle("Building Standard")
-        self.StandardValue = QtGui.QComboBox()
-        self.StandardValue.addItem('')
-        self.StandardValue.addItem('Italy: ntc2018')
-        self.StandardValue.activated.connect(self.selectedStandard)
-
-        layoutStd.addWidget(self.StandardValue)
-        self.form[0].setLayout(layoutStd)
-
-        # ntc2018 parameter QDialog
-        layout = QtGui.QVBoxLayout()
-
         for object in selection:
             if 'Load' in object.Name:
                 Owner=object.ObjectBase[0][0]
-                line = [[round(Owner.Start.x, 2), round(Owner.Start.y, 2), round(Owner.Start.z, 2)], [round(Owner.End.x, 2), round(Owner.End.y, 2), round(Owner.End.z, 2)]]
                 x1 = round(Owner.Start.x, 2)
                 y1 = round(Owner.Start.y, 2)
                 z1 = round(Owner.Start.z, 2)
@@ -68,28 +50,46 @@ class SizeTaskPanel:
                 qa = float(str(object.FinalLoading).split(" ")[0])/1000000
                 qb = float(str(object.InitialLoading).split(" ")[0])/1000000
                 self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
-            if (qa or qb) and not (qa==0 and qb==0):
-                qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
-                qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
-                # Reaction Ra and Rb
-                Ra = (((2*qa+qb)*cos(alpha))*l)/6
-                Rb = (((qa+2*qb)*cos(alpha))*l)/6
-                # Shear force
-                Va = Ra
-                Vb = -Rb
-                if qa==qb:
-                    # Bending moment
-                    x0 = Rational(1, 2)
-                    Mmax = (((qmax)*l**2)/2)
-                else:
-                    z = qmin/qmax
-                    u = 0.577*sqrt(1+z+z**2)
-                    x0 = ((u-1)*l)/(z-1)
-                    # Bending moment
-                    Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
-                # Normal stress
-            print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
+                if (qa or qb) and not (qa==0 and qb==0):
+                    qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+                    qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+                    # Reaction Ra and Rb
+                    Ra = (((2*qa+qb)*cos(alpha))*l)/6
+                    Rb = (((qa+2*qb)*cos(alpha))*l)/6
+                    # Shear force
+                    Va = Ra
+                    Vb = -Rb
+                    if qa==qb:
+                        # Bending moment
+                        x0 = Rational(1, 2)
+                        Mmax = (((qmax)*l**2)/2)
+                    else:
+                        z = qmin/qmax
+                        u = 0.577*sqrt(1+z+z**2)
+                        x0 = ((u-1)*l)/(z-1)
+                        # Bending moment
+                        Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
+                    # Normal stress
+                print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
 
+
+#        self.form = [widget, QtGui.QDialog()]
+        self.form = [QtGui.QDialog(), QtGui.QDialog()]
+
+
+        # Building Standard Selection QDialog
+        layoutStd = QtGui.QVBoxLayout()
+        self.form[0].setWindowTitle("Building Standard")
+        self.StandardValue = QtGui.QComboBox()
+        self.StandardValue.addItem('')
+        self.StandardValue.addItem('Italy: ntc2018')
+        self.StandardValue.activated.connect(self.selectedStandard)
+        layoutStd.addWidget(self.StandardValue)
+        self.form[0].setLayout(layoutStd)
+
+
+        # ntc2018 parameter QDialog
+        layout = QtGui.QVBoxLayout()
         self.form[1].setWindowTitle("ntc2018")
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
