@@ -5,12 +5,12 @@ import subprocess
 from sympy import *
 init_printing()
 
-ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
+ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
     msg_box = QtWidgets.QMessageBox()
     msg_box.setIcon(QtWidgets.QMessageBox.Critical)  #Error icon
-    msg_box.setWindowTitle("Error")
+    msg_box.setWindowTitle('Error')
     msg_box.setText(msg)
     msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     msg_box.exec_()
@@ -23,7 +23,7 @@ def set_type(s):
     # Takes a string, inferes the type and returns either a string, int or float.
     if s.isnumeric():
         return int(s)
-    if s.count(".") == 1 and "".join([c for c in s if c!="."]).isnumeric():
+    if s.count('.') == 1 and ''.join([c for c in s if c!='.']).isnumeric():
         return float(s)
     return s
 
@@ -47,8 +47,8 @@ class SizeTaskPanel:
                     alpha = (pi - alpha)
                 qa = 0
                 qb = 0
-                qa = float(str(object.FinalLoading).split(" ")[0])/1000000
-                qb = float(str(object.InitialLoading).split(" ")[0])/1000000
+                qa = float(str(object.FinalLoading).split(' ')[0])/1000000
+                qb = float(str(object.InitialLoading).split(' ')[0])/1000000
                 self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
                 if (qa or qb) and not (qa==0 and qb==0):
                     qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
@@ -78,7 +78,7 @@ class SizeTaskPanel:
 
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
-        self.form[0].setWindowTitle("Building Standard")
+        self.form[0].setWindowTitle('Building Standard')
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
@@ -90,22 +90,22 @@ class SizeTaskPanel:
         # ntc2018 parameter QDialog
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
-        self.G1LoadLabel = QtGui.QLabel("Structural load G1")
+        self.G1LoadLabel = QtGui.QLabel('Structural load G1')
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setMaximum(99999999999999999999999999.99)
         if self.Qavr:
-            print('entro Qavr: ', self.Qavr)
+            print('entro Qavr ', self.Qavr)
             self.G1LoadValue.setValue(self.Qavr)
             self.G1LoadValue.setMinimum(self.Qavr)
+            print(self.G1LoadValue.value())
         else:
-            print('else Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
         self.G1LoadLabel.hide()
         self.G1LoadValue.hide()
 
         # Non Structural Load G2 [ntc2018 3.1.3]
-        self.G2LoadLabel = QtGui.QLabel("Non structural load G2")
+        self.G2LoadLabel = QtGui.QLabel('Non structural load G2')
         self.G2LoadValue = QtGui.QDoubleSpinBox()
         self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
@@ -132,7 +132,7 @@ class SizeTaskPanel:
         self.Q1mapList.append(list(map(set_type, ['Cat.C Common stairways, balconies and landings', '4.00', '4.00', '2.00'])))
 
 
-        self.Q1LoadLabel = QtGui.QLabel("Overloads by intended use Q1")
+        self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1')
         self.Q1LoadValue = QtGui.QComboBox()
         for i in range(0,len(self.Q1mapList[:])):
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
@@ -140,9 +140,9 @@ class SizeTaskPanel:
         self.Q1LoadLabel.hide()
         self.Q1LoadValue.hide()
 
-        self.qkLoadLabel = QtGui.QLabel("qk: 0 kN/m²")
-        self.QkLoadLabel = QtGui.QLabel("Qk: 0 kN")
-        self.HkLoadLabel = QtGui.QLabel("Hk: 0 kN/m")
+        self.qkLoadLabel = QtGui.QLabel('qk: 0 kN/m²')
+        self.QkLoadLabel = QtGui.QLabel('Qk: 0 kN')
+        self.HkLoadLabel = QtGui.QLabel('Hk: 0 kN/m')
         self.qkLoadLabel.hide()
         self.QkLoadLabel.hide()
         self.HkLoadLabel.hide()
@@ -158,11 +158,11 @@ class SizeTaskPanel:
         layout.addWidget(self.HkLoadLabel)
 
         self.form[1].setLayout(layout)
-        self.form[1].setWindowTitle("ntc2018")
+        self.form[1].setWindowTitle('ntc2018')
 
     def selectedStandard(self, index):
         if index == 1:
-            self.form[1].setWindowTitle("ntc2018")
+            self.form[1].setWindowTitle('ntc2018')
             self.G1LoadLabel.show()
             self.G1LoadValue.show()
             self.G2LoadLabel.show()
@@ -173,7 +173,7 @@ class SizeTaskPanel:
             self.QkLoadLabel.show()
             self.HkLoadLabel.show()
         else:
-            self.form[1].setWindowTitle("")
+            self.form[1].setWindowTitle('')
             self.G1LoadLabel.hide()
             self.G1LoadValue.hide()
             self.G2LoadLabel.hide()
@@ -474,4 +474,4 @@ class CommandSize():
         
         return True
 
-FreeCADGui.addCommand("size", CommandSize())
+FreeCADGui.addCommand('size', CommandSize())
