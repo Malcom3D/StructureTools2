@@ -43,6 +43,7 @@ class SizeTaskPanel:
                 # if is't parallel to xy-plane
                 dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
                 alpha = atan2((z2-z1), dist_alpha)
+                print('alpha atan2: ', alpha)
                 if not alpha==0:
                     alpha = (pi - alpha)
                 qa = 0
@@ -98,7 +99,7 @@ class SizeTaskPanel:
             #self.G1LoadValue.setValue(self.Qavr)
             #self.G1LoadValue.setMinimum(self.Qavr)
             self.G1LoadValue.setValue(40)
-            #self.G1LoadValue.setMinimum(40)
+            self.G1LoadValue.setMinimum(40)
         else:
             print('else Qavr: ', self.Qavr)
             self.G1LoadValue.setValue(0)
