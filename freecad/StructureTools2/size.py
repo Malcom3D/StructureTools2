@@ -471,7 +471,8 @@ class CommandSize():
         stdpanel = StdTaskPanel(stdWidget)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
-        FreeCADGui.Control.showDialog(panel, stdWidget)
+        FreeCADGui.Control.showDialog(panel)
+        FreeCADGui.Control.showDialog(stdWidget)
 
 
         FreeCAD.ActiveDocument.recompute()        
