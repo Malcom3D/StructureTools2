@@ -20,14 +20,24 @@ def Size(Standard, G1Load, G2Load, Q1Load):
     print(Standard, G1Load, G2Load, Q1Load)
 
 def set_type(s):
-#    """(str)->infered type.
-#    Takes a string, inferes the type and returns either a string, int or float.
-#    """
+    # Takes a string, inferes the type and returns either a string, int or float.
     if s.isnumeric():
         return int(s)
     if s.count(".") == 1 and "".join([c for c in s if c!="."]).isnumeric():
         return float(s)
     return s
+
+class StdTaskPanel:
+    def __init__(self, widget):
+        self.form = widget
+        layout = QtGui.QVBoxLayout()
+
+        self.StandardLabel = QtGui.QLabel("Building Standard")
+        self.form.setLayout(layout)
+
+    # What is done when we click on the ok button.
+    def accept(self):
+        FreeCADGui.Control.closeDialog() #close the dialog
 
 class SizeTaskPanel:
     def __init__(self, widget, selection):
@@ -132,19 +142,6 @@ class SizeTaskPanel:
         self.Q1LoadValue = QtGui.QComboBox()
         for i in range(0,len(self.Q1mapList[:])):
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
-   
-#        self.Q1LoadValue.addItem('')
-#        self.Q1LoadValue.addItem('Cat.A  Areas for domestic and residential activities')
-#        self.Q1LoadValue.addItem('Cat.A  Common stairs, balconies, landings')
-#        self.Q1LoadValue.addItem('Cat.B1 Offices not open to the public')
-#        self.Q1LoadValue.addItem('Cat.B2 Offices open to the public')
-#        self.Q1LoadValue.addItem('Cat.B  Common stairs, balconies and landings')
-#        self.Q1LoadValue.addItem('Cat.C1 Areas with tables')
-#        self.Q1LoadValue.addItem('Cat.C2 Areas with fixed seating')
-#        self.Q1LoadValue.addItem('Cat.C3 Environments without obstacles to the movement of people,')
-#        self.Q1LoadValue.addItem('Cat.C4 Areas where physical activities may be carried out')
-#        self.Q1LoadValue.addItem('Cat.C5 Areas susceptible to large crowds')
-#        self.Q1LoadValue.addItem('Cat.C Common stairways, balconies and landings')
         self.Q1LoadValue.activated.connect(self.q1load)
         self.Q1LoadLabel.hide()
         self.Q1LoadValue.hide()
@@ -193,12 +190,6 @@ class SizeTaskPanel:
             self.HkLoadLabel.hide()
 
     def q1load(self, index):
-#        Q1list = [[0, 0, 0], [2.00, 2.00, 1.00], [4.00, 4.00, 2.00], [2.00, 2.00, 1.00], [3.00, 2.00, 1.00], [4.00, 4.00, 2.00], [3.00, 3.00, 1.00], [4.00, 4.00, 2.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [5.00, 5.00, 3.00], [4.00, 4.00, 2.00]]
-#        self.qk = Q1list[index][0]
-#        self.Qk = Q1list[index][1]
-#        self.Hk = Q1list[index][2]
-#        self.Q1LoadValue.currentText()
-
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
@@ -475,10 +466,12 @@ class CommandSize():
         # what is done when the command is clicked
         # creates a panel with a dialog
         baseWidget = QtGui.QWidget()
+        stdWidget = QtGui.QWidget()
         panel = SizeTaskPanel(baseWidget, selection)
+        stdpanel = StdTaskPanel(stdWidget)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
-        FreeCADGui.Control.showDialog(panel)
+        FreeCADGui.Control.showDialog(panel, stdWidget)
 
 
         FreeCAD.ActiveDocument.recompute()        
