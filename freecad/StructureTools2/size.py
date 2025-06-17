@@ -29,7 +29,8 @@ def set_type(s):
 
 class SizeTaskPanel:
     def __init__(self, widget, selection):
-        self.form = [widget, QtGui.QDialog()]
+#        self.form = [widget, QtGui.QDialog()]
+        self.form = [QtGui.QDialog(), QtGui.QDialog()]
         layoutStd = QtGui.QVBoxLayout()
         # Standard ComboBox
         self.form[0].setWindowTitle("Building Standard")
