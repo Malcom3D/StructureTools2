@@ -33,12 +33,12 @@ class SizeTaskPanel:
         for object in selection:
             if 'Load' in object.Name:
                 LoadPresence = 1
-                LinePreCalc(object)
-                LoadPreCalc(object)
+                self.LinePreCalc(object)
+                self.LoadPreCalc(object)
 
         for object in selection:
             if LoadPresence==0 and 'Line' in object.Name:
-                LinePreCalc(object)
+                self.LinePreCalc(object)
 
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
 
