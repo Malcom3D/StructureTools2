@@ -130,7 +130,7 @@ class SizeTaskPanel:
 
         self.Q1LoadLabel = QtGui.QLabel("Overloads by intended use Q1")
         self.Q1LoadValue = QtGui.QComboBox()
-        for i in len(Q1mapList[:]):
+        for i in range(0,len(Q1mapList[:])):
             self.Q1LoadValue.addItem(Q1mapList[i][0])
    
 #        self.Q1LoadValue.addItem('')
