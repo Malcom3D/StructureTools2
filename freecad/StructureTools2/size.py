@@ -40,7 +40,7 @@ class SizeTaskPanel:
         self.StandardValue.addItem('Custom...')
         self.StandardValue.activated.connect(self.selectedStandard)
 
-        layoutStd.addWidget(self.StandardLabel)
+#        layoutStd.addWidget(self.StandardLabel)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
