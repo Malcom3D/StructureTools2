@@ -153,7 +153,7 @@ class SizeTaskPanel:
         layout.addWidget(self.QkLoadLabel)
         layout.addWidget(self.HkLoadLabel)
 
-        self.form.setLayout(layout)
+        self.form[0].setLayout(layout)
 
     def selectedStandard(self, index):
         if index == 1:
