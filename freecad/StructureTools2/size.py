@@ -70,11 +70,11 @@ class SizeTaskPanel:
                         # Bending moment
                         Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
                     # Normal stress
-                print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
+
+        print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
 
 
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
-
 
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
@@ -94,9 +94,11 @@ class SizeTaskPanel:
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setMaximum(99999999999999999999999999.99)
         if self.Qavr:
+            print('entro Qavr: ', Qavr)
             self.G1LoadValue.setValue(self.Qavr)
             self.G1LoadValue.setMinimum(self.Qavr)
         else:
+            print('else Qavr: ', Qavr)
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
         self.G1LoadLabel.hide()
@@ -156,6 +158,7 @@ class SizeTaskPanel:
         layout.addWidget(self.HkLoadLabel)
 
         self.form[1].setLayout(layout)
+        self.form[1].setWindowTitle("ntc2018")
 
     def selectedStandard(self, index):
         if index == 1:
