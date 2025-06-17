@@ -28,7 +28,7 @@ def set_type(s):
     return s
 
 class SizeTaskPanel:
-    def __init__(self, widget, selection):
+    def __init__(self, selection):
         for object in selection:
             if 'Load' in object.Name:
                 Owner=object.ObjectBase[0][0]
@@ -73,7 +73,6 @@ class SizeTaskPanel:
                 print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
 
 
-#        self.form = [widget, QtGui.QDialog()]
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
 
 
@@ -90,7 +89,6 @@ class SizeTaskPanel:
 
         # ntc2018 parameter QDialog
         layout = QtGui.QVBoxLayout()
-        self.form[1].setWindowTitle("ntc2018")
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
         self.G1LoadValue = QtGui.QDoubleSpinBox()
@@ -161,6 +159,7 @@ class SizeTaskPanel:
 
     def selectedStandard(self, index):
         if index == 1:
+            self.form[1].setWindowTitle("ntc2018")
             self.G1LoadLabel.show()
             self.G1LoadValue.show()
             self.G2LoadLabel.show()
@@ -171,6 +170,7 @@ class SizeTaskPanel:
             self.QkLoadLabel.show()
             self.HkLoadLabel.show()
         else:
+            self.form[1].setWindowTitle("")
             self.G1LoadLabel.hide()
             self.G1LoadValue.hide()
             self.G2LoadLabel.hide()
@@ -457,8 +457,8 @@ class CommandSize():
 
         # what is done when the command is clicked
         # creates a panel with a dialog
-        baseWidget = QtGui.QWidget()
-        panel = SizeTaskPanel(baseWidget, selection)
+#        baseWidget = QtGui.QWidget()
+        panel = SizeTaskPanel(selection)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
