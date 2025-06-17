@@ -33,7 +33,7 @@ class SizeTaskPanel:
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         layoutStd = QtGui.QVBoxLayout()
         # Standard ComboBox
-        self.form[0].Label("Building Standard")
+        self.form[0].setWindowTitle("Building Standard")
 #        self.StandardLabel = QtGui.QLabel("Building Standard")
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
@@ -92,7 +92,7 @@ class SizeTaskPanel:
                 # Normal stress
             print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
 
-        self.form[1].Label("ntc2018")
+        self.form[1].setWindowTitle("ntc2018")
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel("Structural load G1")
         self.G1LoadValue = QtGui.QDoubleSpinBox()
