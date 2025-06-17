@@ -116,7 +116,7 @@ class SizeTaskPanel:
         # mapped list ['description', qk, Qk, Hk]
         Q1mapList = [list(map(set_type, ['', '0.0', '0.0', '0.0']))]
         Q1mapList.append(list(map(set_type, ['Cat.A  Areas for domestic and residential activities', '2.00', '2.00', '1.00'])))
-        Q1mapList.append(list(map(set_type, ['Cat.A  Common stairs, balconies, landings', '4.00, '4.00', '2.00'])))
+        Q1mapList.append(list(map(set_type, ['Cat.A  Common stairs, balconies, landings', '4.00', '4.00', '2.00'])))
         Q1mapList.append(list(map(set_type, ['Cat.B1 Offices not open to the public', '2.00', '2.00', '1.00'])))
         Q1mapList.append(list(map(set_type, ['Cat.B2 Offices open to the public', '3.00', '2.00', '1.00'])))
         Q1mapList.append(list(map(set_type, ['Cat.B  Common stairs, balconies and landings', '4.00', '4.00', '2.00'])))
