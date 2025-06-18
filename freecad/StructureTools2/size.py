@@ -52,6 +52,7 @@ class SizeTaskPanel:
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
+    def ntc2018(self)
         # ntc2018 parameter QDialog
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
@@ -63,18 +64,17 @@ class SizeTaskPanel:
             self.G1LoadValue.setMinimum(self.Qavr)
         else:
             self.G1LoadValue.setValue(0)
-        print(self.G1LoadValue.value())
         self.G1LoadValue.setSuffix(' kN/m²')
-        self.G1LoadLabel.hide()
-        self.G1LoadValue.hide()
+#        self.G1LoadLabel.hide()
+#        self.G1LoadValue.hide()
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
         self.G2LoadValue = QtGui.QDoubleSpinBox()
         self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
-        self.G2LoadLabel.hide()
-        self.G2LoadValue.hide()
+#        self.G2LoadLabel.hide()
+#        self.G2LoadValue.hide()
 
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
         # - uniformly distributed vertical loads qk
@@ -100,15 +100,15 @@ class SizeTaskPanel:
         for i in range(0,len(self.Q1mapList[:])):
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
         self.Q1LoadValue.activated.connect(self.q1load)
-        self.Q1LoadLabel.hide()
-        self.Q1LoadValue.hide()
+#        self.Q1LoadLabel.hide()
+#        self.Q1LoadValue.hide()
 
         self.qkLoadLabel = QtGui.QLabel('qk: 0 kN/m²')
         self.QkLoadLabel = QtGui.QLabel('Qk: 0 kN')
         self.HkLoadLabel = QtGui.QLabel('Hk: 0 kN/m')
-        self.qkLoadLabel.hide()
-        self.QkLoadLabel.hide()
-        self.HkLoadLabel.hide()
+#        self.qkLoadLabel.hide()
+#        self.QkLoadLabel.hide()
+#        self.HkLoadLabel.hide()
 
         self.MaterialLabel = QtGui.QLabel('Material')
         self.MaterialValue = QtGui.QComboBox()
@@ -117,8 +117,8 @@ class SizeTaskPanel:
         self.MaterialValue.addItem('Reinforced concrete')
         self.MaterialValue.addItem('Steel')
         self.MaterialValue.activated.connect(self.selectedMaterial)
-        self.MaterialLabel.hide()
-        self.MaterialValue.hide()
+#        self.MaterialLabel.hide()
+#        self.MaterialValue.hide()
 
         layout.addWidget(self.G1LoadLabel)
         layout.addWidget(self.G1LoadValue)
@@ -136,6 +136,7 @@ class SizeTaskPanel:
         self.form[1].setWindowTitle('ntc2018')
 
 
+    def unien338(self)
         # Material parameter
         layoutMaterial = QtGui.QVBoxLayout()
 
@@ -188,31 +189,32 @@ class SizeTaskPanel:
 
     def selectedStandard(self, index):
         if index == 1:
-            self.form[1].setWindowTitle('ntc2018')
-            self.G1LoadLabel.show()
-            self.G1LoadValue.show()
-            self.G2LoadLabel.show()
-            self.G2LoadValue.show()
-            self.Q1LoadLabel.show()
-            self.Q1LoadValue.show()
-            self.qkLoadLabel.show()
-            self.QkLoadLabel.show()
-            self.HkLoadLabel.show()
-            self.MaterialLabel.show()
-            self.MaterialValue.show()
-        else:
-            self.form[1].setWindowTitle('')
-            self.G1LoadLabel.hide()
-            self.G1LoadValue.hide()
-            self.G2LoadLabel.hide()
-            self.G2LoadValue.hide()
-            self.Q1LoadLabel.hide()
-            self.Q1LoadValue.hide()
-            self.qkLoadLabel.hide()
-            self.QkLoadLabel.hide()
-            self.HkLoadLabel.hide()
-            self.MaterialLabel.hide()
-            self.MaterialValue.hide()
+            self.ntc2018()
+#            self.form[1].setWindowTitle('ntc2018')
+#            self.G1LoadLabel.show()
+#            self.G1LoadValue.show()
+#            self.G2LoadLabel.show()
+#            self.G2LoadValue.show()
+#            self.Q1LoadLabel.show()
+#            self.Q1LoadValue.show()
+#            self.qkLoadLabel.show()
+#            self.QkLoadLabel.show()
+#            self.HkLoadLabel.show()
+#            self.MaterialLabel.show()
+#            self.MaterialValue.show()
+#        else:
+#            self.form[1].setWindowTitle('')
+#            self.G1LoadLabel.hide()
+#            self.G1LoadValue.hide()
+#            self.G2LoadLabel.hide()
+#            self.G2LoadValue.hide()
+#            self.Q1LoadLabel.hide()
+#            self.Q1LoadValue.hide()
+#            self.qkLoadLabel.hide()
+#            self.QkLoadLabel.hide()
+#            self.HkLoadLabel.hide()
+#            self.MaterialLabel.hide()
+#            self.MaterialValue.hide()
 
     def LinePreCalc(self, object):
         Owner=object.ObjectBase[0][0]
