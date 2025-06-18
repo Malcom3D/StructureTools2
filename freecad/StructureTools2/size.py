@@ -52,7 +52,7 @@ class SizeTaskPanel:
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
-    def ntc2018(self):
+    def LoadParam(self):
         # ntc2018 parameter QDialog
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
@@ -136,7 +136,7 @@ class SizeTaskPanel:
         self.form[1].setWindowTitle('ntc2018')
 
 
-    def unien338(self):
+    def MaterialParam(self):
         # Material parameter
         layoutMaterial = QtGui.QVBoxLayout()
 
@@ -181,15 +181,16 @@ class SizeTaskPanel:
 
     def selectedMaterial(self, index):
         if index == 1:
-            self.StrengthLabel.show()
-            self.StrengthValue.show()
-        else:
-            self.StrengthLabel.hide()
-            self.StrengthValue.hide()
+            self.MaterialParam()
+#            self.StrengthLabel.show()
+#            self.StrengthValue.show()
+#        else:
+#            self.StrengthLabel.hide()
+#            self.StrengthValue.hide()
 
     def selectedStandard(self, index):
         if index == 1:
-            self.ntc2018()
+            self.LoadParam()
 #            self.form[1].setWindowTitle('ntc2018')
 #            self.G1LoadLabel.show()
 #            self.G1LoadValue.show()
