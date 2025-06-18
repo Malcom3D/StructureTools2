@@ -52,7 +52,7 @@ class SizeTaskPanel:
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
-    def ntc2018(self)
+    def ntc2018(self):
         # ntc2018 parameter QDialog
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
@@ -136,7 +136,7 @@ class SizeTaskPanel:
         self.form[1].setWindowTitle('ntc2018')
 
 
-    def unien338(self)
+    def unien338(self):
         # Material parameter
         layoutMaterial = QtGui.QVBoxLayout()
 
