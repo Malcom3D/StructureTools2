@@ -166,8 +166,8 @@ class SizeTaskPanel:
         for i in range(0,len(self.StrengthList[:])):
             self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
-        self.StrengthLabel.hide()
-        self.StrengthValue.hide()
+#        self.StrengthLabel.hide()
+#        self.StrengthValue.hide()
 
         layoutMaterial.addWidget(self.StrengthLabel)
         layoutMaterial.addWidget(self.StrengthValue)
