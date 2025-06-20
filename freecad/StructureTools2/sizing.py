@@ -135,7 +135,7 @@ class Sizing:
         self.HkLoadLabel.setText('Hk: ' + str(self.Hk) + ' kN/m')
 
     def selectedMaterial(self):
-        index = self.MaterialValue.currentIndex():
+        index = self.MaterialValue.currentIndex()
         if index == 1:
             self.MaterialParam()
 #        else:
