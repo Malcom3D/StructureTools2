@@ -44,14 +44,12 @@ class Sizing:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.activated.connect(self.selectedStandard)
-#        self.StandardValue.currentIndexChanged.connect(self.selectedStandard)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
     def selectedStandard(self):
-        print('self.selectedStandard', self.StandardValue.currentIndex())
-        if self.StandardValue.currentIndex() == 1:
-            print('index1 self.LoadParam')
+        index == self.StandardValue.currentIndex()
+        if index == 1:
             self.LoadParam()
         #else:
 
@@ -127,7 +125,8 @@ class Sizing:
 
         self.form[1].setLayout(layout)
 
-    def q1load(self, index):
+    def q1load(self):
+        index = self.Q1LoadValue.currentIndex()
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
@@ -135,7 +134,8 @@ class Sizing:
         self.QkLoadLabel.setText('Qk: ' + str(self.Qk) + ' kN')
         self.HkLoadLabel.setText('Hk: ' + str(self.Hk) + ' kN/m')
 
-    def selectedMaterial(self, index):
+    def selectedMaterial(self):
+        index = self.MaterialValue.currentIndex():
         if index == 1:
             self.MaterialParam()
 #        else:
@@ -171,15 +171,67 @@ class Sizing:
             self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
 
+        self.fmkLabel = QtGui.QLabel('fmk: 0 kN/mm²')
+        self.ft0kLabel = QtGui.QLabel('ft0k: 0 kN/mm²')
+        self.ft90kLabel = QtGui.QLabel('ft90k: 0 kN/mm²')
+        self.fc0kLabel = QtGui.QLabel('fc0k: 0 kN/mm²')
+        self.fc90kLabel = QtGui.QLabel('fc90k: 0 kN/mm²')
+        self.fvkLabel = QtGui.QLabel('fvk: 0 kN/mm²')
+        self.E0meanLabel = QtGui.QLabel('E0mean: 0 kN/mm²')
+        self.E005Label = QtGui.QLabel('E005: 0 kN/mm²')
+        self.E90meanLabel = QtGui.QLabel('E90mean: 0 kN/mm²')
+        self.GmeanLabel = QtGui.QLabel('Gmean: 0 kN/mm²')
+        self.rkLabel = QtGui.QLabel('rk: 0 kg/m³')
+        self.rmeanLabel = QtGui.QLabel('rmean: 0 kg/m³')
+
         layoutMaterial.addWidget(self.StrengthLabel)
         layoutMaterial.addWidget(self.StrengthValue)
+        layoutMaterial.addWidget(self.fmkLabel)
+        layoutMaterial.addWidget(self.ft0kLabel)
+        layoutMaterial.addWidget(self.ft90kLabel)
+        layoutMaterial.addWidget(self.fc0kLabel)
+        layoutMaterial.addWidget(self.fc90kLabel)
+        layoutMaterial.addWidget(self.fvkLabel)
+        layoutMaterial.addWidget(self.E0meanLabel)
+        layoutMaterial.addWidget(self.E005Label)
+        layoutMaterial.addWidget(self.E90meanLabel)
+        layoutMaterial.addWidget(self.GmeanLabel)
+        layoutMaterial.addWidget(self.rkLabel)
+        layoutMaterial.addWidget(self.rmeanLabel)
 
         self.form[2].setLayout(layoutMaterial)
         self.form[2].setWindowTitle('Material parameter')
 
-    def selectedStrength(self, index):
+    def selectedStrength(self):
+        index = self.StrengthValue.currentIndex()
         if index == 1:
             print("Selected Strength: ", self.StrengthValue.currentText())
+
+        self.fmk = self.StrengthList[index][1]
+        self.ft0k = self.StrengthList[index][2]
+        self.ft90k = self.StrengthList[index][3]
+        self.fc0k = self.StrengthList[index][4]
+        self.fc90k = self.StrengthList[index][5]
+        self.fvk = self.StrengthList[index][6]
+        self.E0mean = self.StrengthList[index][7]
+        self.E005 = self.StrengthList[index][8]
+        self.E90mean = self.StrengthList[index][9]
+        self.Gmean = self.StrengthList[index][10]
+        self.rk = self.StrengthList[index][11]
+        self.rmean = self.StrengthList[index][12]
+
+        self.fmkLabel.setText('fmk: ' + str(self.fmk) + ' N/mm²')
+        self.ft0kLabel.setText('ft0k: ' + str(self.ft0k) + ' N/mm²')
+        self.ft90kLabel.setText('ft90k: ' + str(self.ft90k) + ' N/mm²')
+        self.fc0kLabel.setText('fc0k: ' + str(self.fc0k) + ' N/mm²')
+        self.fc90kLabel.setText('fc90k: ' + str(self.fc90k) + ' N/mm²')
+        self.fvkLabel.setText('fvk: ' + str(self.fvk) + ' N/mm²')
+        self.E0meanLabel.setText('E0mean: ' + str(self.E0mean) + ' kN/mm²')
+        self.E005Label.setText('E005: ' + str(self.E005) + ' kN/mm²')
+        self.E90meanLabel.setText('E90mean: ' + str(self.E90mean) + ' kN/mm²')
+        self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
+        self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
+        self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
