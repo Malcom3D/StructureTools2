@@ -32,7 +32,7 @@ def set_type(s):
 class Sizing:
     def __init__(self, selection):
         NTC2018Data = NTC2018(selection)
-        self.Qavr = NTC2018Data.Qavr()
+        self.Qavr = NTC2018Data.Qavr
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
