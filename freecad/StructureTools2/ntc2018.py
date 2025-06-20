@@ -22,7 +22,7 @@ class NTC2018:
     def selectedStandard(self, index):
         print('self.selectedStandard')
         if index == 1:
-            print('index1 self.LoadParam'
+            print('index1 self.LoadParam')
             self.LoadParam()
         #else:
 
