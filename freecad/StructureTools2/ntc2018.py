@@ -20,7 +20,7 @@ class NTC2018:
 
     def selectedStandard(self, index):
         print('self.selectedStandard', index)
-        if index == 1:
+        if self.StandardValue.currentIndex() == 1:
             print('index1 self.LoadParam')
             self.LoadParam()
         #else:
