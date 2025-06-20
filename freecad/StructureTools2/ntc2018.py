@@ -4,13 +4,11 @@ from PySide import QtWidgets, QtCore, QtGui
 class NTC2018:
     def __init__(self, form, Qavr):
         self.form = form
+	print(form, self.form)
         self.Qavr = Qavr
         self.StandardSelection()
 
     def StandardSelection(self):
-#        self.form = form
-#        self.Qavr = Qavr
-        self.form[0].setWindowTitle('ntc2018')
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
         self.form[0].setWindowTitle('Building Standard')
@@ -29,6 +27,7 @@ class NTC2018:
 
     def LoadParam(self):
         # ntc2018 parameter QDialog
+        self.form[1].setWindowTitle('ntc2018')
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel('Structural load G1 [ntc2018 Tab. 3.1.I]')

@@ -1,6 +1,6 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
-#import subprocess
+import subprocess
 
 from freecad.StructureTools2.ntc2018 import NTC2018
 
