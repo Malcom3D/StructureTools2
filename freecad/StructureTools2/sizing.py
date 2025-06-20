@@ -43,7 +43,7 @@ class Sizing:
                 self.LinePreCalc(object)
 
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
-        StdNTC2018 = NTC2018(self.Qavr)
+        StdNTC2018 = NTC2018(self.form, self.Qavr)
 #        StdNTC2018.StandardSelection()
 #        StdIndex = StdNTC2018.StandardSelection()
 
