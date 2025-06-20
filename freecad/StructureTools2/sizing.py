@@ -2,7 +2,7 @@ import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
-from ntc2018 import ntc2018
+from ntc2018 import Ntc2018
 
 from sympy import *
 init_printing()
