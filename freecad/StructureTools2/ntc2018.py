@@ -4,7 +4,7 @@ from PySide import QtWidgets, QtCore, QtGui
 class NTC2018:
     def __init__(self, form, Qavr):
         self.form = form
-	print(form, self.form)
+        print(form, self.form)
         self.Qavr = Qavr
         self.StandardSelection()
 
