@@ -3,8 +3,8 @@ from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
 class NTC2018:
-    def __init__(self, Qavr):
-#        self.form = form
+    def __init__(self, form, Qavr):
+        self.form = form
         self.Qavr = Qavr
 #        self.StandardSelection()
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
@@ -16,7 +16,7 @@ class NTC2018:
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
-        #self.StandardValue.activated.connect(self.selectedStandard())
+        self.StandardValue.activated.connect(self.selectedStandard())
         self.StandardValue.currentIndexChanged.connect(self.selectedStandard)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
