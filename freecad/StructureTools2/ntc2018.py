@@ -4,7 +4,6 @@ from PySide import QtWidgets, QtCore, QtGui
 class NTC2018:
     def __init__(self, form, Qavr):
         self.form = form
-        print(form, self.form)
         self.Qavr = Qavr
 #        self.StandardSelection()
 
@@ -21,7 +20,9 @@ class NTC2018:
 
 
     def selectedStandard(self, index):
+        print('self.selectedStandard')
         if index == 1:
+            print('index1 self.LoadParam'
             self.LoadParam()
         #else:
 
