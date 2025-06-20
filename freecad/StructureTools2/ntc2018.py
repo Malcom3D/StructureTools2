@@ -1,10 +1,12 @@
 class ntc2018:
-    def __init__(self, form, Qavr):
+#    def __init__(self, form, Qavr):
+#        self.form = form
+#        self.Qavr = Qavr
+#        self.StandardSelection()
+
+    def StandardSelection(self, form, Qavr):
         self.form = form
         self.Qavr = Qavr
-        self.StandardSelection()
-
-    def StandardSelection(self):
         self.form[0].setWindowTitle('ntc2018')
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
