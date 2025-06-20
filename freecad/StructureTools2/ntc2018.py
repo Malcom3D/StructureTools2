@@ -19,7 +19,7 @@ class NTC2018:
         self.form[0].setLayout(layoutStd)
 
     def selectedStandard(self):
-        print('self.selectedStandard', self.StandardValue.currentIndex)
+        print('self.selectedStandard', self.StandardValue.currentIndex())
         if self.StandardValue.currentIndex() == 1:
             print('index1 self.LoadParam')
             self.LoadParam()
