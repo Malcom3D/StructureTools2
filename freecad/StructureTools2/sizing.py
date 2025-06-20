@@ -48,7 +48,7 @@ class Sizing:
         self.form[0].setLayout(layoutStd)
 
     def selectedStandard(self):
-        index == self.StandardValue.currentIndex()
+        index = self.StandardValue.currentIndex()
         if index == 1:
             self.LoadParam()
         #else:
