@@ -44,8 +44,8 @@ class Sizing:
                 self.LinePreCalc(object)
 
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
-        #standard = ntc2018(self.form, self.Qavr)
-        ntc2018.StandardSelection(self.form, self.Qavr)
+        standard = ntc2018(self.form, self.Qavr)
+        #ntc2018.StandardSelection(self.form, self.Qavr)
         #StandardSelection(self.form, self.Qavr)
 
     def LinePreCalc(self, object):
