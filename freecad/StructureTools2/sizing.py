@@ -2,8 +2,8 @@ import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
-#from freecad.StructureTools2 import ntc2018
-import freecad.StructureTools2.ntc2018 as ntc2018
+from freecad.StructureTools2 import NTC2018
+#import freecad.StructureTools2.ntc2018 as ntc2018
 
 from sympy import *
 init_printing()
@@ -44,8 +44,8 @@ class Sizing:
                 self.LinePreCalc(object)
 
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
-        standard = ntc2018(self.form, self.Qavr)
-        #ntc2018.StandardSelection(self.form, self.Qavr)
+        standard = NTC2018(self.form, self.Qavr)
+        #NTC2018.StandardSelection(self.form, self.Qavr)
         #StandardSelection(self.form, self.Qavr)
 
     def LinePreCalc(self, object):
