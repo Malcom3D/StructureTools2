@@ -3,7 +3,7 @@ from PySide import QtWidgets, QtCore, QtGui
 
 class NTC2018:
     def __init__(self, form, Qavr):
-        super(NTC2018, self).__init__(parent)
+        super().__init__()
         self.form = form
         self.Qavr = Qavr
         self.StandardSelection()
