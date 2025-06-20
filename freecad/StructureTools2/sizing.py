@@ -115,7 +115,7 @@ class Sizing:
     def getIcon(self):
         return """
 /* XPM */
-static char *size[] = {
+static char *sizing[] = {
 /* columns rows colors chars-per-pixel */
 "32 32 191 2",
 "   c black",
@@ -349,7 +349,7 @@ static char *size[] = {
 class CommandSizing():
 
     def GetResources(self):
-        return {"Pixmap"  : os.path.join(ICONPATH, "icons/size.svg"), # the name of a svg file available in the resources
+        return {"Pixmap"  : os.path.join(ICONPATH, "icons/sizing.svg"), # the name of a svg file available in the resources
                 "Accel"   : "Shift+S", # a default shortcut (optional)
                 "MenuText": "sizing structure",
                 "ToolTip" : "Sizing the structure"}
@@ -377,4 +377,4 @@ class CommandSizing():
         
         return True
 
-FreeCADGui.addCommand('size', CommandSizing())
+FreeCADGui.addCommand('sizing', CommandSizing())
