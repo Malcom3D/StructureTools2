@@ -6,7 +6,7 @@ class NTC2018:
         self.form = form
         print(form, self.form)
         self.Qavr = Qavr
-        self.StandardSelection()
+#        self.StandardSelection()
 
     def StandardSelection(self):
         # Building Standard Selection QDialog
