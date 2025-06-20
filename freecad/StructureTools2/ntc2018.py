@@ -15,7 +15,7 @@ def show_error_message(msg):
     msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     msg_box.exec_()
 
-class ntc2018:
+class Ntc2018:
     def __init__(self, form, Qavr):
         self.form = form
         self.Qavr = Qavr
