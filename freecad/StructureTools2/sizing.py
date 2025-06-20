@@ -3,7 +3,7 @@ from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
 #from freecad.StructureTools2 import ntc2018
-import freecad.StructureTools2.ntc2018
+import freecad.StructureTools2.ntc2018 as ntc2018
 
 from sympy import *
 init_printing()
