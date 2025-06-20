@@ -4,7 +4,7 @@ import subprocess
 
 class NTC2018:
     def __init__(self, Qavr):
-        self.form = form
+#        self.form = form
         self.Qavr = Qavr
 #        self.StandardSelection()
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
