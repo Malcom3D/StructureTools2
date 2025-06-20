@@ -20,8 +20,9 @@ class NTC2018:
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
-    def selectedStandard(self):
-        print('self.selectedStandard', self.StandardValue.currentIndex())
+    @QtCore.pyqtSlot(int)
+    def selectedStandard(self, index):
+        print('self.selectedStandard', self.StandardValue.currentIndex(), index)
         if self.StandardValue.currentIndex() == 1:
             print('index1 self.LoadParam')
             self.LoadParam()
