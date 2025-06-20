@@ -1,3 +1,6 @@
+import FreeCAD, App, FreeCADGui, Part, os, math
+from PySide import QtWidgets, QtCore, QtGui
+
 class NTC2018:
     def __init__(self, form, Qavr):
         self.form = form
