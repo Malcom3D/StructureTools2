@@ -5,8 +5,7 @@ class NTC2018:
     def __init__(self, form, Qavr):
         self.form = form
         self.Qavr = Qavr
-#        self.StandardSelection()
-        StandardSelection()
+        self.StandardSelection()
 
         def StandardSelection(self):
             # Building Standard Selection QDialog
@@ -15,8 +14,8 @@ class NTC2018:
             self.StandardValue = QtGui.QComboBox()
             self.StandardValue.addItem('')
             self.StandardValue.addItem('Italy: ntc2018')
-#            self.StandardValue.activated.connect(self.selectedStandard)
-            self.StandardValue.activated.connect(selectedStandard)
+            self.StandardValue.activated.connect(self.selectedStandard)
+#            self.StandardValue.activated.connect(selectedStandard)
             layoutStd.addWidget(self.StandardValue)
             self.form[0].setLayout(layoutStd)
 
