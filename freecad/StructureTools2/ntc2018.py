@@ -1,4 +1,4 @@
-class ntc2018:
+#class ntc2018:
 #    def __init__(self, form, Qavr):
 #        self.form = form
 #        self.Qavr = Qavr
