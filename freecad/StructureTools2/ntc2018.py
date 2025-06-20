@@ -7,24 +7,23 @@ class NTC2018:
         self.Qavr = Qavr
         self.StandardSelection()
 
-        def StandardSelection(self):
-            # Building Standard Selection QDialog
-            layoutStd = QtGui.QVBoxLayout()
-            self.form[0].setWindowTitle('Building Standard')
-            self.StandardValue = QtGui.QComboBox()
-            self.StandardValue.addItem('')
-            self.StandardValue.addItem('Italy: ntc2018')
-            self.StandardValue.activated.connect(self.selectedStandard)
-#            self.StandardValue.activated.connect(selectedStandard)
-            layoutStd.addWidget(self.StandardValue)
-            self.form[0].setLayout(layoutStd)
+    def StandardSelection(self):
+        # Building Standard Selection QDialog
+        layoutStd = QtGui.QVBoxLayout()
+        self.form[0].setWindowTitle('Building Standard')
+        self.StandardValue = QtGui.QComboBox()
+        self.StandardValue.addItem('')
+        self.StandardValue.addItem('Italy: ntc2018')
+        self.StandardValue.activated.connect(self.selectedStandard())
+        layoutStd.addWidget(self.StandardValue)
+        self.form[0].setLayout(layoutStd)
 
-        def selectedStandard(self, index):
-            print('self.selectedStandard')
-            if index == 1:
-                print('index1 self.LoadParam')
-                self.LoadParam()
-            #else:
+    def selectedStandard(self, index):
+        print('self.selectedStandard')
+        if index == 1:
+            print('index1 self.LoadParam')
+            self.LoadParam()
+        #else:
 
     def LoadParam(self):
         # ntc2018 parameter QDialog
