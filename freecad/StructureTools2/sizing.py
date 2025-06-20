@@ -43,8 +43,8 @@ class Sizing:
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
-        self.StandardValue.activated.connect(self.selectedStandard())
-        self.StandardValue.currentIndexChanged.connect(self.selectedStandard())
+        self.StandardValue.activated.connect(self.selectedStandard)
+#        self.StandardValue.currentIndexChanged.connect(self.selectedStandard)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
