@@ -4,7 +4,7 @@ class NTC2018:
         self.Qavr = Qavr
         self.StandardSelection()
 
-    def StandardSelection(self, form, Qavr):
+    def StandardSelection(self):
 #        self.form = form
 #        self.Qavr = Qavr
         self.form[0].setWindowTitle('ntc2018')
