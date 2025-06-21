@@ -144,6 +144,8 @@ class Sizing:
         # Material parameter
         layoutMaterial = QtGui.QVBoxLayout()
         layoutMatParam = QtGui.QHBoxLayout()
+        layoutMatParamCol1 = QtGui.QVBoxLayout()
+        layoutMatParamCol2 = QtGui.QVBoxLayout()
 
         # mapped list ['StrengthClass', fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean]
         self.StrengthList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
@@ -185,18 +187,19 @@ class Sizing:
         self.rkLabel = QtGui.QLabel('rk: 0 kg/m³')
         self.rmeanLabel = QtGui.QLabel('rmean: 0 kg/m³')
 
-        layoutMatParam.addWidget(self.fmkLabel)
-        layoutMatParam.addWidget(self.ft0kLabel)
-        layoutMatParam.addWidget(self.ft90kLabel)
-        layoutMatParam.addWidget(self.fc0kLabel)
-        layoutMatParam.addWidget(self.fc90kLabel)
-        layoutMatParam.addWidget(self.fvkLabel)
-        layoutMatParam.addWidget(self.E0meanLabel)
-        layoutMatParam.addWidget(self.E005Label)
-        layoutMatParam.addWidget(self.E90meanLabel)
-        layoutMatParam.addWidget(self.GmeanLabel)
-        layoutMatParam.addWidget(self.rkLabel)
-        layoutMatParam.addWidget(self.rmeanLabel)
+        layoutMatParamCol1.addWidget(self.fmkLabel)
+        layoutMatParamCol1.addWidget(self.ft0kLabel)
+        layoutMatParamCol1.addWidget(self.ft90kLabel)
+        layoutMatParamCol1.addWidget(self.fc0kLabel)
+        layoutMatParamCol1.addWidget(self.fc90kLabel)
+        layoutMatParamCol1.addWidget(self.fvkLabel)
+
+        layoutMatParamCol2.addWidget(self.E0meanLabel)
+        layoutMatParamCol2.addWidget(self.E005Label)
+        layoutMatParamCol2.addWidget(self.E90meanLabel)
+        layoutMatParamCol2.addWidget(self.GmeanLabel)
+        layoutMatParamCol2.addWidget(self.rkLabel)
+        layoutMatParamCol2.addWidget(self.rmeanLabel)
 
 #        layoutMaterial.addWidget(self.fmkLabel)
 #        layoutMaterial.addWidget(self.ft0kLabel)
@@ -212,6 +215,14 @@ class Sizing:
 #        layoutMaterial.addWidget(self.rmeanLabel)
 
         self.formMatParam = QtGui.QDialog()
+        self.formMatParamCol1 = QtGui.QDialog()
+        self.formMatParamCol2 = QtGui.QDialog()
+
+        self.formMatParam.addWidget(self.formMatParamCol1)
+        self.formMatParam.addWidget(self.formMatParamCol2)
+
+        self.formMatParamCol1.setLayout(layoutMatParamCol1)
+        self.formMatParamCol2.setLayout(layoutMatParamCol2)
         self.formMatParam.setLayout(layoutMatParam)
 
         layoutMaterial.addWidget(self.StrengthLabel)
