@@ -1,11 +1,7 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
-import subprocess
-
-from freecad.StructureTools2.ntc2018 import NTC2018
-
-from sympy import *
-init_printing()
+import requests
+import pandas as pd
 
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
@@ -25,17 +21,30 @@ def set_type(s):
         return float(s)
     return s
 
+
+# function for returning elevation from lat, long, based on open elevation data
+# which in turn is based on SRTM
+def get_elevation(lat, long):
+    url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
+    r = requests.get(url).json()  # json object, various ways you can extract value
+#    # one approach is to use pandas json functionality:
+#    elevation = pd.io.json.json_normalize(r, 'results')['elevation'].values[0]
+    elevation = data['result'][0]['elevation']
+    return elevation
+    
+
 class NewProject:
     def __init__(self, obj):
         self.obj = obj
         self.obj.Proxy = self
         self.obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
-        self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building").Latitude = 0
-        self.obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building").Longitude = 0
+        self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building site").Latitude = 0
+        self.obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building site").Longitude = 0
+        self.obj.addProperty("App::PropertyDistance", "Elevation", "NewProject", "Geographic elevation of building site").Elevation = 0
         self.obj.addProperty("App::PropertyString", "NominalLife", "NewProject", "Nominal life time of building").NominalLife = 'None'
         self.obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building").Vn = 0
         self.obj.addProperty("App::PropertyString", "UseClass", "NewProject", "Use class of building").UseClass = 'None'
-        self.obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class of building").Cu = 0
+        self.obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class coefficient of building").Cu = 0
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
@@ -131,6 +140,7 @@ class NewProject:
         self.obj.BuildingStandard = self.StandardValue.currentText()
         self.obj.Latitude = self.LatitudeValue.value()
         self.obj.Longitude = self.LongitudeValue.value()
+        self.obj.Elevation = get_elevation(self.obj.Latitude, self.obj.Longitude)
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
