@@ -211,7 +211,7 @@ class Sizing:
 #        layoutMaterial.addWidget(self.rkLabel)
 #        layoutMaterial.addWidget(self.rmeanLabel)
 
-        self.formMatParam = QtGui.QDialog(self.form[2])
+        self.formMatParam = QtGui.QDialog()
         self.formMatParam.setLayout(layoutMatParam)
 
         layoutMaterial.addWidget(self.StrengthLabel)
