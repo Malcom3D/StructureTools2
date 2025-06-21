@@ -26,7 +26,7 @@ def set_type(s):
 # which in turn is based on SRTM
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
-    r = requests.get(url).json()  # json object, various ways you can extract value
+    data = requests.get(url).json()  # json object, various ways you can extract value
 #    # one approach is to use pandas json functionality:
 #    elevation = pd.io.json.json_normalize(r, 'results')['elevation'].values[0]
     elevation = data['result'][0]['elevation']
