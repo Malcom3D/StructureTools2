@@ -73,6 +73,27 @@ class Sizing:
             self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
 
+        # Overloads by natural action type [ntc2018 Tab. 3.1.II]
+        # Wind [ntc2018 3.3]
+        self.wind.psi0j = 0.6
+        self.wind.psi1j = 0.2
+        self.wind.psi2j = 0.0
+
+        # Snow [ntc2018 3.4]
+        if self.Elevation < 1000:
+            self.snow.psi0j = 0.5
+            self.snow.psi1j = 0.2
+            self.snow.psi2j = 0.0
+        else:
+            self.snow.psi0j = 0.7
+            self.snow.psi1j = 0.5
+            self.snow.psi2j = 0.2
+
+        # Temperature [ntc2018 3.5]
+        self.Temp.psi0j = 0.6
+        self.Temp.psi1j = 0.5
+        self.Temp.psi2j = 0.0
+
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
         # - uniformly distributed vertical loads qk
         # - concentrated vertical loads Qk
@@ -154,6 +175,7 @@ class Sizing:
         for i in range(1,5):
             if i-1 < G2avr < i:
                 self.g2 = 0.4*i
+
         # ntc2018 3.1.4
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
@@ -173,6 +195,7 @@ class Sizing:
             self.QkLoadValue.setMaximum(self.Qk)
             self.HkLoadValue.setMinimum(self.Hk)
             self.HkLoadValue.setMaximum(self.Hk)
+
         # ntc2018 Tab. 2.5.I
         self.psi0j = self.Q1mapList[index][4]
         self.psi1j = self.Q1mapList[index][5]
@@ -182,7 +205,10 @@ class Sizing:
         index = self.MaterialValue.currentIndex()
         if index == 1:
             self.WoodParam()
-#        else:
+#        elif index == 2:
+#            self.ConcreteParam()
+#        elif index == 3:
+#            self.SteelParam()
 
     def WoodParam(self):
         # Wood Material parameter
@@ -292,6 +318,20 @@ class Sizing:
         self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
         self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
         self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
+
+        # Ym: Coefficienti parziali [ntc2018 Tab. 4.4.III]
+        # Kmod: Classe di servizio, Classe di durata del carico [ntc2018 Tab. 4.4.IV]
+        # Kdef: Classe di servizio [ntc2018 Tab. 4.4.V]
+        self.preSizing()
+
+    def preSizing(self):
+        print('preSinzing')
+        # inserimento interasse (beams step) [area d'influenza]
+        # def in ntc2018.py
+        # Resistenze di calcolo: Sforzo Normale
+        # Resistenze di calcolo: Flessione
+        # Resistenze di calcolo: Taglio
+        # Predimensionamento
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
