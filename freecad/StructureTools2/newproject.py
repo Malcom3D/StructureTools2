@@ -51,8 +51,6 @@ class NewProject:
         self.form[0].setWindowTitle('Building Standard')
         self.ProjectNameLabel = QtGui.QLabel('Project Name:')
         self.ProjectNameValue = QtGui.QLineEdit()
-        self.ProjectNameValue.isUndoAvailable(true)
-        self.ProjectNameValue.isRedoAvailable(true)
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
