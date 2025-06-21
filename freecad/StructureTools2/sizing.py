@@ -144,7 +144,7 @@ class Sizing:
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
-        print(index)
+        print(self.Q1LoadValue.count())
         if index == self.Q1LoadValue.count():
             self.qkLoadValue.setMinimum(self.qk)
             self.qkLoadValue.setMaximum(999999999999.99)
@@ -248,8 +248,6 @@ class Sizing:
 
     def selectedStrength(self):
         index = self.StrengthValue.currentIndex()
-        if index == 1:
-            print("Selected Strength: ", self.StrengthValue.currentText())
 
         self.fmk = self.StrengthList[index][1]
         self.ft0k = self.StrengthList[index][2]
