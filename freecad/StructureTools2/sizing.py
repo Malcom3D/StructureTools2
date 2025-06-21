@@ -273,7 +273,6 @@ class Sizing:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        Standard = self.StandardValue.currentText()
         G1Load = self.G1LoadValue.value()
         G2Load = self.G2LoadValue.value()
         #Q1Load = [self.qk, self.Qk, self.Hk]

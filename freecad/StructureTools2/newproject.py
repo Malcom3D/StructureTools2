@@ -147,6 +147,7 @@ class NewProject:
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
         self.obj.Cu = self.Cu
+        self.isReadOnly(true)
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
