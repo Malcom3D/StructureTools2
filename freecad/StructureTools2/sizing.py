@@ -63,10 +63,10 @@ class Sizing:
         self.LongitudeValue = QtGui.QDoubleSpinBox()
         self.LatitudeValue.setPrefix('Latitude:')
         self.LongitudeValue.setPrefix('Longitude:')
-        self.LatitudeValue.setMinimum(-90)
-        self.LatitudeValue.setMaximum(90)
-        self.LongitudeValue.setMinimum(-180)
-        self.LongitudeValue.setMaximum(180)
+        self.LatitudeValue.setMinimum(-90.000000)
+        self.LatitudeValue.setMaximum(90.000000)
+        self.LongitudeValue.setMinimum(-180.000000)
+        self.LongitudeValue.setMaximum(180.000000)
 
         # mapped list ['description', Vn]
         self.NomLifeList = [list(map(set_type, ['', '0']))]
@@ -112,7 +112,7 @@ class Sizing:
     def selectedNomLife(self):
         index = self.NominalLifeValue.currentIndex()
         self.Vn = self.NomLifeList[index][1]
-        self.VnValue.setText('Vn: ' + str(self.Vn) + ' years')
+        self.VnLabel.setText('Vn: ' + str(self.Vn) + ' years')
         
     def selectedUseClass(self):
         index = self.UseClassValue.currentIndex()
