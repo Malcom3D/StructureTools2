@@ -40,7 +40,7 @@ class Sizing:
                     self.Vn = object.Vn
                     self.Cu = object.Cu
 
-        print(self.Latitude, self.Longitude, self.Elevation, self.Vn self.Cu)
+        print(self.Latitude, self.Longitude, self.Elevation, self.Vn, self.Cu)
 
         NTC2018Data = NTC2018(selection)
         self.Qavr = NTC2018Data.Qavr
