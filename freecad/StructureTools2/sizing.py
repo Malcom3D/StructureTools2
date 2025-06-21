@@ -42,6 +42,8 @@ class Sizing:
                     self.Cu = object.Cu
 
         NTC2018Data = NTC2018(selection)
+        self.G1avr = 0
+        self.G2avr = 0
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
