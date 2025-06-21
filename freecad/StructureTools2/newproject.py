@@ -49,10 +49,16 @@ class NewProject:
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
         self.form[0].setWindowTitle('Building Standard')
+        self.ProjectNameLabel = QtGui.QLabel('Project Name:')
+        self.ProjectNameValue = QLineEdit()
+        self.ProjectNameValue.isUndoAvailable(true)
+        self.ProjectNameValue.isRedoAvailable(true)
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.activated.connect(self.selectedStandard)
+        layoutStd.addWidget(self.ProjectNameLabel)
+        layoutStd.addWidget(self.ProjectNameValue)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
@@ -70,8 +76,8 @@ class NewProject:
         self.LocationLabel = QtGui.QLabel('Location [EPSG:4326]:')
         self.LatitudeValue = QtGui.QDoubleSpinBox()
         self.LongitudeValue = QtGui.QDoubleSpinBox()
-        self.LatitudeValue.setPrefix('Latitude:')
-        self.LongitudeValue.setPrefix('Longitude:')
+        self.LatitudeValue.setPrefix('Latitude: ')
+        self.LongitudeValue.setPrefix('Longitude: ')
         self.LatitudeValue.setDecimals(6)
         self.LongitudeValue.setDecimals(6)
         self.LatitudeValue.setMinimum(-90.000000)
@@ -134,6 +140,7 @@ class NewProject:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
+        self.obj.Label = self.ProjectNameValue.text()
         self.obj.BuildingStandard = self.StandardValue.currentText()
         self.obj.Latitude = self.LatitudeValue.value()
         self.obj.Longitude = self.LongitudeValue.value()
