@@ -45,7 +45,7 @@ class Sizing:
         NTC2018Data = NTC2018(selection)
         self.Qavr = NTC2018Data.Qavr
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
-        LoadParam()
+        self.LoadParam()
 
     def LoadParam(self):
         # ntc2018 Load Parameter QDialog
