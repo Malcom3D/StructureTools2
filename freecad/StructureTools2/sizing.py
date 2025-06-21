@@ -34,6 +34,7 @@ class Sizing:
         for object in selection:
             if 'NewProject' in object.Name:
                 if 'ntc2018' in object.BuildingStandard:
+                    self.BuildingStandard = object.BuildingStandard
                     self.Latitude = object.Latitude
                     self.Longitude = object.Longitude
                     self.Elevation = object.Elevation
