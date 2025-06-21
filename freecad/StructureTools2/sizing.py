@@ -44,7 +44,6 @@ class Sizing:
         NTC2018Data = NTC2018(selection)
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
-        print(self.G1avr, self.G2avr)
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.LoadParam()
 
@@ -166,7 +165,7 @@ class Sizing:
         index = self.Q1LoadValue.currentIndex()
         # ntc2018 3.1.3
         for i in range(1,5):
-            if i-1 < G2avr < i:
+            if i-1 < self.G2avr < i:
                 self.g2 = 0.4*i
 
         # ntc2018 3.1.4
