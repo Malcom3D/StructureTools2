@@ -144,8 +144,8 @@ class Sizing:
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
-        print(self.Q1LoadValue.count())
-        if index == self.Q1LoadValue.count():
+        IndexCount = self.Q1LoadValue.count() -1
+        if index == IndexCount:
             self.qkLoadValue.setMinimum(self.qk)
             self.qkLoadValue.setMaximum(999999999999.99)
             self.QkLoadValue.setMinimum(self.Qk)
