@@ -29,7 +29,7 @@ def get_elevation(lat, long):
     data = requests.get(url).json()  # json object, various ways you can extract value
 #    # one approach is to use pandas json functionality:
 #    elevation = pd.io.json.json_normalize(r, 'results')['elevation'].values[0]
-    elevation = data['results'][0]['elevation']
+    elevation = data['results'][0]['elevation']*1000
     return elevation
     
 
