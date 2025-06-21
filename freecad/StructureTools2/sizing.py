@@ -75,24 +75,16 @@ class Sizing:
 
         # Overloads by natural action type [ntc2018 Tab. 3.1.II]
         # Wind [ntc2018 3.3]
-        self.wind.psi0j = 0.6
-        self.wind.psi1j = 0.2
-        self.wind.psi2j = 0.0
+        self.wind = {'psi0j': 0.6, 'psi1j': 0.2, 'psi2j': 0.0}
 
         # Snow [ntc2018 3.4]
         if self.Elevation < 1000:
-            self.snow.psi0j = 0.5
-            self.snow.psi1j = 0.2
-            self.snow.psi2j = 0.0
+            self.snow = {'psi0j': 0.5, 'psi1j': 0.2, 'psi2j': 0.0}
         else:
-            self.snow.psi0j = 0.7
-            self.snow.psi1j = 0.5
-            self.snow.psi2j = 0.2
+            self.snow = {'psi0j': 0.7, 'psi1j': 0.5, 'psi2j': 0.2}
 
         # Temperature [ntc2018 3.5]
-        self.Temp.psi0j = 0.6
-        self.Temp.psi1j = 0.5
-        self.Temp.psi2j = 0.0
+        self.temp = {'psi0j': 0.6, 'psi1j': 0.5, 'psi2j': 0.0}
 
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
         # - uniformly distributed vertical loads qk
@@ -197,9 +189,10 @@ class Sizing:
             self.HkLoadValue.setMaximum(self.Hk)
 
         # ntc2018 Tab. 2.5.I
-        self.psi0j = self.Q1mapList[index][4]
-        self.psi1j = self.Q1mapList[index][5]
-        self.psi2j = self.Q1mapList[index][6]
+        self.Q1 = {'psi0j': self.Q1mapList[index][4], 'psi1j': self.Q1mapList[index][5], 'psi2j': self.Q1mapList[index][6]}
+#        self.psi0j = self.Q1mapList[index][4]
+#        self.psi1j = self.Q1mapList[index][5]
+#        self.psi2j = self.Q1mapList[index][6]
 
     def selectedMaterial(self):
         index = self.MaterialValue.currentIndex()
