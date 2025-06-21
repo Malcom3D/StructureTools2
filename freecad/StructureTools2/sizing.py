@@ -107,7 +107,7 @@ class Sizing:
         for i in range(0,len(self.Q1mapList[:])):
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
         self.Q1LoadValue.activated.connect(self.q1load)
-        self.Q1LoadValue.currentIndexChanged.connect(self.q1load)
+#        self.Q1LoadValue.currentIndexChanged.connect(self.q1load)
 
         self.qkLoadValue = QtGui.QDoubleSpinBox()
         self.qkLoadValue.setPrefix('qk: ')
@@ -134,7 +134,7 @@ class Sizing:
         self.MaterialValue.addItem('Reinforced concrete')
         self.MaterialValue.addItem('Steel')
         self.MaterialValue.activated.connect(self.selectedMaterial)
-        self.MaterialValue.currentIndexChanged.connect(self.selectedMaterial)
+#        self.MaterialValue.currentIndexChanged.connect(self.selectedMaterial)
 
         layout.addWidget(self.G1LoadLabel)
         layout.addWidget(self.G1LoadValue)
@@ -210,7 +210,7 @@ class Sizing:
         for i in range(0,len(self.StrengthList[:])):
             self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
-        self.StrengthValue.currentIndexChanged.connect(self.selectedStrength)
+#        self.StrengthValue.currentIndexChanged.connect(self.selectedStrength)
 
         self.fmkLabel = QtGui.QLabel('fmk: 0 kN/mm²')
         self.ft0kLabel = QtGui.QLabel('ft0k: 0 kN/mm²')
