@@ -33,7 +33,6 @@ def get_elevation(lat, long):
 class NewProject:
     def __init__(self, obj):
         self.obj = obj
-        #self.obj.Proxy = self
         self.obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
         self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building site").Latitude = 0
         self.obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building site").Longitude = 0
