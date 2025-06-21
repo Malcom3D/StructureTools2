@@ -27,14 +27,14 @@ def set_type(s):
 
 class NewProject:
     def __init__(self, obj):
-        obj.Proxy = self
-        obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
-        obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building")
-        obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building")
-        obj.addProperty("App::PropertyString", "NominalLife", "NewProject", "Nominal life time of building")
-        obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building")
-        obj.addProperty("App::PropertyString", "UseClass", "NewProject", "Use class of building")
-        obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class of building")
+        self.obj.Proxy = self
+        self.obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
+        self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building").Latitude = 0
+        self.obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building").Longitude = 0
+        self.obj.addProperty("App::PropertyString", "NominalLife", "NewProject", "Nominal life time of building").NominalLife = 'None'
+        self.obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building").Vn = 0
+        self.obj.addProperty("App::PropertyString", "UseClass", "NewProject", "Use class of building").UseClass = 'None'
+        self.obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class of building").Cu = 0
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
@@ -127,13 +127,13 @@ class NewProject:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        obj.BuildingStandard = self.StandardValue.currentText()
-        obj.Latitude = self.LatitudeValue.Value()
-        obj.Longitude = self.LongitudeValue.Value()
-        obj.NominalLife = self.NominalLifeValue.currentText()
-        obj.Vn = self.Vn
-        obj.UseClass = self.UseClassValue.currentText()
-        obj.Cu = self.Cu
+        self.obj.BuildingStandard = self.StandardValue.currentText()
+        self.obj.Latitude = self.LatitudeValue.Value()
+        self.obj.Longitude = self.LongitudeValue.Value()
+        self.obj.NominalLife = self.NominalLifeValue.currentText()
+        self.obj.Vn = self.Vn
+        self.obj.UseClass = self.UseClassValue.currentText()
+        self.obj.Cu = self.Cu
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
