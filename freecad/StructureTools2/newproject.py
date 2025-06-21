@@ -394,7 +394,7 @@ class CommandNewProject():
         doc = FreeCAD.ActiveDocument
         obj = doc.addObject("Part::FeaturePython", "NewProject")
         objSuport = NewProject(obj)
-        ViewProviderNewProject(obj.ViewObject)
+#        ViewProviderNewProject(obj.ViewObject)
 
         # what is done when the command is clicked
         # creates a panel with a dialog
