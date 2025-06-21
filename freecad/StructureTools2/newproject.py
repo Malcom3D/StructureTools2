@@ -49,14 +49,10 @@ class NewProject:
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
         self.form[0].setWindowTitle('Building Standard')
-        self.ProjectNameLabel = QtGui.QLabel('Project Name:')
-        self.ProjectNameValue = QtGui.QLineEdit()
         self.StandardValue = QtGui.QComboBox()
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.activated.connect(self.selectedStandard)
-        layoutStd.addWidget(self.ProjectNameLabel)
-        layoutStd.addWidget(self.ProjectNameValue)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
@@ -140,7 +136,6 @@ class NewProject:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        self.obj.Label = self.ProjectNameValue.text()
         self.obj.BuildingStandard = self.StandardValue.currentText()
         self.obj.Latitude = self.LatitudeValue.value()
         self.obj.Longitude = self.LongitudeValue.value()
