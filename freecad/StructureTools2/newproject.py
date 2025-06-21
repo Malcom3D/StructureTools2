@@ -27,6 +27,7 @@ def set_type(s):
 
 class NewProject:
     def __init__(self, obj):
+        self.obj = obj
         self.obj.Proxy = self
         self.obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
         self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building").Latitude = 0
