@@ -84,9 +84,9 @@ class Sizing:
         # mapped list ['description', Cu]
         self.UseClassList = [list(map(set_type, ['', '0']))]
         self.UseClassList.append(list(map(set_type, ['Class I: Buildings with only occasional presence of people, agricultural buildings', '0.7'])))
-        self.UseClassList = [list(map(set_type, ['Class II: Buildings whose use involves normal crowding', '1.0']))]
-        self.UseClassList = [list(map(set_type, ['Class III: Buildings whose use involves significant crowding', '1.5']))]
-        self.UseClassList = [list(map(set_type, ['Class IV: Buildings with important public or strategic functions', '2.0']))]
+        self.UseClassList.append(list(map(set_type, ['Class II: Buildings whose use involves normal crowding', '1.0'])))
+        self.UseClassList.append(list(map(set_type, ['Class III: Buildings whose use involves significant crowding', '1.5'])))
+        self.UseClassList.append(list(map(set_type, ['Class IV: Buildings with important public or strategic functions', '2.0'])))
 
         self.UseClassLabel = QtGui.QLabel('Building use class Cu [ntc2018 Ch. 2.4.2]:')
         self.UseClassValue = QtGui.QComboBox()
