@@ -33,7 +33,7 @@ class Sizing:
     def __init__(self, selection):
         NTC2018Data = NTC2018(selection)
         self.Qavr = NTC2018Data.Qavr
-        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
+        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
     def StandardSelection(self):
@@ -50,12 +50,79 @@ class Sizing:
     def selectedStandard(self):
         index = self.StandardValue.currentIndex()
         if index == 1:
-            self.LoadParam()
+            self.ProjectParam()
+#            self.LoadParam()
         #else:
 
+    def ProjectParam(self):
+        # ntc2018 Project Parameter QDialog
+        layoutProj = QtGui.QVBoxLayout()
+        self.form[1].setWindowTitle('Project Parameter')
+        self.LocationLabel = QtGui.QLabel('Location [EPSG:4326]:')
+        self.LatitudeValue = QtGui.QDoubleSpinBox()
+        self.LongitudeValue = QtGui.QDoubleSpinBox()
+        self.LatitudeValue.setPrefix('Latitude:')
+        self.LongitudeValue.setPrefix('Longitude:')
+        self.LatitudeValue.setMinimum(-90)
+        self.LatitudeValue.setMaximum(90)
+        self.LongitudeValue.setMinimum(-180)
+        self.LongitudeValue.setMaximum(180)
+
+        # mapped list ['description', Vn]
+        self.NomLifeList = [list(map(set_type, ['', '0']))]
+        self.NomLifeList.append(list(map(set_type, ['Temporary and provisional buildings', '10'])))
+        self.NomLifeList.append(list(map(set_type, ['Buildings with ordinary performance levels', '50'])))
+        self.NomLifeList.append(list(map(set_type, ['Buildings with high performance levels', '100'])))
+
+        self.NominalLifeLabel = QtGui.QLabel('Nominal life time Vn [ntc2018 Tab. 2.4.I]:')
+        self.NominalLifeValue = QtGui.QComboBox()
+        for i in range(0,len(self.NomLifeList[:])):
+            self.NominalLifeValue.addItem(self.NomLifeList[i][0])
+        self.NominalLifeValue.activated.connect(self.selectedNomLife)
+        self.VnLabel = QtGui.QLabel('Vn: 0 years')
+
+        # mapped list ['description', Cu]
+        self.UseClassList = [list(map(set_type, ['', '0']))]
+        self.UseClassList.append(list(map(set_type, ['Class I: Buildings with only occasional presence of people, agricultural buildings', '0.7'])))
+        self.UseClassList = [list(map(set_type, ['Class II: Buildings whose use involves normal crowding', '1.0']))]
+        self.UseClassList = [list(map(set_type, ['Class III: Buildings whose use involves significant crowding', '1.5']))]
+        self.UseClassList = [list(map(set_type, ['Class IV: Buildings with important public or strategic functions', '2.0']))]
+
+        self.UseClassLabel = QtGui.QLabel('Building use class Cu [ntc2018 Ch. 2.4.2]:')
+        self.UseClassValue = QtGui.QComboBox()
+        for i in range(0,len(self.UseClassList[:])):
+            self.UseClassValue.addItem(self.UseClassList[i][0])
+        self.UseClassValue.activated.connect(self.selectedUseClass)
+        self.CuValue = QtGui.QDoubleSpinBox()
+        self.CuValue.setValue(0)
+        self.CuValue.setPrefix('Cu: ')
+
+        layoutProj.addWidget(self.LocationLabel)
+        layoutProj.addWidget(self.LatitudeValue)
+        layoutProj.addWidget(self.LongitudeValue)
+        layoutProj.addWidget(self.NominalLifeLabel)
+        layoutProj.addWidget(self.NominalLifeValue)
+        layoutProj.addWidget(self.VnLabel)
+        layoutProj.addWidget(self.UseClassLabel)
+        layoutProj.addWidget(self.UseClassValue)
+        layoutProj.addWidget(self.CuValue)
+
+        self.form[1].setLayout(layoutProj)
+
+    def selectedNomLife(self):
+        index = self.NominalLifeValue.currentIndex()
+        self.Vn = self.NomLifeList[index][1]
+        self.VnValue.setText('Vn: ' + str(self.Vn) + ' years')
+        
+    def selectedUseClass(self):
+        index = self.UseClassValue.currentIndex()
+        self.Cu = self.UseClassList[index][1]
+        self.CuValue.setValue(self.Cu)
+        self.CuValue.setMinimum(self.Cu)
+
     def LoadParam(self):
-        # ntc2018 parameter QDialog
-        self.form[1].setWindowTitle('ntc2018')
+        # ntc2018 Load Parameter QDialog
+        self.form[2].setWindowTitle('Load Parameter:')
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel('Structural load G1 [ntc2018 Tab. 3.1.I]')
@@ -137,7 +204,7 @@ class Sizing:
         layout.addWidget(self.MaterialLabel)
         layout.addWidget(self.MaterialValue)
 
-        self.form[1].setLayout(layout)
+        self.form[2].setLayout(layout)
 
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
@@ -243,8 +310,8 @@ class Sizing:
         layoutMaterial.addWidget(self.StrengthValue)
         layoutMaterial.addWidget(self.formMatParam)
 
-        self.form[2].setLayout(layoutMaterial)
-        self.form[2].setWindowTitle('Material parameter')
+        self.form[3].setLayout(layoutMaterial)
+        self.form[3].setWindowTitle('Material parameter')
 
     def selectedStrength(self):
         index = self.StrengthValue.currentIndex()
