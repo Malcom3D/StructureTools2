@@ -143,6 +143,7 @@ class Sizing:
     def MaterialParam(self):
         # Material parameter
         layoutMaterial = QtGui.QVBoxLayout()
+        layoutMatParam = QtGui.QHBoxLayout()
 
         # mapped list ['StrengthClass', fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean]
         self.StrengthList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
@@ -184,20 +185,38 @@ class Sizing:
         self.rkLabel = QtGui.QLabel('rk: 0 kg/m³')
         self.rmeanLabel = QtGui.QLabel('rmean: 0 kg/m³')
 
+        layoutMatParam.addWidget(self.fmkLabel)
+        layoutMatParam.addWidget(self.ft0kLabel)
+        layoutMatParam.addWidget(self.ft90kLabel)
+        layoutMatParam.addWidget(self.fc0kLabel)
+        layoutMatParam.addWidget(self.fc90kLabel)
+        layoutMatParam.addWidget(self.fvkLabel)
+        layoutMatParam.addWidget(self.E0meanLabel)
+        layoutMatParam.addWidget(self.E005Label)
+        layoutMatParam.addWidget(self.E90meanLabel)
+        layoutMatParam.addWidget(self.GmeanLabel)
+        layoutMatParam.addWidget(self.rkLabel)
+        layoutMatParam.addWidget(self.rmeanLabel)
+
+#        layoutMaterial.addWidget(self.fmkLabel)
+#        layoutMaterial.addWidget(self.ft0kLabel)
+#        layoutMaterial.addWidget(self.ft90kLabel)
+#        layoutMaterial.addWidget(self.fc0kLabel)
+#        layoutMaterial.addWidget(self.fc90kLabel)
+#        layoutMaterial.addWidget(self.fvkLabel)
+#        layoutMaterial.addWidget(self.E0meanLabel)
+#        layoutMaterial.addWidget(self.E005Label)
+#        layoutMaterial.addWidget(self.E90meanLabel)
+#        layoutMaterial.addWidget(self.GmeanLabel)
+#        layoutMaterial.addWidget(self.rkLabel)
+#        layoutMaterial.addWidget(self.rmeanLabel)
+
+        self.formMatParam = QtGui.QDialog(self.form[2])
+        self.formMatParam.setLayout(layoutMatParam)
+
         layoutMaterial.addWidget(self.StrengthLabel)
         layoutMaterial.addWidget(self.StrengthValue)
-        layoutMaterial.addWidget(self.fmkLabel)
-        layoutMaterial.addWidget(self.ft0kLabel)
-        layoutMaterial.addWidget(self.ft90kLabel)
-        layoutMaterial.addWidget(self.fc0kLabel)
-        layoutMaterial.addWidget(self.fc90kLabel)
-        layoutMaterial.addWidget(self.fvkLabel)
-        layoutMaterial.addWidget(self.E0meanLabel)
-        layoutMaterial.addWidget(self.E005Label)
-        layoutMaterial.addWidget(self.E90meanLabel)
-        layoutMaterial.addWidget(self.GmeanLabel)
-        layoutMaterial.addWidget(self.rkLabel)
-        layoutMaterial.addWidget(self.rmeanLabel)
+        layoutMaterial.addWidget(self.formMatParam)
 
         self.form[2].setLayout(layoutMaterial)
         self.form[2].setWindowTitle('Material parameter')
