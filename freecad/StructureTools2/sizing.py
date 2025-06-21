@@ -44,7 +44,7 @@ class Sizing:
         NTC2018Data = NTC2018(selection)
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
-        self.form = [QtGui.QDialog(), QtGui.QDialog()]
+        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.LoadParam()
 
     def LoadParam(self):
@@ -107,7 +107,6 @@ class Sizing:
         for i in range(0,len(self.Q1mapList[:])):
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
         self.Q1LoadValue.activated.connect(self.q1load)
-#        self.Q1LoadValue.currentIndexChanged.connect(self.q1load)
 
         self.qkLoadValue = QtGui.QDoubleSpinBox()
         self.qkLoadValue.setPrefix('qk: ')
@@ -134,7 +133,6 @@ class Sizing:
         self.MaterialValue.addItem('Reinforced concrete')
         self.MaterialValue.addItem('Steel')
         self.MaterialValue.activated.connect(self.selectedMaterial)
-#        self.MaterialValue.currentIndexChanged.connect(self.selectedMaterial)
 
         layout.addWidget(self.G1LoadLabel)
         layout.addWidget(self.G1LoadValue)
@@ -152,6 +150,11 @@ class Sizing:
 
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
+        # ntc2018 3.1.3
+        for i in range(1,5):
+            if i-1 < G2avr < i:
+                self.g2 = 0.4*i
+        # ntc2018 3.1.4
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
@@ -170,6 +173,10 @@ class Sizing:
             self.QkLoadValue.setMaximum(self.Qk)
             self.HkLoadValue.setMinimum(self.Hk)
             self.HkLoadValue.setMaximum(self.Hk)
+        # ntc2018 Tab. 2.5.I
+        self.psi0j = self.Q1mapList[index][4]
+        self.psi1j = self.Q1mapList[index][5]
+        self.psi2j = self.Q1mapList[index][6]
 
     def selectedMaterial(self):
         index = self.MaterialValue.currentIndex()
@@ -210,7 +217,6 @@ class Sizing:
         for i in range(0,len(self.StrengthList[:])):
             self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
-#        self.StrengthValue.currentIndexChanged.connect(self.selectedStrength)
 
         self.fmkLabel = QtGui.QLabel('fmk: 0 kN/mm²')
         self.ft0kLabel = QtGui.QLabel('ft0k: 0 kN/mm²')
@@ -548,13 +554,9 @@ class CommandSizing():
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
-#        obj = doc.addObject("Part::FeaturePython", "Sizing")
-#        objSuport = Sizing(obj, selection)
-#        ViewProviderSizing(obj.ViewObject)           
 
         # what is done when the command is clicked
         # creates a panel with a dialog
-#        baseWidget = QtGui.QWidget()
         panel = Sizing(selection)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
