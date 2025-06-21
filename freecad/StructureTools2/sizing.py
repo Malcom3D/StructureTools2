@@ -63,6 +63,8 @@ class Sizing:
         self.LongitudeValue = QtGui.QDoubleSpinBox()
         self.LatitudeValue.setPrefix('Latitude:')
         self.LongitudeValue.setPrefix('Longitude:')
+        self.LatitudeValue.decimals(6)
+        self.LongitudeValue.decimals(6)
         self.LatitudeValue.setMinimum(-90.000000)
         self.LatitudeValue.setMaximum(90.000000)
         self.LongitudeValue.setMinimum(-180.000000)
