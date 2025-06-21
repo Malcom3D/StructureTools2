@@ -17,10 +17,6 @@ def show_error_message(msg):
     msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     msg_box.exec_()
 
-def Size(Standard, G1Load, G2Load, Q1Load):
-    doc = FreeCAD.ActiveDocument
-    print(Standard, G1Load, G2Load, Q1Load)
-
 def set_type(s):
     # Takes a string, inferes the type and returns either a string, int or float.
     if s.isnumeric():
@@ -390,18 +386,17 @@ class CommandNewProject():
                 "ToolTip" : "Define a new building project for structure sizing"}
     
     def Activated(self):
-        selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
         obj = doc.addObject("Part::FeaturePython", "NewProject")
-        objSuport = NewProject(obj)
-#        ViewProviderNewProject(obj.ViewObject)
 
         # what is done when the command is clicked
         # creates a panel with a dialog
-        panel = NewProject(selection)
+        objSuport = NewProject(obj)
+        # ViewProviderNewProject(obj.ViewObject)
+
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
-        FreeCADGui.Control.showDialog(panel)
+        FreeCADGui.Control.showDialog(objSupport)
 
         FreeCAD.ActiveDocument.recompute()        
         return
