@@ -99,9 +99,23 @@ class Sizing:
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
         self.Q1LoadValue.activated.connect(self.q1load)
 
-        self.qkLoadLabel = QtGui.QLabel('qk: 0 kN/m²')
-        self.QkLoadLabel = QtGui.QLabel('Qk: 0 kN')
-        self.HkLoadLabel = QtGui.QLabel('Hk: 0 kN/m')
+        self.qkLoadValue = QtGui.QDoubleSpinBox()
+        self.qkLoadValue.setPrefix('qk: ')
+        self.qkLoadValue.setSuffix('kN/m²')
+        self.qkLoadValue.setMinimum(0)
+        self.qkLoadValue.setMaximum(0)
+
+        self.QkLoadValue = QtGui.QDoubleSpinBox()
+        self.QkLoadValue.setPrefix('Qk: ')
+        self.QkLoadValue.setSuffix('kN')
+        self.QkLoadValue.setMinimum(0)
+        self.QkLoadValue.setMaximum(0)
+
+        self.HkLoadValue = QtGui.QDoubleSpinBox()
+        self.HkLoadValue.setPrefix('Hk: ')
+        self.HkLoadValue.setSuffix('kN/m')
+        self.HkLoadValue.setMinimum(0)
+        self.HkLoadValue.setMaximum(0)
 
         self.MaterialLabel = QtGui.QLabel('Material')
         self.MaterialValue = QtGui.QComboBox()
@@ -117,9 +131,9 @@ class Sizing:
         layout.addWidget(self.G2LoadValue)
         layout.addWidget(self.Q1LoadLabel)
         layout.addWidget(self.Q1LoadValue)
-        layout.addWidget(self.qkLoadLabel)
-        layout.addWidget(self.QkLoadLabel)
-        layout.addWidget(self.HkLoadLabel)
+        layout.addWidget(self.qkLoadValue)
+        layout.addWidget(self.QkLoadValue)
+        layout.addWidget(self.HkLoadValue)
         layout.addWidget(self.MaterialLabel)
         layout.addWidget(self.MaterialValue)
 
@@ -130,18 +144,26 @@ class Sizing:
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
-        self.qkLoadLabel.setText('qk: ' + str(self.qk) + ' kN/m²')
-        self.QkLoadLabel.setText('Qk: ' + str(self.Qk) + ' kN')
-        self.HkLoadLabel.setText('Hk: ' + str(self.Hk) + ' kN/m')
+        if index == -1:
+            self.qkLoadValue.setMinimum(self.qk)
+            self.QkLoadValue.setMinimum(self.Qk)
+            self.HkLoadValue.setMinimum(self.Hk)
+        else:
+            self.qkLoadValue.setMinimum(self.qk)
+            self.qkLoadValue.setMaximum(self.qk)
+            self.QkLoadValue.setMinimum(self.Qk)
+            self.QkLoadValue.setMaximum(self.Qk)
+            self.HkLoadValue.setMinimum(self.Hk)
+            self.HkLoadValue.setMaximum(self.Hk)
 
     def selectedMaterial(self):
         index = self.MaterialValue.currentIndex()
         if index == 1:
-            self.MaterialParam()
+            self.WoodParam()
 #        else:
 
-    def MaterialParam(self):
-        # Material parameter
+    def WoodParam(self):
+        # Wood Material parameter
         layoutMaterial = QtGui.QVBoxLayout()
         layoutMatParam = QtGui.QHBoxLayout()
         layoutMatParamCol1 = QtGui.QVBoxLayout()
@@ -200,19 +222,6 @@ class Sizing:
         layoutMatParamCol2.addWidget(self.GmeanLabel)
         layoutMatParamCol2.addWidget(self.rkLabel)
         layoutMatParamCol2.addWidget(self.rmeanLabel)
-
-#        layoutMaterial.addWidget(self.fmkLabel)
-#        layoutMaterial.addWidget(self.ft0kLabel)
-#        layoutMaterial.addWidget(self.ft90kLabel)
-#        layoutMaterial.addWidget(self.fc0kLabel)
-#        layoutMaterial.addWidget(self.fc90kLabel)
-#        layoutMaterial.addWidget(self.fvkLabel)
-#        layoutMaterial.addWidget(self.E0meanLabel)
-#        layoutMaterial.addWidget(self.E005Label)
-#        layoutMaterial.addWidget(self.E90meanLabel)
-#        layoutMaterial.addWidget(self.GmeanLabel)
-#        layoutMaterial.addWidget(self.rkLabel)
-#        layoutMaterial.addWidget(self.rmeanLabel)
 
         self.formMatParam = QtGui.QDialog()
         self.formMatParamCol1 = QtGui.QDialog()
