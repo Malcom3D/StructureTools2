@@ -218,11 +218,12 @@ class Sizing:
         self.formMatParamCol1 = QtGui.QDialog()
         self.formMatParamCol2 = QtGui.QDialog()
 
-        self.formMatParam.addWidget(self.formMatParamCol1)
-        self.formMatParam.addWidget(self.formMatParamCol2)
-
         self.formMatParamCol1.setLayout(layoutMatParamCol1)
         self.formMatParamCol2.setLayout(layoutMatParamCol2)
+
+        layoutMatParam.addWidget(self.formMatParamCol1)
+        layoutMatParam.addWidget(self.formMatParamCol2)
+
         self.formMatParam.setLayout(layoutMatParam)
 
         layoutMaterial.addWidget(self.StrengthLabel)
