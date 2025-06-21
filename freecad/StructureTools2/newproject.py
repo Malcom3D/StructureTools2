@@ -94,7 +94,7 @@ class NewProject:
         for i in range(0,len(self.NomLifeList[:])):
             self.NominalLifeValue.addItem(self.NomLifeList[i][0])
         self.NominalLifeValue.activated.connect(self.selectedNomLife)
-        self.NominalLifeValue.currentIndexChange.connect(self.selectedNomLife)
+        self.NominalLifeValue.currentIndexChanged.connect(self.selectedNomLife)
         self.VnLabel = QtGui.QLabel('Vn: 0 years')
 
         # mapped list ['description', Cu]
