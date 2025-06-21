@@ -52,7 +52,7 @@ class NTC2018:
         qb = 0
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
-        self.Qavr = (((qa+qb)/2)*cos(alpha)*l)
+        self.G2avr = (((qa+qb)/2)*cos(alpha)*l)
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         # Reaction Ra and Rb
@@ -75,4 +75,4 @@ class NTC2018:
         self.Mmax = Mmax
         # Normal stress
 
-        #print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'Qavr: ', self.Qavr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
+        #print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'G2avr: ', self.G2avr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)

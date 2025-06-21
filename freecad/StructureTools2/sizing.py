@@ -41,10 +41,8 @@ class Sizing:
                     self.Vn = object.Vn
                     self.Cu = object.Cu
 
-        print(self.Latitude, self.Longitude, self.Elevation, self.Vn, self.Cu)
-
         NTC2018Data = NTC2018(selection)
-        self.Qavr = NTC2018Data.Qavr
+        self.G2avr = NTC2018Data.G2avr
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         self.LoadParam()
 
@@ -56,9 +54,9 @@ class Sizing:
         self.G1LoadLabel = QtGui.QLabel('Structural load G1 [ntc2018 Tab. 3.1.I]')
         self.G1LoadValue = QtGui.QDoubleSpinBox()
         self.G1LoadValue.setMaximum(999999999999.99)
-        if self.Qavr:
-            self.G1LoadValue.setValue(self.Qavr)
-            self.G1LoadValue.setMinimum(self.Qavr)
+        if self.G1avr:
+            self.G1LoadValue.setValue(self.G1avr)
+            self.G1LoadValue.setMinimum(self.G1avr)
         else:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
@@ -66,7 +64,12 @@ class Sizing:
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
         self.G2LoadValue = QtGui.QDoubleSpinBox()
-        self.G2LoadValue.setValue(0)
+        self.G2LoadValue.setMaximum(999999999999.99)
+        if self.G2avr:
+            self.G2LoadValue.setValue(self.G2avr)
+            self.G2LoadValue.setMinimum(self.G2avr)
+        else:
+            self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
 
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
@@ -74,25 +77,36 @@ class Sizing:
         # - concentrated vertical loads Qk
         # - linear horizontal loads Hk
 
-        # mapped list ['description', qk, Qk, Hk]
-        self.Q1mapList = [list(map(set_type, ['', '0.0', '0.0', '0.0']))]
-        self.Q1mapList.append(list(map(set_type, ['Cat.A  Areas for domestic and residential activities', '2.00', '2.00', '1.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.A  Common stairs, balconies, landings', '4.00', '4.00', '2.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.B1 Offices not open to the public', '2.00', '2.00', '1.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.B2 Offices open to the public', '3.00', '2.00', '1.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.B  Common stairs, balconies and landings', '4.00', '4.00', '2.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.C1 Areas with tables', '3.00', '3.00', '1.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.C2 Areas with fixed seating', '4.00', '4.00', '2.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.C3 Environments without obstacles to the movement of people', '5.00', '5.00', '3.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.C4 Areas where physical activities may be carried out', '5.00', '5.00', '3.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.C5 Areas susceptible to large crowds', '5.00', '5.00', '3.00'])))
-        self.Q1mapList.append(list(map(set_type, ['Cat.C Common stairways, balconies and landings', '4.00', '4.00', '2.00'])))
+        # mapped list ['description', qk, Qk, Hk, psi0j, psij1, psi2j]
+        self.Q1mapList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
+        self.Q1mapList.append(list(map(set_type, ['Cat.A  Areas for domestic and residential activities', '2.00', '2.00', '1.00', '0.70', '0.50', '0.30'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.A  Common stairs, balconies, landings', '4.00', '4.00', '2.00', '0.70', '0.50', '0.30'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.B1 Offices not open to the public', '2.00', '2.00', '1.00', '0.70', '0.50', '0.30'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.B2 Offices open to the public', '3.00', '2.00', '1.00', '0.70', '0.50', '0.30'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.B  Common stairs, balconies and landings', '4.00', '4.00', '2.00', '0.70', '0.50', '0.30'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.C1 Areas with tables', '3.00', '3.00', '1.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.C2 Areas with fixed seating', '4.00', '4.00', '2.00', '0.70', '0.70', '0.60', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.C3 Environments without obstacles to the movement of people', '5.00', '5.00', '3.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.C4 Areas where physical activities may be carried out', '5.00', '5.00', '3.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.C5 Areas susceptible to large crowds', '5.00', '5.00', '3.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat.C Common stairways, balconies and landings', '4.00', '4.00', '2.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. D1 Shops', '4.00', '4.00', '2.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. D2 Shopping centers, markets, department stores', '5.00', '5.00', '2.00', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. D Common stairs, balconies and landings', '0.0', '0.0', '0.0', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. E1 Areas for accumulation of goods and related access areas', '6.00', '7.00', '1.00', '1.00', '0.90', '0.80'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. E2 Environments for industrial use', '0.0', '0.0', '0.0', '1.00', '0.90', '0.80'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. F Garages, traffic, parking and stopping areas of light vehicles (< 30 KN)', '2.50', '20.0', '1.0', '0.70', '0.70', '0.60'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. G Areas for traffic and parking of medium vehicles ( 30 kN <> 160 kN)', '5.00', '100.00', '1.00', '0.70', '0.50', '0.30'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. H Accessible roofs for maintenance and repair only', '0.50', '1.20', '1.0', '0.0', '0.0', '0.0'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. I Accessible roofs for environments of category of use between A and D', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0'])))
+        self.Q1mapList.append(list(map(set_type, ['Cat. K Roofs for special uses, such as equipment, heliports', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0'])))
 
         self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1 [ntc2018 Tab. 3.1.II]')
         self.Q1LoadValue = QtGui.QComboBox()
         for i in range(0,len(self.Q1mapList[:])):
             self.Q1LoadValue.addItem(self.Q1mapList[i][0])
         self.Q1LoadValue.activated.connect(self.q1load)
+        self.Q1LoadValue.currentIndexChanged.connect(self.q1load)
 
         self.qkLoadValue = QtGui.QDoubleSpinBox()
         self.qkLoadValue.setPrefix('qk: ')
@@ -119,6 +133,7 @@ class Sizing:
         self.MaterialValue.addItem('Reinforced concrete')
         self.MaterialValue.addItem('Steel')
         self.MaterialValue.activated.connect(self.selectedMaterial)
+        self.MaterialValue.currentIndexChanged.connect(self.selectedMaterial)
 
         layout.addWidget(self.G1LoadLabel)
         layout.addWidget(self.G1LoadValue)
@@ -194,6 +209,7 @@ class Sizing:
         for i in range(0,len(self.StrengthList[:])):
             self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
+        self.StrengthValue.currentIndexChanged.connect(self.selectedStrength)
 
         self.fmkLabel = QtGui.QLabel('fmk: 0 kN/mm²')
         self.ft0kLabel = QtGui.QLabel('ft0k: 0 kN/mm²')
