@@ -393,7 +393,7 @@ class CommandNewProject():
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
         obj = doc.addObject("Part::FeaturePython", "NewProject")
-        objSuport = NewProject(obj, selection)
+        objSuport = NewProject(obj)
         ViewProviderNewProject(obj.ViewObject)
 
         # what is done when the command is clicked
