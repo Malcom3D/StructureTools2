@@ -60,7 +60,7 @@ class Sizing:
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel('Structural load G1 [ntc2018 Tab. 3.1.I]')
         self.G1LoadValue = QtGui.QDoubleSpinBox()
-        self.G1LoadValue.setMaximum(99999999999999999999999999.99)
+        self.G1LoadValue.setMaximum(999999999999.99)
         if self.Qavr:
             self.G1LoadValue.setValue(self.Qavr)
             self.G1LoadValue.setMinimum(self.Qavr)
@@ -101,19 +101,19 @@ class Sizing:
 
         self.qkLoadValue = QtGui.QDoubleSpinBox()
         self.qkLoadValue.setPrefix('qk: ')
-        self.qkLoadValue.setSuffix('kN/m²')
+        self.qkLoadValue.setSuffix(' kN/m²')
         self.qkLoadValue.setMinimum(0)
         self.qkLoadValue.setMaximum(0)
 
         self.QkLoadValue = QtGui.QDoubleSpinBox()
         self.QkLoadValue.setPrefix('Qk: ')
-        self.QkLoadValue.setSuffix('kN')
+        self.QkLoadValue.setSuffix(' kN')
         self.QkLoadValue.setMinimum(0)
         self.QkLoadValue.setMaximum(0)
 
         self.HkLoadValue = QtGui.QDoubleSpinBox()
         self.HkLoadValue.setPrefix('Hk: ')
-        self.HkLoadValue.setSuffix('kN/m')
+        self.HkLoadValue.setSuffix(' kN/m')
         self.HkLoadValue.setMinimum(0)
         self.HkLoadValue.setMaximum(0)
 
@@ -144,10 +144,14 @@ class Sizing:
         self.qk = self.Q1mapList[index][1]
         self.Qk = self.Q1mapList[index][2]
         self.Hk = self.Q1mapList[index][3]
+        print(index)
         if index == -1:
             self.qkLoadValue.setMinimum(self.qk)
+            self.qkLoadValue.setMaximum(999999999999.99)
             self.QkLoadValue.setMinimum(self.Qk)
+            self.QkLoadValue.setMaximum(999999999999.99)
             self.HkLoadValue.setMinimum(self.Hk)
+            self.HkLoadValue.setMaximum(999999999999.99)
         else:
             self.qkLoadValue.setMinimum(self.qk)
             self.qkLoadValue.setMaximum(self.qk)
