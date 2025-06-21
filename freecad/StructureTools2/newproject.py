@@ -147,7 +147,15 @@ class NewProject:
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
         self.obj.Cu = self.Cu
-        self.obj.Vn.ReadOnly = 1
+        self.obj.setEditorMode("BuildingStandard",1)
+        self.obj.setEditorMode("Latitude",1)
+        self.obj.setEditorMode("Longitude",1)
+        self.obj.setEditorMode("Elevation",1)
+        self.obj.setEditorMode("NominalLife",1)
+        self.obj.setEditorMode("Vn",1)
+        self.obj.setEditorMode("UseClass",1)
+        self.obj.setEditorMode("Cu",1)
+
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
