@@ -129,8 +129,8 @@ class NewProject:
     # What is done when we click on the ok button.
     def accept(self):
         self.obj.BuildingStandard = self.StandardValue.currentText()
-        self.obj.Latitude = self.LatitudeValue.Value()
-        self.obj.Longitude = self.LongitudeValue.Value()
+        self.obj.Latitude = self.LatitudeValue.value()
+        self.obj.Longitude = self.LongitudeValue.value()
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
