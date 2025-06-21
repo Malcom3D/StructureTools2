@@ -396,7 +396,7 @@ class CommandNewProject():
 
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
-        FreeCADGui.Control.showDialog(objSupport)
+        FreeCADGui.Control.showDialog(objSuport)
 
         FreeCAD.ActiveDocument.recompute()        
         return
