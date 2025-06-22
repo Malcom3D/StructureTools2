@@ -287,13 +287,13 @@ class Sizing:
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
-        print(self.interaxis, self.length*self.interaxis)
-#        self.InfluenceAreaValue.setValue(self.length*self.interaxis)
+#        print(self.interaxis, self.length*self.interaxis)
+        self.InfluenceAreaValue.setValue(self.length*self.interaxis)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
-        print(A, A/self.length)
-#        self.BeamStepValue.setValue(A/self.length)
+#        print(A, A/self.length)
+        self.BeamStepValue.setValue(A/self.length)
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
