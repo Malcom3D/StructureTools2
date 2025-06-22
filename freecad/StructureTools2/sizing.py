@@ -305,6 +305,7 @@ class Sizing:
         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
 
         print(self.Fd, self.bmin, self.hmin)
+
 #############################################################################
         self.form.setLayout(layout)
 #############################################################################
