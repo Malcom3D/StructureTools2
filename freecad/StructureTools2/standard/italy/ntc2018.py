@@ -93,6 +93,7 @@ class NTC2018:
         return desres
 
     def PreDim(self, Fd, length, fmd, fvd):
+        q = Fd/length
         bmin = (3*q*fmd)/(4*fvd**2)
         hmin = (length*fvd)/(fmd)
         return [bmin, hmin]
