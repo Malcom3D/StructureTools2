@@ -172,13 +172,16 @@ class Sizing:
         layoutWoodParamCol1 = QtGui.QVBoxLayout()
         layoutWoodParamCol2 = QtGui.QVBoxLayout()
 
-        self.WoodTypeLabel = QtGui.QLabel('WoodType')
+        self.WoodTypeLabel = QtGui.QLabel('Wood Type')
         self.WoodTypeValue = QtGui.QComboBox()
+        text = ''
         for i in range(0,len(self.KmodList[:])):
-            self.WoodTypeValue.addItem(self.KmodList[i][0])
+            if self.KmodList[i][0] not in text:
+                text = self.KmodList[i][0]
+                self.WoodTypeValue.addItem(text)
         self.WoodTypeValue.activated.connect(self.selectedWoodType)
 
-        self.WoodClassLabel = QtGui.QLabel('WoodType')
+        self.WoodClassLabel = QtGui.QLabel('Wood Class')
         self.WoodClassValue = QtGui.QComboBox()
         self.WoodClassValue.activated.connect(self.selectedWoodClass)
 
@@ -220,7 +223,8 @@ class Sizing:
         self.WoodClassValue.clear()
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                self.WoodClassValue.addItem(self.KmodList[i][1], self.KmodList[i][2])
+                text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
+                self.WoodClassValue.addItem(text)
 
     def selectedWoodClass(self):
         woodclass = self.StrengthValue.currentIndex()
