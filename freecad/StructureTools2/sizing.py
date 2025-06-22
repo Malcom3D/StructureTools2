@@ -58,12 +58,12 @@ class Sizing:
         self.KdefList = self.constant.Kdef()
         self.KmodList = self.constant.Kmod()
 
-        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
+        self.form = QtGui.QDialog()
         self.LoadParam()
 
     def LoadParam(self):
         # ntc2018 Load Parameter QDialog
-        self.form[0].setWindowTitle('Load Parameter:')
+        self.form.setWindowTitle('Load Parameter:')
         layout = QtGui.QVBoxLayout()
         # Structural Load G1 [ntc2018 Tab. 3.1.I]
         self.G1LoadLabel = QtGui.QLabel('Structural load G1 [ntc2018 Tab. 3.1.I]')
