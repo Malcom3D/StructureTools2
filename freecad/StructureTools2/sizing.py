@@ -23,6 +23,8 @@ def Size(Standard, G1Load, G2Load, Q1Load):
 
 def set_type(s):
     # Takes a string, inferes the type and returns either a string, int or float.
+    if isinstance(s, int) or isinstance(s, float):
+        return s
     if s.isnumeric():
         return int(s)
     if s.count('.') == 1 and ''.join([c for c in s if c!='.']).isnumeric():
