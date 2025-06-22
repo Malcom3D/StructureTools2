@@ -48,13 +48,14 @@ class Sizing:
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
 
-        self.Q1mapList = Constant().Q1map()
-        self.psiList = Constant().psi(self.Elevation)
-        self.StrengthList = Constant().Strength()
-        self.GammaList = Constant().Gamma()
-        self.GammaMList = Constant().GammaM()
-        self.KdefList = Constant().Kdef()
-        self.KmodList = Constant().Kmod()
+        constant = Constant()
+        self.Q1mapList = constant.Q1map()
+        self.psiList = constant.psi(self.Elevation)
+        self.StrengthList = constant.Strength()
+        self.GammaList = constant.Gamma()
+        self.GammaMList = constant.GammaM()
+        self.KdefList = constant.Kdef()
+        self.KmodList = constant.Kmod()
 
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.LoadParam()
