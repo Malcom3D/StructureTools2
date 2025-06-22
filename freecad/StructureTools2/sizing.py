@@ -300,7 +300,7 @@ class Sizing:
         self.BendingLabel = QtGui.QLabel('Bending fmd: ' str(self.fmd))
         self.ShearLabel = QtGui.QLabel('Shear fvd: ' + str(self.fvd))
 
-        self.Fd = NTC2018Data.FuncComb(self.G1LoadValue.value(), GammaList[1][4], self.G2LoadValue.value(), GammaList[2][4], 0, GammaList[3][4]))
+        self.Fd = NTC2018Data.FuncComb(self.G1LoadValue.value(), GammaList[1][4], self.G2LoadValue.value(), GammaList[2][4], 0, GammaList[3][4])
 
         self.bmin, self.hmin = NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
 
