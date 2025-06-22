@@ -230,11 +230,11 @@ class Sizing:
         woodclass = self.WoodClassValue.currentIndex()
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                self.kmodPerm = KmodList[i][3]
-                self.kmodLongPerm = KmodList[i][4]
-                self.kmodMed = KmodList[i][5]
-                self.kmodShort = KmodList[i][6]
-                self.kmodInst = KmodList[i][7]
+                self.kmodPerm = self.KmodList[i][3]
+                self.kmodLongPerm = self.KmodList[i][4]
+                self.kmodMed = self.KmodList[i][5]
+                self.kmodShort = self.KmodList[i][6]
+                self.kmodInst = self.KmodList[i][7]
 
                 self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
                 self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
