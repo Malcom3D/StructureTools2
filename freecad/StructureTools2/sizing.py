@@ -292,9 +292,9 @@ class Sizing:
                     GammaM = self.GammaMList[i][2]
                     print(GammaM)
                     break
-        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, GammaM)
-        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, GammaM)
-        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, GammaM)
+        self.fc0d = self.NTC2018Data.DesignRes(kmodPerm, self.fc0k, GammaM)
+        self.fmd = self.NTC2018Data.DesignRes(kmodPerm, self.fmk, GammaM)
+        self.fvd = self.NTC2018Data.DesignRes(kmodPerm, self.fvk, GammaM)
 
         self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
         self.BendingLabel = QtGui.QLabel('Bending fmd: ', + str(self.fmd))
@@ -384,14 +384,14 @@ class Sizing:
             self.formMaterial.show()
 
             for i in range(0,len(self.KmodList[:])):
-                if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                    self.kmodPerm = self.KmodList[i][3]
+                if self.KmodList[i][0] in self.WoodTypeValue.currentText():
+                    kmodPerm = self.KmodList[i][3]
                     self.kmodLongPerm = self.KmodList[i][4]
                     self.kmodMed = self.KmodList[i][5]
                     self.kmodShort = self.KmodList[i][6]
                     self.kmodInst = self.KmodList[i][7]
 
-                    self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
+                    self.kmodPermLabel.setText('Permanent Kmod: ' + str(kmodPerm))
                     self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
                     self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
                     self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
