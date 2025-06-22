@@ -86,7 +86,7 @@ class Constant:
 
         return StrengthList
 
-    def Gamma():
+    def Gamma(self):
         # Gamma[G1, G2, Qi]: Partial coefficients for actions/loads or for the effect of actions/loads in SLU checks [ntc2018 Tab. 2.6.I]
         # mapped list ['LoadType', 'GammaFavourable EQU', 'GammaFavourable A1', 'GammaFavourable A2', 'GammaUnfavourable EQU', 'GammaUnfavourable A1', 'GammaUnfavourable A2',]
         GammaList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
