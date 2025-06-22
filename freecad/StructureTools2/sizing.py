@@ -277,7 +277,9 @@ class Sizing:
         self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
 
+        layoutPreSize.addWidget(self.BeamStepLabel)
         layoutPreSize.addWidget(self.BeamStepValue)
+        layoutPreSize.addWidget(self.InfluenceAreaLabel)
         layoutPreSize.addWidget(self.InfluenceAreaValue)
         self.form[2].setLayout(layoutPreSize)
 
@@ -291,11 +293,13 @@ class Sizing:
         self.interaxis = self.BeamStepValue.value()
         print(self.interaxis, self.length*self.interaxis)
         self.InfluenceAreaValue.setValue(self.length*self.interaxis)
+        self.G2LoadValue.setValue(self.G2avr+(self.g2*self.BeamStepValue.value()))
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
         print(A, A/self.length)
         self.BeamStepValue.setValue(A/self.length)
+        self.G2LoadValue.setValue(self.G2avr+(self.g2*self.BeamStepValue.value()))
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
