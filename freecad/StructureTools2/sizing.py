@@ -47,6 +47,7 @@ class Sizing:
         NTC2018Data = NTC2018(selection)
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
+        self.g2load = NTC2018Data.g2load
         self.length = NTC2018Data.length
 
         self.constant = Constant()
@@ -134,11 +135,6 @@ class Sizing:
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
         self.psiList = self.constant.psi(index, self.Elevation)
-        # ntc2018 3.1.3
-        for i in range(1,5):
-            if i-1 < self.G2avr < i:
-                self.g2load = 0.4*i
-                print(i, self.G2avr, self.g2load)
 
         # ntc2018 3.1.4
         self.qk = self.Q1mapList[index][1]
@@ -292,14 +288,12 @@ class Sizing:
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
-        print(self.interaxis, self.length*self.interaxis)
         self.InfluenceAreaValue.setValue(self.length*self.interaxis)
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
-        print(A, A/self.length)
         self.interaxis = A/self.length
         self.BeamStepValue.setValue(self.interaxis)
         G2tmp = self.G2avr+(self.g2load*self.interaxis)

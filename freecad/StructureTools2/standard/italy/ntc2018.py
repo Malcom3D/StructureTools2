@@ -48,33 +48,38 @@ class NTC2018:
         self.alpha = alpha
 
     def LoadPreCalc(self, object):
-        l = self.length
+        length = self.length
         alpha = self.alpha
         qa = 0
         qb = 0
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
-        self.G2avr = (((qa+qb)/2)*cos(alpha)*l)
+        self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
+        # ntc2018 3.1.3
+        for i in range(1,5):
+            if i-1 < self.G2avr < i:
+                self.g2load = 0.4*i
+
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         # Reaction Ra and Rb
-        Ra = (((2*qa+qb)*cos(alpha))*l)/6
-        Rb = (((qa+2*qb)*cos(alpha))*l)/6
+        Ra = (((2*qa+qb)*cos(alpha))*length)/6
+        Rb = (((qa+2*qb)*cos(alpha))*length)/6
         # Shear force
         Va = Ra
         Vb = -Rb
         if qa==qb:
             # Bending moment
             x0 = Rational(1, 2)
-            Mmax = (((qmax)*l**2)/2)
+            Mmax = (((qmax)*length**2)/2)
         else:
             z = qmin/qmax
             u = 0.577*sqrt(1+z+z**2)
-            x0 = ((u-1)*l)/(z-1)
+            x0 = ((u-1)*length)/(z-1)
             # Bending moment
-            Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*l**2)
+            Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*length**2)
         self.x0 = x0
         self.Mmax = Mmax
         # Normal stress
 
-        #print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'G2avr: ', self.G2avr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
+        #print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'G2avr: ', self.G2avr, 'length: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
