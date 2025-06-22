@@ -160,7 +160,7 @@ class Sizing:
 
         layoutWoodParamCol1.addWidget(self.kmodPermLabel)
         layoutWoodParamCol1.addWidget(self.kmodLongLabel)
-        layoutWoodParamCol2.addWidget(self.kmodMedLabel)
+        layoutWoodParamCol1.addWidget(self.kmodMedLabel)
 
         layoutWoodParamCol2.addWidget(self.kmodShortLabel)
         layoutWoodParamCol2.addWidget(self.kmodInstLabel)
@@ -321,8 +321,8 @@ class Sizing:
         index = self.MaterialValue.currentIndex()
         if index == 1:
             self.formWood.show()
-            self.formPreSizing.show()
-            self.formMaterial.show()
+            #self.formPreSizing.show()
+            #self.formMaterial.show()
             #self.formConcrete.hide()
             #self.formMaterial.hide()
             #self.formPreSizing.hide()
@@ -360,49 +360,58 @@ class Sizing:
                 self.WoodClassValue.addItem(text)
 
     def selectedWoodClass(self):
-        woodclass = self.WoodClassValue.currentIndex()
-        for i in range(0,len(self.KmodList[:])):
-            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                self.kmodPerm = self.KmodList[i][3]
-                self.kmodLongPerm = self.KmodList[i][4]
-                self.kmodMed = self.KmodList[i][5]
-                self.kmodShort = self.KmodList[i][6]
-                self.kmodInst = self.KmodList[i][7]
+        index = self.WoodClassValue.currentIndex()
+        if index == 0:
+            self.formMaterial.hide()
+        else:
+            self.formMaterial.show()
 
-                self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
-                self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
-                self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
-                self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
-                self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
+            for i in range(0,len(self.KmodList[:])):
+                if self.KmodList[i][0] == self.WoodTypeValue.currentText():
+                    self.kmodPerm = self.KmodList[i][3]
+                    self.kmodLongPerm = self.KmodList[i][4]
+                    self.kmodMed = self.KmodList[i][5]
+                    self.kmodShort = self.KmodList[i][6]
+                    self.kmodInst = self.KmodList[i][7]
+
+                    self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
+                    self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
+                    self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
+                    self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
+                    self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
 
     def selectedStrength(self):
         index = self.StrengthValue.currentIndex()
+        if index == 0:
+            self.formPreSizing.hide()
+        else:
+            self.formPreSizing.show()
 
-        self.fmk = self.StrengthList[index][1]
-        self.ft0k = self.StrengthList[index][2]
-        self.ft90k = self.StrengthList[index][3]
-        self.fc0k = self.StrengthList[index][4]
-        self.fc90k = self.StrengthList[index][5]
-        self.fvk = self.StrengthList[index][6]
-        self.E0mean = self.StrengthList[index][7]
-        self.E005 = self.StrengthList[index][8]
-        self.E90mean = self.StrengthList[index][9]
-        self.Gmean = self.StrengthList[index][10]
-        self.rk = self.StrengthList[index][11]
-        self.rmean = self.StrengthList[index][12]
+            self.fmk = self.StrengthList[index][1]
+            self.ft0k = self.StrengthList[index][2]
+            self.ft90k = self.StrengthList[index][3]
+            self.fc0k = self.StrengthList[index][4]
+            self.fc90k = self.StrengthList[index][5]
+            self.fvk = self.StrengthList[index][6]
+            self.E0mean = self.StrengthList[index][7]
+            self.E005 = self.StrengthList[index][8]
+            self.E90mean = self.StrengthList[index][9]
+            self.Gmean = self.StrengthList[index][10]
+            self.rk = self.StrengthList[index][11]
+            self.rmean = self.StrengthList[index][12]
 
-        self.fmkLabel.setText('fmk: ' + str(self.fmk) + ' N/mm²')
-        self.ft0kLabel.setText('ft0k: ' + str(self.ft0k) + ' N/mm²')
-        self.ft90kLabel.setText('ft90k: ' + str(self.ft90k) + ' N/mm²')
-        self.fc0kLabel.setText('fc0k: ' + str(self.fc0k) + ' N/mm²')
-        self.fc90kLabel.setText('fc90k: ' + str(self.fc90k) + ' N/mm²')
-        self.fvkLabel.setText('fvk: ' + str(self.fvk) + ' N/mm²')
-        self.E0meanLabel.setText('E0mean: ' + str(self.E0mean) + ' kN/mm²')
-        self.E005Label.setText('E005: ' + str(self.E005) + ' kN/mm²')
-        self.E90meanLabel.setText('E90mean: ' + str(self.E90mean) + ' kN/mm²')
-        self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
-        self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
-        self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
+            self.fmkLabel.setText('fmk: ' + str(self.fmk) + ' N/mm²')
+            self.ft0kLabel.setText('ft0k: ' + str(self.ft0k) + ' N/mm²')
+            self.ft90kLabel.setText('ft90k: ' + str(self.ft90k) + ' N/mm²')
+            self.fc0kLabel.setText('fc0k: ' + str(self.fc0k) + ' N/mm²')
+            self.fc90kLabel.setText('fc90k: ' + str(self.fc90k) + ' N/mm²')
+            self.fvkLabel.setText('fvk: ' + str(self.fvk) + ' N/mm²')
+            self.E0meanLabel.setText('E0mean: ' + str(self.E0mean) + ' kN/mm²')
+            self.E005Label.setText('E005: ' + str(self.E005) + ' kN/mm²')
+            self.E90meanLabel.setText('E90mean: ' + str(self.E90mean) + ' kN/mm²')
+            self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
+            self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
+            self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
