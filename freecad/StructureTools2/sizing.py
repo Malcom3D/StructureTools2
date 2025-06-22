@@ -348,16 +348,14 @@ class Sizing:
         self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
 
-
-        self.BeamStepLabel = QtGui.QLabel('fc0d: ' + NTC2018Data.)
-        self.BeamStepLabel = QtGui.QLabel('fmd: ' + NTC2018Data.)
-        self.BeamStepLabel = QtGui.QLabel('fvd: ' + NTC2018Data.)
-
         # def in ntc2018.py
         # Resistenze di calcolo: Sforzo Normale
         # Resistenze di calcolo: Flessione
         # Resistenze di calcolo: Taglio
         # Predimensionamento
+        #self.BeamStepLabel = QtGui.QLabel('fc0d: ' + NTC2018Data.)
+        #self.BeamStepLabel = QtGui.QLabel('fmd: ' + NTC2018Data.)
+        #self.BeamStepLabel = QtGui.QLabel('fvd: ' + NTC2018Data.)
 
         layoutPreSize.addWidget(self.BeamStepLabel)
         layoutPreSize.addWidget(self.BeamStepValue)
