@@ -286,6 +286,7 @@ class Sizing:
         layoutPreSize.addWidget(self.InfluenceAreaValue)
 
         self.formPreSizing.setLayout(layoutPreSize)
+        self.formPreSizing.hide()
         layout.addWidget(self.formPreSizing)
 
 #############################################################################
@@ -319,7 +320,9 @@ class Sizing:
     def selectedMaterial(self):
         index = self.MaterialValue.currentIndex()
         if index == 1:
-             pass
+            self.formWood.show()
+            self.formPreSizing.show()
+            self.formMaterial.show()
 #            self.WoodParam()
 #        elif index == 2:
 #            self.ConcreteParam()
