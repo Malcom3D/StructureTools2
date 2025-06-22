@@ -247,6 +247,7 @@ class Sizing:
         layoutMaterial.addWidget(self.formMatParam)
 
         self.formMaterial.setLayout(layoutMaterial)
+        self.formMaterial.hide()
         layout.addWidget(self.formMaterial)
 
 ###########################################################################
