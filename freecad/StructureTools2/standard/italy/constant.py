@@ -135,7 +135,7 @@ class Constant:
 
     def Kmod(self):
         # Kmod: Classe di servizio, Classe di durata del carico [ntc2018 Tab. 4.4.IV]
-        # mapped list ['WoodType', 'UNIENRef', 'ServiceClass', 'Permanent', 'Long', 'MediumShort', 'Instant', 'Kdef', 'GammaMa', 'GammaMb']
+        # mapped list ['WoodType', 'UNIENRef', 'ServiceClass', 'Permanent', 'Long', 'Medium', 'Short', 'Instant', 'Kdef', 'GammaMa', 'GammaMb']
         self.KmodList = [list(map(set_type, ['', '', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
         self.KmodList.append(list(map(set_type, ['Solid wood', 'UNI EN 14081-1', '1', '0.60', '0.70', '0.80', '0.90', '1.10', self.KdefList[1][2], self.GammaMList[1][1], self.GammaMList[1][2]])))
         self.KmodList.append(list(map(set_type, ['Solid wood', 'UNI EN 14081-1', '2', '0.60', '0.70', '0.80', '0.90', '1.10', self.KdefList[1][3], self.GammaMList[2][1], self.GammaMList[2][2]])))

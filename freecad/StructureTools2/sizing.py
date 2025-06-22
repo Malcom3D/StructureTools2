@@ -58,7 +58,7 @@ class Sizing:
         self.KdefList = self.constant.Kdef()
         self.KmodList = self.constant.Kmod()
 
-        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
+        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.LoadParam()
 
     def LoadParam(self):
@@ -167,10 +167,84 @@ class Sizing:
 
     def WoodParam(self):
         # Wood Material parameter
+        layoutWood = QtGui.QVBoxLayout()
+        layoutWoodParam = QtGui.QHBoxLayout()
+        layoutWoodParamCol1 = QtGui.QVBoxLayout()
+        layoutWoodParamCol2 = QtGui.QVBoxLayout()
+
+        self.WoodTypeLabel = QtGui.QLabel('WoodType')
+        self.WoodTypeValue = QtGui.QComboBox()
+        for i in range(0,len(self.KmodList[:])):
+            self.WoodTypeValue.addItem(self.KmodList[i][0])
+        self.WoodTypeValue.activated.connect(self.selectedWoodType)
+
+        self.WoodClassLabel = QtGui.QLabel('WoodType')
+        self.WoodClassValue = QtGui.QComboBox()
+        self.WoodClassValue.activated.connect(self.selectedWoodClass)
+
+        self.kmodPermLabel = QtGui.QLabel('Permanent Kmod: 0')
+        self.kmodLongLabel = QtGui.QLabel('Long Kmod: 0')
+        self.kmodMedLabel = QtGui.QLabel('Medium Kmod: 0')
+        self.kmodShortLabel = QtGui.QLabel('Short Kmod: 0')
+        self.kmodInstLabel = QtGui.QLabel('Instant Kmod: 0')
+
+        layoutWoodParamCol1.addWidget(self.kmodPermLabel)
+        layoutWoodParamCol1.addWidget(self.kmodLongLabel)
+        layoutWoodParamCol2.addWidget(self.kmodMedLabel)
+
+        layoutWoodParamCol2.addWidget(self.kmodShortLabel)
+        layoutWoodParamCol2.addWidget(self.kmodInstLabel)
+
+        self.formWoodParam = QtGui.QDialog()
+        self.formWoodParamCol1 = QtGui.QDialog()
+        self.formWoodParamCol2 = QtGui.QDialog()
+
+        self.formWoodParamCol1.setLayout(layoutWoodParamCol1)
+        self.formWoodParamCol2.setLayout(layoutWoodParamCol2)
+
+        layoutWoodParam.addWidget(self.formWoodParamCol1)
+        layoutWoodParam.addWidget(self.formWoodParamCol2)
+
+        self.formWoodParam.setLayout(layoutWoodParam)
+
+        layoutWood.addWidget(self.WoodTypeLabel)
+        layoutWood.addWidget(self.WoodTypeValue)
+        layoutWood.addWidget(self.WoodClassLabel)
+        layoutWood.addWidget(self.WoodClassValue)
+        layoutWood.addWidget(self.formWoodParam)
+
+        self.form[1].setLayout(layoutWood)
+        self.form[1].setWindowTitle('Wood material parameter')
+
+    def selectedWoodType():
+        self.WoodClassValue.clear()
+        for i in range(0,len(self.KmodList[:])):
+            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
+                self.WoodClassValue.addItem(self.KmodList[i][1], self.KmodList[i][2])
+
+    def selectedWoodClass():
+        woodclass = self.StrengthValue.currentIndex()
+        for i in range(0,len(self.KmodList[:])):
+            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
+                self.kmodPerm = KmodList[i][3]
+                self.kmodLongPerm = KmodList[i][4]
+                self.kmodMed = KmodList[i][5]
+                self.kmodShort = KmodList[i][6]
+                self.kmodInst = KmodList[i][7]
+
+                self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
+                self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
+                self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
+                self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
+                self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
+
+    def WoodStrength():
+        # Wood Strength parameter
         layoutMaterial = QtGui.QVBoxLayout()
         layoutMatParam = QtGui.QHBoxLayout()
         layoutMatParamCol1 = QtGui.QVBoxLayout()
         layoutMatParamCol2 = QtGui.QVBoxLayout()
+
         self.StrengthLabel = QtGui.QLabel('Strength class')
         self.StrengthValue = QtGui.QComboBox()
         for i in range(0,len(self.StrengthList[:])):
@@ -220,8 +294,8 @@ class Sizing:
         layoutMaterial.addWidget(self.StrengthValue)
         layoutMaterial.addWidget(self.formMatParam)
 
-        self.form[1].setLayout(layoutMaterial)
-        self.form[1].setWindowTitle('Material parameter')
+        self.form[2].setLayout(layoutMaterial)
+        self.form[2].setWindowTitle('Material parameter')
 
     def selectedStrength(self):
         index = self.StrengthValue.currentIndex()
@@ -256,7 +330,7 @@ class Sizing:
 
     def preSizing(self):
         # beams step and Area of influence
-        self.form[2].setWindowTitle('Load Parameter:')
+        self.form[3].setWindowTitle('Load Parameter:')
         layoutPreSize = QtGui.QVBoxLayout()
         self.BeamStepLabel = QtGui.QLabel('Beam step')
         self.BeamStepValue = QtGui.QDoubleSpinBox()
@@ -274,17 +348,22 @@ class Sizing:
         self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
 
-        layoutPreSize.addWidget(self.BeamStepLabel)
-        layoutPreSize.addWidget(self.BeamStepValue)
-        layoutPreSize.addWidget(self.InfluenceAreaLabel)
-        layoutPreSize.addWidget(self.InfluenceAreaValue)
-        self.form[2].setLayout(layoutPreSize)
+
+        self.BeamStepLabel = QtGui.QLabel('fc0d: ' + NTC2018Data.)
+        self.BeamStepLabel = QtGui.QLabel('fmd: ' + NTC2018Data.)
+        self.BeamStepLabel = QtGui.QLabel('fvd: ' + NTC2018Data.)
 
         # def in ntc2018.py
         # Resistenze di calcolo: Sforzo Normale
         # Resistenze di calcolo: Flessione
         # Resistenze di calcolo: Taglio
         # Predimensionamento
+
+        layoutPreSize.addWidget(self.BeamStepLabel)
+        layoutPreSize.addWidget(self.BeamStepValue)
+        layoutPreSize.addWidget(self.InfluenceAreaLabel)
+        layoutPreSize.addWidget(self.InfluenceAreaValue)
+        self.form[3].setLayout(layoutPreSize)
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
