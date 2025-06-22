@@ -374,7 +374,7 @@ class Sizing:
         self.Kmod.append(list(map(set_type, ['Fiberboard, semi-hardboard', 'UNI EN 622-3:2005, MBH.HLS1 or 2', '1', '0.20', '0.40', '0.60', '0.80', '1.10', self.Kdef[14][2], self.GammaM[4][1], self.GammaM[4][2]])))
         self.Kmod.append(list(map(set_type, ['Fiberboard, semi-hardboard', 'UNI EN 622-3:2005, MBH.HLS1 or 2', '2', '0.0', '0.0', '0.0', '0.45', '0.80', self.Kdef[14][3], self.GammaM[4][1], self.GammaM[4][2]])))
         self.Kmod.append(list(map(set_type, ['Fiberboard, dry-processed (MDF)', 'UNI EN 622-5:2010, MDF.LA, MDF.HLS', '1', '0.20', '0.40', '0.60', '0.80', '1.10', self.Kdef[15][2], self.GammaM[4][1], self.GammaM[4][2]])))
-        self.Kmod.append(list(map(set_type, ['Fiberboard, dry-processed (MDF)', 'UNI EN 622-5:2010, MDF.HLS', '2, '0.0', '0.0', '0.0', '0.45', '0.80', self.Kdef[16][3], self.GammaM[4][1], self.GammaM[4][2]])))
+        self.Kmod.append(list(map(set_type, ['Fiberboard, dry-processed (MDF)', 'UNI EN 622-5:2010, MDF.HLS', '2', '0.0', '0.0', '0.0', '0.45', '0.80', self.Kdef[16][3], self.GammaM[4][1], self.GammaM[4][2]])))
 
         self.preSizing()
 
