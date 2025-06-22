@@ -57,13 +57,12 @@ class NTC2018:
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
         self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
+        qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
+        qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         # ntc2018 3.1.3
         for i in range(1,6):
             if i-1 < self.G2avr <= i:
                 self.g2load = 0.4*i
-
-        qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
-        qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         # Reaction Ra and Rb
         Ra = (((2*qa+qb)*cos(alpha))*length)/6
         Rb = (((qa+2*qb)*cos(alpha))*length)/6
@@ -82,6 +81,18 @@ class NTC2018:
             Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*length**2)
         self.x0 = x0
         self.Mmax = Mmax
-        # Normal stress
 
         #print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'G2avr: ', self.G2avr, 'length: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
+
+    def FundComb(self, G1, GammaG1, G2, GammaG2, Q1, GammaQ1):
+        Fd = G1*GammaG1+G2*GammaG2+Q1*GammaQ1
+        return Fd
+        
+    def DesignRes(self, kmod, fxk, GammaM):
+        desres = (kmod*fxk)/GammaM
+        return dr
+
+    def PreDim(self, Fd, length, fmd, fvd):
+        bmin = (3*q*fmd)/(4*fvd**2)
+        hmin = (length*fvd)/(fmd)
+        return [bmin, hmin]
