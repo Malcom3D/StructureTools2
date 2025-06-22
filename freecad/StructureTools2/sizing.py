@@ -47,6 +47,7 @@ class Sizing:
         NTC2018Data = NTC2018(selection)
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
+        self.l = NTC2018Data.l
 
         self.constant = Constant()
         self.Q1mapList = self.constant.Q1map()
