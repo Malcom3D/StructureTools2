@@ -50,7 +50,6 @@ class Sizing:
 
         constant = Constant()
         self.Q1mapList = constant.Q1map()
-        self.psiList = constant.psi(self.Elevation)
         self.StrengthList = constant.Strength()
         self.GammaList = constant.Gamma()
         self.GammaMList = constant.GammaM()
@@ -133,6 +132,7 @@ class Sizing:
 
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
+        self.psiList = constant.psi(index, self.Elevation)
         # ntc2018 3.1.3
         for i in range(1,5):
             if i-1 < self.G2avr < i:

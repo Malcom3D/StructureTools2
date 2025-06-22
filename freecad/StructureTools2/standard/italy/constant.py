@@ -44,7 +44,7 @@ class Constant:
 
         return self.Q1mapList
 
-    def psi(self, Elevation):
+    def psi(self, index, Elevation):
         # Combination coefficients [ntc2018 Tab. 2.5.I]
         # Overloads by natural action type [ntc2018 Tab. 3.1.II]
         # Wind [ntc2018 3.3]
