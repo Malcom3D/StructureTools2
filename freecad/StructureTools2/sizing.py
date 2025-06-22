@@ -284,7 +284,7 @@ class Sizing:
         layoutPreSize.addWidget(self.InfluenceAreaValue)
 
         self.formPreSizing.setLayout(layoutPreSize)
-        layout.addWidget(self.formWood)
+        layout.addWidget(self.formPreSizing)
 
 #############################################################################
         self.form.setLayout(layout)
