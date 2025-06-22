@@ -227,7 +227,7 @@ class Sizing:
                 self.WoodClassValue.addItem(text)
 
     def selectedWoodClass(self):
-        woodclass = self.StrengthValue.currentIndex()
+        woodclass = self.WoodClassValue.currentIndex()
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
                 self.kmodPerm = KmodList[i][3]
