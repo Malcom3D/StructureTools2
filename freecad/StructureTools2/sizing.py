@@ -58,6 +58,18 @@ class Sizing:
         self.KdefList = self.constant.Kdef()
         self.KmodList = self.constant.Kmod()
 
+        self.fmk = 0
+        self.ft0k = 0
+        self.ft90k = 0
+        self.fc0k = 0
+        self.fc90k = 0
+        self.fvk = 0
+        self.E0mean = 0
+        self.E005 = 0
+        self.E90mean = 0
+        self.Gmean = 0
+        self.rk = 0
+        self.rmean = 0
 
         self.kmodPerm = 0
         self.kmodLongPerm = 0
