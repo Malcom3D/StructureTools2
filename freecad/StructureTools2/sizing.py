@@ -77,6 +77,8 @@ class Sizing:
         self.kmodShort = 0
         self.kmodInst = 0
 
+        self.GammaM = 0
+
         self.form = QtGui.QDialog()
         self.LoadParam()
 
@@ -308,12 +310,12 @@ class Sizing:
         for i in range(0,len(self.GammaMList[:])):
             for l in self.GammaMList[i][0]:
                 if l in self.WoodTypeValue.currentText().lower():
-                    GammaM = self.GammaMList[i][2]
-                    print(GammaM)
+                    self.GammaM = self.GammaMList[i][2]
+                    print(self.GammaM)
                     break
-        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, GammaM)
-        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, GammaM)
-        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, GammaM)
+        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
+        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
+        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
 
         self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
         self.BendingLabel = QtGui.QLabel('Bending fmd: ', + str(self.fmd))
