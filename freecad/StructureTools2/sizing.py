@@ -130,42 +130,8 @@ class Sizing:
         layout.addWidget(self.MaterialLabel)
         layout.addWidget(self.MaterialValue)
 
-        self.form[0].setLayout(layout)
+####################################################################
 
-    def q1load(self):
-        index = self.Q1LoadValue.currentIndex()
-        self.psiList = self.constant.psi(index, self.Elevation)
-
-        # ntc2018 3.1.4
-        self.qk = self.Q1mapList[index][1]
-        self.Qk = self.Q1mapList[index][2]
-        self.Hk = self.Q1mapList[index][3]
-        IndexCount = self.Q1LoadValue.count() -1
-        if index == IndexCount:
-            self.qkLoadValue.setMinimum(self.qk)
-            self.qkLoadValue.setMaximum(999999999999.99)
-            self.QkLoadValue.setMinimum(self.Qk)
-            self.QkLoadValue.setMaximum(999999999999.99)
-            self.HkLoadValue.setMinimum(self.Hk)
-            self.HkLoadValue.setMaximum(999999999999.99)
-        else:
-            self.qkLoadValue.setMinimum(self.qk)
-            self.qkLoadValue.setMaximum(self.qk)
-            self.QkLoadValue.setMinimum(self.Qk)
-            self.QkLoadValue.setMaximum(self.Qk)
-            self.HkLoadValue.setMinimum(self.Hk)
-            self.HkLoadValue.setMaximum(self.Hk)
-
-    def selectedMaterial(self):
-        index = self.MaterialValue.currentIndex()
-        if index == 1:
-            self.WoodParam()
-#        elif index == 2:
-#            self.ConcreteParam()
-#        elif index == 3:
-#            self.SteelParam()
-
-    def WoodParam(self):
         # Wood Material parameter
         layoutWood = QtGui.QVBoxLayout()
         layoutWoodParam = QtGui.QHBoxLayout()
@@ -199,6 +165,7 @@ class Sizing:
         layoutWoodParamCol2.addWidget(self.kmodShortLabel)
         layoutWoodParamCol2.addWidget(self.kmodInstLabel)
 
+        self.formWood = QtGui.QDialog()
         self.formWoodParam = QtGui.QDialog()
         self.formWoodParamCol1 = QtGui.QDialog()
         self.formWoodParamCol2 = QtGui.QDialog()
@@ -217,38 +184,13 @@ class Sizing:
         layoutWood.addWidget(self.WoodClassValue)
         layoutWood.addWidget(self.formWoodParam)
 
-        self.form[1].setLayout(layoutWood)
-        self.form[1].setWindowTitle('Wood material parameter')
+        self.formWood.setLayout(layoutWood)
+        layout.addWidget(self.formWood)
 
-    def selectedWoodType(self):
-        self.WoodClassValue.clear()
-        text = ''
-        self.WoodClassValue.addItem(text)
-        for i in range(0,len(self.KmodList[:])):
-            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
-                self.WoodClassValue.addItem(text)
+#####################################################################################
 
-    def selectedWoodClass(self):
-        woodclass = self.WoodClassValue.currentIndex()
-        for i in range(0,len(self.KmodList[:])):
-            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                self.kmodPerm = self.KmodList[i][3]
-                self.kmodLongPerm = self.KmodList[i][4]
-                self.kmodMed = self.KmodList[i][5]
-                self.kmodShort = self.KmodList[i][6]
-                self.kmodInst = self.KmodList[i][7]
-
-                self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
-                self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
-                self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
-                self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
-                self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
-
-        self.WoodStrength()
-
-    def WoodStrength(self):
         # Wood Strength parameter
+        self.formMaterial = QtGui.QDialog()
         layoutMaterial = QtGui.QVBoxLayout()
         layoutMatParam = QtGui.QHBoxLayout()
         layoutMatParamCol1 = QtGui.QVBoxLayout()
@@ -303,43 +245,13 @@ class Sizing:
         layoutMaterial.addWidget(self.StrengthValue)
         layoutMaterial.addWidget(self.formMatParam)
 
-        self.form[2].setLayout(layoutMaterial)
-        self.form[2].setWindowTitle('Material parameter')
+        self.formMaterial.setLayout(layoutMaterial)
+        layout.addWidget(self.formMaterial)
 
-    def selectedStrength(self):
-        index = self.StrengthValue.currentIndex()
+###########################################################################
 
-        self.fmk = self.StrengthList[index][1]
-        self.ft0k = self.StrengthList[index][2]
-        self.ft90k = self.StrengthList[index][3]
-        self.fc0k = self.StrengthList[index][4]
-        self.fc90k = self.StrengthList[index][5]
-        self.fvk = self.StrengthList[index][6]
-        self.E0mean = self.StrengthList[index][7]
-        self.E005 = self.StrengthList[index][8]
-        self.E90mean = self.StrengthList[index][9]
-        self.Gmean = self.StrengthList[index][10]
-        self.rk = self.StrengthList[index][11]
-        self.rmean = self.StrengthList[index][12]
-
-        self.fmkLabel.setText('fmk: ' + str(self.fmk) + ' N/mm²')
-        self.ft0kLabel.setText('ft0k: ' + str(self.ft0k) + ' N/mm²')
-        self.ft90kLabel.setText('ft90k: ' + str(self.ft90k) + ' N/mm²')
-        self.fc0kLabel.setText('fc0k: ' + str(self.fc0k) + ' N/mm²')
-        self.fc90kLabel.setText('fc90k: ' + str(self.fc90k) + ' N/mm²')
-        self.fvkLabel.setText('fvk: ' + str(self.fvk) + ' N/mm²')
-        self.E0meanLabel.setText('E0mean: ' + str(self.E0mean) + ' kN/mm²')
-        self.E005Label.setText('E005: ' + str(self.E005) + ' kN/mm²')
-        self.E90meanLabel.setText('E90mean: ' + str(self.E90mean) + ' kN/mm²')
-        self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
-        self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
-        self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
-
-        self.preSizing()
-
-    def preSizing(self):
         # beams step and Area of influence
-        self.form[3].setWindowTitle('Load Parameter:')
+        self.formPreSizing = QtGui.QDialog()
         layoutPreSize = QtGui.QVBoxLayout()
         self.BeamStepLabel = QtGui.QLabel('Beam step')
         self.BeamStepValue = QtGui.QDoubleSpinBox()
@@ -370,7 +282,101 @@ class Sizing:
         layoutPreSize.addWidget(self.BeamStepValue)
         layoutPreSize.addWidget(self.InfluenceAreaLabel)
         layoutPreSize.addWidget(self.InfluenceAreaValue)
-        self.form[3].setLayout(layoutPreSize)
+
+        self.formPreSizing.setLayout(layoutPreSize)
+        layout.addWidget(self.formWood)
+
+#############################################################################
+        self.form.setLayout(layout)
+#############################################################################
+
+    def q1load(self):
+        index = self.Q1LoadValue.currentIndex()
+        self.psiList = self.constant.psi(index, self.Elevation)
+
+        # ntc2018 3.1.4
+        self.qk = self.Q1mapList[index][1]
+        self.Qk = self.Q1mapList[index][2]
+        self.Hk = self.Q1mapList[index][3]
+        IndexCount = self.Q1LoadValue.count() -1
+        if index == IndexCount:
+            self.qkLoadValue.setMinimum(self.qk)
+            self.qkLoadValue.setMaximum(999999999999.99)
+            self.QkLoadValue.setMinimum(self.Qk)
+            self.QkLoadValue.setMaximum(999999999999.99)
+            self.HkLoadValue.setMinimum(self.Hk)
+            self.HkLoadValue.setMaximum(999999999999.99)
+        else:
+            self.qkLoadValue.setMinimum(self.qk)
+            self.qkLoadValue.setMaximum(self.qk)
+            self.QkLoadValue.setMinimum(self.Qk)
+            self.QkLoadValue.setMaximum(self.Qk)
+            self.HkLoadValue.setMinimum(self.Hk)
+            self.HkLoadValue.setMaximum(self.Hk)
+
+    def selectedMaterial(self):
+        index = self.MaterialValue.currentIndex()
+        if index == 1:
+             pass
+#            self.WoodParam()
+#        elif index == 2:
+#            self.ConcreteParam()
+#        elif index == 3:
+#            self.SteelParam()
+
+    def selectedWoodType(self):
+        self.WoodClassValue.clear()
+        text = ''
+        self.WoodClassValue.addItem(text)
+        for i in range(0,len(self.KmodList[:])):
+            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
+                text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
+                self.WoodClassValue.addItem(text)
+
+    def selectedWoodClass(self):
+        woodclass = self.WoodClassValue.currentIndex()
+        for i in range(0,len(self.KmodList[:])):
+            if self.KmodList[i][0] == self.WoodTypeValue.currentText():
+                self.kmodPerm = self.KmodList[i][3]
+                self.kmodLongPerm = self.KmodList[i][4]
+                self.kmodMed = self.KmodList[i][5]
+                self.kmodShort = self.KmodList[i][6]
+                self.kmodInst = self.KmodList[i][7]
+
+                self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
+                self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
+                self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
+                self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
+                self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
+
+    def selectedStrength(self):
+        index = self.StrengthValue.currentIndex()
+
+        self.fmk = self.StrengthList[index][1]
+        self.ft0k = self.StrengthList[index][2]
+        self.ft90k = self.StrengthList[index][3]
+        self.fc0k = self.StrengthList[index][4]
+        self.fc90k = self.StrengthList[index][5]
+        self.fvk = self.StrengthList[index][6]
+        self.E0mean = self.StrengthList[index][7]
+        self.E005 = self.StrengthList[index][8]
+        self.E90mean = self.StrengthList[index][9]
+        self.Gmean = self.StrengthList[index][10]
+        self.rk = self.StrengthList[index][11]
+        self.rmean = self.StrengthList[index][12]
+
+        self.fmkLabel.setText('fmk: ' + str(self.fmk) + ' N/mm²')
+        self.ft0kLabel.setText('ft0k: ' + str(self.ft0k) + ' N/mm²')
+        self.ft90kLabel.setText('ft90k: ' + str(self.ft90k) + ' N/mm²')
+        self.fc0kLabel.setText('fc0k: ' + str(self.fc0k) + ' N/mm²')
+        self.fc90kLabel.setText('fc90k: ' + str(self.fc90k) + ' N/mm²')
+        self.fvkLabel.setText('fvk: ' + str(self.fvk) + ' N/mm²')
+        self.E0meanLabel.setText('E0mean: ' + str(self.E0mean) + ' kN/mm²')
+        self.E005Label.setText('E005: ' + str(self.E005) + ' kN/mm²')
+        self.E90meanLabel.setText('E90mean: ' + str(self.E90mean) + ' kN/mm²')
+        self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
+        self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
+        self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
