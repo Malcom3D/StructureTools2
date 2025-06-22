@@ -309,8 +309,8 @@ class Sizing:
         layoutDesRes = QtGui.QVBoxLayout()
         for i in range(0,len(self.GammaMList[:])):
             print('entro for' + str(i))
-            for l in self.GammaMList[i][0]:
-                print('entro for 2' + str(l) + self.WoodTypeValue.currentText().lower())
+            for l in self.GammaMList[i][0].split():
+                print('entro for 2 ' + str(l) + self.WoodTypeValue.currentText().lower())
                 if l in self.WoodTypeValue.currentText().lower():
                     print('entro if' + str(l))
                     self.GammaM = self.GammaMList[i][2]
