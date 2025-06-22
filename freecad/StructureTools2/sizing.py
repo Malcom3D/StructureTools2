@@ -286,7 +286,7 @@ class Sizing:
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
-        print(i, self.l*self.interaxis)
+        print(self.interaxis, self.l*self.interaxis)
 #        self.InfluenceAreaValue.setValue(self.l*self.interaxis)
 
     def selectedInfluenceArea(self):
