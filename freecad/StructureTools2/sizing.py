@@ -216,13 +216,13 @@ class Sizing:
         self.form[1].setLayout(layoutWood)
         self.form[1].setWindowTitle('Wood material parameter')
 
-    def selectedWoodType():
+    def selectedWoodType(self):
         self.WoodClassValue.clear()
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
                 self.WoodClassValue.addItem(self.KmodList[i][1], self.KmodList[i][2])
 
-    def selectedWoodClass():
+    def selectedWoodClass(self):
         woodclass = self.StrengthValue.currentIndex()
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
@@ -238,7 +238,7 @@ class Sizing:
                 self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
                 self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
 
-    def WoodStrength():
+    def WoodStrength(self):
         # Wood Strength parameter
         layoutMaterial = QtGui.QVBoxLayout()
         layoutMatParam = QtGui.QHBoxLayout()
