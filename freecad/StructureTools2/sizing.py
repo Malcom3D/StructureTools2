@@ -77,7 +77,7 @@ class Sizing:
         self.kmodShort = 0
         self.kmodInst = 0
 
-        self.GammaM = 0
+        self.GammaM = 1
 
         self.form = QtGui.QDialog()
         self.LoadParam()
@@ -308,8 +308,11 @@ class Sizing:
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
         for i in range(0,len(self.GammaMList[:])):
+            print('entro for' + str(i))
             for l in self.GammaMList[i][0]:
+                print('entro for 2' + str(l) + self.WoodTypeValue.currentText().lower())
                 if l in self.WoodTypeValue.currentText().lower():
+                    print('entro if' + str(l))
                     self.GammaM = self.GammaMList[i][2]
                     print(self.GammaM)
                     break
