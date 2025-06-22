@@ -90,7 +90,7 @@ class NTC2018:
         
     def DesignRes(self, kmod, fxk, GammaM):
         desres = (kmod*fxk)/GammaM
-        return dr
+        return desres
 
     def PreDim(self, Fd, length, fmd, fvd):
         bmin = (3*q*fmd)/(4*fvd**2)
