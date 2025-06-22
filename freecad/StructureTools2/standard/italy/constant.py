@@ -10,7 +10,7 @@ def set_type(s):
 
 class Constant:
     def __init__(self):
-        
+        pass
 
     def Q1map(self):
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
