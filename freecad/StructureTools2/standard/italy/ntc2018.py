@@ -2,8 +2,8 @@
 #from PySide import QtWidgets, QtCore, QtGui
 #import subprocess
 
-#from sympy import *
-#init_printing()
+from sympy import *
+init_printing()
 
 #ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
