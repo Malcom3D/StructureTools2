@@ -1,6 +1,7 @@
 #import FreeCAD, App, FreeCADGui, Part, os, math
 #from PySide import QtWidgets, QtCore, QtGui
 #import subprocess
+import os
 
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
