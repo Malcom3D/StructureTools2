@@ -417,7 +417,7 @@ class Sizing:
                     self.kmodShort = self.KmodList[i][6]
                     self.kmodInst = self.KmodList[i][7]
 
-                    self.kmodPermLabel.setText('Permanent Kmod: ' + str(kmodPerm))
+                    self.kmodPermLabel.setText('Permanent Kmod: ' + str(self.kmodPerm))
                     self.kmodLongLabel.setText('Long Kmod: ' + str(self.kmodLongPerm))
                     self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
                     self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
