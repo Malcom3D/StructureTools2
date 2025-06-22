@@ -137,7 +137,8 @@ class Sizing:
         # ntc2018 3.1.3
         for i in range(1,5):
             if i-1 < self.G2avr < i:
-                self.g2 = 0.4*i
+                self.g2load = 0.4*i
+                print(i, self.G2avr, self.g2load)
 
         # ntc2018 3.1.4
         self.qk = self.Q1mapList[index][1]
@@ -293,13 +294,16 @@ class Sizing:
         self.interaxis = self.BeamStepValue.value()
         print(self.interaxis, self.length*self.interaxis)
         self.InfluenceAreaValue.setValue(self.length*self.interaxis)
-        self.G2LoadValue.setValue(self.G2avr+(self.g2*self.BeamStepValue.value()))
+        G2tmp = self.G2avr+(self.g2load*self.interaxis)
+        self.G2LoadValue.setValue(G2tmp)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
         print(A, A/self.length)
-        self.BeamStepValue.setValue(A/self.length)
-        self.G2LoadValue.setValue(self.G2avr+(self.g2*self.BeamStepValue.value()))
+        self.interaxis = A/self.length
+        self.BeamStepValue.setValue(self.interaxis)
+        G2tmp = self.G2avr+(self.g2load*self.interaxis)
+        self.G2LoadValue.setValue(G2tmp)
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
