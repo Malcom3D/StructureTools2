@@ -285,9 +285,9 @@ class Sizing:
         # Predimensionamento
 
     def selectedBeamStep(self):
-        self.i = self.BeamStepValue.value()
-        print(i, self.l*i)
-#        self.InfluenceAreaValue.setValue(self.l*i)
+        self.interaxis = self.BeamStepValue.value()
+        print(i, self.l*self.interaxis)
+#        self.InfluenceAreaValue.setValue(self.l*self.interaxis)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
