@@ -323,11 +323,20 @@ class Sizing:
             self.formWood.show()
             self.formPreSizing.show()
             self.formMaterial.show()
-#            self.WoodParam()
-#        elif index == 2:
-#            self.ConcreteParam()
-#        elif index == 3:
-#            self.SteelParam()
+        elif index == 2:
+            self.formConcrete.hide()
+            self.formMaterial.hide()
+            self.formPreSizing.hide()
+            #self.formWood.show()
+            #self.formPreSizing.show()
+            #self.formMaterial.show()
+        elif index == 3:
+            self.formSteel.hide()
+            self.formMaterial.hide()
+            self.formPreSizing.hide()
+            #self.formWood.show()
+            #self.formPreSizing.show()
+            #self.formMaterial.show()
 
     def selectedWoodType(self):
         self.WoodClassValue.clear()
