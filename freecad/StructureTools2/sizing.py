@@ -44,11 +44,11 @@ class Sizing:
                     self.Vn = object.Vn
                     self.Cu = object.Cu
 
-        NTC2018Data = NTC2018(selection)
-        self.G1avr = NTC2018Data.G1avr
-        self.G2avr = NTC2018Data.G2avr
-        self.g2load = NTC2018Data.g2load
-        self.length = NTC2018Data.length
+        self.NTC2018Data = NTC2018(selection)
+        self.G1avr = self.NTC2018Data.G1avr
+        self.G2avr = self.NTC2018Data.G2avr
+        self.g2load = self.NTC2018Data.g2load
+        self.length = self.NTC2018Data.length
 
         self.constant = Constant()
         self.Q1mapList = self.constant.Q1map()
@@ -292,17 +292,17 @@ class Sizing:
                     GammaM = self.GammaMList[i][2]
                     print(GammaM)
                     break
-        self.fc0d = NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, GammaM)
-        self.fmd = NTC2018Data.DesignRes(self.kmodPerm, self.fmk, GammaM)
-        self.fvd = NTC2018Data.DesignRes(self.kmodPerm, self.fvk, GammaM)
+        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, GammaM)
+        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, GammaM)
+        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, GammaM)
 
         self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
         self.BendingLabel = QtGui.QLabel('Bending fmd: ', + str(self.fmd))
         self.ShearLabel = QtGui.QLabel('Shear fvd: ' + str(self.fvd))
 
-        self.Fd = NTC2018Data.FuncComb(self.G1LoadValue.value(), GammaList[1][4], self.G2LoadValue.value(), GammaList[2][4], 0, GammaList[3][4])
+        self.Fd = self.NTC2018Data.FuncComb(self.G1LoadValue.value(), GammaList[1][4], self.G2LoadValue.value(), GammaList[2][4], 0, GammaList[3][4])
 
-        self.bmin, self.hmin = NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
+        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
 
         print(self.Fd, self.bmin, self.hmin)
 #############################################################################
