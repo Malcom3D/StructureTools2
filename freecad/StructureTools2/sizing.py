@@ -175,6 +175,7 @@ class Sizing:
         self.WoodTypeLabel = QtGui.QLabel('Wood Type')
         self.WoodTypeValue = QtGui.QComboBox()
         text = ''
+        self.WoodTypeValue.addItem(text)
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] not in text:
                 text = self.KmodList[i][0]
@@ -221,6 +222,8 @@ class Sizing:
 
     def selectedWoodType(self):
         self.WoodClassValue.clear()
+        text = ''
+        self.WoodClassValue.addItem(text)
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
                 text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
@@ -241,6 +244,8 @@ class Sizing:
                 self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
                 self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
                 self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
+
+        self.WoodStrength()
 
     def WoodStrength(self):
         # Wood Strength parameter
