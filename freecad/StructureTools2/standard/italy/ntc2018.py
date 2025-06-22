@@ -58,12 +58,9 @@ class NTC2018:
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
         self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
         # ntc2018 3.1.3
-        for i in range(1,5):
-            print('entro for')
-            if (i-1) < self.G2avr < i:
-                print('entro if')
+        for i in range(1,6):
+            if i-1 < self.G2avr <= i:
                 self.g2load = 0.4*i
-                print(self.g2load)
 
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
