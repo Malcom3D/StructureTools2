@@ -48,7 +48,6 @@ class Sizing:
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
 
-
         self.Q1mapList = Constant.Q1map()
         self.psiList = Constant.psi(self.Elevation)
         self.StrengthList = Constant.Strength()
@@ -257,13 +256,43 @@ class Sizing:
         self.preSizing()
 
     def preSizing(self):
-        print('preSinzing')
-        # inserimento interasse (beams step) [area d'influenza]
+        # beams step and Area of influence
+        self.form[2].setWindowTitle('Load Parameter:')
+        layoutPreSize = QtGui.QVBoxLayout()
+        self.BeamStepLabel = QtGui.QLabel('Beam step')
+        self.BeamStepValue = QtGui.QDoubleSpinBox()
+        self.BeamStepValue.setDecimals(4)
+        self.BeamStepValue.setSuffix(' m')
+        self.BeamStepValue.setMaximum(999999999999.99)
+        self.BeamStepValue.setValue(1)
+        self.BeamStepValue.activated.connect(self.selectedBeamStep)
+
+        self.InfluenceAreaLabel = QtGui.QLabel('Area of influence')
+        self.InfluenceAreaValue = QtGui.QDoubleSpinBox()
+        self.InfluenceAreaValue.setDecimals(4)
+        self.InfluenceAreaValue.setSuffix(' m²')
+        self.InfluenceAreaValue.setMaximum(999999999999.99)
+        self.InfluenceAreaValue.setValue(self.l*self.BeamStepValue.value())
+        self.InfluenceAreaValue.activated.connect(self.selectedInfluenceArea)
+
+        self.form[2].setLayout(layoutPreSize)
+
         # def in ntc2018.py
         # Resistenze di calcolo: Sforzo Normale
         # Resistenze di calcolo: Flessione
         # Resistenze di calcolo: Taglio
         # Predimensionamento
+
+    def selectedBeamStep(self):
+        self.i = self.BeamStepValue.value()
+        print(i, self.l*i)
+#        self.InfluenceAreaValue.setValue(self.l*i)
+
+    def selectedInfluenceArea(self):
+        A = self.InfluenceAreaValue.value()
+        print(A, A/self.l)
+#        self.BeamStepValue.setValue(A/self.l)
+
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.

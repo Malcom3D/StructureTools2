@@ -10,7 +10,7 @@ def set_type(s):
 
 class Constant:
 
-    def Q1map():
+    def Q1map(self):
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
         # - uniformly distributed vertical loads qk
         # - concentrated vertical loads Qk
@@ -94,7 +94,7 @@ class Constant:
 
         return GammaList
 
-    def GammaM():
+    def GammaM(self):
         # Gamma[mA, mB]: Coefficienti parziali per tipo di materiale [ntc2018 Tab. 4.4.III]
         # mapped list ['WoodType', 'GammaMa', 'GammaMb']
         self.GammaMList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
@@ -108,7 +108,7 @@ class Constant:
 
         return self.GammaMList
 
-    def Kdef():
+    def Kdef(self):
         # Kdef: Classe di servizio [ntc2018 Tab. 4.4.V]
         # mapped list ['WoodType', 'UNIENRef', 'ServiceClass1', 'ServiceClass2', 'ServiceClass3']
         self.KdefList = [list(map(set_type, ['', '', '0.0', '0.0', '0.0']))]
@@ -131,7 +131,7 @@ class Constant:
 
         return self.KdefList
 
-    def Kmod():
+    def Kmod(self):
         # Kmod: Classe di servizio, Classe di durata del carico [ntc2018 Tab. 4.4.IV]
         # mapped list ['WoodType', 'UNIENRef', 'ServiceClass', 'Permanent', 'Long', 'MediumShort', 'Instant', 'Kdef', 'GammaMa', 'GammaMb']
         self.KmodList = [list(map(set_type, ['', '', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
