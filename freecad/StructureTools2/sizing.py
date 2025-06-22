@@ -47,7 +47,7 @@ class Sizing:
         NTC2018Data = NTC2018(selection)
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
-        self.l = NTC2018Data.l
+        self.length = NTC2018Data.length
 
         self.constant = Constant()
         self.Q1mapList = self.constant.Q1map()
@@ -274,7 +274,7 @@ class Sizing:
         self.InfluenceAreaValue.setDecimals(4)
         self.InfluenceAreaValue.setSuffix(' m²')
         self.InfluenceAreaValue.setMaximum(999999999999.99)
-        self.InfluenceAreaValue.setValue(self.l*self.BeamStepValue.value())
+        self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea())
 
         self.form[2].setLayout(layoutPreSize)
@@ -287,13 +287,13 @@ class Sizing:
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
-        print(self.interaxis, self.l*self.interaxis)
-#        self.InfluenceAreaValue.setValue(self.l*self.interaxis)
+        print(self.interaxis, self.length*self.interaxis)
+#        self.InfluenceAreaValue.setValue(self.length*self.interaxis)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
-        print(A, A/self.l)
-#        self.BeamStepValue.setValue(A/self.l)
+        print(A, A/self.length)
+#        self.BeamStepValue.setValue(A/self.length)
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels

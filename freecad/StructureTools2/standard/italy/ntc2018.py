@@ -38,7 +38,7 @@ class NTC2018:
         x2 = round(Owner.End.x, 2)
         y2 = round(Owner.End.y, 2)
         z2 = round(Owner.End.z, 2)
-        self.l = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
+        self.length = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
 
         # if is't parallel to xy-plane
         dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
@@ -48,7 +48,7 @@ class NTC2018:
         self.alpha = alpha
 
     def LoadPreCalc(self, object):
-        l = self.l
+        l = self.length
         alpha = self.alpha
         qa = 0
         qb = 0
