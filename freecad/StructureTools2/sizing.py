@@ -20,7 +20,7 @@ def show_error_message(msg):
 
 def Size(Standard, G1Load, G2Load, Q1Load):
     doc = FreeCAD.ActiveDocument
-    print(Standard, G1Load, G2Load, Q1Load)
+    #print(Standard, G1Load, G2Load, Q1Load)
 
 def set_type(s):
     # Takes a string, inferes the type and returns either a string, int or float.
@@ -289,12 +289,12 @@ class Sizing:
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
-#        print(self.interaxis, self.length*self.interaxis)
+        print(self.interaxis, self.length*self.interaxis)
         self.InfluenceAreaValue.setValue(self.length*self.interaxis)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
-#        print(A, A/self.length)
+        print(A, A/self.length)
         self.BeamStepValue.setValue(A/self.length)
 
 
