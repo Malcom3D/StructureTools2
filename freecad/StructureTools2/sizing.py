@@ -181,8 +181,12 @@ class Sizing:
         # Snow [ntc2018 3.4]
         # Temperature [ntc2018 3.5]
         # mapped list ['description', psi0j, psij1, psi2j]
+        Q1psi0j = "'" + self.Q1mapList[index][4] + "'"
+        Q1psi1j = "'" + self.Q1mapList[index][5] + "'"
+        Q1psi2j = "'" + self.Q1mapList[index][6] + "'"
         self.psiList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
-        self.psiList.append(list(map(set_type, ['Q1', self.Q1mapList[index][4], self.Q1mapList[index][5], self.Q1mapList[index][6]])))
+#        self.psiList.append(list(map(set_type, ['Q1', self.Q1mapList[index][4], self.Q1mapList[index][5], self.Q1mapList[index][6]])))
+        self.psiList.append(list(map(set_type, ['Q1', Q1psi0j, Q1psi1j, Q1psi2j])))
         self.psiList.append(list(map(set_type, ['Wind', '0.6', '0.2', '0.0']])))
         self.psiList.append(list(map(set_type, ['Temperature', '0.6', '0.5', '0.0']])))
         if self.Elevation < 1000:
