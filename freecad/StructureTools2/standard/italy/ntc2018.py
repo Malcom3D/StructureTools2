@@ -1,11 +1,11 @@
-import FreeCAD, App, FreeCADGui, Part, os, math
-from PySide import QtWidgets, QtCore, QtGui
-import subprocess
+#import FreeCAD, App, FreeCADGui, Part, os, math
+#from PySide import QtWidgets, QtCore, QtGui
+#import subprocess
 
-from sympy import *
-init_printing()
+#from sympy import *
+#init_printing()
 
-ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
+#ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
     msg_box = QtWidgets.QMessageBox()
@@ -77,4 +77,4 @@ class NTC2018:
         self.Mmax = Mmax
         # Normal stress
 
-        #print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'G2avr: ', self.G2avr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
+        print('qa: ', qa, 'qb: ', qb, 'Ra: ', Ra, 'Rb: ', Rb, 'Va: ', Va, 'Vb: ', Vb, 'Mmax: ', Mmax, 'x0: ', x0, 'alpha: ', alpha, 'G2avr: ', self.G2avr, 'l: ', l, 'u: ', u, 'z: ', z, 'qmin: ', qmin, 'qmax: ', qmax)
