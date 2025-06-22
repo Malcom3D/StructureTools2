@@ -9,6 +9,8 @@ def set_type(s):
     return s
 
 class Constant:
+    def __init__(self):
+        
 
     def Q1map(self):
         # Overloads by intended use [ntc2018 Tab. 3.1.II]
