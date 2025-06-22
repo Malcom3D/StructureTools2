@@ -267,7 +267,7 @@ class Sizing:
         self.BeamStepValue.setSuffix(' m')
         self.BeamStepValue.setMaximum(999999999999.99)
         self.BeamStepValue.setValue(1)
-        self.BeamStepValue.valueChanged.connect(self.selectedBeamStep())
+        self.BeamStepValue.valueChanged.connect(self.selectedBeamStep)
 
         self.InfluenceAreaLabel = QtGui.QLabel('Area of influence')
         self.InfluenceAreaValue = QtGui.QDoubleSpinBox()
@@ -275,8 +275,10 @@ class Sizing:
         self.InfluenceAreaValue.setSuffix(' m²')
         self.InfluenceAreaValue.setMaximum(999999999999.99)
         self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
-        self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea())
+        self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
 
+        layoutPreSize.addWidget(self.BeamStepValue)
+        layoutPreSize.addWidget(self.InfluenceAreaValue)
         self.form[2].setLayout(layoutPreSize)
 
         # def in ntc2018.py
