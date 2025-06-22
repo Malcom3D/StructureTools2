@@ -301,20 +301,16 @@ class Sizing:
         layoutPreSize.addWidget(self.InfluenceAreaValue)
 
         self.formPreSizing.setLayout(layoutPreSize)
-        self.formPreSizing.hide()
+#        self.formPreSizing.hide()
         layout.addWidget(self.formPreSizing)
 
         # Design resistances [ fc0d, fmd, fvd]
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
         for i in range(0,len(self.GammaMList[:])):
-            print('entro for' + str(i))
             for l in self.GammaMList[i][0].split():
-                print('entro for 2 ' + str(l) + self.WoodTypeValue.currentText().lower())
                 if l in self.WoodTypeValue.currentText().lower():
-                    print('entro if' + str(l))
                     self.GammaM = self.GammaMList[i][2]
-                    print(self.GammaM)
                     break
         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
