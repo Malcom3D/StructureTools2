@@ -1,6 +1,7 @@
 #import FreeCAD, App, FreeCADGui, Part, os, math
 #from PySide import QtWidgets, QtCore, QtGui
 #import subprocess
+import math
 
 from sympy import *
 init_printing()
@@ -58,7 +59,7 @@ class NTC2018:
         self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
         # ntc2018 3.1.3
         for i in range(1,5):
-            if i-1 < self.G2avr < i:
+            if (i-1) < self.G2avr < i:
                 self.g2load = 0.4*i
 
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
