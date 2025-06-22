@@ -185,6 +185,7 @@ class Sizing:
         layoutWood.addWidget(self.formWoodParam)
 
         self.formWood.setLayout(layoutWood)
+        self.formWood.hide()
         layout.addWidget(self.formWood)
 
 #####################################################################################
