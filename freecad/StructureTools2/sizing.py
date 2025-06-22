@@ -321,7 +321,7 @@ class Sizing:
         self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
 
         self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
-        self.BendingLabel = QtGui.QLabel('Bending fmd: ', + str(self.fmd))
+        self.BendingLabel = QtGui.QLabel('Bending fmd: ' + str(self.fmd))
         self.ShearLabel = QtGui.QLabel('Shear fvd: ' + str(self.fvd))
 
         self.Fd = self.NTC2018Data.FuncComb(self.G1LoadValue.value(), GammaList[1][4], self.G2LoadValue.value(), GammaList[2][4], 0, GammaList[3][4])
