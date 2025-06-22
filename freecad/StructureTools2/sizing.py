@@ -77,7 +77,7 @@ class Sizing:
         self.kmodShort = 0
         self.kmodInst = 0
 
-        self.GammaM = 1
+        self.GammaM = 0
 
         self.form = QtGui.QDialog()
         self.LoadParam()
@@ -301,8 +301,10 @@ class Sizing:
         layoutPreSize.addWidget(self.InfluenceAreaValue)
 
         self.formPreSizing.setLayout(layoutPreSize)
-#        self.formPreSizing.hide()
+        self.formPreSizing.hide()
         layout.addWidget(self.formPreSizing)
+
+###########################################################################
 
         # Design resistances [ fc0d, fmd, fvd]
         self.formDesRes = QtGui.QDialog()
@@ -311,6 +313,7 @@ class Sizing:
             for l in self.GammaMList[i][0].split():
                 if l in self.WoodTypeValue.currentText().lower():
                     self.GammaM = self.GammaMList[i][2]
+                    print('GammaM :' + self.GammaM)
                     break
         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
@@ -324,6 +327,7 @@ class Sizing:
 
         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
 
+        print(self.Fd, self.length, self.fmd, self.fvd)
         print(self.Fd, self.bmin, self.hmin)
 
 #############################################################################
