@@ -48,7 +48,7 @@ class Sizing:
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
 
-        self.Q1mapList = Constant.Q1map()
+        self.Q1mapList = Constant().Q1map()
         self.psiList = Constant.psi(self.Elevation)
         self.StrengthList = Constant.Strength()
         self.GammaList = Constant.Gamma()
