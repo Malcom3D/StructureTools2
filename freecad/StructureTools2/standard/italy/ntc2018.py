@@ -19,6 +19,7 @@ class NTC2018:
     def __init__(self, selection):
         self.G1avr = 0
         self.G2avr = 0
+        self.g2load = 0
         LoadPresence = 0
         for object in selection:
             if 'Load' in object.Name:
