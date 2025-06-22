@@ -48,13 +48,13 @@ class Sizing:
         self.G1avr = NTC2018Data.G1avr
         self.G2avr = NTC2018Data.G2avr
 
-        constant = constant()
-        self.Q1mapList = constant.Q1map()
-        self.StrengthList = constant.Strength()
-        self.GammaList = constant.Gamma()
-        self.GammaMList = constant.GammaM()
-        self.KdefList = constant.Kdef()
-        self.KmodList = constant.Kmod()
+        self.constant = Constant()
+        self.Q1mapList = self.constant.Q1map()
+        self.StrengthList = self.constant.Strength()
+        self.GammaList = self.constant.Gamma()
+        self.GammaMList = self.constant.GammaM()
+        self.KdefList = self.constant.Kdef()
+        self.KmodList = self.constant.Kmod()
 
         self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.LoadParam()
@@ -132,7 +132,7 @@ class Sizing:
 
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
-        self.psiList = constant.psi(index, self.Elevation)
+        self.psiList = self.constant.psi(index, self.Elevation)
         # ntc2018 3.1.3
         for i in range(1,5):
             if i-1 < self.G2avr < i:
