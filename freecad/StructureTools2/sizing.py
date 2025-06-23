@@ -287,7 +287,8 @@ class Sizing:
         self.BeamStepValue = QtGui.QDoubleSpinBox()
         self.BeamStepValue.setDecimals(4)
         self.BeamStepValue.setSuffix(' m')
-        self.BeamStepValue.setMaximum(999999999999.99)
+        self.BeamStepValue.setMinimum(0.0001)
+        self.BeamStepValue.setMaximum(9999999999.9999)
         self.BeamStepValue.setValue(1/self.length)
         self.BeamStepValue.valueChanged.connect(self.selectedBeamStep)
 
@@ -295,7 +296,8 @@ class Sizing:
         self.InfluenceAreaValue = QtGui.QDoubleSpinBox()
         self.InfluenceAreaValue.setDecimals(4)
         self.InfluenceAreaValue.setSuffix(' m²')
-        self.InfluenceAreaValue.setMaximum(999999999999.99)
+        self.InfluenceAreaValue.setMaximum(9999999999.9999)
+        self.InfluenceAreaValue.setMinimum(0.0001)
         self.InfluenceAreaValue.setValue(1)
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
 
