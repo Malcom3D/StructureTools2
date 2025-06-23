@@ -345,13 +345,8 @@ class Sizing:
         self.DimCommValue = QtGui.QComboBox()
         text = ''
         self.DimCommValue.addItem(text)
-        for i in range(0,len(self.BeamDimList[:])):
-                text = 'text'
-                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
-                    text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
-                    self.DimCommValue.addItem(text)
-        text = 'Custom...'
-        self.DimCommValue.addItem(text)
+        if bmin and bmax:
+             self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
@@ -379,10 +374,25 @@ class Sizing:
         self.formDimComm.setLayout(layoutDimComm)
         layout.addWidget(self.formDimComm)
 
+    def BeamComDimm(self):
+        for i in range(0,len(self.BeamDimList[:])):
+                text = 'text'
+                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
+                    text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
+                    self.DimCommValue.addItem(text)
+        text = 'Custom...'
+        self.DimCommValue.addItem(text)
+
     def selectedDimComm(self):
+        self.DimCommValue.clear()
         if self.DimCommValue.currentIndex() == -1:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
+        elif:
+            self.DimCommXValue.hide()
+            self.DimCommYValue.hide()
+        else:
+            BeamComDimm()
 
     def selectedDimCommX(self):
         pass
