@@ -345,7 +345,7 @@ class Sizing:
         self.DimCommValue = QtGui.QComboBox()
         text = ''
         self.DimCommValue.addItem(text)
-        if bmin and bmax:
+        if self.bmin and self.bmax:
              self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
 
