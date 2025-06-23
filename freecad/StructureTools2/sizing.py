@@ -97,7 +97,7 @@ class Sizing:
         else:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
-        self.G1LoadValue.activated.connect(self.DimBoundaries)
+        self.G1LoadValue.valueChanged.connect(self.DimBoundaries)
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
@@ -109,7 +109,7 @@ class Sizing:
         else:
             self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
-        self.G2LoadValue.activated.connect(self.DimBoundaries)
+        self.G2LoadValue.valueChanged.connect(self.DimBoundaries)
 
         self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1 [ntc2018 Tab. 3.1.II]')
         self.Q1LoadValue = QtGui.QComboBox()
