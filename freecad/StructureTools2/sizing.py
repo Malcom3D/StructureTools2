@@ -391,10 +391,11 @@ class Sizing:
         self.DimCommValue.addItem(text)
 
     def selectedDimComm(self):
-        if self.DimCommValue.currentIndex() == -1:
+        index = self.DimCommValue.currentIndex()
+        if index == -1:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
-        elif self.DimCommValue.currentIndex() == 0:
+        elif index == 0:
             self.DimCommXValue.hide()
             self.DimCommYValue.hide()
         else:
