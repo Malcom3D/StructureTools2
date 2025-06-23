@@ -169,8 +169,7 @@ class Constant:
     def BeamDim(self):
         # BeamDim: commercial beam dimensions
         # mapped list ['Width', 'Height', 'Length', 'Producer', 'Model']
-        self.BeamDimList = [list(map(set_type, ['', '', '', '', '']))]
-        self.BeamDimList.append(list(map(set_type, ['80', '160', '7000'])))
+        self.BeamDimList = [list(map(set_type, ['80', '160', '7000']))]
         self.BeamDimList.append(list(map(set_type, ['80', '160', '7500'])))
         self.BeamDimList.append(list(map(set_type, ['80', '160', '8000'])))
         self.BeamDimList.append(list(map(set_type, ['80', '160', '8500'])))
