@@ -475,7 +475,7 @@ class Sizing:
 
     def DimBoundaries(self):
         # dimensional boundaries
-        if self.WoodTypeValue.currentText():
+        if self.WoodTypeValue.currentText() and self.WoodClassValue.currentText():
             for i in range(0,len(self.GammaMList[:])):
                 for l in self.GammaMList[i][0].split():
                     if l.lower() in self.WoodTypeValue.currentText().lower():
