@@ -80,6 +80,8 @@ class Sizing:
 
         self.GammaM = 1
         self.interaxis = 1
+        self.bmin = 0
+        self.hmin  = 0
 
         self.form = QtGui.QDialog()
         self.LoadParam()
