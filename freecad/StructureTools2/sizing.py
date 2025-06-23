@@ -381,10 +381,10 @@ class Sizing:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
 
-    def self.selectedDimCommX(self):
+    def selectedDimCommX(self):
         pass
 
-    def self.selectedDimCommY(self):
+    def selectedDimCommY(self):
         pass
 
 #############################################################################
