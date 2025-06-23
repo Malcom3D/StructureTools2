@@ -97,4 +97,4 @@ class NTC2018:
         q = Fd*interaxis/Area
         bmin = (3*q*fmd)/(4*fvd**2)
         hmin = (length*1000*fvd)/(fmd)
-        return [bmin, hmin]
+        return bmin, hmin
