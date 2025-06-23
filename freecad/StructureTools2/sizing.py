@@ -289,8 +289,8 @@ class Sizing:
         self.InfluenceAreaValue.setDecimals(4)
         self.InfluenceAreaValue.setSuffix(' m²')
         self.InfluenceAreaValue.setMaximum(999999999999.99)
-        self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
+        self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
 
         # def in ntc2018.py
         # Predimensionamento
@@ -314,7 +314,6 @@ class Sizing:
                 for l in self.GammaMList[i][0].split():
                     if l.lower() in self.WoodTypeValue.currentText().lower():
                         self.GammaM = self.GammaMList[i][2]
-                        print('GammaM :' + self.GammaM)
                         break
         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
@@ -328,8 +327,16 @@ class Sizing:
 
         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
 
+        print('GammaM :' + self.GammaM)
         print(self.Fd, self.length, self.fmd, self.fvd)
         print(self.Fd, self.bmin, self.hmin)
+ 
+        layoutDesRes.addWidget(self.NormalStressLabel)
+        layoutDesRes.addWidget(self.BendingLabel)
+        layoutDesRes.addWidget(self.ShearLabel)
+
+        self.formDesRes.setLayout(layoutDesRes)
+        layout.addWidget(self.formDesRes)
 
 #############################################################################
 
