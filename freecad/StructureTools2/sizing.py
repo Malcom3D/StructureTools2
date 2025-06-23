@@ -376,7 +376,7 @@ class Sizing:
         self.formDimComm.setLayout(layoutDimComm)
         layout.addWidget(self.formDimComm)
 
-    def self.selectedDimComm(self):
+    def selectedDimComm(self):
         if self.DimCommValue.currentIndex() == -1:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
