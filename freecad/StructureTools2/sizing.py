@@ -77,7 +77,7 @@ class Sizing:
         self.kmodShort = 0
         self.kmodInst = 0
 
-        self.GammaM = 0
+        self.GammaM = 1
 
         self.form = QtGui.QDialog()
         self.LoadParam()
@@ -309,15 +309,13 @@ class Sizing:
         # Design resistances [ fc0d, fmd, fvd]
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
-        for i in range(0,len(self.GammaMList[:])):
-            for l in self.GammaMList[i][0].split():
-                print(self.GammaMList[i][0])
-                print('l: ', l)
-                print(self.WoodTypeValue.currentText().lower())
-                if l.lower() in self.WoodTypeValue.currentText().lower():
-                    self.GammaM = self.GammaMList[i][2]
-                    print('GammaM :' + self.GammaM)
-                    break
+        if self.WoodTypeValue.currentText():
+            for i in range(0,len(self.GammaMList[:])):
+                for l in self.GammaMList[i][0].split():
+                    if l.lower() in self.WoodTypeValue.currentText().lower():
+                        self.GammaM = self.GammaMList[i][2]
+                        print('GammaM :' + self.GammaM)
+                        break
         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
         self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
