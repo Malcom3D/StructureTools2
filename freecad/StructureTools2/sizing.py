@@ -347,8 +347,8 @@ class Sizing:
         self.DimCommValue.addItem(text)
         for i in range(0,len(self.BeamDimList[:])):
                 text = 'text'
-                print(self.BeamDimList[i][0], text, self.bmin, text, self.BeamDimList[i][1], text, self.hmin, text, self.BeamDimList[i][3], text, self.length)
-                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][3] >= self.length):
+                print(self.BeamDimList[i][0], text, self.bmin, text, self.BeamDimList[i][1], text, self.hmin, text, self.BeamDimList[i][2], text, self.length)
+                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
                     text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
                     self.DimCommValue.addItem(text)
         text = 'Custom...'
