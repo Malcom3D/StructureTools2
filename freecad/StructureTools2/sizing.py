@@ -473,9 +473,9 @@ class Sizing:
         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
         self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
-        self.NormalStressLabel.setText('Normal stress fc0d: ', str(self.fc0d))
-        self.BendingLabel.setText('Bending fmd: ', str(self.fmd))
-        self.ShearLabel.setText('Shear fvd: ', str(self.fvd))
+        self.NormalStressLabel.setText('Normal stress fc0d: ' + str(self.fc0d))
+        self.BendingLabel.setText('Bending fmd: ' + str(self.fmd))
+        self.ShearLabel.setText('Shear fvd: ' + str(self.fvd))
 
         print('GammaM :', self.GammaM)
         print(self.Fd, self.length, self.fmd, self.fvd)
