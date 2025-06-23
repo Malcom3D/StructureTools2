@@ -165,4 +165,3 @@ class Constant:
         self.KmodList.append(list(map(set_type, ['Fiberboard, dry-processed (MDF)', 'UNI EN 622-5:2010, MDF.HLS', '2', '0.0', '0.0', '0.0', '0.45', '0.80', self.KdefList[16][3], self.GammaMList[4][1], self.GammaMList[4][2]])))
 
         return self.KmodList
-
