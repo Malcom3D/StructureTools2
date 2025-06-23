@@ -453,7 +453,7 @@ class Sizing:
             self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
             self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
 
-           self.DimBoundaries()
+            self.DimBoundaries()
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
