@@ -392,9 +392,8 @@ class Sizing:
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
-        IndexCount = self.DimCommValue.count()
-        print(index, IndexCount)
-        if index == -1:
+        IndexCount = self.DimCommValue.count() -1
+        if index == IndexCount:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
         elif index == 0:
