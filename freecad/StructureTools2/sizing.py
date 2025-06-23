@@ -496,7 +496,7 @@ class Sizing:
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.interaxis, self.length, self.fmd, self.fvd)
                         print('GammaM :', self.GammaM)
-                        print(self.Fd, self.length, self.fmd, self.fvd)
+                        print(self.Fd, self.interaxis, self.length, self.fmd, self.fvd)
                         print(self.Fd, self.bmin, self.hmin)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
