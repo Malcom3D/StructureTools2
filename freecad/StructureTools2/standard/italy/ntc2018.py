@@ -92,8 +92,8 @@ class NTC2018:
         desres = (kmod*fxk)/GammaM
         return desres
 
-    def PreDim(self, Fd, length, fmd, fvd):
-        q = Fd/length
+    def PreDim(self, Fd, interaxis, length, fmd, fvd):
+        q = (Fd*1000)*interaxis
         bmin = (3*q*fmd)/(4*fvd**2)
         hmin = (length*fvd)/(fmd)
         return [bmin, hmin]

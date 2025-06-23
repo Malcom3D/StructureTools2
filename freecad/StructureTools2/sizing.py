@@ -281,7 +281,7 @@ class Sizing:
         self.BeamStepValue.setDecimals(4)
         self.BeamStepValue.setSuffix(' m')
         self.BeamStepValue.setMaximum(999999999999.99)
-        self.BeamStepValue.setValue(1)
+        self.BeamStepValue.setValue(1/self.length)
         self.BeamStepValue.valueChanged.connect(self.selectedBeamStep)
 
         self.InfluenceAreaLabel = QtGui.QLabel('Area of influence')
@@ -289,8 +289,8 @@ class Sizing:
         self.InfluenceAreaValue.setDecimals(4)
         self.InfluenceAreaValue.setSuffix(' m²')
         self.InfluenceAreaValue.setMaximum(999999999999.99)
+        self.InfluenceAreaValue.setValue(1)
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
-        self.InfluenceAreaValue.setValue(self.length*self.BeamStepValue.value())
 
         # def in ntc2018.py
         # Predimensionamento
@@ -487,7 +487,7 @@ class Sizing:
                         self.ShearLabel.setText('Shear fvd: ' + str(self.fvd))
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
-                        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
+                        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.interaxis, self.length, self.fmd, self.fvd)
                         print('GammaM :', self.GammaM)
                         print(self.Fd, self.length, self.fmd, self.fvd)
                         print(self.Fd, self.bmin, self.hmin)
