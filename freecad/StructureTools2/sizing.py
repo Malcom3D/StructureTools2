@@ -57,6 +57,7 @@ class Sizing:
         self.GammaMList = self.constant.GammaM()
         self.KdefList = self.constant.Kdef()
         self.KmodList = self.constant.Kmod()
+        self.BeamDimList = self.constant.BeamDim()
 
         self.fmk = 0
         self.ft0k = 0
@@ -314,18 +315,77 @@ class Sizing:
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
 
-        self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: 0')
-        self.BendingLabel = QtGui.QLabel('Bending fmd: 0')
-        self.ShearLabel = QtGui.QLabel('Shear fvd: 0')
+        self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: 0 kN/mm²')
+        self.BendingLabel = QtGui.QLabel('Bending fmd: 0 kN/mm²')
+        self.ShearLabel = QtGui.QLabel('Shear fvd: 0 kN/mm²')
+
+        self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
+        self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
+        layoutDesRes.addWidget(self.BaseMinLabel)
+        layoutDesRes.addWidget(self.HeightMinLabel)
 
         self.DimBoundaries()
 
         self.formDesRes.setLayout(layoutDesRes)
         layout.addWidget(self.formDesRes)
+
+#############################################################################
+
+        # Design resistances [fc0d, fmd, fvd]
+        self.formDimComm = QtGui.QDialog()
+        layoutDimComm = QtGui.QVBoxLayout()
+
+        self.DimCommLabel = QtGui.QLabel('Beam of commercial dimensions')
+        self.DimCommValue = QtGui.QComboBox()
+        text = ''
+        self.DimCommValue.addItem(text)
+        for i in range(0,len(self.BeamDimList[:])):
+                if (self.BeamDimList[i][0] > bmin) and (self.BeamDimList[i][1] > hmin) and (self.BeamDimList[i][3] > self.length):
+                text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
+                self.DimCommValue.addItem(text)
+        text = 'Custom...'
+        self.DimCommValue.addItem(text)
+        self.DimCommValue.activated.connect(self.selectedDimComm)
+
+        self.DimCommXValue = QtGui.QDoubleSpinBox()
+        self.DimCommXValue.setDecimals(2)
+        self.DimCommXValue.setPrefix('bmin')
+        self.DimCommXValue.setSuffix(' mm')
+        self.DimCommXValue.setMaximum(999999999999.99)
+        self.DimCommXValue.setMinimum(self.bmin)
+        self.DimCommXValue.valueChanged.connect(self.selectedDimCommX)
+        self.DimCommXValue.hide()
+
+        self.DimCommYValue = QtGui.QDoubleSpinBox()
+        self.DimCommYValue.setDecimals(2)
+        self.DimCommYValue.setPrefix('hmin')
+        self.DimCommXValue.setSuffix(' mm')
+        self.DimCommYValue.setMaximum(999999999999.99)
+        self.DimCommYValue.setMinimum(self.hmin)
+        self.DimCommYValue.valueChanged.connect(self.selectedDimCommY)
+        self.DimCommYValue.hide()
+
+        layoutDimComm.addWidget(self.DimCommValue)
+        layoutDimComm.addWidget(self.DimCommXValue)
+        layoutDimComm.addWidget(self.DimCommYValue)
+
+        self.formDimComm.setLayout(layoutDimComm)
+        layout.addWidget(self.formDimComm)
+
+    def self.selectedDimComm(self):
+        if self.DimCommValue.currentIndex() == -1:
+            self.DimCommXValue.show()
+            self.DimCommYValue.show()
+
+    def self.selectedDimCommX(self):
+        pass
+
+    def self.selectedDimCommY(self):
+        pass
 
 #############################################################################
 
@@ -495,9 +555,9 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
-                        print('GammaM :', self.GammaM)
-                        print(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
-                        print(self.Fd, self.bmin, self.hmin)
+
+                        self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2) ' mm')
+                        self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2) ' mm')
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
