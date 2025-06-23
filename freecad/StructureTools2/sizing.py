@@ -388,7 +388,7 @@ class Sizing:
         if self.DimCommValue.currentIndex() == -1:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
-        elif:
+        elif self.DimCommValue.currentIndex() == 0:
             self.DimCommXValue.hide()
             self.DimCommYValue.hide()
         else:
