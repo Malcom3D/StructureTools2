@@ -398,7 +398,7 @@ class Sizing:
             self.DimCommXValue.hide()
             self.DimCommYValue.hide()
         else:
-            BeamComDimm()
+            self.BeamComDimm()
 
     def selectedDimCommX(self):
         pass
