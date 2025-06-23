@@ -309,19 +309,10 @@ class Sizing:
         # Design resistances [ fc0d, fmd, fvd]
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
-        if self.WoodTypeValue.currentText():
-            for i in range(0,len(self.GammaMList[:])):
-                for l in self.GammaMList[i][0].split():
-                    if l.lower() in self.WoodTypeValue.currentText().lower():
-                        self.GammaM = self.GammaMList[i][2]
-                        break
-        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
-        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
-        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
 
-        self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
-        self.BendingLabel = QtGui.QLabel('Bending fmd: ' + str(self.fmd))
-        self.ShearLabel = QtGui.QLabel('Shear fvd: ' + str(self.fvd))
+        self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: 0')
+        self.BendingLabel = QtGui.QLabel('Bending fmd: 0')
+        self.ShearLabel = QtGui.QLabel('Shear fvd: 0'))
 
         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
 
@@ -473,9 +464,18 @@ class Sizing:
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
 
-        self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
-        self.BendingLabel = QtGui.QLabel('Bending fmd: ' + str(self.fmd))
-        self.ShearLabel = QtGui.QLabel('Shear fvd: ' + str(self.fvd))
+        if self.WoodTypeValue.currentText():
+            for i in range(0,len(self.GammaMList[:])):
+                for l in self.GammaMList[i][0].split():
+                    if l.lower() in self.WoodTypeValue.currentText().lower():
+                        self.GammaM = self.GammaMList[i][2]
+                        break
+        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
+        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
+        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
+        self.NormalStressLabel.setText('Normal stress fc0d: ', str(self.fc0d))
+        self.BendingLabel.setText('Bending fmd: ', str(self.fmd))
+        self.ShearLabel.setText('Shear fvd: ', str(self.fvd))
 
         print('GammaM :', self.GammaM)
         print(self.Fd, self.length, self.fmd, self.fvd)
