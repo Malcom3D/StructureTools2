@@ -351,19 +351,19 @@ class Sizing:
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
         self.DimCommXValue.setDecimals(2)
-        self.DimCommXValue.setPrefix('bmin')
+        self.DimCommXValue.setPrefix('bmin ')
         self.DimCommXValue.setSuffix(' mm')
-        self.DimCommXValue.setMaximum(999999999999.99)
         self.DimCommXValue.setMinimum(self.bmin)
+        self.DimCommXValue.setMaximum(999999999999.99)
         self.DimCommXValue.valueChanged.connect(self.selectedDimCommX)
         self.DimCommXValue.hide()
 
         self.DimCommYValue = QtGui.QDoubleSpinBox()
         self.DimCommYValue.setDecimals(2)
-        self.DimCommYValue.setPrefix('hmin')
+        self.DimCommYValue.setPrefix('hmin ')
         self.DimCommXValue.setSuffix(' mm')
-        self.DimCommYValue.setMaximum(999999999999.99)
         self.DimCommYValue.setMinimum(self.hmin)
+        self.DimCommYValue.setMaximum(999999999999.99)
         self.DimCommYValue.valueChanged.connect(self.selectedDimCommY)
         self.DimCommYValue.hide()
 
@@ -396,6 +396,8 @@ class Sizing:
         if index == IndexCount:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
+            self.DimCommXValue.setMinimum(self.bmin)
+            self.DimCommYValue.setMinimum(self.hmin)
         elif index == 0:
             self.DimCommXValue.hide()
             self.DimCommYValue.hide()
