@@ -327,10 +327,6 @@ class Sizing:
 
         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
 
-        print('GammaM :', self.GammaM)
-        print(self.Fd, self.length, self.fmd, self.fvd)
-        print(self.Fd, self.bmin, self.hmin)
- 
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
@@ -476,6 +472,15 @@ class Sizing:
         self.BeamStepValue.setValue(self.interaxis)
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
+
+        self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: ' + str(self.fc0d))
+        self.BendingLabel = QtGui.QLabel('Bending fmd: ' + str(self.fmd))
+        self.ShearLabel = QtGui.QLabel('Shear fvd: ' + str(self.fvd))
+
+        print('GammaM :', self.GammaM)
+        print(self.Fd, self.length, self.fmd, self.fvd)
+        print(self.Fd, self.bmin, self.hmin)
+ 
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
