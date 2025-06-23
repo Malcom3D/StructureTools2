@@ -479,21 +479,18 @@ class Sizing:
                 for l in self.GammaMList[i][0].split():
                     if l.lower() in self.WoodTypeValue.currentText().lower():
                         self.GammaM = self.GammaMList[i][2]
-                        break
-        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
-        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
-        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
-        self.NormalStressLabel.setText('Normal stress fc0d: ' + str(self.fc0d))
-        self.BendingLabel.setText('Bending fmd: ' + str(self.fmd))
-        self.ShearLabel.setText('Shear fvd: ' + str(self.fvd))
+                        self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
+                        self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
+                        self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
+                        self.NormalStressLabel.setText('Normal stress fc0d: ' + str(self.fc0d))
+                        self.BendingLabel.setText('Bending fmd: ' + str(self.fmd))
+                        self.ShearLabel.setText('Shear fvd: ' + str(self.fvd))
 
-        self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
-        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
-        print('GammaM :', self.GammaM)
-        print(self.Fd, self.length, self.fmd, self.fvd)
-        print(self.Fd, self.bmin, self.hmin)
- 
-
+                        self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
+                        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
+                        print('GammaM :', self.GammaM)
+                        print(self.Fd, self.length, self.fmd, self.fvd)
+                        print(self.Fd, self.bmin, self.hmin)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
