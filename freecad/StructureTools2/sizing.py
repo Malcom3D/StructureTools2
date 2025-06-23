@@ -345,8 +345,8 @@ class Sizing:
         self.DimCommValue.addItem(text)
         for i in range(0,len(self.BeamDimList[:])):
                 if (self.BeamDimList[i][0] > bmin) and (self.BeamDimList[i][1] > hmin) and (self.BeamDimList[i][3] > self.length):
-                text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
-                self.DimCommValue.addItem(text)
+                    text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
+                    self.DimCommValue.addItem(text)
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         self.DimCommValue.activated.connect(self.selectedDimComm)
