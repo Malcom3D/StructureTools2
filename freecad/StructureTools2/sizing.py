@@ -97,6 +97,7 @@ class Sizing:
         else:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setSuffix(' kN/m²')
+        self.G1LoadValue.activated.connect(self.DimBoundaries)
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
@@ -108,6 +109,8 @@ class Sizing:
         else:
             self.G2LoadValue.setValue(0)
         self.G2LoadValue.setSuffix(' kN/m²')
+        self.G2LoadValue.activated.connect(self.DimBoundaries)
+
         self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1 [ntc2018 Tab. 3.1.II]')
         self.Q1LoadValue = QtGui.QComboBox()
         for i in range(0,len(self.Q1mapList[:])):
@@ -354,10 +357,13 @@ class Sizing:
             self.HkLoadValue.setMinimum(self.Hk)
             self.HkLoadValue.setMaximum(self.Hk)
 
+        self.DimBoundaries()
+
     def selectedMaterial(self):
         index = self.MaterialValue.currentIndex()
         if index == 1:
             self.formWood.show()
+            self.DimBoundaries()
             #self.formPreSizing.show()
             #self.formMaterial.show()
             #self.formConcrete.hide()
