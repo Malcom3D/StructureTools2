@@ -374,6 +374,12 @@ class Sizing:
         self.formDimComm.setLayout(layoutDimComm)
         layout.addWidget(self.formDimComm)
 
+#############################################################################
+
+        self.form.setLayout(layout)
+
+#############################################################################
+
     def BeamComDimm(self):
         for i in range(0,len(self.BeamDimList[:])):
                 text = 'text'
@@ -400,11 +406,7 @@ class Sizing:
     def selectedDimCommY(self):
         pass
 
-#############################################################################
-
-        self.form.setLayout(layout)
-
-#############################################################################
+##########################################################################
 
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
