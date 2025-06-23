@@ -78,6 +78,7 @@ class Sizing:
         self.kmodInst = 0
 
         self.GammaM = 1
+        self.interaxis = 0
 
         self.form = QtGui.QDialog()
         self.LoadParam()
