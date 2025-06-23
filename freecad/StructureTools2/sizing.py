@@ -381,6 +381,7 @@ class Sizing:
 #############################################################################
 
     def BeamComDimm(self):
+        self.DimCommValue.clear()
         for i in range(0,len(self.BeamDimList[:])):
                 text = 'text'
                 if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
@@ -390,7 +391,6 @@ class Sizing:
         self.DimCommValue.addItem(text)
 
     def selectedDimComm(self):
-        self.DimCommValue.clear()
         if self.DimCommValue.currentIndex() == -1:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
