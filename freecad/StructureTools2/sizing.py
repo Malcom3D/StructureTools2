@@ -314,13 +314,11 @@ class Sizing:
         self.BendingLabel = QtGui.QLabel('Bending fmd: 0')
         self.ShearLabel = QtGui.QLabel('Shear fvd: 0')
 
-        self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
-
-        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
-
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
+
+        self.DimBoundaries()
 
         self.formDesRes.setLayout(layoutDesRes)
         layout.addWidget(self.formDesRes)
@@ -397,6 +395,8 @@ class Sizing:
                 text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
                 self.WoodClassValue.addItem(text)
 
+        self.DimBoundaries()
+
     def selectedWoodClass(self):
         index = self.WoodClassValue.currentIndex()
         if index == 0:
@@ -417,6 +417,8 @@ class Sizing:
                     self.kmodMedLabel.setText('Medium Kmod: ' + str(self.kmodMed))
                     self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
                     self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
+
+            self.DimBoundaries()
 
     def selectedStrength(self):
         index = self.StrengthValue.currentIndex()
@@ -451,11 +453,15 @@ class Sizing:
             self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
             self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
 
+           self.DimBoundaries()
+
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
         self.InfluenceAreaValue.setValue(self.length*self.interaxis)
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
+
+        self.DimBoundaries()
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
@@ -464,6 +470,10 @@ class Sizing:
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
 
+        self.DimBoundaries()
+
+    def DimBoundaries(self):
+        # dimensional boundaries
         if self.WoodTypeValue.currentText():
             for i in range(0,len(self.GammaMList[:])):
                 for l in self.GammaMList[i][0].split():
@@ -477,6 +487,8 @@ class Sizing:
         self.BendingLabel.setText('Bending fmd: ' + str(self.fmd))
         self.ShearLabel.setText('Shear fvd: ' + str(self.fvd))
 
+        self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
+        self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.length, self.fmd, self.fvd)
         print('GammaM :', self.GammaM)
         print(self.Fd, self.length, self.fmd, self.fvd)
         print(self.Fd, self.bmin, self.hmin)
