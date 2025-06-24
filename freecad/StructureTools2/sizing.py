@@ -88,6 +88,7 @@ class Sizing:
         self.selHeight = 0
 
         self.beamweight = 0
+        self.FinalBeamDim = 0
 
         self.form = QtGui.QDialog()
         self.LoadParam()
@@ -556,7 +557,7 @@ class Sizing:
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
 
-                        if SelBeam == 1:
+                        if SelBeam == 1 or self.FinalBeamDim == 1:
                             print('SelectedBeam if:', SelBeam)
                             Width = self.B
                             Height = self.H
@@ -571,6 +572,10 @@ class Sizing:
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
+                                self.FinalBeamDim = 1
+                            else:
+                                self.FinalBeamDim = 0
+                                return
                         else:
                             print('SelectedBeam else:', SelBeam)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
