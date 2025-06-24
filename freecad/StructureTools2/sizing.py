@@ -546,10 +546,6 @@ class Sizing:
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
 
-                        self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
-                        self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
-                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
-
                         if self.B == 0 and self.H == 0 or self.bmin > self.B and self.hmin > self.H:
                             Width = self.bmin
                             Height = self.hmin
@@ -559,6 +555,10 @@ class Sizing:
                         Length = self.length
                         rhomean = self.rmean
                         self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+
+                        self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
+                        self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
+                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
 
                         G1tmp = self.beamweight + self.G1avr
                         if G1tmp != self.G1LoadValue.value():
