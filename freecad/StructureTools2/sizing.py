@@ -353,6 +353,7 @@ class Sizing:
         if self.bmin and self.bmax:
              self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
+        self.DimCommValue.valueChanged.connect(self.selectedDimComm)
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
         self.DimCommXValue.setDecimals(2)
@@ -577,6 +578,7 @@ class Sizing:
     def BeamComDimm(self):
         G1tmp = self.beamweight + self.G1avr
         if self.beamweight == 0 or (G1tmp != self.G1LoadValue.value()):
+            print(self.beamweight, G1tmp, self.G1LoadValue.value())
             self.DimCommValue.clear()
             for i in range(0,len(self.BeamDimList[:])):
                     text = 'text'
