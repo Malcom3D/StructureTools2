@@ -104,5 +104,5 @@ class NTC2018:
         X = Width/1000 # mm to m
         Y = Height/1000 # mm to m
         Weightkg = (X*Y*Length)*rhomean
-        WeightN = Weightkg*9.80665 # Kg to N
+        WeightN = (Weightkg*9.80665)/1000 # kg to kN
         return WeightN
