@@ -397,6 +397,9 @@ class Sizing:
             self.DimCommYValue.show()
             self.DimCommXValue.setMinimum(self.bmin)
             self.DimCommYValue.setMinimum(self.hmin)
+        elif self.DimCommValue.count() >= 1 and self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
+            self.DimCommXValue.hide()
+            self.DimCommYValue.hide()
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
