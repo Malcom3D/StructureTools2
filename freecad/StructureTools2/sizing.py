@@ -573,7 +573,7 @@ class Sizing:
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
                                 self.FinalBeamDim = 1
-                                print('self.FinalBeamDim:', self.FinalBeamDim)
+                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', self.G1LoadValue.value())
                             else:
                                 self.FinalBeamDim = 0
                                 print('self.FinalBeamDim:', self.FinalBeamDim)
