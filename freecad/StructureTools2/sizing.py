@@ -546,7 +546,7 @@ class Sizing:
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
 
-                        if (self.B == 0 and self.H == 0) or (self.bmin > self.B and self.hmin > self.H):
+                        if (self.B == 0 and self.H == 0) or (self.bmin > self.B or self.hmin > self.H):
                             Width = self.bmin
                             Height = self.hmin
                         elif self.B >= self.bmin and self.H >= self.hmin:
@@ -602,7 +602,7 @@ class Sizing:
             if self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
                 self.DimCommXValue.hide()
                 self.DimCommYValue.hide()
-        else:
+#        else:
             selection = self.DimCommValue.currentText().split('x')
             self.B = float(selection[0])
             self.H = float(selection[1])
