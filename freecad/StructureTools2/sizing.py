@@ -608,7 +608,7 @@ class Sizing:
                         G1tmp = self.beamweight + self.G1avr
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
-                            if ! self.DimCommValue.currentText():
+                            if not self.DimCommValue.currentText():
                                 self.BeamComDimm()
 
 
