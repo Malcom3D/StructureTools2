@@ -575,7 +575,7 @@ class Sizing:
 #                            if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
 #                                self.BeamComDimm()
 
-            self.BeamComDimm()
+        self.BeamComDimm()
 
     def BeamComDimm(self):
         G1tmp = round(self.beamweight + self.G1avr, 4)
