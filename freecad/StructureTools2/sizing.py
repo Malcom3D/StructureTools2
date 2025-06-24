@@ -600,7 +600,7 @@ class Sizing:
             if SelBeam != 1 and self.FinalBeamDim != 1:
                 print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                 self.BeamComDimm()
-            elif SelBeam != 1 and self.FinalBeamDim = 1:
+            elif SelBeam != 1 and self.FinalBeamDim == 1:
                 self.FinalBeamDim = 0
                 print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
 
