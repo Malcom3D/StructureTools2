@@ -583,6 +583,7 @@ class Sizing:
             self.BeamComDimm()
 
     def BeamComDimm(self):
+        print('BeamComDimm')
         self.DimCommValue.clear()
         for i in range(0,len(self.BeamDimList[:])):
                 text = 'text'
