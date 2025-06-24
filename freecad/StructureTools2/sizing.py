@@ -589,7 +589,7 @@ class Sizing:
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
 
-            if SelBeam == 0:
+            if SelBeam != 1:
                 self.BeamComDimm()
 
     def BeamComDimm(self):
