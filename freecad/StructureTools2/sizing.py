@@ -567,7 +567,7 @@ class Sizing:
 #            else:
 #                self.BeamComDimm()
             if SelBeam == 0:
-            self.BeamComDimm()
+                self.BeamComDimm()
 
     def BeamComDimm(self):
         print('BeamComDimm')
