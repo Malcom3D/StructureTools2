@@ -394,7 +394,7 @@ class Sizing:
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
                 self.DimCommValue.setCurrentIndex(0)
-#                self.selectedDimComm()
+                self.selectedDimComm()
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
