@@ -578,7 +578,7 @@ class Sizing:
                 DimCommX = float(self.DimCommValue.currentText().split('x')[0])
                 DimCommY = float(self.DimCommValue.currentText().split('x')[1])
                 print(DimCommX, DimCommY)
-                if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
+                if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value()):
                     return
             else:
                 self.BeamComDimm()
