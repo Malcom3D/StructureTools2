@@ -579,7 +579,7 @@ class Sizing:
 
     def BeamComDimm(self):
         G1tmp = round(self.beamweight + self.G1avr, 4)
-        if self.beamweight == 0 or (G1tmp != self.G1LoadValue.value()):
+        if self.beamweight == 0.0 or (G1tmp != self.G1LoadValue.value()):
             print(self.beamweight, G1tmp, self.G1LoadValue.value())
             self.DimCommValue.clear()
             for i in range(0,len(self.BeamDimList[:])):
