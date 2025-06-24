@@ -540,6 +540,7 @@ class Sizing:
                         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
                         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
                         self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
+
                         self.NormalStressLabel.setText('Normal stress fc0d: ' + str(self.fc0d) + ' kN/mm²')
                         self.BendingLabel.setText('Bending fmd: ' + str(self.fmd) + ' kN/mm²')
                         self.ShearLabel.setText('Shear fvd: ' + str(self.fvd) + ' kN/mm²')
@@ -547,6 +548,7 @@ class Sizing:
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], self.qk, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
                         self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
+
                         self.FundCombLabel.setText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' kN/m')
                         self.WidthMinLabel.setText('Section width minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
@@ -571,17 +573,12 @@ class Sizing:
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
 
-#                            break
-#            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
-#                DimCommX = float(self.DimCommValue.currentText().split('x')[0])
-#                DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-#                if self.B == DimCommX and self.H == DimCommY:
-#                    return
-#            elif 'Custom' in self.DimCommValue.currentText():
-#                if self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value():
-#                    return
-#            else:
-#                self.BeamComDimm()
+            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
+                DimCommX = float(self.DimCommValue.currentText().split('x')[0])
+                DimCommY = float(self.DimCommValue.currentText().split('x')[1])
+                print('X: ', X, 'Y :', Y)
+            elif 'Custom' in self.DimCommValue.currentText():
+                print('Xcust: ', self.DimCommXValue.value(), 'Ycust: ', self.DimCommYValue.value())
 
             if SelBeam == 0:
                 self.BeamComDimm()
