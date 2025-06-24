@@ -84,6 +84,8 @@ class Sizing:
         self.hmin  = 0
         self.B = 0
         self.H = 0
+        self.selWidth = 0
+        self.selHeight = 0
 
         self.beamweight = 0
 
@@ -555,10 +557,20 @@ class Sizing:
                         self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
 
                         if SelBeam == 0:
-                            G1tmp = round(self.beamminweight + self.G1avr, 4)
-                            if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
-                                self.G1LoadValue.setMinimum(G1tmp)
-                                self.G1LoadValue.setValue(G1tmp)
+                            if self.selWidth >= self.bmin and self.Height >= self.hmin:
+                                self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.Height, self.length, self.rmean) 
+                                self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
+                                self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
+                                self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.Height, 4)) + '  mm')
+                                G1tmp = round(self.beamweight + self.G1avr, 4)
+                                if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
+                                    self.G1LoadValue.setMinimum(G1tmp)
+                                    self.G1LoadValue.setValue(G1tmp)
+                            else:
+                                G1tmp = round(self.beamminweight + self.G1avr, 4)
+                                if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
+                                    self.G1LoadValue.setMinimum(G1tmp)
+                                    self.G1LoadValue.setValue(G1tmp)
                         else:
                             Width = self.B
                             Height = self.H
@@ -573,13 +585,6 @@ class Sizing:
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
 
-            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
-                DimCommX = float(self.DimCommValue.currentText().split('x')[0])
-                DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-                print('X: ', X, 'Y :', Y)
-            elif 'Custom' in self.DimCommValue.currentText():
-                print('Xcust: ', self.DimCommXValue.value(), 'Ycust: ', self.DimCommYValue.value())
-
             if SelBeam == 0:
                 self.BeamComDimm()
 
@@ -591,6 +596,9 @@ class Sizing:
                 if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
                     text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
                     self.DimCommValue.addItem(text)
+                if self.DimCommValue.count() == 1:
+                    self.selWidth = self.BeamDimList[i][0]
+                    self.selHeight = self.BeamDimList[i][1]
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
