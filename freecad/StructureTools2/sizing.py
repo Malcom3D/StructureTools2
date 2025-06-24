@@ -406,13 +406,15 @@ class Sizing:
             self.DimCommYValue.hide()
         else:
             selection = self.DimCommValue.currentText().split('x')
-            self.B = selection[0]
-            self.H = selection[1]
+            self.B = float(selection[0])
+            self.H = float(selection[1])
             
             self.BeamComDimm()
 
     def selectedDimCommXY(self):
-        pass
+            selection = self.DimCommValue.currentText().split('x')
+            self.B = float(self.DimCommXValue.currentText())
+            self.H = float(self.DimCommYValue.currentText())
 
 ##########################################################################
 
@@ -580,13 +582,13 @@ class Sizing:
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
 
                         if self.B != 0 and self.H != 0:
-                            Width = float(self.B)
-                            Height = float(self.H)
+                            Width = self.B
+                            Height = self.H
                         else:
-                            Width = float(self.bmin)
-                            Height = float(self.hmin)
-                        Length = float(self.length)
-                        rhomean = float(self.rmean)
+                            Width = self.bmin
+                            Height = self.hmin
+                        Length = self.length
+                        rhomean = self.rmean
                         self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
