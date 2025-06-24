@@ -571,7 +571,7 @@ class Sizing:
                             return
 
                         if (self.B == float(self.DimCommValue.currentText().split('x')[0]) and self.H == float(self.DimCommValue.currentText().split('x')[1])) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
-                        return
+                            return
 
             self.BeamComDimm()
 
