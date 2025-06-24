@@ -99,9 +99,10 @@ class NTC2018:
         hmin = (length*1000*fvd)/(fmd)
         return bmin, hmin
 
-    def BeamWeight(self, bmin, hmin, length, rhomean):
+    def BeamWeight(self, Width, Height, Length, rhomean):
         # beam dead weight
-        X = bmin/1000
-        Y = hmin/1000
-        Weight = (X*Y*length)*rhomean
-        return Weight
+        X = Width/1000 # mm to m
+        Y = Height/1000 # mm to m
+        Weightkg = (X*Y*Length)*rhomean
+        WeightN = Weightkg*9.80665 # Kg to N
+        return WeightN

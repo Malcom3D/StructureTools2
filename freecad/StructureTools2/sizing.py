@@ -82,6 +82,8 @@ class Sizing:
         self.interaxis = 1
         self.bmin = 0
         self.hmin  = 0
+        self.B = 0
+        self.H = 0
 
         self.form = QtGui.QDialog()
         self.LoadParam()
@@ -403,6 +405,10 @@ class Sizing:
             self.DimCommXValue.hide()
             self.DimCommYValue.hide()
         else:
+            selection = self.DimCommValue.currentText().split('x')
+            self.B = selection[0]
+            self.H = selection[1]
+            
             self.BeamComDimm()
 
     def selectedDimCommXY(self):
@@ -572,7 +578,16 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
-                        self.beamweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean)
+
+                        if self.B and self.H:
+                            Width = self.B
+                            Height = self.H
+                        else:
+                            Width = self.bmin
+                            Height = self.hmin
+                        Length = self.length
+                        rhomean = self.rmean
+                        self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
