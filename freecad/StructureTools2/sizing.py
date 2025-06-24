@@ -328,6 +328,9 @@ class Sizing:
 
         self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
+
+        self.FundCombLabel = QtGui.QLabel('Fundamental Combination: 0 mm')
+
         self.BeamMinWeightLabel = QtGui.QLabel('Minimum section weight: 0 kN')
         self.BeamWeightLabel = QtGui.QLabel('Selected section weight: 0 kN')
 
@@ -336,6 +339,7 @@ class Sizing:
         layoutDesRes.addWidget(self.ShearLabel)
         layoutDesRes.addWidget(self.BaseMinLabel)
         layoutDesRes.addWidget(self.HeightMinLabel)
+        layoutDesRes.addWidget(self.FundCombLabel)
         layoutDesRes.addWidget(self.BeamMinWeightLabel)
         layoutDesRes.addWidget(self.BeamWeightLabel)
 
@@ -538,8 +542,11 @@ class Sizing:
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
                         self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
+                        self.FundCombLabelsetText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' mm')
+
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
+                        
                         self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
 
                         if SelBeam == 0:
