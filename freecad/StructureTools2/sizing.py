@@ -597,7 +597,7 @@ class Sizing:
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
 
-            if SelBeam != 1:
+            if SelBeam != 1 or self.FinalBeamDim !=1:
                 print('DimBoundaries self.BeamComDimm')
                 self.BeamComDimm()
 
