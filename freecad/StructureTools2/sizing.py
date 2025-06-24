@@ -569,10 +569,10 @@ class Sizing:
                         self.BeamMinWeightLabel.setText('Beam weight: '  + str(round(self.beamminweight, 4)) + '  kN')
                         self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
 
-                        if self.beamminweight == self.beamweight:
-                            self.BeamComDimm()
-                        else:
-                            return
+#                        if self.beamminweight == self.beamweight:
+#                            self.BeamComDimm()
+#                        else:
+#                            return
 #                        G1tmp = round(self.beamweight + self.G1avr, 4)
 #                        if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
 #                            self.G1LoadValue.setMinimum(G1tmp)
