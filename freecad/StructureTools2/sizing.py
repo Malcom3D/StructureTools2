@@ -566,9 +566,9 @@ class Sizing:
                             self.G1LoadValue.setValue(G1tmp)
 
                         if self.DimCommValue.currentText():
-                        print(self.DimCommValue.currentText())
-                        if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
-                        self.BeamComDimm()
+                            print(self.DimCommValue.currentText())
+                            if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
+                                self.BeamComDimm()
 
             self.BeamComDimm()
 
