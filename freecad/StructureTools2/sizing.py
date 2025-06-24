@@ -573,12 +573,13 @@ class Sizing:
                         if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
                             break
-                        DimCommX = float(self.DimCommValue.currentText().split('x')[0])
-                        DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-                        print(DimCommX, DimCommY)
-                        if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
-                            return
-
+            print(self.DimCommValue.currentText())
+            DimCommX = float(self.DimCommValue.currentText().split('x')[0])
+            DimCommY = float(self.DimCommValue.currentText().split('x')[1])
+            print(DimCommX, DimCommY)
+            if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
+                return
+            else:
             self.BeamComDimm()
 
     def BeamComDimm(self):
@@ -602,6 +603,7 @@ class Sizing:
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
         IndexCount = self.DimCommValue.count() -1
+        print(self.DimCommValue.currentText())
         if index == IndexCount:
             self.DimCommXValue.show()
             self.DimCommYValue.show()
