@@ -608,8 +608,9 @@ class Sizing:
                         G1tmp = self.beamweight + self.G1avr
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
+                            if ! self.DimCommValue.currentText():
+                                self.BeamComDimm()
 
-                        self.BeamComDimm()
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
