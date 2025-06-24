@@ -328,8 +328,8 @@ class Sizing:
 
         self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
-        self.BeamMinWeightLabel = QtGui.QLabel('Minimum Section weight: 0 kN')
-#        self.BeamWeightLabel = QtGui.QLabel('Section weight: 0 kN')
+        self.BeamMinWeightLabel = QtGui.QLabel('Minimum section weight: 0 kN')
+        self.BeamWeightLabel = QtGui.QLabel('Selected section weight: 0 kN')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
@@ -337,7 +337,7 @@ class Sizing:
         layoutDesRes.addWidget(self.BaseMinLabel)
         layoutDesRes.addWidget(self.HeightMinLabel)
         layoutDesRes.addWidget(self.BeamMinWeightLabel)
-#        layoutDesRes.addWidget(self.BeamWeightLabel)
+        layoutDesRes.addWidget(self.BeamWeightLabel)
 
         self.formDesRes.setLayout(layoutDesRes)
         layout.addWidget(self.formDesRes)
@@ -540,7 +540,7 @@ class Sizing:
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
-                        self.BeamMinWeightLabel.setText('Beam weight: '  + str(round(self.beamminweight, 4)) + '  kN')
+                        self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
 
                         if SelBeam == 0:
                             G1tmp = round(self.beamminweight + self.G1avr, 4)
@@ -552,7 +552,7 @@ class Sizing:
                             Length = self.length
                             rhomean = self.rmean
                             self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
-                            self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
+                            self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                             G1tmp = round(self.beamweight + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
