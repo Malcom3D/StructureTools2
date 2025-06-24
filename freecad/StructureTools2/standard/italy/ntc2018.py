@@ -95,8 +95,8 @@ class NTC2018:
     def PreDim(self, Fd, interaxis, length, fmd, fvd):
         Area = interaxis*length
         q = Fd*interaxis/Area
-        bmin = (3*q*fmd)/(4*fvd**2)
-        hmin = (length*1000*fvd)/(fmd)
+        hmin = (3*q*fmd)/(4*fvd**2)
+        bmin = (length*1000*fvd)/(fmd)
         return bmin, hmin
 
     def BeamWeight(self, Width, Height, Length, rhomean):
