@@ -566,7 +566,7 @@ class Sizing:
                         self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
 
                         G1tmp = round(self.beamweight + self.G1avr, 4)
-                        if G1tmp != self.G1LoadValue.value():
+                        if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
                             return
                         DimCommX = float(self.DimCommValue.currentText().split('x')[0])
