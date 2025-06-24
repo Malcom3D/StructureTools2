@@ -570,18 +570,16 @@ class Sizing:
                             self.G1LoadValue.setMinimum(G1tmp)
                             return
 
-#                        if self.DimCommValue.currentText() and self.DimCommValue.count() != 1:
-#                            print(self.DimCommValue.currentText())
-#                            if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
-#                                self.BeamComDimm()
+                        if (self.B == float(self.DimCommValue.currentText().split('x')[0]) and self.H == float(self.DimCommValue.currentText().split('x')[1]) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value():
+                        return
 
-        self.BeamComDimm()
+            self.BeamComDimm()
 
     def BeamComDimm(self):
-        G1tmp = round(self.beamweight + self.G1avr, 4)
-        G1val = self.G1LoadValue.value()
-        if self.beamweight == 0 or (G1tmp != G1val):
-            print(self.beamweight, G1tmp, G1val, self.G1LoadValue.value())
+#        G1tmp = round(self.beamweight + self.G1avr, 4)
+#        G1val = self.G1LoadValue.value()
+#        if self.beamweight == 0 or (G1tmp != G1val):
+#            print(self.beamweight, G1tmp, G1val, self.G1LoadValue.value())
             self.DimCommValue.clear()
             for i in range(0,len(self.BeamDimList[:])):
                     text = 'text'
