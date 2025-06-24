@@ -393,7 +393,10 @@ class Sizing:
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
-                self.DimCommValue.setCurrentIndex(0)
+            self.DimCommXValue.show()
+            self.DimCommYValue.show()
+            self.DimCommXValue.setMinimum(self.bmin)
+            self.DimCommYValue.setMinimum(self.hmin)
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
