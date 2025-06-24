@@ -394,7 +394,6 @@ class Sizing:
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
                 self.DimCommValue.setCurrentIndex(0)
-                self.selectedDimComm()
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
@@ -416,7 +415,6 @@ class Sizing:
         self.DimBoundaries()
 
     def selectedDimCommXY(self):
-        selection = self.DimCommValue.currentText().split('x')
         self.B = self.DimCommXValue.value()
         self.H = self.DimCommYValue.value()
 
