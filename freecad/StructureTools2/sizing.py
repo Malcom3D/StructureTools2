@@ -579,8 +579,9 @@ class Sizing:
 
     def BeamComDimm(self):
         G1tmp = round(self.beamweight + self.G1avr, 4)
-        if self.beamweight == 0.0 or (G1tmp != self.G1LoadValue.value()):
-            print(self.beamweight, G1tmp, self.G1LoadValue.value())
+        G1val = self.G1LoadValue.value()
+        if self.beamweight == 0 or (G1tmp != G1val):
+            print(self.beamweight, G1tmp, G1val, self.G1LoadValue.value())
             self.DimCommValue.clear()
             for i in range(0,len(self.BeamDimList[:])):
                     text = 'text'
