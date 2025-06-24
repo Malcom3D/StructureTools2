@@ -546,12 +546,12 @@ class Sizing:
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
 
-                        if self.B != 0 and self.H != 0:
-                            Width = self.B
-                            Height = self.H
-                        else:
+                        if self.B == 0 and self.H == 0:
                             Width = self.bmin
                             Height = self.hmin
+                        else:
+                            Width = self.B
+                            Height = self.H
                         Length = self.length
                         rhomean = self.rmean
                         self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
@@ -563,10 +563,14 @@ class Sizing:
                         G1tmp = self.beamweight + self.G1avr
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
+                            self.G1LoadValue.setValue(G1tmp)
+
             if self.DimCommValue.currentText():
                 print(self.DimCommValue.currentText())
                 if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
                     self.BeamComDimm()
+        elif:
+            self.BeamComDimm()
 
     def BeamComDimm(self):
         self.DimCommValue.clear()
