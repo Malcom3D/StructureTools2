@@ -105,7 +105,7 @@ class Sizing:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setDecimals(4)
         self.G1LoadValue.setSuffix(' kN/m²')
-        self.G1LoadValue.valueChanged.connect(self.DimBoundaries)
+        self.G1LoadValue.valueChanged.connect(self.DimBoundaries(0))
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
@@ -118,7 +118,7 @@ class Sizing:
             self.G2LoadValue.setValue(0)
         self.G2LoadValue.setDecimals(4)
         self.G2LoadValue.setSuffix(' kN/m²')
-        self.G2LoadValue.valueChanged.connect(self.DimBoundaries)
+        self.G2LoadValue.valueChanged.connect(self.DimBoundaries(0))
 
         self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1 [ntc2018 Tab. 3.1.II]')
         self.Q1LoadValue = QtGui.QComboBox()
@@ -329,7 +329,7 @@ class Sizing:
         self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
         self.BeamMinWeightLabel = QtGui.QLabel('Minimum Section weight: 0 kN')
-        self.BeamWeightLabel = QtGui.QLabel('Section weight: 0 kN')
+#        self.BeamWeightLabel = QtGui.QLabel('Section weight: 0 kN')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
@@ -337,7 +337,7 @@ class Sizing:
         layoutDesRes.addWidget(self.BaseMinLabel)
         layoutDesRes.addWidget(self.HeightMinLabel)
         layoutDesRes.addWidget(self.BeamMinWeightLabel)
-        layoutDesRes.addWidget(self.BeamWeightLabel)
+#        layoutDesRes.addWidget(self.BeamWeightLabel)
 
         self.formDesRes.setLayout(layoutDesRes)
         layout.addWidget(self.formDesRes)
@@ -411,41 +411,27 @@ class Sizing:
             self.HkLoadValue.setMinimum(self.Hk)
             self.HkLoadValue.setMaximum(self.Hk)
 
-        self.DimBoundaries()
+        self.DimBoundaries(0)
 
     def selectedMaterial(self):
         index = self.MaterialValue.currentIndex()
         if index == 1:
             self.formWood.show()
-            self.DimBoundaries()
-            #self.formPreSizing.show()
-            #self.formMaterial.show()
+            self.DimBoundaries(0)
             #self.formConcrete.hide()
-            #self.formMaterial.hide()
-            #self.formPreSizing.hide()
             #self.formSteel.hide()
-            #self.formMaterial.hide()
-            #self.formPreSizing.hide()
         elif index == 2:
             self.formWood.hide()
             self.formMaterial.hide()
             self.formPreSizing.hide()
             #self.formConcrete.hide()
-            #self.formPreSizing.hide()
-            #self.formMaterial.hide()
             #self.formSteel.show()
-            #self.formMaterial.show()
-            #self.formPreSizing.show()
         elif index == 3:
             self.formWood.hide()
             self.formMaterial.hide()
             self.formPreSizing.hide()
             #self.formConcrete.hide()
-            #self.formPreSizing.hide()
-            #self.formMaterial.hide()
             #self.formSteel.show()
-            #self.formPreSizing.show()
-            #self.formMaterial.show()
 
     def selectedWoodType(self):
         self.WoodClassValue.clear()
@@ -456,7 +442,7 @@ class Sizing:
                 text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
                 self.WoodClassValue.addItem(text)
 
-        self.DimBoundaries()
+        self.DimBoundaries(0)
 
     def selectedWoodClass(self):
         index = self.WoodClassValue.currentIndex()
@@ -479,7 +465,7 @@ class Sizing:
                     self.kmodShortLabel.setText('Short Kmod: ' + str(self.kmodShort))
                     self.kmodInstLabel.setText('Instant Kmod: ' + str(self.kmodInst))
 
-            self.DimBoundaries()
+            self.DimBoundaries(0)
 
     def selectedStrength(self):
         index = self.StrengthValue.currentIndex()
@@ -514,7 +500,7 @@ class Sizing:
             self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
             self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
 
-            self.DimBoundaries()
+            self.DimBoundaries(0)
 
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
@@ -522,7 +508,7 @@ class Sizing:
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
 
-        self.DimBoundaries()
+        self.DimBoundaries(0)
 
     def selectedInfluenceArea(self):
         A = self.InfluenceAreaValue.value()
@@ -531,9 +517,9 @@ class Sizing:
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
 
-        self.DimBoundaries()
+        self.DimBoundaries(0)
 
-    def DimBoundaries(self):
+    def DimBoundaries(self, SelBeam):
         # dimensional boundaries
         if self.WoodTypeValue.currentText() and self.WoodClassValue.currentText() and self.StrengthValue.currentText():
             for i in range(0,len(self.GammaMList[:])):
@@ -547,7 +533,7 @@ class Sizing:
                         self.BendingLabel.setText('Bending fmd: ' + str(self.fmd) + ' kN/mm²')
                         self.ShearLabel.setText('Shear fvd: ' + str(self.fvd) + ' kN/mm²')
 
-                        self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
+                        self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], self.qk, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
                         self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
@@ -580,6 +566,7 @@ class Sizing:
 #                    return
 #            else:
 #                self.BeamComDimm()
+            if SelBeam == 0:
             self.BeamComDimm()
 
     def BeamComDimm(self):
@@ -618,13 +605,13 @@ class Sizing:
             self.B = float(selection[0])
             self.H = float(selection[1])
 
-        self.DimBoundaries()
+        self.DimBoundaries(1)
 
     def selectedDimCommXY(self):
         self.B = self.DimCommXValue.value()
         self.H = self.DimCommYValue.value()
 
-        self.DimBoundaries()
+        self.DimBoundaries(1)
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
