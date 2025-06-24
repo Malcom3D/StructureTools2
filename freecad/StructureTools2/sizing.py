@@ -393,8 +393,8 @@ class Sizing:
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
-                self.DimCommValue.setCurrentIndex(1)
-                self.selectedDimComm()
+                self.DimCommValue.setCurrentIndex(0)
+#                self.selectedDimComm()
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
@@ -404,9 +404,11 @@ class Sizing:
             self.DimCommYValue.show()
             self.DimCommXValue.setMinimum(self.bmin)
             self.DimCommYValue.setMinimum(self.hmin)
+        elif index != IndexCount:
+            if self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
+                self.DimCommXValue.hide()
+                self.DimCommYValue.hide()
         else:
-            self.DimCommXValue.hide()
-            self.DimCommYValue.hide()
             selection = self.DimCommValue.currentText().split('x')
             self.B = float(selection[0])
             self.H = float(selection[1])
