@@ -409,12 +409,13 @@ class Sizing:
             self.B = float(selection[0])
             self.H = float(selection[1])
             
-            self.BeamComDimm()
+        self.BeamComDimm()
 
     def selectedDimCommXY(self):
-            selection = self.DimCommValue.currentText().split('x')
-            self.B = self.DimCommXValue.value()
-            self.H = self.DimCommYValue.value()
+        selection = self.DimCommValue.currentText().split('x')
+        self.B = self.DimCommXValue.value()
+        self.H = self.DimCommYValue.value()
+        self.BeamComDimm()
 
 ##########################################################################
 
