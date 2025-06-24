@@ -383,51 +383,6 @@ class Sizing:
 
 #############################################################################
 
-    def BeamComDimm(self):
-        self.DimCommValue.clear()
-        for i in range(0,len(self.BeamDimList[:])):
-                text = 'text'
-                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
-                    text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
-                    self.DimCommValue.addItem(text)
-        text = 'Custom...'
-        self.DimCommValue.addItem(text)
-        if self.DimCommValue.count() == 1:
-            self.DimCommXValue.show()
-            self.DimCommYValue.show()
-            self.DimCommXValue.setMinimum(self.bmin)
-            self.DimCommYValue.setMinimum(self.hmin)
-        elif self.DimCommValue.count() >= 1 and self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
-            self.DimCommXValue.hide()
-            self.DimCommYValue.hide()
-
-    def selectedDimComm(self):
-        index = self.DimCommValue.currentIndex()
-        IndexCount = self.DimCommValue.count() -1
-        if index == IndexCount:
-            self.DimCommXValue.show()
-            self.DimCommYValue.show()
-            self.DimCommXValue.setMinimum(self.bmin)
-            self.DimCommYValue.setMinimum(self.hmin)
-        elif index != IndexCount:
-            if self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
-                self.DimCommXValue.hide()
-                self.DimCommYValue.hide()
-        else:
-            selection = self.DimCommValue.currentText().split('x')
-            self.B = float(selection[0])
-            self.H = float(selection[1])
-            
-        self.DimBoundaries()
-
-    def selectedDimCommXY(self):
-        self.B = self.DimCommXValue.value()
-        self.H = self.DimCommYValue.value()
-
-        self.DimBoundaries()
-
-##########################################################################
-
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
         self.psiList = self.constant.psi(index, self.Elevation)
@@ -612,6 +567,49 @@ class Sizing:
             print(self.DimCommValue.currentText())
             if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
                 self.BeamComDimm()
+
+    def BeamComDimm(self):
+        self.DimCommValue.clear()
+        for i in range(0,len(self.BeamDimList[:])):
+                text = 'text'
+                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
+                    text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
+                    self.DimCommValue.addItem(text)
+        text = 'Custom...'
+        self.DimCommValue.addItem(text)
+        if self.DimCommValue.count() == 1:
+            self.DimCommXValue.show()
+            self.DimCommYValue.show()
+            self.DimCommXValue.setMinimum(self.bmin)
+            self.DimCommYValue.setMinimum(self.hmin)
+        elif self.DimCommValue.count() >= 1 and self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
+            self.DimCommXValue.hide()
+            self.DimCommYValue.hide()
+
+    def selectedDimComm(self):
+        index = self.DimCommValue.currentIndex()
+        IndexCount = self.DimCommValue.count() -1
+        if index == IndexCount:
+            self.DimCommXValue.show()
+            self.DimCommYValue.show()
+            self.DimCommXValue.setMinimum(self.bmin)
+            self.DimCommYValue.setMinimum(self.hmin)
+        elif index != IndexCount:
+            if self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
+                self.DimCommXValue.hide()
+                self.DimCommYValue.hide()
+        else:
+            selection = self.DimCommValue.currentText().split('x')
+            self.B = float(selection[0])
+            self.H = float(selection[1])
+
+        self.DimBoundaries()
+
+    def selectedDimCommXY(self):
+        self.B = self.DimCommXValue.value()
+        self.H = self.DimCommYValue.value()
+
+        self.DimBoundaries()
 
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
