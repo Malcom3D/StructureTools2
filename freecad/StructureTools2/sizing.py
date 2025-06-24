@@ -328,6 +328,7 @@ class Sizing:
 
         self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
+        self.BeamMinWeightLabel = QtGui.QLabel('Minimum Section weight: 0 kN')
         self.BeamWeightLabel = QtGui.QLabel('Section weight: 0 kN')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
@@ -335,6 +336,7 @@ class Sizing:
         layoutDesRes.addWidget(self.ShearLabel)
         layoutDesRes.addWidget(self.BaseMinLabel)
         layoutDesRes.addWidget(self.HeightMinLabel)
+        layoutDesRes.addWidget(self.BeamMinWeightLabel)
         layoutDesRes.addWidget(self.BeamWeightLabel)
 
         self.DimBoundaries()
@@ -550,6 +552,7 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
+                        self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
                         if (self.B == 0 and self.H == 0) or (self.bmin > self.B or self.hmin > self.H):
                             Width = self.bmin
@@ -563,17 +566,22 @@ class Sizing:
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
-                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
+                        self.BeamMinWeightLabel.setText('Beam weight: '  + str(round(self.beamminweight, 4)) + '  kN')
+                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
 
-                        G1tmp = round(self.beamweight + self.G1avr, 4)
-                        if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
-                            self.G1LoadValue.setMinimum(G1tmp)
+                        if self.beamminweight == self.beamweight:
+                            self.BeamComDimm()
+                        else:
                             return
-                        DimCommX = float(self.DimCommValue.currentText().split('x')[0])
-                        DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-                        print(DimCommX, DimCommY)
-                        if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
-                            return
+#                        G1tmp = round(self.beamweight + self.G1avr, 4)
+#                        if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
+#                            self.G1LoadValue.setMinimum(G1tmp)
+#                            return
+#                        DimCommX = float(self.DimCommValue.currentText().split('x')[0])
+#                        DimCommY = float(self.DimCommValue.currentText().split('x')[1])
+#                        print(DimCommX, DimCommY)
+#                        if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
+#                            return
 
             self.BeamComDimm()
 
