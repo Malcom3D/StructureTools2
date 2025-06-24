@@ -546,29 +546,29 @@ class Sizing:
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
 
-                        if self.B == 0 and self.H == 0:
+                        self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
+                        self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
+                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
+
+                        if self.B == 0 and self.H == 0 or self.bmin > self.B and self.hmin > self.H:
                             Width = self.bmin
                             Height = self.hmin
-                        else:
+                        elif self.B >= self.bmin and self.H >= self.hmin:
                             Width = self.B
                             Height = self.H
                         Length = self.length
                         rhomean = self.rmean
                         self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
 
-                        self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
-                        self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
-                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
-
                         G1tmp = self.beamweight + self.G1avr
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
                             self.G1LoadValue.setValue(G1tmp)
 
-                        if self.DimCommValue.currentText():
-                            print(self.DimCommValue.currentText())
-                            if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
-                                self.BeamComDimm()
+#                        if self.DimCommValue.currentText() and self.DimCommValue.count() != 1:
+#                            print(self.DimCommValue.currentText())
+#                            if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
+#                                self.BeamComDimm()
 
             self.BeamComDimm()
 
