@@ -332,6 +332,10 @@ class Sizing:
         self.FundCombLabel = QtGui.QLabel('Fundamental Combination: 0 mm')
 
         self.BeamMinWeightLabel = QtGui.QLabel('Minimum section weight: 0 kN')
+
+
+        self.SelectedWidthLabel = QtGui.QLabel('Selected width: 0 mm')
+        self.SelectedHeightLabel = QtGui.QLabel('Selected height: 0  mm')
         self.BeamWeightLabel = QtGui.QLabel('Selected section weight: 0 kN')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
