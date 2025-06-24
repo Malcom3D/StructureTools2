@@ -101,5 +101,8 @@ class NTC2018:
 
     def BeamWeight(self, x, y ,z, rhomean):
         # beam dead weight
-        Weight = (x*y*z)*rhomean
+        X = x/1000
+        Y = y/1000
+        Z = z/1000
+        Weight = (X*Y*Z)*rhomean
         return Weight
