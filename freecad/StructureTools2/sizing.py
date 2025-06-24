@@ -103,6 +103,7 @@ class Sizing:
             self.G1LoadValue.setMinimum(self.G1avr)
         else:
             self.G1LoadValue.setValue(0)
+        self.G1LoadValue.setDecimals(4)
         self.G1LoadValue.setSuffix(' kN/m²')
         self.G1LoadValue.valueChanged.connect(self.DimBoundaries)
 
@@ -115,6 +116,7 @@ class Sizing:
             self.G2LoadValue.setMinimum(self.G2avr)
         else:
             self.G2LoadValue.setValue(0)
+        self.G2LoadValue.setDecimals(4)
         self.G2LoadValue.setSuffix(' kN/m²')
         self.G2LoadValue.valueChanged.connect(self.DimBoundaries)
 
@@ -563,7 +565,7 @@ class Sizing:
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
 
-                        G1tmp = self.beamweight + self.G1avr
+                        G1tmp = round(self.beamweight + self.G1avr, 4)
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
                             self.G1LoadValue.setValue(G1tmp)
@@ -576,7 +578,7 @@ class Sizing:
             self.BeamComDimm()
 
     def BeamComDimm(self):
-        G1tmp = self.beamweight + self.G1avr
+        G1tmp = round(self.beamweight + self.G1avr, 4)
         if self.beamweight == 0 or (G1tmp != self.G1LoadValue.value()):
             print(self.beamweight, G1tmp, self.G1LoadValue.value())
             self.DimCommValue.clear()
