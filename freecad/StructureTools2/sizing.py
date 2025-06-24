@@ -580,7 +580,7 @@ class Sizing:
 #                    return
 #            else:
 #                self.BeamComDimm()
-             self.BeamComDimm()
+            self.BeamComDimm()
 
     def BeamComDimm(self):
         self.DimCommValue.clear()
