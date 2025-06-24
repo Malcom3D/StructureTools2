@@ -353,7 +353,7 @@ class Sizing:
         if self.bmin and self.bmax:
              self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
-        self.DimCommValue.valueChanged.connect(self.selectedDimComm)
+        self.DimCommValue.currentIndexChanged.connect(self.selectedDimComm)
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
         self.DimCommXValue.setDecimals(2)
