@@ -570,10 +570,13 @@ class Sizing:
                         if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
                             break
-            if self.DimCommValue.currentText():
+            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
                 DimCommX = float(self.DimCommValue.currentText().split('x')[0])
                 DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-                if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value()):
+                if self.B == DimCommX and self.H == DimCommY:
+                    return
+            elif 'Custom' in self.DimCommValue.currentText():
+                if self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value():
                     return
             else:
                 self.BeamComDimm()
