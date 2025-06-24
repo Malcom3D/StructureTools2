@@ -551,35 +551,36 @@ class Sizing:
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
                         self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
-                        if (self.B == 0 and self.H == 0) or (self.bmin > self.B or self.hmin > self.H):
-                            Width = self.bmin
-                            Height = self.hmin
-                        elif self.B >= self.bmin and self.H >= self.hmin:
-                            Width = self.B
-                            Height = self.H
-                        Length = self.length
-                        rhomean = self.rmean
-                        self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+#                        if (self.B == 0 and self.H == 0) or (self.bmin > self.B or self.hmin > self.H):
+#                            Width = self.bmin
+#                            Height = self.hmin
+#                        elif self.B >= self.bmin and self.H >= self.hmin:
+#                            Width = self.B
+#                            Height = self.H
+#                        Length = self.length
+#                        rhomean = self.rmean
+#                        self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamMinWeightLabel.setText('Beam weight: '  + str(round(self.beamminweight, 4)) + '  kN')
-                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
+#                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
 
                         G1tmp = round(self.beamweight + self.G1avr, 4)
                         if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
-                            break
-            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
-                DimCommX = float(self.DimCommValue.currentText().split('x')[0])
-                DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-                if self.B == DimCommX and self.H == DimCommY:
-                    return
-            elif 'Custom' in self.DimCommValue.currentText():
-                if self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value():
-                    return
-            else:
-                self.BeamComDimm()
+#                            break
+#            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
+#                DimCommX = float(self.DimCommValue.currentText().split('x')[0])
+#                DimCommY = float(self.DimCommValue.currentText().split('x')[1])
+#                if self.B == DimCommX and self.H == DimCommY:
+#                    return
+#            elif 'Custom' in self.DimCommValue.currentText():
+#                if self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value():
+#                    return
+#            else:
+#                self.BeamComDimm()
+             self.BeamComDimm()
 
     def BeamComDimm(self):
         self.DimCommValue.clear()
