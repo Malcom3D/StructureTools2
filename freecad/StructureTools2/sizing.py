@@ -339,8 +339,6 @@ class Sizing:
         layoutDesRes.addWidget(self.BeamMinWeightLabel)
         layoutDesRes.addWidget(self.BeamWeightLabel)
 
-        #self.DimBoundaries()
-
         self.formDesRes.setLayout(layoutDesRes)
         layout.addWidget(self.formDesRes)
 
@@ -357,7 +355,6 @@ class Sizing:
         if self.bmin and self.bmax:
              self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
-        #self.DimCommValue.currentIndexChanged.connect(self.selectedDimComm)
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
         self.DimCommXValue.setDecimals(2)
@@ -574,10 +571,8 @@ class Sizing:
                             self.G1LoadValue.setMinimum(G1tmp)
                             break
             if self.DimCommValue.currentText():
-                print(self.DimCommValue.currentText())
                 DimCommX = float(self.DimCommValue.currentText().split('x')[0])
                 DimCommY = float(self.DimCommValue.currentText().split('x')[1])
-                print(DimCommX, DimCommY)
                 if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommXValue.value() and self.H == self.DimCommXValue.value()):
                     return
             else:
