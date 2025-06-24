@@ -575,10 +575,10 @@ class Sizing:
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
                                 print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
-                            else:
-                                self.FinalBeamDim = 0
-                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
-                                return
+#                            else:
+#                                self.FinalBeamDim = 0
+#                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
+#                                return
                         elif SelBeam != 1 and self.FinalBeamDim != 1:
                             print('SelectedBeam else:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
@@ -597,9 +597,12 @@ class Sizing:
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
 
-            if SelBeam != 1 and self.FinalBeamDim !=1:
+            if SelBeam != 1 and self.FinalBeamDim != 1:
                 print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                 self.BeamComDimm()
+            elif SelBeam != 1 and self.FinalBeamDim = 1:
+                self.FinalBeamDim = 0
+                print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
 
     def BeamComDimm(self):
         print('BeamComDimm')
