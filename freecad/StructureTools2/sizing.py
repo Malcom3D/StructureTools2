@@ -580,13 +580,13 @@ class Sizing:
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
 
                         if self.B != 0 and self.H != 0:
-                            Width = self.B
-                            Height = self.H
+                            Width = float(self.B)
+                            Height = float(self.H)
                         else:
-                            Width = self.bmin
-                            Height = self.hmin
-                        Length = self.length
-                        rhomean = self.rmean
+                            Width = float(self.bmin)
+                            Height = float(self.hmin)
+                        Length = float(self.length)
+                        rhomean = float(self.rmean)
                         self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
