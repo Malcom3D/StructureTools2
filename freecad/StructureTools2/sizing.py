@@ -322,14 +322,14 @@ class Sizing:
 
         self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
-        self.WeightLabel = QtGui.QLabel('Section weight: 0 kN')
+        self.BeamWeightLabel = QtGui.QLabel('Section weight: 0 kN')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
         layoutDesRes.addWidget(self.BaseMinLabel)
         layoutDesRes.addWidget(self.HeightMinLabel)
-        layoutDesRes.addWidget(self.WeightLabel)
+        layoutDesRes.addWidget(self.BeamWeightLabel)
 
         self.DimBoundaries()
 
