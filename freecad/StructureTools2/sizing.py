@@ -542,7 +542,7 @@ class Sizing:
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
                         self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
-                        self.FundCombLabelsetText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' mm')
+                        self.FundCombLabel.setText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' kN/m')
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
