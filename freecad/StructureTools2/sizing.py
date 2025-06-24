@@ -546,6 +546,7 @@ class Sizing:
                             G1tmp = round(self.beamminweight + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
+                                self.G1LoadValue.setValue(G1tmp)
                         else:
                             Width = self.B
                             Height = self.H
@@ -556,6 +557,7 @@ class Sizing:
                             G1tmp = round(self.beamweight + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
+                                self.G1LoadValue.setValue(G1tmp)
 
 #                            break
 #            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
