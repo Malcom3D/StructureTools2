@@ -586,26 +586,22 @@ class Sizing:
             self.BeamComDimm()
 
     def BeamComDimm(self):
-#        G1tmp = round(self.beamweight + self.G1avr, 4)
-#        G1val = self.G1LoadValue.value()
-#        if self.beamweight == 0 or (G1tmp != G1val):
-#            print(self.beamweight, G1tmp, G1val, self.G1LoadValue.value())
-            self.DimCommValue.clear()
-            for i in range(0,len(self.BeamDimList[:])):
-                    text = 'text'
-                    if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
-                        text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
-                        self.DimCommValue.addItem(text)
-            text = 'Custom...'
-            self.DimCommValue.addItem(text)
-            if self.DimCommValue.count() == 1:
-                self.DimCommXValue.show()
-                self.DimCommYValue.show()
-                self.DimCommXValue.setMinimum(self.bmin)
-                self.DimCommYValue.setMinimum(self.hmin)
-            elif self.DimCommValue.count() >= 1 and self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
-                self.DimCommXValue.hide()
-                self.DimCommYValue.hide()
+        self.DimCommValue.clear()
+        for i in range(0,len(self.BeamDimList[:])):
+                text = 'text'
+                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
+                    text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
+                    self.DimCommValue.addItem(text)
+        text = 'Custom...'
+        self.DimCommValue.addItem(text)
+        if self.DimCommValue.count() == 1:
+            self.DimCommXValue.show()
+            self.DimCommYValue.show()
+            self.DimCommXValue.setMinimum(self.bmin)
+            self.DimCommYValue.setMinimum(self.hmin)
+        elif self.DimCommValue.count() >= 1 and self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
+            self.DimCommXValue.hide()
+            self.DimCommYValue.hide()
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
