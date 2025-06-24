@@ -354,7 +354,7 @@ class Sizing:
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
         self.DimCommXValue.setDecimals(2)
-        self.DimCommXValue.setPrefix('bmin ')
+        self.DimCommXValue.setPrefix('B ')
         self.DimCommXValue.setSuffix(' mm')
         self.DimCommXValue.setMinimum(self.bmin)
         self.DimCommXValue.setMaximum(999999999999.99)
@@ -363,7 +363,7 @@ class Sizing:
 
         self.DimCommYValue = QtGui.QDoubleSpinBox()
         self.DimCommYValue.setDecimals(2)
-        self.DimCommYValue.setPrefix('hmin ')
+        self.DimCommYValue.setPrefix('H ')
         self.DimCommYValue.setSuffix(' mm')
         self.DimCommYValue.setMinimum(self.hmin)
         self.DimCommYValue.setMaximum(999999999999.99)
@@ -392,6 +392,8 @@ class Sizing:
                     self.DimCommValue.addItem(text)
         text = 'Custom...'
         self.DimCommValue.addItem(text)
+        if self.DimCommValue.count() == 2:
+                self.DimCommValue.setCurrentIndex(2)
 
     def selectedDimComm(self):
         index = self.DimCommValue.currentIndex()
@@ -401,21 +403,21 @@ class Sizing:
             self.DimCommYValue.show()
             self.DimCommXValue.setMinimum(self.bmin)
             self.DimCommYValue.setMinimum(self.hmin)
-        elif index == 0:
+        else:
             self.DimCommXValue.hide()
             self.DimCommYValue.hide()
-        else:
             selection = self.DimCommValue.currentText().split('x')
             self.B = float(selection[0])
             self.H = float(selection[1])
             
-        self.BeamComDimm()
+        self.DimBoundaries()
 
     def selectedDimCommXY(self):
         selection = self.DimCommValue.currentText().split('x')
         self.B = self.DimCommXValue.value()
         self.H = self.DimCommYValue.value()
-        self.BeamComDimm()
+
+        self.DimBoundaries()
 
 ##########################################################################
 
