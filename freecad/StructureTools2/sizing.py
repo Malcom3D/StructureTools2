@@ -568,6 +568,7 @@ class Sizing:
                         G1tmp = round(self.beamweight + self.G1avr, 4)
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
+                            return
 
 #                        if self.DimCommValue.currentText() and self.DimCommValue.count() != 1:
 #                            print(self.DimCommValue.currentText())
