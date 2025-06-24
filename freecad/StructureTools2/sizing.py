@@ -569,7 +569,7 @@ class Sizing:
                 print(self.DimCommValue.currentText())
                 if not (float(self.DimCommValue.currentText().split('x')[0]) >= Width and float(self.DimCommValue.currentText().split('x')[1]) >= Height):
                     self.BeamComDimm()
-        elif:
+        else:
             self.BeamComDimm()
 
     def BeamComDimm(self):
