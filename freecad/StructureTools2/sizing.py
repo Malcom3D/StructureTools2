@@ -366,6 +366,7 @@ class Sizing:
         text = ''
         self.DimCommValue.addItem(text)
         if self.bmin and self.bmax:
+             print('self.formDimComm self.BeamComDimm')
              self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
 
@@ -558,7 +559,7 @@ class Sizing:
                         self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
 
                         if SelBeam == 1 or self.FinalBeamDim == 1:
-                            print('SelectedBeam if:', SelBeam)
+                            print('SelectedBeam if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             Width = self.B
                             Height = self.H
                             Length = self.length
@@ -597,6 +598,7 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
 
             if SelBeam != 1:
+                print('DimBoundaries self.BeamComDimm')
                 self.BeamComDimm()
 
     def BeamComDimm(self):
