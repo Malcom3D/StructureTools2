@@ -556,7 +556,20 @@ class Sizing:
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
 
-                        if SelBeam == 0:
+                        if SelBeam == 1:
+                            Width = self.B
+                            Height = self.H
+                            Length = self.length
+                            rhomean = self.rmean
+                            self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+                            self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
+                            self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
+                            self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
+                            G1tmp = round(self.beamweight + self.G1avr, 4)
+                            if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
+                                self.G1LoadValue.setMinimum(G1tmp)
+                                self.G1LoadValue.setValue(G1tmp)
+                        else:
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
                                 self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
@@ -571,19 +584,6 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-                        else:
-                            Width = self.B
-                            Height = self.H
-                            Length = self.length
-                            rhomean = self.rmean
-                            self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
-                            self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
-                            self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
-                            self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
-                            G1tmp = round(self.beamweight + self.G1avr, 4)
-                            if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
-                                self.G1LoadValue.setMinimum(G1tmp)
-                                self.G1LoadValue.setValue(G1tmp)
 
             if SelBeam == 0:
                 self.BeamComDimm()
