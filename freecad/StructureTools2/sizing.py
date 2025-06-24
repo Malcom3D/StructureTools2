@@ -339,7 +339,7 @@ class Sizing:
         layoutDesRes.addWidget(self.BeamMinWeightLabel)
         layoutDesRes.addWidget(self.BeamWeightLabel)
 
-        self.DimBoundaries()
+        #self.DimBoundaries()
 
         self.formDesRes.setLayout(layoutDesRes)
         layout.addWidget(self.formDesRes)
@@ -357,7 +357,7 @@ class Sizing:
         if self.bmin and self.bmax:
              self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
-        self.DimCommValue.currentIndexChanged.connect(self.selectedDimComm)
+        #self.DimCommValue.currentIndexChanged.connect(self.selectedDimComm)
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
         self.DimCommXValue.setDecimals(2)
@@ -569,14 +569,10 @@ class Sizing:
                         self.BeamMinWeightLabel.setText('Beam weight: '  + str(round(self.beamminweight, 4)) + '  kN')
                         self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
 
-#                        if self.beamminweight == self.beamweight:
-#                            self.BeamComDimm()
-#                        else:
-#                            return
                         G1tmp = round(self.beamweight + self.G1avr, 4)
                         if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
-                            return
+                            break
                         DimCommX = float(self.DimCommValue.currentText().split('x')[0])
                         DimCommY = float(self.DimCommValue.currentText().split('x')[1])
                         print(DimCommX, DimCommY)
