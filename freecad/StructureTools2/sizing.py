@@ -325,12 +325,14 @@ class Sizing:
 
         self.BaseMinLabel = QtGui.QLabel('Section base minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
+        self.WeightLabel = QtGui.QLabel('Section weight: 0 kN')
 
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
         layoutDesRes.addWidget(self.BaseMinLabel)
         layoutDesRes.addWidget(self.HeightMinLabel)
+        layoutDesRes.addWidget(self.WeightLabel)
 
         self.DimBoundaries()
 
@@ -357,7 +359,7 @@ class Sizing:
         self.DimCommXValue.setSuffix(' mm')
         self.DimCommXValue.setMinimum(self.bmin)
         self.DimCommXValue.setMaximum(999999999999.99)
-        self.DimCommXValue.valueChanged.connect(self.selectedDimCommX)
+        self.DimCommXValue.valueChanged.connect(self.selectedDimCommXY)
         self.DimCommXValue.hide()
 
         self.DimCommYValue = QtGui.QDoubleSpinBox()
@@ -366,7 +368,7 @@ class Sizing:
         self.DimCommYValue.setSuffix(' mm')
         self.DimCommYValue.setMinimum(self.hmin)
         self.DimCommYValue.setMaximum(999999999999.99)
-        self.DimCommYValue.valueChanged.connect(self.selectedDimCommY)
+        self.DimCommYValue.valueChanged.connect(self.selectedDimCommXY)
         self.DimCommYValue.hide()
 
         layoutDimComm.addWidget(self.DimCommValue)
@@ -406,10 +408,7 @@ class Sizing:
         else:
             self.BeamComDimm()
 
-    def selectedDimCommX(self):
-        pass
-
-    def selectedDimCommY(self):
+    def selectedDimCommXY(self):
         pass
 
 ##########################################################################
@@ -576,9 +575,15 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], 0, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
+                        self.beamweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean)
 
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
+                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
+
+                        G1tot = self.beamweight + self.G1avr
+                        if G1tot != self.G1LoadValue.value:
+                            self.G1LoadValue.setValue(G1tot)
 
                         self.BeamComDimm()
 

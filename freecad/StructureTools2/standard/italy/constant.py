@@ -63,7 +63,7 @@ class Constant:
         return psiList
 
     def Strength(self):
-        # mapped list ['StrengthClass', fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean]
+        # mapped list ['StrengthClass', fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rhok, rhomean]
         StrengthList = [list(map(set_type, ['', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']))]
         StrengthList.append(list(map(set_type, ['C14', '14', '8', '0.4', '16', '2.0', '1.7', '7', '4.7', '0.23', '0.44', '290', '350'])))
         StrengthList.append(list(map(set_type, ['C16', '16', '10', '0.5', '17', '2.2', '1.8', '8', '5.4', '0.27', '0.50', '310', '370'])))
