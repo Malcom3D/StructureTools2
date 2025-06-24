@@ -301,9 +301,6 @@ class Sizing:
         self.InfluenceAreaValue.setValue(1)
         self.InfluenceAreaValue.valueChanged.connect(self.selectedInfluenceArea)
 
-        # def in ntc2018.py
-        # Predimensionamento
-
         layoutPreSize.addWidget(self.BeamStepLabel)
         layoutPreSize.addWidget(self.BeamStepValue)
         layoutPreSize.addWidget(self.InfluenceAreaLabel)
@@ -315,7 +312,7 @@ class Sizing:
 
 ###########################################################################
 
-        # Design resistances [ fc0d, fmd, fvd]
+        # Design resistances [fc0d, fmd, fvd]
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
 
@@ -581,9 +578,9 @@ class Sizing:
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 2)) + '  kN')
 
-                        G1tot = self.beamweight + self.G1avr
-                        if G1tot != self.G1LoadValue.value:
-                            self.G1LoadValue.setValue(G1tot)
+                        G1tmp = self.beamweight + self.G1avr
+                        if G1tmp != self.G1LoadValue.value:
+                            self.G1LoadValue.setValue(G1tmp)
 
                         self.BeamComDimm()
 
