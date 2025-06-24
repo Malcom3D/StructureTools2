@@ -569,8 +569,10 @@ class Sizing:
                         if G1tmp != self.G1LoadValue.value():
                             self.G1LoadValue.setMinimum(G1tmp)
                             return
-
-                        if (self.B == float(self.DimCommValue.currentText().split('x')[0]) and self.H == float(self.DimCommValue.currentText().split('x')[1])) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
+                        DimCommX = float(self.DimCommValue.currentText().split('x')[0]
+                        DimCommY = float(self.DimCommValue.currentText().split('x')[1]
+                        print(DimCommX, DimCommY)
+                        if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
                             return
 
             self.BeamComDimm()
