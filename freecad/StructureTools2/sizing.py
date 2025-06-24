@@ -413,8 +413,8 @@ class Sizing:
 
     def selectedDimCommXY(self):
             selection = self.DimCommValue.currentText().split('x')
-            self.B = float(self.DimCommXValue.currentText())
-            self.H = float(self.DimCommYValue.currentText())
+            self.B = self.DimCommXValue.value()
+            self.H = self.DimCommYValue.value()
 
 ##########################################################################
 
