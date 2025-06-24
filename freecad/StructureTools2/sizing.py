@@ -345,6 +345,8 @@ class Sizing:
         layoutDesRes.addWidget(self.HeightMinLabel)
         layoutDesRes.addWidget(self.FundCombLabel)
         layoutDesRes.addWidget(self.BeamMinWeightLabel)
+        layoutDesRes.addWidget(self.SelectedWidthLabel)
+        layoutDesRes.addWidget(self.SelectedHeightLabel)
         layoutDesRes.addWidget(self.BeamWeightLabel)
 
         self.formDesRes.setLayout(layoutDesRes)
