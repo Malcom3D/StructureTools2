@@ -580,7 +580,7 @@ class Sizing:
             if (self.B == DimCommX and self.H == DimCommY) or (self.B == self.DimCommValueX.value() and self.H == self.DimCommValueY.value()):
                 return
             else:
-            self.BeamComDimm()
+                self.BeamComDimm()
 
     def BeamComDimm(self):
         self.DimCommValue.clear()
