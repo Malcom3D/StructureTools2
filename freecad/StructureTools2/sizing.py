@@ -520,6 +520,7 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
+        print('SelBeam', SelBeam)
         # dimensional boundaries
         if self.WoodTypeValue.currentText() and self.WoodClassValue.currentText() and self.StrengthValue.currentText():
             for i in range(0,len(self.GammaMList[:])):
@@ -537,24 +538,25 @@ class Sizing:
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
                         self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
-#                        if (self.B == 0 and self.H == 0) or (self.bmin > self.B or self.hmin > self.H):
-#                            Width = self.bmin
-#                            Height = self.hmin
-#                        elif self.B >= self.bmin and self.H >= self.hmin:
-#                            Width = self.B
-#                            Height = self.H
-#                        Length = self.length
-#                        rhomean = self.rmean
-#                        self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
-
                         self.BaseMinLabel.setText('Section base minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamMinWeightLabel.setText('Beam weight: '  + str(round(self.beamminweight, 4)) + '  kN')
-#                        self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
 
-                        G1tmp = round(self.beamweight + self.G1avr, 4)
-                        if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
-                            self.G1LoadValue.setMinimum(G1tmp)
+                        if SelBeam == 0:
+                            G1tmp = round(self.beamminweight + self.G1avr, 4)
+                            if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
+                                self.G1LoadValue.setMinimum(G1tmp)
+                        else:
+                            Width = self.B
+                            Height = self.H
+                            Length = self.length
+                            rhomean = self.rmean
+                            self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+                            self.BeamWeightLabel.setText('Beam weight: '  + str(round(self.beamweight, 4)) + '  kN')
+                            G1tmp = round(self.beamweight + self.G1avr, 4)
+                            if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
+                                self.G1LoadValue.setMinimum(G1tmp)
+
 #                            break
 #            if self.DimCommValue.currentText() and 'Custom' not in self.DimCommValue.currentText():
 #                DimCommX = float(self.DimCommValue.currentText().split('x')[0])
@@ -566,6 +568,7 @@ class Sizing:
 #                    return
 #            else:
 #                self.BeamComDimm()
+
             if SelBeam == 0:
                 self.BeamComDimm()
 
