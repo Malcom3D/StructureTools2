@@ -558,10 +558,10 @@ class Sizing:
 
                         if SelBeam == 0:
                             if self.selWidth >= self.bmin and self.Height >= self.hmin:
-                                self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.Height, self.length, self.rmean) 
+                                self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                                 self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
-                                self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.Height, 4)) + '  mm')
+                                self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.selHeight, 4)) + '  mm')
                                 G1tmp = round(self.beamweight + self.G1avr, 4)
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
