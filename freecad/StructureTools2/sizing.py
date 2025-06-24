@@ -392,6 +392,7 @@ class Sizing:
                     self.DimCommValue.addItem(text)
         text = 'Custom...'
         self.DimCommValue.addItem(text)
+        print(self.DimCommValue.count())
         if self.DimCommValue.count() == 2:
                 self.DimCommValue.setCurrentIndex(2)
                 self.selectedDimComm()
