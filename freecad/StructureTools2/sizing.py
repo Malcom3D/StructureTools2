@@ -585,7 +585,7 @@ class Sizing:
 #                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
 #                                return
                         elif SelBeam != 1 and self.FinalBeamDim != 1:
-                            print('SelectedBeam else:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
+                            print('SelectedBeam else if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
 #                                Width = self.selWidth
 #                                Height = self.selHeight
@@ -595,12 +595,14 @@ class Sizing:
                                 self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
                                 self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.selHeight, 4)) + '  mm')
                                 G1tmp = round(self.beamweight + self.G1avr, 4)
+                                print('G1avr', self.G1avr, 'self.beamweight', self.beamweight)
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
 #                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
 #                                    self.checkSLU(Width, Height)
                             else:
+                                print('else', 'G1avr', self.G1avr, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
