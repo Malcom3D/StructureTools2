@@ -60,6 +60,7 @@ class Sizing:
         self.KmodList = self.constant.Kmod()
         self.BeamDimList = self.constant.BeamDim()
 
+        self.G1start = 0
         self.fmk = 0
         self.ft0k = 0
         self.ft90k = 0
@@ -109,7 +110,7 @@ class Sizing:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setDecimals(4)
         self.G1LoadValue.setSuffix(' kN/m²')
-        self.G1LoadValue.valueChanged.connect(self.DimBoundaries)
+        self.G1LoadValue.valueChanged.connect(self.setG1LoadValue)
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
@@ -403,6 +404,10 @@ class Sizing:
         self.form.setLayout(layout)
 
 #############################################################################
+
+    def setG1LoadValue(self):
+        self.G1start = self.G1LoadValue.value()
+        self.DimBoundaries(0)
 
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
