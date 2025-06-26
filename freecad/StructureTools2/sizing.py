@@ -579,6 +579,7 @@ class Sizing:
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
                                 print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
+                            self.checkSLU(Width, Height)
 #                            else:
 #                                self.FinalBeamDim = 0
 #                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
@@ -597,13 +598,12 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
+                                self.checkSLU(Width, Height)
                             else:
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-                        if Width and Height:
-                            self.checkSLU()
 
             if SelBeam != 1 and self.FinalBeamDim != 1:
                 print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
