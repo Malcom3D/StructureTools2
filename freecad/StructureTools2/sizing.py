@@ -659,9 +659,9 @@ class Sizing:
 
         self.DimBoundaries(1)
 
-    def checkSLU(self):
-        Width = self.B
-        Height = self.H
+    def checkSLU(self, Width, Height):
+#        Width = self.B
+#        Height = self.H
         Length = self.length
         Moment = self.NTC2018Data.MomentEq(self.Fd, self.interaxis, Length, self.alpha)
         Shear = self.NTC2018Data.ShearForceEq(self.Fd, self.interaxis, Length, self.alpha)
