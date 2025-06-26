@@ -106,7 +106,7 @@ class NTC2018:
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
-            M = (q*l**2)/8
+            M = (q*length**2)/8
         elif cos(alpha) != 1 and cos(alpha) != 0:
             M = 0.1265 ((q*cos(alpha))/2)*length**2
         return M
