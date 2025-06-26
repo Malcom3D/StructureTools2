@@ -586,6 +586,7 @@ class Sizing:
 #                                return
                         elif SelBeam != 1 and self.FinalBeamDim != 1:
                             print('SelectedBeam else if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
+                            print('self.bmin', self.bmin, 'selW: ', self.selWidth, 'self.hmin', self.hmin, 'selH: ', self.selHeight)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
 #                                Width = self.selWidth
 #                                Height = self.selHeight
