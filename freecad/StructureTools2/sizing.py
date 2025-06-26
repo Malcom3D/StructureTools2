@@ -60,7 +60,6 @@ class Sizing:
         self.KmodList = self.constant.Kmod()
         self.BeamDimList = self.constant.BeamDim()
 
-        self.G1start = 0
         self.fmk = 0
         self.ft0k = 0
         self.ft90k = 0
@@ -110,7 +109,7 @@ class Sizing:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setDecimals(4)
         self.G1LoadValue.setSuffix(' kN/m²')
-        self.G1LoadValue.valueChanged.connect(self.setG1LoadValue)
+        self.G1LoadValue.valueChanged.connect(self.DimBoundaries)
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
@@ -405,10 +404,6 @@ class Sizing:
 
 #############################################################################
 
-    def setG1LoadValue(self):
-        self.G1start = self.G1LoadValue.value()
-        self.DimBoundaries(0)
-
     def q1load(self):
         index = self.Q1LoadValue.currentIndex()
         self.psiList = self.constant.psi(index, self.Elevation)
@@ -538,7 +533,6 @@ class Sizing:
         self.BeamStepValue.setValue(self.interaxis)
         G2tmp = self.G2avr+(self.g2load*self.interaxis)
         self.G2LoadValue.setValue(G2tmp)
-
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
@@ -603,7 +597,7 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-                                if Width != 0 and Height != 0:
+                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
                             else:
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)
