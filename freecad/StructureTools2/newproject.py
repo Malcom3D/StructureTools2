@@ -45,6 +45,7 @@ class NewProject:
         self.StandardSelection()
 
         self.Cu = 0
+        self.Vn = 0
 
     def StandardSelection(self):
         # Building Standard Selection QDialog
@@ -54,7 +55,7 @@ class NewProject:
         self.StandardValue.addItem('')
         self.StandardValue.addItem('Italy: ntc2018')
         self.StandardValue.activated.connect(self.selectedStandard)
-        self.StandardValue.currentIndexChanged.connect(self.selectedStandard)
+        #self.StandardValue.currentIndexChanged.connect(self.selectedStandard)
         layoutStd.addWidget(self.StandardValue)
         self.form[0].setLayout(layoutStd)
 
@@ -92,7 +93,7 @@ class NewProject:
         for i in range(0,len(self.NomLifeList[:])):
             self.NominalLifeValue.addItem(self.NomLifeList[i][0])
         self.NominalLifeValue.activated.connect(self.selectedNomLife)
-        self.NominalLifeValue.currentIndexChanged.connect(self.selectedNomLife)
+        #self.NominalLifeValue.currentIndexChanged.connect(self.selectedNomLife)
         self.VnLabel = QtGui.QLabel('Vn: 0 years')
 
         # mapped list ['description', Cu]
@@ -107,7 +108,7 @@ class NewProject:
         for i in range(0,len(self.UseClassList[:])):
             self.UseClassValue.addItem(self.UseClassList[i][0])
         self.UseClassValue.activated.connect(self.selectedUseClass)
-        self.UseClassValue.currentIndexChanged.connect(self.selectedUseClass)
+        #self.UseClassValue.currentIndexChanged.connect(self.selectedUseClass)
         self.CuValue = QtGui.QDoubleSpinBox()
         self.CuValue.setValue(0)
         self.CuValue.setPrefix('Cu: ')
