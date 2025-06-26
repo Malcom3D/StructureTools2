@@ -44,6 +44,8 @@ class NewProject:
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
+        self.Cu = 0
+
     def StandardSelection(self):
         # Building Standard Selection QDialog
         layoutStd = QtGui.QVBoxLayout()
