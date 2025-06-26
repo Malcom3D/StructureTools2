@@ -664,7 +664,7 @@ class Sizing:
         Shear = self.NTC2018Data.ShearForceEq(self.Fd, self.interaxis, Length, self.alpha)
         Deflection = self.NTC2018Data.DeflectionEq(self.Fd, self.interaxis, Width, Height, Length, self.alpha, self.E005)
         NormalStress = self.NTC2018Data.NormalStress(self.Fd, self.interaxis, Length, self.alpha, self.Hk)
-        Wmax, Wmin = self.NTC2018Data.SectionModulus(Width, Heigh)
+        Wmax, Wmin = self.NTC2018Data.SectionModulus(Width, Height)
 
         Check_fmd = self.NTC2018Data.Verify_Bending(Moment, Wmax, self.fmd)
         Check_fvd = self.NTC2018Data.Verify_Shear(Shear, Width, Heigh, self.fvd)
