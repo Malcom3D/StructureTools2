@@ -149,8 +149,8 @@ class NTC2018:
 #                N = -((Hk*sin(alpha)*length)/2
 
     def SectionModulus(self, Width, Heigh):
-       Wmax = max((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
-       Wmin = max((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
+       Wmax = max(((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
+       Wmin = max(((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
 
     def Verify_Bending(self, M, W, fmd):
         check = M/W
