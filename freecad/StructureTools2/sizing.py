@@ -109,7 +109,7 @@ class Sizing:
             self.G1LoadValue.setValue(0)
         self.G1LoadValue.setDecimals(4)
         self.G1LoadValue.setSuffix(' kN/m²')
-        self.G1LoadValue.valueChanged.connect(self.DimBoundaries)
+        self.G1LoadValue.valueChanged.connect(self.DimBoundaries(0))
 
         # Non Structural Load G2 [ntc2018 3.1.3]
         self.G2LoadLabel = QtGui.QLabel('Non structural load G2 [ntc2018 3.1.3]')
@@ -122,7 +122,7 @@ class Sizing:
             self.G2LoadValue.setValue(0)
         self.G2LoadValue.setDecimals(4)
         self.G2LoadValue.setSuffix(' kN/m²')
-        self.G2LoadValue.valueChanged.connect(self.DimBoundaries)
+        self.G2LoadValue.valueChanged.connect(self.DimBoundaries(0))
 
         self.Q1LoadLabel = QtGui.QLabel('Overloads by intended use Q1 [ntc2018 Tab. 3.1.II]')
         self.Q1LoadValue = QtGui.QComboBox()
@@ -536,7 +536,7 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
-        print('SelBeam', SelBeam)
+        print('DimBoundaries SelBeam', SelBeam)
         # dimensional boundaries
         if self.WoodTypeValue.currentText() and self.WoodClassValue.currentText() and self.StrengthValue.currentText():
             for i in range(0,len(self.GammaMList[:])):
