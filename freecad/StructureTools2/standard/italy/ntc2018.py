@@ -160,7 +160,7 @@ class NTC2018:
             return 0
 
     def Verify_Shear(self, V, Width, Heigh, fvd):
-        check = 3V/(2*Width*Heigh)
+        check = 3*V/(2*Width*Heigh)
         if fvd >= check:
             return 1
         else:
