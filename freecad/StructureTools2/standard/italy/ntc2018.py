@@ -97,7 +97,7 @@ class NTC2018:
 
     def BeamWeight(self, Width, Height, Length, rhomean):
         # beam dead weight
-        Length = Length*1000
+        Length = Length
         X = Width/1000 # mm to m
         Y = Height/1000 # mm to m
         Weightkg = (X*Y*Length)*rhomean
@@ -105,7 +105,7 @@ class NTC2018:
         return WeightN
 
     def MomentEq(self, Fd, interaxis, length, alpha):
-        length = length*1000
+        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
@@ -115,7 +115,7 @@ class NTC2018:
         return M
 
     def ShearForceEq(self, Fd, interaxis, length, alpha):
-        length = length*1000
+        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
@@ -125,7 +125,7 @@ class NTC2018:
         return V
 
     def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005):
-        length = length*1000
+        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         I = (Width*Height**3)/12
@@ -136,7 +136,7 @@ class NTC2018:
         return f
 
     def NormalStress(self, Fd, interaxis, length, alpha, Hk):
-        length = length*1000
+        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
