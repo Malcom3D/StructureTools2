@@ -603,7 +603,7 @@ class Sizing:
 #                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
 #                                    self.checkSLU(Width, Height)
                             else:
-                                print('else', 'G1avr', self.G1avr, 'self.beamweight', self.beamweight)
+                                print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)
                                 print('G1tmp', G1tmp, 'self.G1LoadValue.value()', self.G1LoadValue.value())
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
