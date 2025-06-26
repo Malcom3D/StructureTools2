@@ -51,7 +51,6 @@ class NTC2018:
         qb = 0
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
-        print('qa:', qa, 'qb:', qb)
         self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
@@ -89,7 +88,7 @@ class NTC2018:
         return desres
 
     def PreDim(self, Fd, interaxis, length, fmd, fvd):
-        length = length
+        print(length)
         Area = interaxis*length
         q = Fd*interaxis/Area
         bmin = (3*q*fmd)/(4*fvd**2)
@@ -98,7 +97,6 @@ class NTC2018:
 
     def BeamWeight(self, Width, Height, Length, rhomean):
         # beam dead weight
-        Length = Length
         X = Width/1000 # mm to m
         Y = Height/1000 # mm to m
         Weightkg = (X*Y*Length)*rhomean
@@ -106,7 +104,6 @@ class NTC2018:
         return WeightN
 
     def MomentEq(self, Fd, interaxis, length, alpha):
-        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
@@ -116,7 +113,6 @@ class NTC2018:
         return M
 
     def ShearForceEq(self, Fd, interaxis, length, alpha):
-        length = length
         Area = interaxis*length
         q = Fd*1000*interaxis/Area
         if cos(alpha) == 1:
@@ -126,7 +122,6 @@ class NTC2018:
         return V
 
     def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005):
-        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         I = (Width*Height**3)/12
@@ -137,7 +132,6 @@ class NTC2018:
         return f
 
     def NormalStress(self, Fd, interaxis, length, alpha, Hk):
-        length = length
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
