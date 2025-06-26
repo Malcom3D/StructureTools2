@@ -605,6 +605,7 @@ class Sizing:
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)
+                                print('G1tmp', G1tmp, 'self.G1LoadValue.value()', self.G1LoadValue.value())
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
