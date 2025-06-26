@@ -40,7 +40,7 @@ class NTC2018:
         # if is't parallel to xy-plane
         dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
         alpha = atan2((z2-z1), dist_alpha)
-        if not alpha==0:
+        if not alpha == 0:
             alpha = (pi/2 - alpha)
         self.alpha = alpha
 
@@ -141,7 +141,7 @@ class NTC2018:
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
 #            if A = cerniera B = appoggio semplice:
-            N =  0
+            N =  Hk
             return N
 #            if A = appoggio semplice B = cerniera
         elif cos(alpha) != 1 and cos(alpha) != 0:

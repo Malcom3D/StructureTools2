@@ -667,6 +667,8 @@ class Sizing:
     def checkSLU(self, Width, Height):
 #        Width = self.B
 #        Height = self.H
+        if Width == 0 or Height == 0:
+            return
         Length = self.length
         Moment = self.NTC2018Data.MomentEq(self.Fd, self.interaxis, Length, self.alpha)
         Shear = self.NTC2018Data.ShearForceEq(self.Fd, self.interaxis, Length, self.alpha)
