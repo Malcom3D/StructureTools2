@@ -573,6 +573,7 @@ class Sizing:
                             self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                             self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
                             self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
+                            print('G1avr', self.G1avr, 'self.beamweight', self.beamweight)
                             G1tmp = round(self.beamweight + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
