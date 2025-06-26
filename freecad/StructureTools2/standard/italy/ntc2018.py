@@ -66,7 +66,7 @@ class NTC2018:
         Vb = -Rb
         if qa==qb:
             # Bending moment
-            x0 = Rational(1, 2)
+            x0 = 0.5
             Mmax = (((qmax)*length**2)/2)
         else:
             z = qmin/qmax
