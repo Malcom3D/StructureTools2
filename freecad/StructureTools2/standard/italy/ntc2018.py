@@ -49,6 +49,7 @@ class NTC2018:
         alpha = self.alpha
         qa = 0
         qb = 0
+        print(str(object.FinalLoading).split(' '))
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
         self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
