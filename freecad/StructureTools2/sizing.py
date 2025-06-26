@@ -343,7 +343,7 @@ class Sizing:
         self.SelectedHeightLabel = QtGui.QLabel('Selected height: 0  mm')
         self.BeamWeightLabel = QtGui.QLabel('Selected section weight: 0 kN')
 
-        layoutDesRes.addWidget(self.self.DesignResistance)
+        layoutDesRes.addWidget(self.DesignResistance)
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
