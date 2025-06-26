@@ -672,12 +672,12 @@ class Sizing:
             Check_fx0d = self.NTC2018Data.Verify_NormalStress(NormalStress, Width, Heigh, self.fc0d, self.ft0d)
             Check_Deflection = self.NTC2018Data.Verify_Deflection(Deflection, Length,)
 
-        if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
-            print('Verified')
-        else:
-            print('Verification Fail')
-            print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
-            print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
+            if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
+                print('Verified')
+            else:
+                print('Verification Fail')
+                print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
+                print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
