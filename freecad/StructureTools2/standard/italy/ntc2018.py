@@ -102,7 +102,7 @@ class NTC2018:
         WeightN = (Weightkg*9.80665)/1000 # kg to kN
         return WeightN
 
-    def MomentEq(self, Fd, interaxis, length, alpha)
+    def MomentEq(self, Fd, interaxis, length, alpha):
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
@@ -111,7 +111,7 @@ class NTC2018:
             M = 0.1265 ((q*cos(alpha))/2)*l**2
         return M
 
-    def ShearForceEq(self, Fd, interaxis, length, alpha)
+    def ShearForceEq(self, Fd, interaxis, length, alpha):
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
@@ -120,7 +120,7 @@ class NTC2018:
             V = ((q*cos(alpha))/2)*l
         return V
 
-    def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005)
+    def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005):
         Area = interaxis*length
         q = Fd*interaxis/Area
         I = (Width*Height**3)/12
@@ -130,7 +130,7 @@ class NTC2018:
            f = (5/384)*(((q*cos(alpha))*length**4)/(I*E005*cos(alpha)**2)
         return f
 
-    def NormalStress(self, Fd, interaxis, length, alpha, Hk)
+    def NormalStress(self, Fd, interaxis, length, alpha, Hk):
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
@@ -148,11 +148,11 @@ class NTC2018:
 #            if A = B = cerniera -> Na=Nb
 #                N = -((Hk*sin(alpha)*length)/2
 
-    def SectionModulus(self, Width, Heigh)
+    def SectionModulus(self, Width, Heigh):
        Wmax = max((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
        Wmin = max((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
 
-    def Verify_Bending(self, M, W, fmd)
+    def Verify_Bending(self, M, W, fmd):
         check = M/W
         if fmd >= check:
             return 1
@@ -166,7 +166,7 @@ class NTC2018:
         else:
             return 0
 
-    def Verify_NormalStress(self, N, Width, Heigh, fc0d, ft0d)
+    def Verify_NormalStress(self, N, Width, Heigh, fc0d, ft0d):
         check = N/(Width*Heigh)
         if N > 0:
             fx0d = ft0d
@@ -178,7 +178,7 @@ class NTC2018:
         else:
             return 0
 
-    def Verify_Deflection(self, f, length)
+    def Verify_Deflection(self, f, length):
         check = length/300 
         if f < check:
             return 1
