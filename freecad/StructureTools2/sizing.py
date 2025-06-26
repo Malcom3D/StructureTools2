@@ -597,8 +597,8 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
-                                    self.checkSLU(Width, Height)
+#                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
+#                                    self.checkSLU(Width, Height)
                             else:
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
