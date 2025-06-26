@@ -108,7 +108,7 @@ class NTC2018:
         if cos(alpha) == 1:
             M = (q*l**2)/8
         elif cos(alpha) != 1 and cos(alpha) != 0:
-            M = 0.1265 ((q*cos(alpha))/2)*l**2
+            M = 0.1265 ((q*cos(alpha))/2)*length**2
         return M
 
     def ShearForceEq(self, Fd, interaxis, length, alpha):
