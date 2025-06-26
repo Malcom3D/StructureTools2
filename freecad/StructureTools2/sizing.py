@@ -49,6 +49,7 @@ class Sizing:
         self.G2avr = self.NTC2018Data.G2avr
         self.g2load = self.NTC2018Data.g2load
         self.length = self.NTC2018Data.length
+        self.alpha = self.NTC2018Data.alpha
 
         self.constant = Constant()
         self.Q1mapList = self.constant.Q1map()
@@ -325,6 +326,7 @@ class Sizing:
         self.formDesRes = QtGui.QDialog()
         layoutDesRes = QtGui.QVBoxLayout()
 
+        self.DesignResistance = QtGui.QLabel('Design resistances')
         self.NormalStressLabel = QtGui.QLabel('Normal stress fc0d: 0 kN/mm²')
         self.BendingLabel = QtGui.QLabel('Bending fmd: 0 kN/mm²')
         self.ShearLabel = QtGui.QLabel('Shear fvd: 0 kN/mm²')
@@ -341,6 +343,7 @@ class Sizing:
         self.SelectedHeightLabel = QtGui.QLabel('Selected height: 0  mm')
         self.BeamWeightLabel = QtGui.QLabel('Selected section weight: 0 kN')
 
+        layoutDesRes.addWidget(self.self.DesignResistance)
         layoutDesRes.addWidget(self.NormalStressLabel)
         layoutDesRes.addWidget(self.BendingLabel)
         layoutDesRes.addWidget(self.ShearLabel)
@@ -542,6 +545,7 @@ class Sizing:
                     if l.lower() in self.WoodTypeValue.currentText().lower():
                         self.GammaM = self.GammaMList[i][2]
                         self.fc0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.fc0k, self.GammaM)
+                        self.ft0d = self.NTC2018Data.DesignRes(self.kmodPerm, self.ft0k, self.GammaM)
                         self.fmd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fmk, self.GammaM)
                         self.fvd = self.NTC2018Data.DesignRes(self.kmodPerm, self.fvk, self.GammaM)
 
@@ -596,6 +600,7 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
+                        self.checkSLU()
 
             if SelBeam != 1 and self.FinalBeamDim != 1:
                 print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
@@ -651,6 +656,27 @@ class Sizing:
 
         self.DimBoundaries(1)
 
+    def checkSLU(self)
+        Width = self.B
+        Height = self.H
+        Length = self.length
+        Moment = self.NTC2018Data.MomentEq(self.Fd, self.interaxis, Length, self.alpha)
+        Shear = self.NTC2018Data.ShearForceEq(self.Fd, self.interaxis, Length, self.alpha)
+        Deflection = self.NTC2018Data.DeflectionEq(self.Fd, self.interaxis, Width, Height, Length, self.alpha, self.E005)
+        NormalStress = self.NTC2018Data.NormalStress(self.Fd, self.interaxis, Length, self.alpha, self.Hk)
+        Wmax, Wmin = self.NTC2018Data.SectionModulus(self.Width, self.Heigh)
+
+        Check_fmd = self.NTC2018Data.Verify_Bending(Moment, Wmax, self.fmd)
+        Check_fvd = self.NTC2018Data.Verify_Shear(Shear, Width, Heigh, self.fvd)
+        Check_fx0d = self.NTC2018Data.Verify_NormalStress(NormalStress, Width, Heigh, self.fc0d, self.ft0d)
+        Check_Deflection = self.NTC2018Data.Verify_Deflection(Deflection, Length,)
+
+        if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
+            print('Verified')
+        else:
+            print('Verification Fail')
+            print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
+            print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.

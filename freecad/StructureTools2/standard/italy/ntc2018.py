@@ -1,12 +1,7 @@
-#import FreeCAD, App, FreeCADGui, Part, os, math
-#from PySide import QtWidgets, QtCore, QtGui
-#import subprocess
 import math
 
 from sympy import *
 init_printing()
-
-#ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
     msg_box = QtWidgets.QMessageBox()
@@ -78,7 +73,7 @@ class NTC2018:
             u = 0.577*sqrt(1+z+z**2)
             x0 = ((u-1)*length)/(z-1)
             # Bending moment
-            Mmax = 0.1256*((((qa+qb)*cos(alpha))/2)*length**2)
+            Mmax = 0.1265*((((qa+qb)*cos(alpha))/2)*length**2)
         self.x0 = x0
         self.Mmax = Mmax
 
@@ -106,3 +101,86 @@ class NTC2018:
         Weightkg = (X*Y*Length)*rhomean
         WeightN = (Weightkg*9.80665)/1000 # kg to kN
         return WeightN
+
+    def MomentEq(self, Fd, interaxis, length, alpha)
+        Area = interaxis*length
+        q = Fd*interaxis/Area
+        if cos(alpha) == 1:
+            M = (q*l**2)/8
+        elif cos(alpha) != 1 and cos(alpha) != 0:
+            M = 0.1265 ((q*cos(alpha))/2)*l**2
+        return M
+
+    def ShearForceEq(self, Fd, interaxis, length, alpha)
+        Area = interaxis*length
+        q = Fd*interaxis/Area
+        if cos(alpha) == 1:
+            V = q*l/2
+        elif cos(alpha) != 1 and cos(alpha) != 0:
+            V = ((q*cos(alpha))/2)*l
+        return V
+
+    def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005)
+        Area = interaxis*length
+        q = Fd*interaxis/Area
+        I = (Width*Height**3)/12
+        if cos(alpha) == 1:
+           f = (5/384)*((q*length**4)/(I*E005)
+        elif cos(alpha) != 1 and cos(alpha) != 0:
+           f = (5/384)*(((q*cos(alpha))*length**4)/(I*E005*cos(alpha)**2)
+        return f
+
+    def NormalStress(self, Fd, interaxis, length, alpha, Hk)
+        Area = interaxis*length
+        q = Fd*interaxis/Area
+        if cos(alpha) == 1:
+#            if A = cerniera B = appoggio semplice:
+            N =  0
+#            if A = appoggio semplice B = cerniera
+        elif cos(alpha) != 1 and cos(alpha) != 0:
+            N = Hk*sin(alpha)
+#            if A = cerniera B = appoggio semplice:
+#                Na = -(Hk*sin(alpha))*length
+#                Nb = 0
+#            if A = appoggio semplice B = cerniera
+#                Na = 0
+#                Nb = (Hk*sin(alpha))*length
+#            if A = B = cerniera -> Na=Nb
+#                N = -((Hk*sin(alpha)*length)/2
+
+    def SectionModulus(self, Width, Heigh)
+       Wmax = max((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
+       Wmin = max((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
+
+    def Verify_Bending(self, M, W, fmd)
+        check = M/W
+        if fmd >= check:
+            return 1
+        else:
+            return 0
+
+    def Verify_Shear(self, V, Width, Heigh, fvd):
+        check = 3V/(2*Width*Heigh)
+        if fvd >= check:
+            return 1
+        else:
+            return 0
+
+    def Verify_NormalStress(self, N, Width, Heigh, fc0d, ft0d)
+        check = N/(Width*Heigh)
+        if N > 0:
+            fx0d = ft0d
+        else:
+            fx0d = fc0d
+
+        if fx0d >= check:
+            return 1
+        else:
+            return 0
+
+    def Verify_Deflection(self, f, length)
+        check = length/300 
+        if f < check:
+            return 1
+        else:
+            return 0
