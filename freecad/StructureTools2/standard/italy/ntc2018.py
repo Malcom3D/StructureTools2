@@ -124,9 +124,10 @@ class NTC2018:
         Area = interaxis*length
         q = Fd*interaxis/Area
         I = (Width*Height**3)/12
-        if cos(alpha) == 1:
+        torb = cos(alpha)
+        if torb == 1:
            f = (5/384)*((q*length**4)/(I*E005)
-        elif cos(alpha) != 1 and cos(alpha) != 0:
+        elif torb != 1 and torb != 0:
            f = (5/384)*(((q*cos(alpha))*length**4)/(I*E005*cos(alpha)**2)
         return f
 
