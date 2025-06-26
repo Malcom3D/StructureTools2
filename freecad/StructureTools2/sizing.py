@@ -586,6 +586,8 @@ class Sizing:
                         elif SelBeam != 1 and self.FinalBeamDim != 1:
                             print('SelectedBeam else:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
+                                Width = self.selWidth
+                                Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
                                 self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
@@ -600,7 +602,8 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-                        self.checkSLU()
+                        if Width and Height:
+                            self.checkSLU()
 
             if SelBeam != 1 and self.FinalBeamDim != 1:
                 print('DimBoundaries SelBeam', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
@@ -668,9 +671,9 @@ class Sizing:
 
         if Wmax != 0:
             Check_fmd = self.NTC2018Data.Verify_Bending(Moment, Wmax, self.fmd)
-            Check_fvd = self.NTC2018Data.Verify_Shear(Shear, Width, Heigh, self.fvd)
-            Check_fx0d = self.NTC2018Data.Verify_NormalStress(NormalStress, Width, Heigh, self.fc0d, self.ft0d)
-            Check_Deflection = self.NTC2018Data.Verify_Deflection(Deflection, Length,)
+            Check_fvd = self.NTC2018Data.Verify_Shear(Shear, Width, Height, self.fvd)
+            Check_fx0d = self.NTC2018Data.Verify_NormalStress(NormalStress, Width, Height, self.fc0d, self.ft0d)
+            Check_Deflection = self.NTC2018Data.Verify_Deflection(Deflection, Length)
 
             if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
                 print('Verified')
