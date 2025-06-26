@@ -158,14 +158,14 @@ class NTC2018:
 
     def Verify_Bending(self, M, W, fmd):
         check = M/W
-        if fmd >= check:
+        if fmd <= check:
             return False
         else:
             return True
 
     def Verify_Shear(self, V, Width, Heigh, fvd):
         check = 3*V/(2*Width*Heigh)
-        if fvd >= check:
+        if fvd <= check:
             return False
         else:
             return True
@@ -177,14 +177,14 @@ class NTC2018:
         else:
             fx0d = fc0d
 
-        if fx0d >= check:
+        if fx0d <= check:
             return False
         else:
             return True
 
     def Verify_Deflection(self, f, length):
         check = length/300 
-        if f < check:
+        if f > check:
             return False
         else:
             return True
