@@ -666,10 +666,11 @@ class Sizing:
         NormalStress = self.NTC2018Data.NormalStress(self.Fd, self.interaxis, Length, self.alpha, self.Hk)
         Wmax, Wmin = self.NTC2018Data.SectionModulus(Width, Height)
 
-        Check_fmd = self.NTC2018Data.Verify_Bending(Moment, Wmax, self.fmd)
-        Check_fvd = self.NTC2018Data.Verify_Shear(Shear, Width, Heigh, self.fvd)
-        Check_fx0d = self.NTC2018Data.Verify_NormalStress(NormalStress, Width, Heigh, self.fc0d, self.ft0d)
-        Check_Deflection = self.NTC2018Data.Verify_Deflection(Deflection, Length,)
+        if Wmax != 0:
+            Check_fmd = self.NTC2018Data.Verify_Bending(Moment, Wmax, self.fmd)
+            Check_fvd = self.NTC2018Data.Verify_Shear(Shear, Width, Heigh, self.fvd)
+            Check_fx0d = self.NTC2018Data.Verify_NormalStress(NormalStress, Width, Heigh, self.fc0d, self.ft0d)
+            Check_Deflection = self.NTC2018Data.Verify_Deflection(Deflection, Length,)
 
         if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
             print('Verified')
