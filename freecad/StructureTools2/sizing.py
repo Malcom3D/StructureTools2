@@ -579,7 +579,7 @@ class Sizing:
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
                                 print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
-#                            self.checkSLU(Width, Height)
+                            self.checkSLU(Width, Height)
 #                            else:
 #                                self.FinalBeamDim = 0
 #                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
@@ -588,8 +588,8 @@ class Sizing:
                             print('SelectedBeam else if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             print('self.bmin', self.bmin, 'selW: ', self.selWidth, 'self.hmin', self.hmin, 'selH: ', self.selHeight)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
-#                                Width = self.selWidth
-#                                Height = self.selHeight
+                                Width = self.selWidth
+                                Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
                                 self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
@@ -600,8 +600,8 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-#                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
-#                                    self.checkSLU(Width, Height)
+                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
+                                    self.checkSLU(Width, Height)
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminweight + self.G1avr, 4)

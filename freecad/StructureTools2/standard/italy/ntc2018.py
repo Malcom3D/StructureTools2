@@ -117,7 +117,7 @@ class NTC2018:
     def ShearForceEq(self, Fd, interaxis, length, alpha):
         length = length
         Area = interaxis*length
-        q = Fd*interaxis/Area
+        q = Fd*1000*interaxis/Area
         if cos(alpha) == 1:
             V = q*length/2
         elif cos(alpha) != 1 and cos(alpha) != 0:
@@ -163,7 +163,7 @@ class NTC2018:
        return Wmax, Wmin
 
     def Verify_Bending(self, M, W, fmd):
-        check = M/W
+        check = (M*1000000)/W
         if fmd <= check:
             return False
         else:
