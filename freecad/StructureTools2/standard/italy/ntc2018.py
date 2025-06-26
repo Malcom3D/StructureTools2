@@ -115,9 +115,9 @@ class NTC2018:
         Area = interaxis*length
         q = Fd*interaxis/Area
         if cos(alpha) == 1:
-            V = q*l/2
+            V = q*length/2
         elif cos(alpha) != 1 and cos(alpha) != 0:
-            V = ((q*cos(alpha))/2)*l
+            V = ((q*cos(alpha))/2)*length
         return V
 
     def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005):
