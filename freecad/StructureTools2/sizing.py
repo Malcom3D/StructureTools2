@@ -586,8 +586,8 @@ class Sizing:
                         elif SelBeam != 1 and self.FinalBeamDim != 1:
                             print('SelectedBeam else:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
-                                Width = self.selWidth
-                                Height = self.selHeight
+#                                Width = self.selWidth
+#                                Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
                                 self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
