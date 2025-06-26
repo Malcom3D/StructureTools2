@@ -656,7 +656,7 @@ class Sizing:
 
         self.DimBoundaries(1)
 
-    def checkSLU(self)
+    def checkSLU(self):
         Width = self.B
         Height = self.H
         Length = self.length
