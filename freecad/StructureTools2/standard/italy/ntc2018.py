@@ -136,9 +136,11 @@ class NTC2018:
         if cos(alpha) == 1:
 #            if A = cerniera B = appoggio semplice:
             N =  0
+            return N
 #            if A = appoggio semplice B = cerniera
         elif cos(alpha) != 1 and cos(alpha) != 0:
             N = Hk*sin(alpha)
+            return N
 #            if A = cerniera B = appoggio semplice:
 #                Na = -(Hk*sin(alpha))*length
 #                Nb = 0
@@ -147,10 +149,12 @@ class NTC2018:
 #                Nb = (Hk*sin(alpha))*length
 #            if A = B = cerniera -> Na=Nb
 #                N = -((Hk*sin(alpha)*length)/2
+ 
 
     def SectionModulus(self, Width, Heigh):
        Wmax = max(((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
        Wmin = max(((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
+       return Wmax, Wmin
 
     def Verify_Bending(self, M, W, fmd):
         check = M/W
