@@ -51,6 +51,7 @@ class NTC2018:
         qb = 0
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
+        print('qa:', qa, 'qb:', qb)
         self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
