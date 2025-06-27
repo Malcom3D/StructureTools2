@@ -90,10 +90,12 @@ class NTC2018:
 
     def PreDim(self, Fd, interaxis, length, fmd, fvd):
         q = Fd*interaxis
+        lengthmm = length * 1000
 #        bmin = (3*q*fmd)/(4*fvd**2)
 #        hmin = (length*1000*fvd)/(fmd)
-        bmin = (7*q*length*1000*fvd)/(20*fmd)
-        hmin = sqrt((15*q*length*1000)/(14*fvd))
+#        bmin = (7*q*length*1000*fvd)/(20*fmd)
+        hmin = sqrt((15*q*lengthmm**2)/(14*fmd))
+        bmin = 0.7*hmin
         return bmin, hmin
 
     def BeamWeight(self, Width, Height, Length, rhomean):
@@ -102,6 +104,7 @@ class NTC2018:
         Y = Height/1000 # mm to m
         Weightkg = (X*Y*Length)*rhomean
         WeightN = (Weightkg*9.80665)/1000 # kg to kN
+        print('BeamWeight: ', WeightN)
         return WeightN
 
     def MomentEq(self, Fd, interaxis, length, alpha):
