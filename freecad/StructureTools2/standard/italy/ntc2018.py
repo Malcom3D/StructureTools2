@@ -118,15 +118,15 @@ class NTC2018:
         return WeightN, WeightQ
 
     def MomentEq(self, Fd, interaxis, length, alpha):
-        q = Fd*interaxis
+        q = Fd*interaxis # kN/m² * m = kN/m
         if cos(alpha) == 1:
             M = (q*length**2)/8
         elif cos(alpha) != 1 and cos(alpha) != 0:
             M = 0.1265*((q*cos(alpha))/2)*length**2
-        return M
+        return M # kNm
 
     def ShearForceEq(self, Fd, interaxis, length, alpha):
-        q = Fd*interaxis
+        q = Fd*interaxis # kN/m² * m = kN/m
         if cos(alpha) == 1:
             V = q*length/2
         elif cos(alpha) != 1 and cos(alpha) != 0:
@@ -134,7 +134,7 @@ class NTC2018:
         return V
 
     def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005):
-        q = Fd*interaxis
+        q = Fd*interaxis # kN/m² * m = kN/m
         I = (Width*Height**3)/12
         if cos(alpha) == 1:
            f = (5/384)*((q*length**4)/(I*E005))
@@ -142,8 +142,7 @@ class NTC2018:
            f = (5/384)*(((q*cos(alpha))*length**4)/(I*E005*cos(alpha)**2))
         return f
 
-    def NormalStress(self, Fd, interaxis, length, alpha, Hk):
-        q = Fd*interaxis
+    def NormalStress(self, interaxis, length, alpha, Hk):
         if cos(alpha) == 1:
 #            if A = cerniera B = appoggio semplice:
             N =  Hk
@@ -165,10 +164,10 @@ class NTC2018:
     def SectionModulus(self, Width, Heigh):
        Wmax = max(((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
        Wmin = max(((Width*Heigh**2)/6), ((Heigh*Width**2)/6))
-       return Wmax, Wmin
+       return Wmax, Wmin # mm³
 
     def Verify_Bending(self, M, W, fmd):
-        check = (M*1000000)/W
+        check = (1000000*M)/W # 1000*kNm*1000 -> Nmm/mm³ = N/mm²
         if fmd <= check:
             return False
         else:
