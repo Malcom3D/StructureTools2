@@ -305,7 +305,7 @@ class Sizing:
         self.BeamStepValue.setSuffix(' m')
         self.BeamStepValue.setMinimum(0.0001)
         self.BeamStepValue.setMaximum(9999999999.9999)
-        self.BeamStepValue.setValue(1)
+        self.BeamStepValue.setValue(1/self.length)
         self.BeamStepValue.valueChanged.connect(self.selectedBeamStep)
 
         self.InfluenceAreaLabel = QtGui.QLabel('Area of influence')
@@ -496,7 +496,6 @@ class Sizing:
             self.formPreSizing.hide()
         else:
             self.formPreSizing.show()
-            self.BeamStepValue.setValue(1/self.length)
 
             self.fmk = self.StrengthList[index][1]
             self.ft0k = self.StrengthList[index][2]
