@@ -30,7 +30,8 @@ class NTC2018:
                 self.LinePreCalc(object)
 
     def LinePreCalc(self, object):
-        Owner=object.ObjectBase[0][0]
+#        Owner=object.ObjectBase[0][0]
+        Owner=object
         x1 = round(Owner.Start.x, 2)
         y1 = round(Owner.Start.y, 2)
         z1 = round(Owner.Start.z, 2)
