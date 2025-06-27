@@ -39,7 +39,7 @@ class NTC2018:
         y2 = round(Owner.End.y, 2)
         z2 = round(Owner.End.z, 2)
         self.length = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
-        print('Owner.Length: ', Owner.Length.split())
+        print('Owner.Length: ', str(Owner.Length).split()[0])
 #        self.length = round((Owner.Length.split().[0]/1000), 2)
 
         # if is't parallel to xy-plane
