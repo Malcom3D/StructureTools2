@@ -106,9 +106,9 @@ class NTC2018:
 
     def BeamWeight(self, Width, Height, Length, rhomean):
         # beam dead weight
-        print('X: ', X, 'Y: ', Y, 'Length: ', Length)
         X = Width/1000 # mm to m
         Y = Height/1000 # mm to m
+        print('X: ', X, 'Y: ', Y, 'Length: ', Length)
         Weightkg = (X*Y*Length)*rhomean
         WeightN = (Weightkg*9.80665)/1000 # kg to kN
         WeightQ = WeightN/(X*Length) # kN/m²
