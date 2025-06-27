@@ -60,6 +60,10 @@ class Sizing:
         self.KmodList = self.constant.Kmod()
         self.BeamDimList = self.constant.BeamDim()
 
+        self.qk = 0
+        self.Qk = 0
+        self.Hk = 0
+
         self.fmk = 0
         self.ft0k = 0
         self.ft90k = 0
