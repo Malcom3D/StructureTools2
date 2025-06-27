@@ -92,11 +92,12 @@ class NTC2018:
         return desres
 
     def PreDim(self, Fd, interaxis, length, fmd, fvd):
-        q = Fd*interaxis
-        bmin = (3*q*1000*fmd)/(4*fvd**2)
-        hmin = ((length*fvd)/(fmd))*1000
-#        bmin = ((7*q*length*fvd)/(20*fmd))*1000
-#        hmin = sqrt((15*q*(length*1000)**2)/(14*fmd))
+        q = Fd*interaxis/1000 # N/m² to N/mm
+        lengthmm = length*1000
+        bmin = (3*q*fmd)/(4*fvd**2)
+        hmin = ((lengthmm*fvd)/(fmd))
+#        bmin = ((7*q*lengthmm*fvd)/(20*fmd))
+#        hmin = sqrt((15*q*(lengthmm)**2)/(14*fmd))
 #        bmin = 0.7*hmin
         return bmin, hmin
 
