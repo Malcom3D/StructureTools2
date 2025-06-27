@@ -16,7 +16,7 @@ class NTC2018:
         self.G1avr = 0
         self.G2avr = 0
         self.g2load = 0
-        self.length = 1
+#        self.length = 1
         self.alpha = 0
         LoadPresence = 0
         for object in selection:
@@ -38,9 +38,9 @@ class NTC2018:
         x2 = round(Owner.End.x, 2)
         y2 = round(Owner.End.y, 2)
         z2 = round(Owner.End.z, 2)
-        self.length = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
+#        self.length = sqrt((x2-x1)**2+(y1-y2)**2+(z1-z2)**2)/1000
         print('Owner.Length: ', str(Owner.Length).split()[0])
-#        self.length = round((Owner.Length.split().[0]/1000), 2)
+        self.length = round((Owner.Length.split().[0]/1000), 2)
 
         # if is't parallel to xy-plane
         dist_alpha = sqrt((x2-x1)**2+(y2-y1)**2)
