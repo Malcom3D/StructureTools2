@@ -15,7 +15,7 @@ class NTC2018:
     def __init__(self, selection):
         self.G1avr = 0
         self.G2avr = 0
-        self.g2load = 0
+        self.G2load = 0
 #        self.length = 1
         self.alpha = 0
         LoadPresence = 0
@@ -58,13 +58,14 @@ class NTC2018:
         print(str(object.FinalLoading).split(' '))
         qa = float(str(object.FinalLoading).split(' ')[0])/1000000
         qb = float(str(object.InitialLoading).split(' ')[0])/1000000
-        self.G2avr = (((qa+qb)/2)*cos(alpha)*length)
+        self.G2avr = (((qa+qb)/2)*cos(alpha)*length) # kN/m²
         qmax = max((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         qmin = min((((2*qa+qb)*cos(alpha))/3), (((qa+2*qb)*cos(alpha))/3))
         # ntc2018 3.1.3
+        g2avr = self.G2avr/length # kN/m
         for i in range(1,6):
-            if i-1 < self.G2avr <= i:
-                self.g2load = 0.4*i
+            if i-1 < g2avr <= i:
+                self.G2load = 0.4*i  # kN/m²
         # Reaction Ra and Rb
         Ra = (((2*qa+qb)*cos(alpha))*length)/6
         Rb = (((qa+2*qb)*cos(alpha))*length)/6

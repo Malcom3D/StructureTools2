@@ -47,7 +47,7 @@ class Sizing:
         self.NTC2018Data = NTC2018(selection)
         self.G1avr = self.NTC2018Data.G1avr
         self.G2avr = self.NTC2018Data.G2avr
-        self.g2load = self.NTC2018Data.g2load
+        self.G2load = self.NTC2018Data.G2load
         self.length = self.NTC2018Data.length
         self.alpha = self.NTC2018Data.alpha
 
@@ -528,7 +528,8 @@ class Sizing:
     def selectedBeamStep(self):
         self.interaxis = self.BeamStepValue.value()
         self.InfluenceAreaValue.setValue(self.length*self.interaxis)
-        G2tmp = self.G2avr+(self.g2load*self.interaxis)
+#        G2tmp = self.G2avr+(self.g2load*self.interaxis)
+        G2tmp = self.G2avr+self.G2load
         self.G2LoadValue.setValue(G2tmp)
 
         self.DimBoundaries(0)
@@ -537,7 +538,8 @@ class Sizing:
         A = self.InfluenceAreaValue.value()
         self.interaxis = A/self.length
         self.BeamStepValue.setValue(self.interaxis)
-        G2tmp = self.G2avr+(self.g2load*self.interaxis)
+#        G2tmp = self.G2avr+(self.g2load*self.interaxis)
+        G2tmp = self.G2avr+self.G2load
         self.G2LoadValue.setValue(G2tmp)
         self.DimBoundaries(0)
 
