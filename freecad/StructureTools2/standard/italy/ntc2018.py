@@ -92,8 +92,8 @@ class NTC2018:
         q = Fd*interaxis
         bmin = (3*q*fmd)/(4*fvd**2)
         hmin = ((length*fvd)/(fmd))*1000
-#        bmin = (7*q*length*1000*fvd)/(20*fmd)
-#        hmin = sqrt((15*q*length**2)/(14*fmd))*1000
+#        bmin = ((7*q*length*fvd)/(20*fmd))*1000
+#        hmin = sqrt((15*q*(length*1000)**2)/(14*fmd))
 #        bmin = 0.7*hmin
         return bmin, hmin
 
