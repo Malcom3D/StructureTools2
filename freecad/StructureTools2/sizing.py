@@ -629,6 +629,7 @@ class Sizing:
         self.DimCommValue.clear()
         for i in range(0,len(self.BeamDimList[:])):
                 text = 'text'
+                Length = self.length*1000 # m -> mm
                 if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
                     text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
                     self.DimCommValue.addItem(text)

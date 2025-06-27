@@ -167,7 +167,7 @@ class NTC2018:
        return Wmax, Wmin # mm³
 
     def Verify_Bending(self, M, W, fmd):
-        check = (1000000*M)/W # 1000*kNm*1000 -> Nmm/mm³ = N/mm²
+        check = (1000*M)/W # kNm*1000 -> kNmm/mm³ = kN/mm²
         if fmd <= check:
             return False
         else:
