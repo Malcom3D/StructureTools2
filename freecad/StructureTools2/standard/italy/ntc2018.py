@@ -16,6 +16,8 @@ class NTC2018:
         self.G1avr = 0
         self.G2avr = 0
         self.g2load = 0
+        self.length = 0
+        self.alpha = 0
         LoadPresence = 0
         for object in selection:
             if 'Load' in object.Name:
