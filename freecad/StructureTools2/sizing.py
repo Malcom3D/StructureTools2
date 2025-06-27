@@ -955,7 +955,7 @@ class CommandSizing():
     
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
-        print(selection)
+        print(selection[0].Name)
         doc = FreeCAD.ActiveDocument
 
         # what is done when the command is clicked
