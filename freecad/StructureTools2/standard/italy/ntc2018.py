@@ -22,7 +22,7 @@ class NTC2018:
         for object in selection:
             if 'Load' in object.Name:
                 LoadPresence = 1
-                self.LinePreCalc(object)
+#                self.LinePreCalc(object)
                 self.LoadPreCalc(object)
 
         for object in selection:
