@@ -89,11 +89,11 @@ class NTC2018:
         return desres
 
     def PreDim(self, Fd, interaxis, length, fmd, fvd):
-#        Area = interaxis*length
-#        q = Fd*interaxis/Area
         q = Fd*interaxis
-        bmin = (3*q*fmd)/(4*fvd**2)
-        hmin = (length*1000*fvd)/(fmd)
+#        bmin = (3*q*fmd)/(4*fvd**2)
+#        hmin = (length*1000*fvd)/(fmd)
+        bmin = (7*q*length*1000*fvd)/(20*fmd)
+        hmin = sqrt((15*length*1000)/(14*fvd))
         return bmin, hmin
 
     def BeamWeight(self, Width, Height, Length, rhomean):
@@ -105,8 +105,6 @@ class NTC2018:
         return WeightN
 
     def MomentEq(self, Fd, interaxis, length, alpha):
-#        Area = interaxis*length
-#        q = Fd*interaxis/Area
         q = Fd*interaxis
         if cos(alpha) == 1:
             M = (q*length**2)/8
@@ -115,8 +113,6 @@ class NTC2018:
         return M
 
     def ShearForceEq(self, Fd, interaxis, length, alpha):
-#        Area = interaxis*length
-#        q = Fd*interaxis/Area
         q = Fd*interaxis
         if cos(alpha) == 1:
             V = q*length/2
@@ -125,8 +121,6 @@ class NTC2018:
         return V
 
     def DeflectionEq(self, Fd, interaxis, Width, Height, length, alpha, E005):
-#        Area = interaxis*length
-#        q = Fd*interaxis/Area
         q = Fd*interaxis
         I = (Width*Height**3)/12
         if cos(alpha) == 1:
@@ -136,8 +130,6 @@ class NTC2018:
         return f
 
     def NormalStress(self, Fd, interaxis, length, alpha, Hk):
-#        Area = interaxis*length
-#        q = Fd*interaxis/Area
         q = Fd*interaxis
         if cos(alpha) == 1:
 #            if A = cerniera B = appoggio semplice:
