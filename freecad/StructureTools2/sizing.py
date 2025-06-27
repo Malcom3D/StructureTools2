@@ -34,6 +34,7 @@ def set_type(s):
 
 class Sizing:
     def __init__(self, selection):
+        print(selection[0].Name)
         for object in selection:
             if 'NewProject' in object.Name:
                 if 'ntc2018' in object.BuildingStandard:
@@ -955,7 +956,6 @@ class CommandSizing():
     
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
-        print(selection[0].Name)
         doc = FreeCAD.ActiveDocument
 
         # what is done when the command is clicked
