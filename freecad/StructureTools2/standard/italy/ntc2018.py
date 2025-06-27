@@ -142,7 +142,7 @@ class NTC2018:
            f = (5/384)*(((q*cos(alpha))*length**4)/(I*E005*cos(alpha)**2))
         return f
 
-    def NormalStress(self, interaxis, length, alpha, Hk):
+    def NormalStress(self, Fd, interaxis, length, alpha, Hk):
         if cos(alpha) == 1:
 #            if A = cerniera B = appoggio semplice:
             N =  Hk
