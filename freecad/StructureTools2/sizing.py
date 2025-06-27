@@ -560,7 +560,7 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], self.qk, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
-                        self.beamminweight self.beamminQ = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
+                        self.beamminweight, self.beamminQ = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
                         self.FundCombLabel.setText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' kN/m²')
                         self.WidthMinLabel.setText('Section width minimum: ' + str(round(self.bmin, 2)) + ' mm')
@@ -575,7 +575,7 @@ class Sizing:
                             rhomean = self.rmean
                             self.FinalBeamDim = 1
                             print('W: ', Width, 'H: ', Height)
-                            self.beamweight self.beamQ = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+                            self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
                             self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                             self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
                             self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
@@ -597,7 +597,7 @@ class Sizing:
                                 Width = self.selWidth
                                 Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
-                                self.beamweight self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
+                                self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                                 self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
                                 self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.selHeight, 4)) + '  mm')
