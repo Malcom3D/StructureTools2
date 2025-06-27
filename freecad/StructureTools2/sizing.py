@@ -541,10 +541,15 @@ class Sizing:
 #        G2tmp = self.G2avr+(self.g2load*self.interaxis)
         G2tmp = self.G2avr+self.G2load
         self.G2LoadValue.setValue(G2tmp)
+
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
-        print('DimBoundaries SelBeam', SelBeam)
+        # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
+        #      G1LoadInit=G1LoadValue
+        # if G2LoadValue != 0 and (not G2LoadInit or G2LoadInit == 0):
+        #      if G2LoadValue != self G2avr:
+        #          G2LoadInit = G2LoadValue + self.G2avr
         # dimensional boundaries
         if self.WoodTypeValue.currentText() and self.WoodClassValue.currentText() and self.StrengthValue.currentText():
             for i in range(0,len(self.GammaMList[:])):
