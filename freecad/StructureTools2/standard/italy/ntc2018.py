@@ -103,8 +103,9 @@ class NTC2018:
         Y = Height/1000 # mm to m
         Weightkg = (X*Y*Length)*rhomean
         WeightN = (Weightkg*9.80665)/1000 # kg to kN
+        WeightQ = WeightN/(X*Length) # kN/m²
         print('BeamWeight: ', WeightN)
-        return WeightN
+        return WeightN WeightQ
 
     def MomentEq(self, Fd, interaxis, length, alpha):
         q = Fd*interaxis

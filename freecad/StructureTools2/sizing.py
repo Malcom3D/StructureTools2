@@ -92,6 +92,8 @@ class Sizing:
         self.selWidth = 0
         self.selHeight = 0
 
+        self.beamQ = 0
+        self.beamminQ = 0
         self.beamweight = 0
         self.FinalBeamDim = 0
 
@@ -338,7 +340,7 @@ class Sizing:
         self.WidthMinLabel = QtGui.QLabel('Section width minimum: 0 mm')
         self.HeightMinLabel = QtGui.QLabel('Section height minimum: 0 mm')
 
-        self.FundCombLabel = QtGui.QLabel('Fundamental Combination: 0 mm')
+        self.FundCombLabel = QtGui.QLabel('Fundamental Combination: 0 kN/m²')
 
         self.BeamMinWeightLabel = QtGui.QLabel('Minimum section weight: 0 kN')
 
@@ -558,9 +560,9 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], self.qk, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
-                        self.beamminweight = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
+                        self.beamminweight self.beamminQ = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
 
-                        self.FundCombLabel.setText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' kN/m')
+                        self.FundCombLabel.setText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' kN/m²')
                         self.WidthMinLabel.setText('Section width minimum: ' + str(round(self.bmin, 2)) + ' mm')
                         self.HeightMinLabel.setText('Section height minimum: ' + str(round(self.hmin, 2)) + ' mm')
                         self.BeamMinWeightLabel.setText('Minimum section weight: '  + str(round(self.beamminweight, 4)) + '  kN')
@@ -573,12 +575,12 @@ class Sizing:
                             rhomean = self.rmean
                             self.FinalBeamDim = 1
                             print('W: ', Width, 'H: ', Height)
-                            self.beamweight = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+                            self.beamweight self.beamQ = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
                             self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                             self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
                             self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
-                            print('G1avr', self.G1avr, 'self.beamweight', self.beamweight)
-                            G1tmp = round(self.beamweight + self.G1avr, 4)
+                            print('G1avr', self.G1avr, 'self.beamQ', self.beamQ)
+                            G1tmp = round(self.beamQ + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
@@ -595,12 +597,12 @@ class Sizing:
                                 Width = self.selWidth
                                 Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
-                                self.beamweight = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
+                                self.beamweight self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                                 self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
                                 self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.selHeight, 4)) + '  mm')
-                                G1tmp = round(self.beamweight + self.G1avr, 4)
-                                print('G1avr', self.G1avr, 'self.beamweight', self.beamweight)
+                                G1tmp = round(self.beamQ + self.G1avr, 4)
+                                print('G1avr', self.G1avr, 'self.beamQ', self.beamQ)
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
@@ -608,7 +610,7 @@ class Sizing:
                                     self.checkSLU(Width, Height)
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
-                                G1tmp = round(self.beamminweight + self.G1avr, 4)
+                                G1tmp = round(self.beamminQ + self.G1avr, 4)
                                 print('G1tmp', G1tmp, 'self.G1LoadValue.value()', self.G1LoadValue.value())
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
