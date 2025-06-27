@@ -98,10 +98,10 @@ class NTC2018:
         lengthmm = length*1000
 #        bmin = (3*q*fmd)/(4*fvd**2)
 #        hmin = ((lengthmm*fvd)/(fmd))
-        bmin = ((7*q*lengthmm*fvd)/(20*fmd))
+#        bmin = ((7*q*lengthmm*fvd)/(20*fmd))
         hmin = sqrt((15*q*lengthmm)/(14*fvd))
 #        hmin = cbrt((15*q*(lengthmm)**2)/(14*fmd))
-#        bmin = 0.7*hmin
+        bmin = 0.7*hmin
         return bmin, hmin
 
     def BeamWeight(self, Width, Height, Length, rhomean):
