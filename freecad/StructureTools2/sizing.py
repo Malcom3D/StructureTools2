@@ -35,7 +35,8 @@ def set_type(s):
 
 class Sizing:
     def __init__(self, selection):
-        for object in selection:
+        iself.selection = selection
+        for object in self.selection:
             if 'NewProject' in object.Name:
                 if 'ntc2018' in object.BuildingStandard:
                     self.BuildingStandard = object.BuildingStandard
@@ -45,7 +46,7 @@ class Sizing:
                     self.Vn = object.Vn
                     self.Cu = object.Cu
 
-        self.NTC2018Data = NTC2018(selection)
+        self.NTC2018Data = NTC2018(self.selection)
         self.G1avr = self.NTC2018Data.G1avr
         self.G2avr = self.NTC2018Data.G2avr
         self.G2load = self.NTC2018Data.G2load
@@ -671,9 +672,9 @@ class Sizing:
             if self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
                 self.DimCommXValue.hide()
                 self.DimCommYValue.hide()
-            selection = self.DimCommValue.currentText().split('x')
-            self.B = float(selection[0])
-            self.H = float(selection[1])
+            self.selection = self.DimCommValue.currentText().split('x')
+            self.B = float(self.selection[0])
+            self.H = float(self.selection[1])
 
         self.DimBoundaries(1)
 
@@ -716,7 +717,7 @@ class Sizing:
         WoodStrengthClass = self.StrengthValue.currentText()
         doc = FreeCAD.ActiveDocument
         objmat = doc.addObject("Part::FeaturePython", "Material")
-        Material(objmat, selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
+        Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ##Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
 
