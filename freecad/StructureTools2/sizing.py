@@ -97,7 +97,7 @@ class Sizing:
         self.beamweight = 0
         self.FinalBeamDim = 0
 
-        self.recurse = 999
+        self.recurse = 500
 
         self.form = QtGui.QDialog()
         self.LoadParam()
