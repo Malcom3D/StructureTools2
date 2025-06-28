@@ -16,6 +16,7 @@ class Material:
     def __init__(self, obj, selection, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean):
         obj.Proxy = self
 
+        obj.Label = WoodType + ' ' + WoodStrengthClass + ' Class ' + WoodClass
         obj.addProperty("App::PropertyLinkList", "ListElements", "Calc", "elements for analysis").ListElements = selection
         obj.addProperty("App::PropertyString", "WoodType", "Material", "Analise Material','Wood Type").WoodType = WoodType
         obj.addProperty("App::PropertyString", "WoodClass", "Material", "Analise Material','Wood Class").WoodClass = WoodClass
