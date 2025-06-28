@@ -595,7 +595,6 @@ class Sizing:
                                 self.G1LoadValue.setValue(G1tmp)
                                 print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
                             self.checkSLU(Width, Height)
-                            return
 #                            else:
 #                                self.FinalBeamDim = 0
 #                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
@@ -618,7 +617,6 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
-                                    return
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminQ + self.G1avr, 4)
