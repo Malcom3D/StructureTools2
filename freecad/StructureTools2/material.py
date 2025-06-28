@@ -13,13 +13,28 @@ def show_error_message(msg):
 
 
 class Material:
-    def __init__(self, obj):
+    def __init__(self, obj, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean):
         obj.Proxy = self
 
+        obj.addProperty("App::PropertyString", "Wood type", "Material", "Analise Material','Wood Type").WoodType = WoodType
+        obj.addProperty("App::PropertyString", "Wood class", "Material", "Analise Material','Wood Class").WoodClass = WoodClass
+        obj.addProperty("App::PropertyString", "Wood strength class", "Material", "Analise Material','Wood strength class").WoodStrengthClass = WoodStrengthClass
+        obj.addProperty("App::PropertyStress", "Bending", "Material", "Analise Material','fmk-> Bending").Bending = fmk # N/mm²
+        obj.addProperty("App::PropertyStress", "Tension Paralel", "Material", "Analise Material','ft0k-> Tension Paralel").TensionParalel = ft0k # N/mm²
+        obj.addProperty("App::PropertyStress", "Tension Perpendicular", "Material", "Analise Material','ft90k-> Tension Perpendicular").TensionPerpendicular = ft90k # N/mm²
+        obj.addProperty("App::PropertyStress", "Compression Parallel", "Material", "Analise Material','fc0k-> Compression Parallel").CompressionParallel = fc0k # N/mm²
+        obj.addProperty("App::PropertyStress", "Compression Perpendicular", "Material", "Analise Material','fc90k-> Compression Perpendicular").CompressionPerpendicular = fc90k # N/mm²
+        obj.addProperty("App::PropertyStress", "Shear", "Material", "Analise Material','fvk-> Shear").Shear = fvk # N/mm²
+        obj.addProperty("App::PropertyShearModulus", "Mean modulus of elasticity parallel", "Material", "Analise Material','E0mean->Mean modulus of elasticity parallel").MeanModulusOfElasticityParallel = E0mean # kN/mm²
+        obj.addProperty("App::PropertyShearModulus", "5% modulus of elasticity parallel", "Material", "Analise Material','E005->5% modulus of elasticity parallel").5ModulusOfElasticityParallel = E005 # kN/mm²
+        obj.addProperty("App::PropertyShearModulus", "Mean modulus of elasticity perpendicular", "Material", "Analise Material','E90mean->Mean modulus of elasticity perpendicular").MeanModulusOfElasticityPerpendicular = E90mean # kN/mm²
+        obj.addProperty("App::PropertyShearModulus", "Mean shear modulus", "Material", "Analise Material','Gmean->Mean shear modulus Gmean").MeanShearModulus = Gmean # kN/mm²
+        obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','rk->Density").Density = rk # kg/m³
+        obj.addProperty("App::PropertyDensity", "Mean Density", "Material", "Analise Material','rmean->MeanDensity").MeanDensity = rmean # kg/m³
+         
         obj.addProperty("App::PropertyPressure", "ModulusElasticity", "Material", "Analise Material','Modulus of elasticity").ModulusElasticity = 0.00
         obj.addProperty("App::PropertyFloat", "PoissonRatio", "Material", "Analise Material','v-> Poisson ratio").PoissonRatio = 0.00
         obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','d-> Density").Density = 0.00
-
 
     def execute(self, obj): 
         obj.Label = 'Material'       

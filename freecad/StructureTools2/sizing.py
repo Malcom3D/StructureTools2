@@ -4,6 +4,7 @@ import subprocess
 
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
 from freecad.StructureTools2.standard.italy.constant import Constant
+from freecad.StructureTools2.standard.italy.constant import Material
 
 from sympy import *
 init_printing()
@@ -617,7 +618,7 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
-                            elif self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight != self.beamweight:
+                            elif self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight == self.beamweight:
                                 self.checkSLU(Width, Height)
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
@@ -710,10 +711,10 @@ class Sizing:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        G1Load = self.G1LoadValue.value()
-        G2Load = self.G2LoadValue.value()
-        #Q1Load = [self.qk, self.Qk, self.Hk]
-
+        WoodType = self.WoodTypeValue.currentText()
+        WoodClass = self.WoodClassValue.currentText()
+        WoodStrengthClass = self.StrengthValue.currentText()
+        Material(WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ##Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
 
@@ -975,7 +976,6 @@ class CommandSizing():
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
-
 
         FreeCAD.ActiveDocument.recompute()        
         return
