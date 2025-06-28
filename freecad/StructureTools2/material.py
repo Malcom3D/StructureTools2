@@ -37,16 +37,15 @@ class Material:
         obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','d-> Density").Density = 0.00
 
     def execute(self, obj): 
-        obj.Label = 'Material'       
+        obj.Label = WoodType + ' ' + WoodStrengthClass + ' ' + 'Class ' + WoodClass
         pass
         
         
        
 
 
-    def onChanged(self,obj,Parameter):
-        if Parameter == 'edgeLength':
-            self.execute(obj)
+    def onChanged(self,obj):
+        pass
     
 
 class ViewProviderMaterial:
@@ -434,26 +433,26 @@ static char * material_xpm[] = {
         """
 
 
-class CommandMaterial():
-    """My new command"""
-
-    def GetResources(self):
-        return {"Pixmap"  : os.path.join(ICONPATH, "icons/material.svg"), # the name of a svg file available in the resources
-                "Accel"   : "Shift+M", # a default shortcut (optional)
-                "MenuText": "Material",
-                "ToolTip" : "Adds material to structure member"}
-
-    def Activated(self):
-        doc = FreeCAD.ActiveDocument
-        obj = doc.addObject("Part::FeaturePython", "Material")
-
-        Material(obj)
-        ViewProviderMaterial(obj.ViewObject)
-        FreeCAD.ActiveDocument.recompute()        
-        return
-
-    def IsActive(self):
-        
-        return True
-
-FreeCADGui.addCommand("material", CommandMaterial())
+#class CommandMaterial():
+#    """My new command"""
+#
+#    def GetResources(self):
+#        return {"Pixmap"  : os.path.join(ICONPATH, "icons/material.svg"), # the name of a svg file available in the resources
+#                "Accel"   : "Shift+M", # a default shortcut (optional)
+#                "MenuText": "Material",
+#                "ToolTip" : "Adds material to structure member"}
+#
+#    def Activated(self):
+#        doc = FreeCAD.ActiveDocument
+#        obj = doc.addObject("Part::FeaturePython", "Material")
+#
+#        Material(obj)
+#        ViewProviderMaterial(obj.ViewObject)
+#        FreeCAD.ActiveDocument.recompute()        
+#        return
+#
+#    def IsActive(self):
+#        
+#        return True
+#
+#FreeCADGui.addCommand("material", CommandMaterial())
