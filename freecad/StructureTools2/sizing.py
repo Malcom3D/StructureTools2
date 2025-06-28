@@ -35,7 +35,7 @@ def set_type(s):
 
 class Sizing:
     def __init__(self, selection):
-        iself.selection = selection
+        self.selection = selection
         for object in self.selection:
             if 'NewProject' in object.Name:
                 if 'ntc2018' in object.BuildingStandard:
