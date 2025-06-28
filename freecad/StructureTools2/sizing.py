@@ -95,6 +95,7 @@ class Sizing:
         self.beamQ = 0
         self.beamminQ = 0
         self.beamweight = 0
+        self.oldbeamweight = 0
         self.FinalBeamDim = 0
 
         self.form = QtGui.QDialog()
@@ -600,11 +601,12 @@ class Sizing:
                         elif SelBeam != 1 and self.FinalBeamDim != 1:
                             print('SelectedBeam else if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             print('self.bmin', self.bmin, 'selW: ', self.selWidth, 'self.hmin', self.hmin, 'selH: ', self.selHeight)
-                            if self.selWidth >= self.bmin and self.selHeight >= self.hmin:
+                            if self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight != self.beamweight:
                                 Width = self.selWidth
                                 Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
                                 self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
+                                self.oldbeamweight = self.beamweight
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                                 self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
                                 self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.selHeight, 4)) + '  mm')
