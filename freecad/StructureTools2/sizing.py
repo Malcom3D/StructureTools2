@@ -97,8 +97,12 @@ class Sizing:
         self.beamweight = 0
         self.FinalBeamDim = 0
 
+        self.recurse = 999
+
         self.form = QtGui.QDialog()
         self.LoadParam()
+
+        
 
     def LoadParam(self):
         # ntc2018 Load Parameter QDialog
@@ -545,6 +549,13 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
+        self.recurse -= 1
+        if self.recurse == 1:
+            print('Max recursive call', self.recurse)
+            return
+        else:
+            print('Recursive call', self.recurse)
+
         # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
         #      G1LoadInit=G1LoadValue
         # if G2LoadValue != 0 and (not G2LoadInit or G2LoadInit == 0):
