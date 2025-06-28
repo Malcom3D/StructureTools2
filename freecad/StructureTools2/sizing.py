@@ -547,6 +547,9 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
+        if selFinal == 1:
+            print('selFinal')
+            return
         # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
         #      G1LoadInit=G1LoadValue
         # if G2LoadValue != 0 and (not G2LoadInit or G2LoadInit == 0):
@@ -595,6 +598,7 @@ class Sizing:
                                 self.G1LoadValue.setValue(G1tmp)
                                 print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
                             self.checkSLU(Width, Height)
+                            return
 #                            else:
 #                                self.FinalBeamDim = 0
 #                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
@@ -617,7 +621,8 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
-                                return
+                                    selFinal = 1
+                                    return
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminQ + self.G1avr, 4)
