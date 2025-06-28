@@ -17,7 +17,7 @@ class Material:
         obj.Proxy = self
 
         obj.addProperty("App::PropertyLinkList", "ListElements", "Calc", "elements for analysis").ListElements = selection
-        obj.addProperty("App::PropertyString", "Wood type", "Material", "Analise Material','Wood Type").WoodType = WoodType
+        obj.addProperty("App::PropertyString", "WoodType", "Material", "Analise Material','Wood Type").WoodType = WoodType
         obj.addProperty("App::PropertyString", "Wood class", "Material", "Analise Material','Wood Class").WoodClass = WoodClass
         obj.addProperty("App::PropertyString", "Wood strength class", "Material", "Analise Material','Wood strength class").WoodStrengthClass = WoodStrengthClass
         obj.addProperty("App::PropertyStress", "Bending", "Material", "Analise Material','fmk-> Bending").Bending = fmk # N/mm²
