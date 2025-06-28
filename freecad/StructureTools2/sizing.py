@@ -97,8 +97,6 @@ class Sizing:
         self.beamweight = 0
         self.FinalBeamDim = 0
 
-        self.recurse = 500
-
         self.form = QtGui.QDialog()
         self.LoadParam()
 
@@ -549,13 +547,6 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
-        self.recurse -= 1
-        if self.recurse == 1:
-            print('Max recursive call', self.recurse)
-            return
-        else:
-            print('Recursive call', self.recurse)
-
         # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
         #      G1LoadInit=G1LoadValue
         # if G2LoadValue != 0 and (not G2LoadInit or G2LoadInit == 0):
@@ -597,7 +588,7 @@ class Sizing:
                             self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                             self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
                             self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
-                            print('G1avr', self.G1avr, 'self.beamQ', self.beamQ)
+                            print(''G1avr', self.G1avr, 'self.beamQ', self.beamQ)
                             G1tmp = round(self.beamQ + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
@@ -626,6 +617,7 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
+                                return
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminQ + self.G1avr, 4)
