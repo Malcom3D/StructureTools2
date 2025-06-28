@@ -619,7 +619,7 @@ class Sizing:
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
                             elif self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight == self.beamweight:
-                                self.checkSLU(Width, Height)
+                                self.checkSLU(self.selWidth, self.selHeight)
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminQ + self.G1avr, 4)
