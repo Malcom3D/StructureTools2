@@ -13,9 +13,10 @@ def show_error_message(msg):
 
 
 class Material:
-    def __init__(self, obj, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean):
+    def __init__(self, obj, selection, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean):
         obj.Proxy = self
 
+        obj.addProperty("App::PropertyLinkList", "ListElements", "Calc", "elements for analysis").ListElements = selection
         obj.addProperty("App::PropertyString", "Wood type", "Material", "Analise Material','Wood Type").WoodType = WoodType
         obj.addProperty("App::PropertyString", "Wood class", "Material", "Analise Material','Wood Class").WoodClass = WoodClass
         obj.addProperty("App::PropertyString", "Wood strength class", "Material", "Analise Material','Wood strength class").WoodStrengthClass = WoodStrengthClass
@@ -36,22 +37,9 @@ class Material:
         obj.addProperty("App::PropertyFloat", "PoissonRatio", "Material", "Analise Material','v-> Poisson ratio").PoissonRatio = 0.00
         obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','d-> Density").Density = 0.00
 
-    def execute(self, obj): 
-        obj.Label = WoodType + ' ' + WoodStrengthClass + ' ' + 'Class ' + WoodClass
+    def execute(self, obj):
+        #obj.Proxy = self
         pass
-        
-        
-       
-
-
-    def onChanged(self,obj):
-        pass
-    
-
-class ViewProviderMaterial:
-    def __init__(self, obj):
-        obj.Proxy = self
-    
 
     def getIcon(self):
         return """

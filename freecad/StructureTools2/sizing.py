@@ -714,7 +714,9 @@ class Sizing:
         WoodType = self.WoodTypeValue.currentText()
         WoodClass = self.WoodClassValue.currentText()
         WoodStrengthClass = self.StrengthValue.currentText()
-        Material(WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
+        doc = FreeCAD.ActiveDocument
+        objmat = doc.addObject("Part::FeaturePython", "Material")
+        Material(objmat, selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ##Size(Standard, G1Load, G2Load, Q1Load)
         FreeCADGui.Control.closeDialog() #close the dialog
 
