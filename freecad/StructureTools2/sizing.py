@@ -100,7 +100,7 @@ class Sizing:
         self.form = QtGui.QDialog()
         self.LoadParam()
 
-        selFinal = 0
+        self.selFinal = 0
 
     def LoadParam(self):
         # ntc2018 Load Parameter QDialog
@@ -547,7 +547,7 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
-        if selFinal == 1:
+        if self.selFinal == 1:
             print('selFinal')
             return
         # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
@@ -621,7 +621,7 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
-                                    selFinal = 1
+                                    self.selFinal = 1
                                     return
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
