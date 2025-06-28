@@ -718,7 +718,7 @@ class Sizing:
         doc = FreeCAD.ActiveDocument
         objmat = doc.addObject("Part::FeaturePython", "Material")
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
-        ##Size(Standard, G1Load, G2Load, Q1Load)
+        ViewProviderMaterial(objmat.ViewObject)
         FreeCADGui.Control.closeDialog() #close the dialog
 
     # What is done when we click on the cancel button.
