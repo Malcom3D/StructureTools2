@@ -547,9 +547,6 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
-        if self.selFinal == 1:
-            print('selFinal')
-            return
         # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
         #      G1LoadInit=G1LoadValue
         # if G2LoadValue != 0 and (not G2LoadInit or G2LoadInit == 0):
@@ -621,7 +618,6 @@ class Sizing:
                                     self.G1LoadValue.setValue(G1tmp)
                                 if 0 < Width < float("inf") and 0 < Height < float("inf"):
                                     self.checkSLU(Width, Height)
-                                    self.selFinal = 1
                                     return
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
@@ -644,12 +640,12 @@ class Sizing:
         for i in range(0,len(self.BeamDimList[:])):
                 text = 'text'
                 Length = self.length*1000 # m -> mm
-                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= self.length):
+                if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= Length):
                     text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
                     self.DimCommValue.addItem(text)
-                if self.DimCommValue.count() == 1:
-                    self.selWidth = self.BeamDimList[i][0]
-                    self.selHeight = self.BeamDimList[i][1]
+#                if self.DimCommValue.count() == 1:
+#                    self.selWidth = self.BeamDimList[i][0]
+#                    self.selHeight = self.BeamDimList[i][1]
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
