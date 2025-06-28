@@ -641,9 +641,9 @@ class Sizing:
                 if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= Length):
                     text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
                     self.DimCommValue.addItem(text)
-#                if self.DimCommValue.count() == 1:
-#                    self.selWidth = self.BeamDimList[i][0]
-#                    self.selHeight = self.BeamDimList[i][1]
+                    if self.DimCommValue.count() == 1:
+                        self.selWidth = self.BeamDimList[i][0]
+                        self.selHeight = self.BeamDimList[i][1]
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
