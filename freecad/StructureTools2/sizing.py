@@ -100,8 +100,6 @@ class Sizing:
         self.form = QtGui.QDialog()
         self.LoadParam()
 
-        self.selFinal = 0
-
     def LoadParam(self):
         # ntc2018 Load Parameter QDialog
         self.form.setWindowTitle('Load Parameter:')
@@ -640,10 +638,10 @@ class Sizing:
                 Length = self.length*1000 # m -> mm
                 if (self.BeamDimList[i][0] >= self.bmin) and (self.BeamDimList[i][1] >= self.hmin) and (self.BeamDimList[i][2] >= Length):
                     text = str(self.BeamDimList[i][0]) + 'x' + str(self.BeamDimList[i][1]) + 'x' + str(self.BeamDimList[i][2])
-                    self.DimCommValue.addItem(text)
-                    if self.DimCommValue.count() == 1:
+                    if self.DimCommValue.count() == 0:
                         self.selWidth = self.BeamDimList[i][0]
                         self.selHeight = self.BeamDimList[i][1]
+                    self.DimCommValue.addItem(text)
         text = 'Custom...'
         self.DimCommValue.addItem(text)
         if self.DimCommValue.count() == 1:
