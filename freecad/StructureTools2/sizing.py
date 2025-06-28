@@ -374,9 +374,9 @@ class Sizing:
         self.DimCommValue = QtGui.QComboBox()
         text = ''
         self.DimCommValue.addItem(text)
-        if self.bmin and self.bmax:
-             print('self.formDimComm self.BeamComDimm')
-             self.BeamComDimm()
+#        if self.bmin and self.bmax:
+#             print('self.formDimComm self.BeamComDimm')
+#             self.BeamComDimm()
         self.DimCommValue.activated.connect(self.selectedDimComm)
 
         self.DimCommXValue = QtGui.QDoubleSpinBox()
