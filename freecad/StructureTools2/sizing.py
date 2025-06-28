@@ -100,7 +100,7 @@ class Sizing:
         self.form = QtGui.QDialog()
         self.LoadParam()
 
-        
+        selFinal = 0
 
     def LoadParam(self):
         # ntc2018 Load Parameter QDialog
