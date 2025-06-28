@@ -27,7 +27,7 @@ class Material:
         obj.addProperty("App::PropertyStress", "Compression Perpendicular", "Material", "Analise Material','fc90k-> Compression Perpendicular").CompressionPerpendicular = fc90k # N/mm²
         obj.addProperty("App::PropertyStress", "Shear", "Material", "Analise Material','fvk-> Shear").Shear = fvk # N/mm²
         obj.addProperty("App::PropertyShearModulus", "Mean modulus of elasticity parallel", "Material", "Analise Material','E0mean->Mean modulus of elasticity parallel").MeanModulusOfElasticityParallel = E0mean # kN/mm²
-        obj.addProperty("App::PropertyShearModulus", "5% modulus of elasticity parallel", "Material", "Analise Material','E005->5% modulus of elasticity parallel").5ModulusOfElasticityParallel = E005 # kN/mm²
+        obj.addProperty("App::PropertyShearModulus", "5/100 modulus of elasticity parallel", "Material", "Analise Material','E005->5/100% modulus of elasticity parallel").5ModulusOfElasticityParallel = E005 # kN/mm²
         obj.addProperty("App::PropertyShearModulus", "Mean modulus of elasticity perpendicular", "Material", "Analise Material','E90mean->Mean modulus of elasticity perpendicular").MeanModulusOfElasticityPerpendicular = E90mean # kN/mm²
         obj.addProperty("App::PropertyShearModulus", "Mean shear modulus", "Material", "Analise Material','Gmean->Mean shear modulus Gmean").MeanShearModulus = Gmean # kN/mm²
         obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','rk->Density").Density = rk # kg/m³
