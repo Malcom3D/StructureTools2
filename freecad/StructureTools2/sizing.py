@@ -160,7 +160,7 @@ class Sizing:
         self.MaterialLabel = QtGui.QLabel('Material')
         self.MaterialValue = QtGui.QComboBox()
         self.MaterialValue.addItem('')
-        self.MaterialValue.addItem('Wood [UNI EN338 pag.254]')
+        self.MaterialValue.addItem('Wood')
         self.MaterialValue.addItem('Reinforced concrete')
         self.MaterialValue.addItem('Steel')
         self.MaterialValue.activated.connect(self.selectedMaterial)
@@ -465,7 +465,7 @@ class Sizing:
         self.WoodClassValue.addItem(text)
         for i in range(0,len(self.KmodList[:])):
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
-                text = 'Class ' + str(self.KmodList[i][2]) + ':' + self.KmodList[i][1]
+                text = 'Class ' + str(self.KmodList[i][2]) + ' : ' + self.KmodList[i][1]
                 self.WoodClassValue.addItem(text)
 
         self.DimBoundaries(0)
