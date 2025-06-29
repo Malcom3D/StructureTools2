@@ -12,7 +12,7 @@ def show_error_message(msg):
     msg_box.exec_()
 
 class Surface:
-    def __init__(self, obj, selection, Width, Height)
+    def __init__(self, obj, selection, Width, Height):
         for object in selection:
             if 'Line' in object.Name:
                 self.x1 = round(object.Start.x, 2)
@@ -29,7 +29,7 @@ class Surface:
                 self.Width = Width
                 self.Height  Height
 
-    def execute(self. obj)
+    def execute(self. obj):
         # wire = make_wire(pointslist, closed=False, placement=None, face=None, support=None)
 
         placement = App.Vector(self.x1,self.y1,self.z1)
