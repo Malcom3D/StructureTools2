@@ -16,12 +16,12 @@ class Material:
     def __init__(self, obj, selection, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean):
         obj.Proxy = self
 
-        fmk = fmk*10
-        ft0k = ft0k*10
-        ft90k = ft90k*10
-        fc0k = fc0k*10
-        fc90k = fc90k*10
-        fvk = fvk*10
+        fmk = fmk*10 # 1N/mm² -> 10kPa
+        ft0k = ft0k*10 # 1N/mm² -> 10kPa
+        ft90k = ft90k*10 # 1N/mm² -> 10kPa
+        fc0k = fc0k*10 # 1N/mm² -> 10kPa
+        fc90k = fc90k*10 # 1N/mm² -> 10kPa
+        fvk = fvk*10 # 1N/mm² -> 10kPa
         #E0mean, E005, E90mean, Gmean
 
         obj.Label = WoodType + ' ' + WoodStrengthClass + ' ' + WoodClass
@@ -29,7 +29,7 @@ class Material:
         obj.addProperty("App::PropertyString", "WoodType", "Material", "Analise Material','Wood Type").WoodType = WoodType
         obj.addProperty("App::PropertyString", "WoodClass", "Material", "Analise Material','Wood Class").WoodClass = WoodClass
         obj.addProperty("App::PropertyString", "WoodStrengthClass", "Material", "Analise Material','Wood strength class").WoodStrengthClass = WoodStrengthClass
-        obj.addProperty("App::PropertyStress", "fmk", "Material", "Bending").Bending = fmk*10 # 1N/mm² -> 10kPa
+        obj.addProperty("App::PropertyStress", "fmk", "Material", "Bending").Bending = fmk # 1N/mm² -> 10kPa
         obj.addProperty("App::PropertyStress", "TensionParalel", "Material", "Analise Material','ft0k-> Tension Paralel").TensionParalel = ft0k # N/mm²
         obj.addProperty("App::PropertyStress", "TensionPerpendicular", "Material", "Analise Material','ft90k-> Tension Perpendicular").TensionPerpendicular = ft90k # N/mm²
         obj.addProperty("App::PropertyStress", "CompressionParallel", "Material", "Analise Material','fc0k-> Compression Parallel").CompressionParallel = fc0k # N/mm²
