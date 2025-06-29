@@ -1,6 +1,9 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 import Draft
 
+from sympy import *
+init_printing()
+
 ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
 
 def show_error_message(msg):
