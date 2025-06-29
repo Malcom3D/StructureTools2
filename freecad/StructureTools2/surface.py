@@ -30,7 +30,7 @@ class Surface:
         surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
         surface.Shape # is a face
 
-ViewProviderSurface:
+class ViewProviderSurface:
     def __init__(self, obj):
         pass
 
