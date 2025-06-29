@@ -29,7 +29,7 @@ class Material:
         obj.addProperty("App::PropertyString", "WoodType", "Material", "Analise Material','Wood Type").WoodType = WoodType
         obj.addProperty("App::PropertyString", "WoodClass", "Material", "Analise Material','Wood Class").WoodClass = WoodClass
         obj.addProperty("App::PropertyString", "WoodStrengthClass", "Material", "Analise Material','Wood strength class").WoodStrengthClass = WoodStrengthClass
-        obj.addProperty("App::PropertyStress", "fmk", "Material", "Bending").Bending = fmk # 1N/mm² -> 10kPa
+        obj.addProperty("App::PropertyStress", "fmk", "Material", "Bending").fmk = fmk # 1N/mm² -> 10kPa
         obj.addProperty("App::PropertyStress", "TensionParalel", "Material", "Analise Material','ft0k-> Tension Paralel").TensionParalel = ft0k # N/mm²
         obj.addProperty("App::PropertyStress", "TensionPerpendicular", "Material", "Analise Material','ft90k-> Tension Perpendicular").TensionPerpendicular = ft90k # N/mm²
         obj.addProperty("App::PropertyStress", "CompressionParallel", "Material", "Analise Material','fc0k-> Compression Parallel").CompressionParallel = fc0k # N/mm²
