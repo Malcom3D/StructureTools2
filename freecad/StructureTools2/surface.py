@@ -24,9 +24,6 @@ class Surface:
                 self.x2 = round(object.End.x, 2)
                 self.y2 = round(object.End.y, 2)
                 self.z2 = round(object.End.z, 2)
-                self.dist = float(str(object.Length).split()[0])
-                alpha = atan2((y2-y1), (x2-x1))
-                beta = atan2((x2-x1), (z2-z1))
                 self.vec1 = App.Vector(self.x1,self.y1,self.z1)
                 self.vec2 = App.Vector(self.x2, self.y2, self.z2)
                 self.Width = Width
