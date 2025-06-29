@@ -29,7 +29,6 @@ class Surface:
         surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
         surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
         surface.Shape # is a face
-        ViewProviderBox(obj.ViewObject):
 
 ViewProviderSurface:
     def __init__(self, obj):
