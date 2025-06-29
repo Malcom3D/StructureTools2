@@ -39,12 +39,12 @@ class Material:
 #        obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','d-> Density").Density = 0.00
 
     def execute(self, obj):
-        #obj.Proxy = self
+        obj.Proxy = self
         pass
 
 class ViewProviderMaterial:
-        def __init__(self, obj):
-                obj.Proxy = self
+    def __init__(self, obj):
+        obj.Proxy = self
 
     def getIcon(self):
         return """
