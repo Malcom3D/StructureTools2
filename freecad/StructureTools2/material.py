@@ -24,8 +24,8 @@ class Material:
         fvk = fvk*1000000 # 1N/mm² -> 1MPa
         E0mean = E0mean*1000000000 # 1kN/mm² -> 1GPa
         E005 = E005*1000000000 # 1kN/mm² -> 1GPa
-        E90mean = E90mea*1000000000 # 1kN/mm² -> 1GPa
-        Gmean = Gmea*1000000000 # 1kN/mm² -> 1GPa
+        E90mean = E90mean*1000000000 # 1kN/mm² -> 1GPa
+        Gmean = Gmean*1000000000 # 1kN/mm² -> 1GPa
 
         obj.Label = WoodType + ' ' + WoodStrengthClass + ' ' + WoodClass
         obj.addProperty("App::PropertyLinkList", "ListElements", "Material", "Elements from sizing").ListElements = selection
