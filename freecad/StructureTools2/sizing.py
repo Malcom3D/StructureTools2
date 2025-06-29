@@ -5,6 +5,7 @@ import subprocess
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
 from freecad.StructureTools2.standard.italy.constant import Constant
 from freecad.StructureTools2.material import Material, ViewProviderMaterial
+from freecad.StructureTools2.surface import Surface
 
 from sympy import *
 init_printing()
@@ -715,10 +716,19 @@ class Sizing:
         WoodType = self.WoodTypeValue.currentText()
         WoodClass = self.WoodClassValue.currentText()
         WoodStrengthClass = self.StrengthValue.currentText()
+
         doc = FreeCAD.ActiveDocument
+        selection = FreeCADGui.Selection.getSelection()
+
         objmat = doc.addObject("Part::FeaturePython", "Material")
+        objsurf = doc.addObject("Part::FeaturePython", "Surface")
+
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ViewProviderMaterial(objmat.ViewObject)
+
+        Surface(objsurf, selection, self.B, self.H)
+
+        doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
 
     # What is done when we click on the cancel button.
