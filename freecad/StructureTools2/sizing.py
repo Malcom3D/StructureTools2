@@ -4,7 +4,7 @@ import subprocess
 
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
 from freecad.StructureTools2.standard.italy.constant import Constant
-from freecad.StructureTools2.material import Material ViewProviderMaterial
+from freecad.StructureTools2.material import Material, ViewProviderMaterial
 
 from sympy import *
 init_printing()
