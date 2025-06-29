@@ -5,7 +5,7 @@ import subprocess
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
 from freecad.StructureTools2.standard.italy.constant import Constant
 from freecad.StructureTools2.material import Material, ViewProviderMaterial
-from freecad.StructureTools2.surface import Surface
+from freecad.StructureTools2.surface import Surface, ViewProviderSurface
 
 from sympy import *
 init_printing()
@@ -727,6 +727,7 @@ class Sizing:
         ViewProviderMaterial(objmat.ViewObject)
 
         Surface(objsurf, selection, self.B, self.H)
+        ViewProviderSurface(objsurf.ViewObject)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog

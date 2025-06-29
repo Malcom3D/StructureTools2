@@ -1,19 +1,6 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 import Draft
 
-from sympy import *
-init_printing()
-
-ICONPATH = os.path.join(os.path.dirname(__file__), "resources")
-
-def show_error_message(msg):
-    msg_box = QtWidgets.QMessageBox()
-    msg_box.setIcon(QtWidgets.QMessageBox.Critical)  # Ícone de erro
-    msg_box.setWindowTitle("Erro")
-    msg_box.setText(msg)
-    msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
-    msg_box.exec_()
-
 class Surface:
     def __init__(self, obj, selection, Width, Height):
         for object in selection:
@@ -42,4 +29,9 @@ class Surface:
         surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
         surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
         surface.Shape # is a face
-        Part.show(surface)
+        ViewProviderBox(obj.ViewObject):
+
+ViewProviderSurface:
+    def __init__(self, obj):
+        pass
+
