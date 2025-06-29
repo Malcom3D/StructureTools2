@@ -27,7 +27,7 @@ class Surface:
                 self.vec1 = App.Vector(self.x1,self.y1,self.z1)
                 self.vec2 = App.Vector(self.x2, self.y2, self.z2)
                 self.Width = Width
-                self.Height  Height
+                self.Height = Height
 
     def execute(self. obj):
         # wire = make_wire(pointslist, closed=False, placement=None, face=None, support=None)
