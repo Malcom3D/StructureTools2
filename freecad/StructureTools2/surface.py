@@ -30,10 +30,10 @@ class Surface:
                 p4 = FreeCAD.Vector(-self.Width/2, -self.Height/2, 0)
 
                 surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
-                surface.Shape # is a face
                 #surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
                 #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1, self.vec2))
                 surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1.cross(self.vec2), Radian = self.vec1.getAngle(self.vec2)))
+                surface.Shape # is a face
 
     def execute(self, obj):
         pass
