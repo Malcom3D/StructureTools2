@@ -3,6 +3,10 @@ import Draft
 
 class Surface:
     def __init__(self, obj, selection, Width, Height):
+
+#        self.Type = 'surface'
+        obj.Proxy = self
+
         for object in selection:
             if 'Line' in object.Name:
                 self.x1 = round(object.Start.x, 2)
@@ -16,19 +20,21 @@ class Surface:
                 self.Width = Width
                 self.Height = Height
 
+                # wire = make_wire(pointslist, closed=False, placement=None, face=None, support=None)
+
+                #placement = App.Vector(self.x1,self.y1,self.z1)
+
+                p1 = FreeCAD.Vector(-self.Width/2, self.Height/2, 0)
+                p2 = FreeCAD.Vector(self.Width/2, self.Height/2, 0)
+                p3 = FreeCAD.Vector(self.Width/2, -self.Height/2, 0)
+                p4 = FreeCAD.Vector(-self.Width/2, -self.Height/2, 0)
+
+                surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
+                surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
+                surface.Shape # is a face
+
     def execute(self, obj):
-        # wire = make_wire(pointslist, closed=False, placement=None, face=None, support=None)
-
-        #placement = App.Vector(self.x1,self.y1,self.z1)
-
-        p1 = FreeCAD.Vector(-self.Width/2, self.Height/2, 0)
-        p2 = FreeCAD.Vector(self.Width/2, self.Height/2, 0)
-        p3 = FreeCAD.Vector(self.Width/2, -self.Height/2, 0)
-        p4 = FreeCAD.Vector(-self.Width/2, -self.Height/2, 0)
-
-        surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
-        surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
-        surface.Shape # is a face
+        pass
 
 class ViewProviderSurface:
     def __init__(self, obj):
