@@ -4,8 +4,8 @@ import Draft
 class Surface:
     def __init__(self, obj, selection, Width, Height):
 
-#        self.Type = 'surface'
         obj.Proxy = self
+        self.Type = 'surface'
 
         for object in selection:
             if 'Line' in object.Name:
@@ -17,6 +17,7 @@ class Surface:
                 self.z2 = round(object.End.z, 2)
                 self.vec1 = FreeCAD.Vector(self.x1, self.y1, self.z1)
                 self.vec2 = FreeCAD.Vector(self.x2, self.y2, self.z2)
+                matrix = object.Placement.Matrix
                 self.Width = Width
                 self.Height = Height
 
@@ -32,7 +33,8 @@ class Surface:
                 surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
                 #surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
                 #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1, self.vec2))
-                surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1.cross(self.vec2), Radian = self.vec1.getAngle(self.vec2)))
+                #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1.cross(self.vec2), Radian = self.vec1.getAngle(self.vec2)))
+                surface.Placement = FreeCAD.Placement(Matrix)
                 surface.Shape # is a face
 
     def execute(self, obj):
