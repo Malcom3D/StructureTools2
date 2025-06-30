@@ -34,7 +34,7 @@ class Surface:
                 #surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
                 #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1, self.vec2))
                 #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1.cross(self.vec2), Radian = self.vec1.getAngle(self.vec2)))
-                surface.Placement = FreeCAD.Placement(Matrix)
+                surface.Placement = FreeCAD.Placement(matrix)
                 surface.Shape # is a face
 
     def execute(self, obj):
