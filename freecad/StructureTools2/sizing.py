@@ -673,9 +673,9 @@ class Sizing:
             if self.DimCommXValue.isVisibleTo(self.form) and self.DimCommYValue.isVisibleTo(self.form):
                 self.DimCommXValue.hide()
                 self.DimCommYValue.hide()
-            self.selection = self.DimCommValue.currentText().split('x')
-            self.B = float(self.selection[0])
-            self.H = float(self.selection[1])
+            self.section = self.DimCommValue.currentText().split('x')
+            self.B = float(self.section[0])
+            self.H = float(self.section[1])
 
         self.DimBoundaries(1)
 
@@ -718,7 +718,7 @@ class Sizing:
         WoodStrengthClass = self.StrengthValue.currentText()
 
         doc = FreeCAD.ActiveDocument
-        selection = FreeCADGui.Selection.getSelection()
+        #selection = FreeCADGui.Selection.getSelection()
 
         objmat = doc.addObject("Part::FeaturePython", "Material")
         objsurf = doc.addObject("Part::FeaturePython", "Surface")
@@ -726,7 +726,7 @@ class Sizing:
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ViewProviderMaterial(objmat.ViewObject)
 
-        Surface(objsurf, selection, self.B, self.H)
+        Surface(objsurf, self.selection, self.B, self.H)
         ViewProviderSurface(objsurf.ViewObject)
 
         doc.recompute()
