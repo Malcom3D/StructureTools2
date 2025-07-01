@@ -1,6 +1,6 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 import Draft, Part
-from PySide2 import QtWidgets, QtCore, QtGui, QDialogButtonBox
+from PySide2 import QtWidgets, QtCore, QtGui
 from PySide2.QtWidgets import QDialogButtonBox
 import subprocess
 
