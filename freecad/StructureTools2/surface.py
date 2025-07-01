@@ -20,14 +20,14 @@ class Surface:
                 p3 = FreeCAD.Vector(Width/2, -Height/2, 0)
                 p4 = FreeCAD.Vector(-Width/2, -Height/2, 0)
 
-                surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
+                wire = Draft.make_wire([p1, p2, p3, p4], closed=True, face=True)
 
                 v = FreeCAD.Vector(x1,y1,z1).sub(FreeCAD.Vector(x2,y2,z2))
                 r = FreeCAD.Rotation(FreeCAD.Vector(0,0,1),v)
                 pl = FreeCAD.Placement()
                 pl.Rotation.Q = r.Q
                 pl.Base = FreeCAD.Vector(x1,y1,z1)
-                surface.Placement = pl
+                wire.Placement = pl
 
     def execute(self, obj):
         pass
