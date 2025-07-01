@@ -1015,6 +1015,12 @@ class CommandSizing():
         # what is done when the command is clicked
         # creates a panel with a dialog
         panel = Sizing(selection)
+        obj = FreeCADGui.getMainWindow()
+        if len(obj.children()) > 0:
+            for child in obj.children():
+                if "QPushButton" in str(type(child)): 
+                    if "OK" in str(child.property("text")):
+                        print(child)
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
