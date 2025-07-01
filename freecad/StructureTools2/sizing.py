@@ -710,7 +710,7 @@ class Sizing:
                 print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
                 print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
 
-    def Wire(self, obj, selection, Width, Height):
+    def Wire(self, selection, Width, Height):
         for object in selection:
             if 'Line' in object.Name:
                 x1 = object.Start.x
@@ -749,7 +749,7 @@ class Sizing:
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ViewProviderMaterial(objmat.ViewObject)
 
-        self.Wire(objsurf, self.selection, self.B, self.H)
+        self.Wire(self.selection, self.B, self.H)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
