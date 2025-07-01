@@ -709,13 +709,11 @@ class Sizing:
 
             if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
                 print('Verified')
-                self.okBtn.setEnabled(True)
                 return True
             else:
                 print('Verification Fail')
                 print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
                 print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
-                self.okBtn.setEnabled(False)
                 return False
 
     def Section(self, selection, Width, Height):
