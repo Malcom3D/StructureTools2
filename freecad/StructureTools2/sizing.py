@@ -104,8 +104,8 @@ class Sizing:
         self.FinalBeamDim = 0
 
         mw = FreeCADGui.getMainWindow()
-        if len(obj.children()) > 0:
-            for child in obj.children():
+        if len(mw.children()) > 0:
+            for child in mw.children():
                 if "QPushButton" in str(type(child)):
                     if "OK" in str(child.property("text")):
                         self.okBtn = child
