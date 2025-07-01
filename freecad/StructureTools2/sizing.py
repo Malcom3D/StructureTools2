@@ -710,7 +710,7 @@ class Sizing:
                 print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
                 print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
 
-    def Wire(self, selection, Width, Height):
+    def Section(self, selection, Width, Height):
         for object in selection:
             if 'Line' in object.Name:
                 x1 = object.Start.x
@@ -725,14 +725,14 @@ class Sizing:
                 p3 = FreeCAD.Vector(Width/2, -Height/2, 0)
                 p4 = FreeCAD.Vector(-Width/2, -Height/2, 0)
 
-                wire = Draft.make_wire([p1, p2, p3, p4], closed=True, face=True)
+                section = Draft.make_wire([p1, p2, p3, p4], closed=True)
 
                 v = FreeCAD.Vector(x1,y1,z1).sub(FreeCAD.Vector(x2,y2,z2))
                 r = FreeCAD.Rotation(FreeCAD.Vector(0,0,1),v)
                 pl = FreeCAD.Placement()
                 pl.Rotation.Q = r.Q
                 pl.Base = FreeCAD.Vector(x1,y1,z1)
-                wire.Placement = pl
+                section.Placement = pl
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
@@ -749,7 +749,7 @@ class Sizing:
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ViewProviderMaterial(objmat.ViewObject)
 
-        self.Wire(self.selection, self.B, self.H)
+        self.Section(self.selection, self.B, self.H)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
