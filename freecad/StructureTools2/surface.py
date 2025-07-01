@@ -8,19 +8,17 @@ class Surface:
 
         for object in selection:
             if 'Line' in object.Name:
-                self.x1 = object.Start.x, 2
-                self.y1 = object.Start.y, 2
-                self.z1 = object.Start.z, 2
-                self.x2 = object.End.x, 2
-                self.y2 = object.End.y, 2
-                self.z2 = object.End.z, 2
-                self.Width = Width
-                self.Height = Height
+                x1 = object.Start.x, 2
+                y1 = object.Start.y, 2
+                z1 = object.Start.z, 2
+                x2 = object.End.x, 2
+                y2 = object.End.y, 2
+                z2 = object.End.z, 2
 
-                p1 = FreeCAD.Vector(-self.Width/2, self.Height/2, 0)
-                p2 = FreeCAD.Vector(self.Width/2, self.Height/2, 0)
-                p3 = FreeCAD.Vector(self.Width/2, -self.Height/2, 0)
-                p4 = FreeCAD.Vector(-self.Width/2, -self.Height/2, 0)
+                p1 = FreeCAD.Vector(-Width/2, Height/2, 0)
+                p2 = FreeCAD.Vector(Width/2, Height/2, 0)
+                p3 = FreeCAD.Vector(Width/2, -Height/2, 0)
+                p4 = FreeCAD.Vector(-Width/2, -Height/2, 0)
 
                 surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
 
