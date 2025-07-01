@@ -103,6 +103,7 @@ class Sizing:
         self.FinalBeamDim = 0
 
         self.form = QtGui.QDialog()
+        self.form.QPushButton.setEnable(False)
         self.LoadParam()
 
     def LoadParam(self):
