@@ -1,5 +1,5 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
-import Draft, Part
+import Draft
 from PySide import QtWidgets, QtCore, QtGui
 from PySide2.QtWidgets import QDialogButtonBox
 import subprocess
@@ -104,6 +104,15 @@ class Sizing:
         self.FinalBeamDim = 0
 
         self.form = QtGui.QDialog()
+
+        mw = FreeCADGui.getMainWindow()
+        if len(mw.children()) > 0:
+            for child in mw.children():
+                if "QPushButton" in str(type(child)):
+                    if "OK" in str(child.property("text")):
+                        self.okBtn = child
+                        self.okBtn.setEnabled(False)
+
         self.LoadParam()
 
     def LoadParam(self):
@@ -1019,15 +1028,6 @@ class CommandSizing():
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
-
-        mw = FreeCADGui.getMainWindow()
-        if len(mw.children()) > 0:
-            for child in mw.children():
-                if "QPushButton" in str(type(child)):
-                    if "OK" in str(child.property("text")):
-                        self.okBtn = child
-                        self.okBtn.setEnabled(False)
-
 
         FreeCAD.ActiveDocument.recompute()        
         return
