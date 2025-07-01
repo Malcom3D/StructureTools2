@@ -103,7 +103,7 @@ class Sizing:
         self.FinalBeamDim = 0
 
         self.TaskPanel = QtWidgets
-        self.TaskPanel.QPushButton.setEnable(False)
+        self.TaskPanel.QPushButton.Ok.setEnable(False)
         self.form = self.TaskPanel.QDialog()
         self.LoadParam()
 
