@@ -1,7 +1,6 @@
-import FreeCAD, App, FreeCADGui, Part, os, math
+import FreeCAD, FreeCADGui, Part, os, math
 import Draft
 from PySide import QtWidgets, QtCore, QtGui
-from PySide2.QtWidgets import QDialogButtonBox
 import subprocess
 
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
@@ -693,16 +692,6 @@ class Sizing:
         self.DimBoundaries(1)
 
     def checkSLU(self, Width, Height):
-        if not self.okBtn:
-            mw = FreeCADGui.getMainWindow()
-            if len(mw.children()) > 0:
-                for child in mw.children():
-                    if "QPushButton" in str(type(child)):
-                        if "OK" in str(child.property("text")):
-                            self.okBtn = child
-                            self.okBtn.setEnabled(False)
-
-
         if Width == 0 or Height == 0:
             return
         Length = self.length
