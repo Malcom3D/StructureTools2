@@ -1,4 +1,5 @@
-import FreeCAD, App, FreeCADGui, Part, Draft, os, math
+import FreeCAD, App, FreeCADGui, Part, os, math
+#import Draft
 from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
@@ -725,7 +726,7 @@ class Sizing:
                 p3 = FreeCAD.Vector(Width/2, -Height/2, 0)
                 p4 = FreeCAD.Vector(-Width/2, -Height/2, 0)
 
-                section = Draft.make_wire([p1, p2, p3, p4], closed=True)
+                section = FreeCAD.Draft.make_wire([p1, p2, p3, p4], closed=True)
 
                 v = FreeCAD.Vector(x1,y1,z1).sub(FreeCAD.Vector(x2,y2,z2))
                 r = FreeCAD.Rotation(FreeCAD.Vector(0,0,1),v)
