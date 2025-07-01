@@ -102,8 +102,9 @@ class Sizing:
         self.oldbeamweight = 0
         self.FinalBeamDim = 0
 
-        self.form = QtGui.QDialog()
-        self.form.QPushButton.setEnable(False)
+        self.TaskPanel = PySide2.QtWidgets
+        self.TaskPanel.QPushButton.setEnable(False)
+        self.form = self.TaskPanel.QDialog()
         self.LoadParam()
 
     def LoadParam(self):
