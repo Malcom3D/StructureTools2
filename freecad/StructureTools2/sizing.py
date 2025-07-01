@@ -7,7 +7,6 @@ import subprocess
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
 from freecad.StructureTools2.standard.italy.constant import Constant
 from freecad.StructureTools2.material import Material, ViewProviderMaterial
-#from freecad.StructureTools2.surface import Surface, ViewProviderSurface
 
 from sympy import *
 init_printing()
@@ -104,15 +103,6 @@ class Sizing:
         self.FinalBeamDim = 0
 
         self.form = QtGui.QDialog()
-
-        mw = FreeCADGui.getMainWindow()
-        if len(mw.children()) > 0:
-            for child in mw.children():
-                if "QPushButton" in str(type(child)):
-                    if "OK" in str(child.property("text")):
-                        self.okBtn = child
-                        self.okBtn.setEnabled(False)
-
         self.LoadParam()
 
     def LoadParam(self):
@@ -703,6 +693,16 @@ class Sizing:
         self.DimBoundaries(1)
 
     def checkSLU(self, Width, Height):
+        if not self.okBtn:
+            mw = FreeCADGui.getMainWindow()
+            if len(mw.children()) > 0:
+                for child in mw.children():
+                    if "QPushButton" in str(type(child)):
+                        if "OK" in str(child.property("text")):
+                            self.okBtn = child
+                            self.okBtn.setEnabled(False)
+
+
         if Width == 0 or Height == 0:
             return
         Length = self.length
@@ -720,11 +720,13 @@ class Sizing:
 
             if Check_fmd and Check_fvd and Check_fx0d and Check_Deflection:
                 print('Verified')
+                self.okBtn.setEnabled(True)
                 return True
             else:
                 print('Verification Fail')
                 print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
                 print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
+                self.okBtn.setEnabled(False)
                 return False
 
     def Section(self, selection, Width, Height):
