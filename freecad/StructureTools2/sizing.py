@@ -95,6 +95,8 @@ class Sizing:
         self.H = 0
         self.selWidth = 0
         self.selHeight = 0
+        self.Width = 0
+        self.Height = 0
 
         self.beamQ = 0
         self.beamminQ = 0
@@ -581,23 +583,23 @@ class Sizing:
 
                         if SelBeam == 1 or self.FinalBeamDim == 1:
                             print('SelectedBeam if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
-                            Width = self.B
-                            Height = self.H
+                            self.Width = self.B
+                            self.Height = self.H
                             Length = self.length
                             rhomean = self.rmean
                             self.FinalBeamDim = 1
-                            print('W: ', Width, 'H: ', Height)
-                            self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+                            print('W: ', self.Width, 'H: ', self.Height)
+                            self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(self.Width, self.Height, Length, rhomean) 
                             self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
-                            self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
-                            self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
+                            self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.Width, 4)) + '  mm')
+                            self.SelectedHeightLabel.setText('Selected height: '  + str(round(self.Height, 4)) + '  mm')
                             print('G1avr', self.G1avr, 'self.beamQ', self.beamQ)
                             G1tmp = round(self.beamQ + self.G1avr, 4)
                             if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                 self.G1LoadValue.setMinimum(G1tmp)
                                 self.G1LoadValue.setValue(G1tmp)
                                 print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
-                            self.checkSLU(Width, Height)
+                            self.checkSLU(self.Width, self.Height)
 #                            else:
 #                                self.FinalBeamDim = 0
 #                                print('self.FinalBeamDim:', self.FinalBeamDim, 'G1tmp:', G1tmp, 'self.G1LoadValue.value', self.G1LoadValue.value())
@@ -606,8 +608,8 @@ class Sizing:
                             print('SelectedBeam else if:', SelBeam, 'self.FinalBeamDim', self.FinalBeamDim)
                             print('self.bmin', self.bmin, 'selW: ', self.selWidth, 'self.hmin', self.hmin, 'selH: ', self.selHeight)
                             if self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight != self.beamweight:
-                                Width = self.selWidth
-                                Height = self.selHeight
+                                self.Width = self.selWidth
+                                self.Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
                                 self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
                                 self.oldbeamweight = self.beamweight
@@ -619,8 +621,8 @@ class Sizing:
                                 if G1tmp != 0 and G1tmp != self.G1LoadValue.value():
                                     self.G1LoadValue.setMinimum(G1tmp)
                                     self.G1LoadValue.setValue(G1tmp)
-                                if 0 < Width < float("inf") and 0 < Height < float("inf"):
-                                    self.checkSLU(Width, Height)
+                                if 0 < self.Width < float("inf") and 0 < self.Height < float("inf"):
+                                    self.checkSLU(self.Width, self.Height)
                             elif self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight == self.beamweight:
                                 self.checkSLU(self.selWidth, self.selHeight)
                             else:
@@ -687,8 +689,6 @@ class Sizing:
         self.DimBoundaries(1)
 
     def checkSLU(self, Width, Height):
-#        Width = self.B
-#        Height = self.H
         if Width == 0 or Height == 0:
             return
         Length = self.length
@@ -750,7 +750,7 @@ class Sizing:
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ViewProviderMaterial(objmat.ViewObject)
 
-        self.Section(self.selection, Width, Height)
+        self.Section(self.selection, self.Width, self.Height)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
