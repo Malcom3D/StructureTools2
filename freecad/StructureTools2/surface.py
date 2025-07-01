@@ -8,12 +8,12 @@ class Surface:
 
         for object in selection:
             if 'Line' in object.Name:
-                x1 = object.Start.x, 2
-                y1 = object.Start.y, 2
-                z1 = object.Start.z, 2
-                x2 = object.End.x, 2
-                y2 = object.End.y, 2
-                z2 = object.End.z, 2
+                x1 = object.Start.x
+                y1 = object.Start.y
+                z1 = object.Start.z
+                x2 = object.End.x
+                y2 = object.End.y
+                z2 = object.End.z
 
                 p1 = FreeCAD.Vector(-Width/2, Height/2, 0)
                 p2 = FreeCAD.Vector(Width/2, Height/2, 0)
