@@ -103,8 +103,15 @@ class Sizing:
         self.oldbeamweight = 0
         self.FinalBeamDim = 0
 
+        mw = FreeCADGui.getMainWindow()
+        if len(obj.children()) > 0:
+            for child in obj.children():
+                if "QPushButton" in str(type(child)):
+                    if "OK" in str(child.property("text")):
+                        self.okBtn = child
+        self.okBtn.setEnabled(False)
+
         self.form = QtGui.QDialog()
-        self.form.QPushButton.Ok.setEnable(False)
         self.LoadParam()
 
     def LoadParam(self):
