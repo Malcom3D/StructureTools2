@@ -1,28 +1,21 @@
-import FreeCAD, App, FreeCADGui, Part, os, math
+import FreeCAD, App
 import Draft
 
 class Surface:
     def __init__(self, obj, selection, Width, Height):
 
         obj.Proxy = self
-        self.Type = 'surface'
 
         for object in selection:
             if 'Line' in object.Name:
-                self.x1 = round(object.Start.x, 2)
-                self.y1 = round(object.Start.y, 2)
-                self.z1 = round(object.Start.z, 2)
-                self.x2 = round(object.End.x, 2)
-                self.y2 = round(object.End.y, 2)
-                self.z2 = round(object.End.z, 2)
-                self.vec1 = FreeCAD.Vector(self.x1, self.y1, self.z1)
-                self.vec2 = FreeCAD.Vector(self.x2, self.y2, self.z2)
+                self.x1 = object.Start.x, 2
+                self.y1 = object.Start.y, 2
+                self.z1 = object.Start.z, 2
+                self.x2 = object.End.x, 2
+                self.y2 = object.End.y, 2
+                self.z2 = object.End.z, 2
                 self.Width = Width
                 self.Height = Height
-
-                # wire = make_wire(pointslist, closed=False, placement=None, face=None, support=None)
-
-                #placement = App.Vector(self.x1,self.y1,self.z1)
 
                 p1 = FreeCAD.Vector(-self.Width/2, self.Height/2, 0)
                 p2 = FreeCAD.Vector(self.Width/2, self.Height/2, 0)
@@ -30,11 +23,13 @@ class Surface:
                 p4 = FreeCAD.Vector(-self.Width/2, -self.Height/2, 0)
 
                 surface = Draft.make_wire([p1, p2, p3, p4], closed=True)
-                #surface.Placement = FreeCAD.Placement(FreeCAD.Vector(self.x1, self.y1, self.z1), FreeCAD.Rotation(self.vec1, self.vec2))
-                #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1, self.vec2))
-                #surface.Placement = FreeCAD.Placement(self.vec1, FreeCAD.Rotation(self.vec1.cross(self.vec2), Radian = self.vec1.getAngle(self.vec2)))
-                surface.Placement = FreeCAD.Placement(object.Placement)
-                surface.Shape # is a face
+
+                v = App.Vector(x1,y1,z1).sub(App.Vector(x2,y2,z2))
+                r = App.Rotation(App.Vector(0,0,1),v)
+                pl = FreeCAD.Placement()
+                pl.Rotation.Q = r.Q
+                pl.Base = App.Vector(x1,y1,z1)
+                surface.Placement = pl
 
     def execute(self, obj):
         pass
