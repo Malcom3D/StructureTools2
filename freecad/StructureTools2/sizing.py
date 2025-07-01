@@ -1,6 +1,7 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 import Draft, Part
 from PySide2 import QtWidgets, QtCore, QtGui, QDialogButtonBox
+from PySide2.QtWidgets import QDialogButtonBox
 import subprocess
 
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
@@ -104,7 +105,7 @@ class Sizing:
 
         self.TaskPanel = QtGui
         self.TaskPanel.QPushButton.Ok.setEnable(False)
-        self.form = self.TaskPanel.QDialog()
+        self.form = QtGui.QDialog()
         self.LoadParam()
 
     def LoadParam(self):
