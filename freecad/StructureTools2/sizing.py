@@ -1,6 +1,6 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 import Draft, Part
-from PySide import QtWidgets, QtCore, QtGui
+from PySide import QtWidgets, QtCore, QtGui, QDialogButtonBox
 import subprocess
 
 from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
