@@ -710,7 +710,7 @@ class Sizing:
                 print('Check_fmd', Check_fmd, 'Check_fvd', Check_fvd, 'Check_fx0d', Check_fx0d, 'Check_Deflection', Check_Deflection)
                 print('Moment', Moment, 'Shear', Shear, 'Deflection', Deflection, 'NormalStress', NormalStress, 'Wmax', Wmax)
 
-    def Wire(self, obj, selection, Width, Height)
+    def Wire(self, obj, selection, Width, Height):
         for object in selection:
             if 'Line' in object.Name:
                 x1 = object.Start.x
