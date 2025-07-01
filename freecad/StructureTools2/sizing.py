@@ -750,7 +750,7 @@ class Sizing:
         Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
         ViewProviderMaterial(objmat.ViewObject)
 
-        Wire(objsurf, self.selection, self.B, self.H)
+        self.Wire(objsurf, self.selection, self.B, self.H)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
