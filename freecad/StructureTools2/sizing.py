@@ -1,5 +1,5 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
-import Draft
+import Draft, Part
 from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
@@ -743,7 +743,6 @@ class Sizing:
         WoodStrengthClass = self.StrengthValue.currentText()
 
         doc = FreeCAD.ActiveDocument
-        #selection = FreeCADGui.Selection.getSelection()
 
         objmat = doc.addObject("Part::FeaturePython", "Material")
 
