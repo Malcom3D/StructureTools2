@@ -739,6 +739,7 @@ class Sizing:
                 pl.Rotation.Q = r.Q
                 pl.Base = FreeCAD.Vector(x1,y1,z1)
                 section.Placement = pl
+                return section
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
@@ -749,12 +750,16 @@ class Sizing:
 
         doc = FreeCAD.ActiveDocument
 
+        objSection = self.Section(self.selection, self.B, self.H)
+
         objmat = doc.addObject("Part::FeaturePython", "Material")
 
-        Material(objmat, self.selection, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
-        ViewProviderMaterial(objmat.ViewObject)
-
-        self.Section(self.selection, self.B, self.H)
+        ListElem = [objSection]
+        for objsel in self.selection:
+            if not 'NewProject' in objsel.Name:
+                ListElem.append(objsel)
+                Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
+                ViewProviderMaterial(objmat.ViewObject)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
