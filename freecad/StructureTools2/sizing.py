@@ -758,8 +758,8 @@ class Sizing:
         for objsel in self.selection:
             if not 'NewProject' in objsel.Name:
                 ListElem.append(objsel)
-                Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
-                ViewProviderMaterial(objmat.ViewObject)
+        Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
+        ViewProviderMaterial(objmat.ViewObject)
 
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
