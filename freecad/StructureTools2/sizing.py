@@ -470,6 +470,7 @@ class Sizing:
                 text = 'Class ' + str(self.KmodList[i][2]) + ' : ' + self.KmodList[i][1]
                 self.WoodClassValue.addItem(text)
         self.StrengthValue.clear()
+        self.StrengthValue.addItem('')
         for i in range(0,len(self.StrengthList[:])):
             if self.StrengthList[i][14] == self.WoodTypeValue.currentText():
                 self.StrengthValue.addItem(self.StrengthList[i][0])
