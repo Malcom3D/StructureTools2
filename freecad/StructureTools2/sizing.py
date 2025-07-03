@@ -250,7 +250,7 @@ class Sizing:
         self.StrengthValue = QtGui.QComboBox()
         WoodType = self.WoodTypeValue.currentText()
         for i in range(0,len(self.StrengthList[:])):
-            if WoodType in i:
+            if WoodType in self.StrengthList[i][0]:
                 self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
 
