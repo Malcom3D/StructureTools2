@@ -13,7 +13,7 @@ def show_error_message(msg):
 
 
 class Material:
-    def __init__(self, obj, selection, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean):
+    def __init__(self, obj, selection, WoodType, WoodClass, WoodStrengthClass, fmk, ft0k, ft90k, fc0k, fc90k, fvk, E0mean, E005, E90mean, Gmean, rk, rmean, PoissonRatio):
         obj.Proxy = self
 
         fmk = fmk*1000000 # 1N/mm² -> 1MPa
@@ -45,9 +45,9 @@ class Material:
         obj.addProperty("App::PropertyDensity", "rk", "Material", "Density").rk = rk # kg/m³
         obj.addProperty("App::PropertyDensity", "rmean", "Material", "MeanDensity").rmean = rmean # kg/m³
          
-        obj.addProperty("App::PropertyPressure", "ModulusElasticity", "Material", "Analise Material','Modulus of elasticity").ModulusElasticity = 0.00
-        obj.addProperty("App::PropertyFloat", "PoissonRatio", "Material", "Analise Material','v-> Poisson ratio").PoissonRatio = 0.00
-#        obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','d-> Density").Density = 0.00
+        obj.addProperty("App::PropertyPressure", "ModulusElasticity", "Material", "Analise Material','Modulus of elasticity").ModulusElasticity = E0mean
+        obj.addProperty("App::PropertyFloat", "PoissonRatio", "Material", "Analise Material','v-> Poisson ratio").PoissonRatio = PoissonRatio
+        obj.addProperty("App::PropertyDensity", "Density", "Material", "Analise Material','d-> Density").Density = rk
 
     def execute(self, obj):
         obj.Proxy = self

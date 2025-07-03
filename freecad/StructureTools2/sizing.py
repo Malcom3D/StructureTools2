@@ -3,8 +3,8 @@ import Draft
 from PySide import QtWidgets, QtCore, QtGui
 import subprocess
 
-from freecad.StructureTools2.standard.italy.ntc2018 import NTC2018
-from freecad.StructureTools2.standard.italy.constant import Constant
+from freecad.StructureTools2.standard.eurocode.ntc2018 import NTC2018
+from freecad.StructureTools2.standard.eurocode.constant import Constant
 from freecad.StructureTools2.material import Material, ViewProviderMaterial
 
 from sympy import *
@@ -79,6 +79,7 @@ class Sizing:
         self.Gmean = 0
         self.rk = 0
         self.rmean = 0
+        self.PoissonRatio = 0
 
         self.kmodPerm = 0
         self.kmodLongPerm = 0
@@ -247,8 +248,10 @@ class Sizing:
 
         self.StrengthLabel = QtGui.QLabel('Strength class')
         self.StrengthValue = QtGui.QComboBox()
+        WoodType = self.WoodTypeValue.currentText()
         for i in range(0,len(self.StrengthList[:])):
-            self.StrengthValue.addItem(self.StrengthList[i][0])
+            if WoodType in i:
+                self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
 
         self.fmkLabel = QtGui.QLabel('fmk: 0 kN/mm²')
@@ -263,6 +266,7 @@ class Sizing:
         self.GmeanLabel = QtGui.QLabel('Gmean: 0 kN/mm²')
         self.rkLabel = QtGui.QLabel('rk: 0 kg/m³')
         self.rmeanLabel = QtGui.QLabel('rmean: 0 kg/m³')
+        self.PoissonRatioLabel = QtGui.QLabel('Poisson Ratio: 0')
 
         layoutMatParamCol1.addWidget(self.fmkLabel)
         layoutMatParamCol1.addWidget(self.ft0kLabel)
@@ -277,6 +281,7 @@ class Sizing:
         layoutMatParamCol2.addWidget(self.GmeanLabel)
         layoutMatParamCol2.addWidget(self.rkLabel)
         layoutMatParamCol2.addWidget(self.rmeanLabel)
+        layoutMatParamCol2.addWidget(self.PoissonRatioLabel)
 
         self.formMatParam = QtGui.QDialog()
         self.formMatParamCol1 = QtGui.QDialog()
@@ -513,6 +518,7 @@ class Sizing:
             self.Gmean = self.StrengthList[index][10]
             self.rk = self.StrengthList[index][11]
             self.rmean = self.StrengthList[index][12]
+            self.PoissonRatio = self.StrengthList[index][13]
 
             self.fmkLabel.setText('fmk: ' + str(self.fmk) + ' N/mm²')
             self.ft0kLabel.setText('ft0k: ' + str(self.ft0k) + ' N/mm²')
@@ -526,6 +532,7 @@ class Sizing:
             self.GmeanLabel.setText('Gmean: ' + str(self.Gmean) + ' kN/mm²')
             self.rkLabel.setText('rk: ' + str(self.rk) + ' kg/m³')
             self.rmeanLabel.setText('rmean: ' + str(self.rmean) + ' kg/m³')
+            self.PoissonRatioLabel.setText('Poisson Ratio: ' + str(self.PoissonRatio))
 
             self.DimBoundaries(0)
 
@@ -758,7 +765,7 @@ class Sizing:
         for objsel in self.selection:
             if not 'NewProject' in objsel.Name:
                 ListElem.append(objsel)
-        Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean)
+        Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean, self.PoissonRatio)
         ViewProviderMaterial(objmat.ViewObject)
 
         doc.recompute()
