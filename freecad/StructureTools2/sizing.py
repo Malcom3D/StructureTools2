@@ -248,10 +248,6 @@ class Sizing:
 
         self.StrengthLabel = QtGui.QLabel('Strength class')
         self.StrengthValue = QtGui.QComboBox()
-        WoodType = self.WoodTypeValue.currentText()
-        for i in range(0,len(self.StrengthList[:])):
-            if WoodType in self.StrengthList[i][0]:
-                self.StrengthValue.addItem(self.StrengthList[i][0])
         self.StrengthValue.activated.connect(self.selectedStrength)
 
         self.fmkLabel = QtGui.QLabel('fmk: 0 kN/mm²')
@@ -473,6 +469,10 @@ class Sizing:
             if self.KmodList[i][0] == self.WoodTypeValue.currentText():
                 text = 'Class ' + str(self.KmodList[i][2]) + ' : ' + self.KmodList[i][1]
                 self.WoodClassValue.addItem(text)
+        self.StrengthValue.clear()
+        for i in range(0,len(self.StrengthList[:])):
+            if self.StrengthList[i][14] == self.WoodTypeValue.currentText():
+                self.StrengthValue.addItem(self.StrengthList[i][0])
 
         self.DimBoundaries(0)
 
