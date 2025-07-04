@@ -21,13 +21,23 @@ def set_type(s):
     return s
 
 
-# function for returning elevation from lat, long, based on open elevation data
+# function for return elevation from lat, long, based on open elevation data
 # which in turn is based on SRTM
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
     elevation = data['results'][0]['elevation']*1000
     return elevation
+
+# function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
+def get_location(lat, long):
+    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
+    data = requests.get(url).json()  # json object, various ways you can extract value
+    town = data['address']['town']
+    county = data['address']['county']
+    country = data['address']['country']
+    country_code = data['address']['country_code']
+    return  town, county, country, country_code
     
 
 class NewProject:
@@ -37,6 +47,10 @@ class NewProject:
         self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building site").Latitude = 0
         self.obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building site").Longitude = 0
         self.obj.addProperty("App::PropertyDistance", "Elevation", "NewProject", "Geographic elevation of building site").Elevation = 0
+        self.obj.addProperty("App::PropertyString", "CountryCode", "NewProject", "Country Code").CountryCode = 'None'
+        self.obj.addProperty("App::PropertyString", "Country", "NewProject", "Country").Country = 'None'
+        self.obj.addProperty("App::PropertyString", "County", "NewProject", "County").County = 'None'
+        self.obj.addProperty("App::PropertyString", "Town", "NewProject", "Town").Town = 'None'
         self.obj.addProperty("App::PropertyString", "NominalLife", "NewProject", "Nominal life time of building").NominalLife = 'None'
         self.obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building").Vn = 0
         self.obj.addProperty("App::PropertyString", "UseClass", "NewProject", "Use class of building").UseClass = 'None'
@@ -139,6 +153,7 @@ class NewProject:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_locationm(self.obj.Latitude, self.obj.Longitude)
         self.obj.BuildingStandard = self.StandardValue.currentText()
         self.obj.Latitude = self.LatitudeValue.value()
         self.obj.Longitude = self.LongitudeValue.value()
@@ -147,14 +162,14 @@ class NewProject:
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
         self.obj.Cu = self.Cu
-        self.obj.setEditorMode("BuildingStandard",1)
-        self.obj.setEditorMode("Latitude",1)
-        self.obj.setEditorMode("Longitude",1)
-        self.obj.setEditorMode("Elevation",1)
-        self.obj.setEditorMode("NominalLife",1)
-        self.obj.setEditorMode("Vn",1)
-        self.obj.setEditorMode("UseClass",1)
-        self.obj.setEditorMode("Cu",1)
+        self.obj.setEditorMode("BuildingStandard",1) # readOnly
+        self.obj.setEditorMode("Latitude",1) # readOnly
+        self.obj.setEditorMode("Longitude",1) # readOnly
+        self.obj.setEditorMode("Elevation",1) # readOnly
+        self.obj.setEditorMode("NominalLife",1) # readOnly
+        self.obj.setEditorMode("Vn",1) # readOnly
+        self.obj.setEditorMode("UseClass",1) # readOnly
+        self.obj.setEditorMode("Cu",1) # readOnly
 
 
         FreeCADGui.Control.closeDialog() #close the dialog

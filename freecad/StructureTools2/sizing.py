@@ -557,7 +557,7 @@ class Sizing:
         self.DimBoundaries(0)
 
     def DimBoundaries(self, SelBeam):
-        # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0): 
+        # if G1LoadValue != 0 and (not G1LoadInit or G1LoadInit == 0):
         #      G1LoadInit=G1LoadValue
         # if G2LoadValue != 0 and (not G2LoadInit or G2LoadInit == 0):
         #      if G2LoadValue != self G2avr:
@@ -579,7 +579,7 @@ class Sizing:
 
                         self.Fd = self.NTC2018Data.FundComb(self.G1LoadValue.value(), self.GammaList[1][4], self.G2LoadValue.value(), self.GammaList[2][4], self.qk, self.GammaList[3][4])
                         self.bmin, self.hmin = self.NTC2018Data.PreDim(self.Fd, self.BeamStepValue.value(), self.length, self.fmd, self.fvd)
-                        self.beamminweight, self.beamminQ = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean) 
+                        self.beamminweight, self.beamminQ = self.NTC2018Data.BeamWeight(self.bmin, self.hmin, self.length, self.rmean)
 
                         self.FundCombLabel.setText('Fundamental Combination: ' + str(round(self.Fd, 2)) + ' kN/m²')
                         self.WidthMinLabel.setText('Section width minimum: ' + str(round(self.bmin, 2)) + ' mm')
@@ -594,7 +594,7 @@ class Sizing:
                             rhomean = self.rmean
                             self.FinalBeamDim = 1
                             print('W: ', Width, 'H: ', Height)
-                            self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean) 
+                            self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(Width, Height, Length, rhomean)
                             self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                             self.SelectedWidthLabel.setText('Selected width: '  + str(round(Width, 4)) + '  mm')
                             self.SelectedHeightLabel.setText('Selected height: '  + str(round(Height, 4)) + '  mm')
@@ -618,7 +618,7 @@ class Sizing:
                                 Width = self.selWidth
                                 Height = self.selHeight
                                 print('selW: ', self.selWidth, 'selH: ', self.selHeight)
-                                self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean) 
+                                self.beamweight, self.beamQ = self.NTC2018Data.BeamWeight(self.selWidth, self.selHeight, self.length, self.rmean)
                                 self.oldbeamweight = self.beamweight
                                 self.BeamWeightLabel.setText('Selected section weight: '  + str(round(self.beamweight, 4)) + '  kN')
                                 self.SelectedWidthLabel.setText('Selected width: '  + str(round(self.selWidth, 4)) + '  mm')
@@ -635,7 +635,7 @@ class Sizing:
                             elif self.selWidth >= self.bmin and self.selHeight >= self.hmin and self.oldbeamweight == self.beamweight:
                                 if self.checkSLU(self.selWidth, self.selHeight):
                                     self.B = self.selWidth
-                                    self.H = self.selHeight 
+                                    self.H = self.selHeight
                             else:
                                 print('else', 'G1avr', self.G1avr, 'self.beamminweight', self.beamminweight, 'self.beamweight', self.beamweight)
                                 G1tmp = round(self.beamminQ + self.G1avr, 4)
@@ -1019,7 +1019,7 @@ class CommandSizing():
                 "Accel"   : "Shift+S", # a default shortcut (optional)
                 "MenuText": "sizing structure",
                 "ToolTip" : "Sizing the structure"}
-    
+
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
         doc = FreeCAD.ActiveDocument
@@ -1027,15 +1027,15 @@ class CommandSizing():
         # what is done when the command is clicked
         # creates a panel with a dialog
         panel = Sizing(selection)
-        # having a panel with a widget in self.form and the accept and 
+        # having a panel with a widget in self.form and the accept and
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
 
-        FreeCAD.ActiveDocument.recompute()        
+        FreeCAD.ActiveDocument.recompute()
         return
 
     def IsActive(self):
-        
+
         return True
 
 FreeCADGui.addCommand('sizing', CommandSizing())
