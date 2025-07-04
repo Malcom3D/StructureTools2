@@ -153,11 +153,11 @@ class NewProject:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_locationm(self.obj.Latitude, self.obj.Longitude)
         self.obj.BuildingStandard = self.StandardValue.currentText()
         self.obj.Latitude = self.LatitudeValue.value()
         self.obj.Longitude = self.LongitudeValue.value()
         self.obj.Elevation = get_elevation(self.obj.Latitude, self.obj.Longitude)
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.obj.Latitude, self.obj.Longitude)
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
