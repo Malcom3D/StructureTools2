@@ -36,6 +36,7 @@ def get_location(lat, long):
         'long': long,
         'format' :'json'
     }
+    print(lat, long)
 #    url = 'https://nominatim.openstreetmap.org/reverse'
 #    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
     url = (f'https://nominatim.openstreetmap.org/reverse?lat=',str(lat),'&lon=',str(long),'&zoom=18&format=json')
