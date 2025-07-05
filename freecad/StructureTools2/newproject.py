@@ -33,7 +33,7 @@ def get_elevation(lat, long):
 def get_location(lat, long):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 'Referer': 'https://none.net'}
     url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
-    data = requests.get(url).json()  # json object, various ways you can extract value
+    data = requests.get(url, headers=headers).json()  # json object, various ways you can extract value
     town = data['address']['town']
     county = data['address']['county']
     country = data['address']['country']
