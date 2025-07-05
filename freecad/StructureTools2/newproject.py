@@ -31,9 +31,7 @@ def get_elevation(lat, long):
 
 # function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
 def get_location(lat, long):
-    print(lat, long)
-#    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
-    url = f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json'
+    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
     data = requests.get(url).json()  # json object, various ways you can extract value
     town = data['address']['town']
     county = data['address']['county']
@@ -173,6 +171,7 @@ class NewProject:
         self.obj.setEditorMode("UseClass",1) # readOnly
         self.obj.setEditorMode("Cu",1) # readOnly
 
+        print(get_location(lat, long))
         self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(lat, long)
 
         FreeCADGui.Control.closeDialog() #close the dialog
