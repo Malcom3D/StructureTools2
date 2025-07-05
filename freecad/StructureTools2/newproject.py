@@ -37,17 +37,9 @@ def get_location(lat, long):
         'format' :'json'
     }
     print(lat, long)
-#    url = 'https://nominatim.openstreetmap.org/reverse'
 #    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
-    url = (f'https://nominatim.openstreetmap.org/reverse?lat=',str(lat),'&lon=',str(long),'&zoom=18&format=json')
-#    data = requests.get(url).json()  # json object, various ways you can extract value
-    response = requests.get(url)  # json object, various ways you can extract value
-    # Make the GET request with query parameters
-#    response = requests.get('https://nominatim.openstreetmap.org/reverse', params=params)
-    data = response.json()
-#    data = requests.get(url, params=params)
-    print(response.url)
-
+    url = f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json'
+    data = requests.get(url).json()  # json object, various ways you can extract value
     town = data['address']['town']
     county = data['address']['county']
     country = data['address']['country']
