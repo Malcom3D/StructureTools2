@@ -42,7 +42,7 @@ def get_location(lat, long):
     # Make the GET request with query parameters
 #    data = requests.get(url, params=params).json()
     data = requests.get(url, params=params)
-    print(data.url)
+    print(data)
     town = data['address']['town']
     county = data['address']['county']
     country = data['address']['country']
