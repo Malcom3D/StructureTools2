@@ -31,11 +31,6 @@ def get_elevation(lat, long):
 
 # function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
 def get_location(lat, long):
-    params = { 
-        'lat': lat,
-        'long': long,
-        'format' :'json'
-    }
     print(lat, long)
 #    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
     url = f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json'
@@ -166,7 +161,6 @@ class NewProject:
         print(self.obj.Latitude, self.obj.Longitude)
         self.obj.Elevation = get_elevation(self.obj.Latitude, self.obj.Longitude)
         #self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.obj.Latitude, self.obj.Longitude)
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(45.52868, 9.04425)
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
