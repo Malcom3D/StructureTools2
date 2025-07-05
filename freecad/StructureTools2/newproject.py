@@ -165,7 +165,8 @@ class NewProject:
         self.obj.Longitude = self.LongitudeValue.value()
         print(self.obj.Latitude, self.obj.Longitude)
         self.obj.Elevation = get_elevation(self.obj.Latitude, self.obj.Longitude)
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.obj.Latitude, self.obj.Longitude)
+        #self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.obj.Latitude, self.obj.Longitude)
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(45.52868, 9.04425)
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
