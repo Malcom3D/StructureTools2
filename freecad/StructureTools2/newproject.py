@@ -44,6 +44,8 @@ def get_location(lat, long):
 
 class NewProject:
     def __init__(self, obj):
+        self.Cu = 0
+        self.Vn = 0
         self.obj = obj
         self.obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
         self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building site").Latitude = 0
@@ -54,14 +56,11 @@ class NewProject:
         self.obj.addProperty("App::PropertyString", "County", "NewProject", "County").County = 'None'
         self.obj.addProperty("App::PropertyString", "Town", "NewProject", "Town").Town = 'None'
         self.obj.addProperty("App::PropertyString", "NominalLife", "NewProject", "Nominal life time of building").NominalLife = 'None'
-        self.obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building").Vn = 0
+        self.obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building").Vn = self.Vn
         self.obj.addProperty("App::PropertyString", "UseClass", "NewProject", "Use class of building").UseClass = 'None'
-        self.obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class coefficient of building").Cu = 0
+        self.obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class coefficient of building").Cu = self.Cu
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
-
-        self.Cu = 0
-        self.Vn = 0
 
     def StandardSelection(self):
         # Building Standard Selection QDialog
@@ -161,7 +160,6 @@ class NewProject:
         lat = str(self.obj.Latitude).strip(' deg')
         long = str(self.obj.Longitude).strip(' deg')
         self.obj.Elevation = get_elevation(lat, long)
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(lat, long)
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
@@ -175,6 +173,7 @@ class NewProject:
         self.obj.setEditorMode("UseClass",1) # readOnly
         self.obj.setEditorMode("Cu",1) # readOnly
 
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(lat, long)
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
