@@ -1,6 +1,6 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
-import requests json
+import requests, json
 
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
