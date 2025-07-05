@@ -31,18 +31,18 @@ def get_elevation(lat, long):
 
 # function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
 def get_location(lat, long):
-    params = {
-        'lat': lat,
-        'long': long,
-        'format': 'json'
-    }
+    params = dict( 
+        lat=lat,
+        long=long,
+        format='json'
+    )
     url = 'https://nominatim.openstreetmap.org/reverse'
 #    url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
 #    data = requests.get(url).json()  # json object, various ways you can extract value
     # Make the GET request with query parameters
-    data = requests.get(url, params=params).json()
+    data = requests.get(url=url, params=params).json()
 #    data = requests.get(url, params=params)
-    print(data)
+    print(data.url)
     town = data['address']['town']
     county = data['address']['county']
     country = data['address']['country']
