@@ -158,9 +158,10 @@ class NewProject:
         self.obj.BuildingStandard = self.StandardValue.currentText()
         self.obj.Latitude = self.LatitudeValue.value()
         self.obj.Longitude = self.LongitudeValue.value()
-        print(self.obj.Latitude, self.obj.Longitude)
-        self.obj.Elevation = get_elevation(self.obj.Latitude, self.obj.Longitude)
-        #self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.obj.Latitude, self.obj.Longitude)
+        lat = str(self.obj.Latitude).strip(' deg')
+        long = str(self.obj.Longitude).strip(' deg')
+        self.obj.Elevation = get_elevation(lat, long)
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(lat, long)
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
