@@ -117,7 +117,6 @@ class LoadDistributed:
             obj.ViewObject.ShapeAppearance = (FreeCAD.Material(DiffuseColor=(0.00,0.00,1.00),AmbientColor=(0.33,0.33,0.33),SpecularColor=(0.53,0.53,0.53),EmissiveColor=(0.00,0.00,0.00),Shininess=(0.90),Transparency=(0.00),))
             obj.Label = 'distributed load'
 
-
         obj.Placement = shape.Placement
         obj.Shape = shape
         obj.ViewObject.DisplayMode = 'Shaded'
@@ -303,6 +302,7 @@ class CommandLoadDistributed():
 #                    obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
 #                    LoadDistributed(obj,(selection.Object, 'Edge'+str(i+1)))
 #                    ViewProviderLoadDistributed(obj.ViewObject)
+
         selections = FreeCADGui.Selection.getSelectionEx()
         for selection in selections:
             if 'Line' in selection.ObjectName:
@@ -314,7 +314,6 @@ class CommandLoadDistributed():
                         obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
                         LoadDistributed(obj,(selection.Object, 'Edge'+str(i+1)))
                         ViewProviderLoadDistributed(obj.ViewObject) 
-
         
         FreeCAD.ActiveDocument.recompute()
         # except:
