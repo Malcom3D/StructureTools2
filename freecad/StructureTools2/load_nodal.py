@@ -209,7 +209,6 @@ class CommandLoadNodal():
                             ViewProviderLoadNodal(obj.ViewObject)
                 else:
                     show_error_message('Elements length need to be >= 25cm')
-selection.Object.Shape.Vertexes
 
             FreeCAD.ActiveDocument.recompute()
 #        except:
