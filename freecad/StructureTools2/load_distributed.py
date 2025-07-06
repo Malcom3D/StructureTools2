@@ -14,6 +14,7 @@ def show_error_message(msg):
 
 class LoadDistributed:
     def __init__(self, obj, selection):
+        print(selection)
         obj.Proxy = self
         obj.addProperty("App::PropertyLinkSubList", "ObjectBase", "Base", "Object base")
         obj.addProperty("App::PropertyForce", "InitialLoading", "Distributed", "Initial loading (load per unit length)").InitialLoading = 10000000
@@ -31,10 +32,9 @@ class LoadDistributed:
         obj.GlobalDirection = ['+X','-X', '+Y','-Y', '+Z','-Z']
         obj.GlobalDirection = '-Z'
         
-        print(selection)
         obj.ObjectBase = (selection[0], selection[1])
     
-    # Desenha carregamento pontual
+    # Draw distributet load
     def drawNodeLoad(self, obj, vertex):
         pass
     
@@ -272,7 +272,6 @@ static char * load_distributed_xpm[] = {
 
 
 class CommandLoadDistributed():
-    """My new command"""
 
     def GetResources(self):
         return {"Pixmap"  : os.path.join(ICONPATH, "icons/load_distributed.svg"), # the name of a svg file available in the resources
