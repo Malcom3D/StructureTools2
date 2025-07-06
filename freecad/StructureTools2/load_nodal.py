@@ -23,7 +23,6 @@ class LoadNodal:
         obj.GlobalDirection = ['+X','-X', '+Y','-Y', '+Z','-Z']
         obj.GlobalDirection = '-Z'
         
-        print(selection)
         obj.ObjectBase = (selection[0], selection[1])
     
     # Desenha carregamento pontual
@@ -81,9 +80,6 @@ class LoadNodal:
         obj.Placement = shape.Placement
         obj.Shape = shape
         obj.ViewObject.DisplayMode = 'Shaded'
-        
-        
-       
 
 
     def onChanged(self,obj,Parameter):
@@ -173,7 +169,6 @@ static char * load_nodal_xpm[] = {
 
 
 class CommandLoadNodal():
-    """My new command"""
 
     def GetResources(self):
         return {"Pixmap"  : os.path.join(ICONPATH, "icons/load_nodal.svg"), # the name of a svg file available in the resources
@@ -183,20 +178,42 @@ class CommandLoadNodal():
 
     def Activated(self):
         try:
-            selections = list(FreeCADGui.Selection.getSelectionEx())        
-            for selection in selections:
+#            selections = list(FreeCADGui.Selection.getSelectionEx())        
+#            for selection in selections:
+#                for subSelectionname in selection.SubElementNames:
+#
+#                    doc = FreeCAD.ActiveDocument
+#                    obj = doc.addObject("Part::FeaturePython", "Load_Nodal")
+#
+#                    objLoad = LoadNodal(obj,(selection.Object, subSelectionname))
+#                    ViewProviderLoadNodal(obj.ViewObject)
+#            
+        doc = FreeCAD.ActiveDocument
+        selections = FreeCADGui.Selection.getSelectionEx()
+        for selection in selections:
+            if selection.HasSubObjects:
                 for subSelectionname in selection.SubElementNames:
+                    if 'Line' in subSelectionname:
+                        obj = doc.addObject("Part::FeaturePython", "Load_Nodal")
+                        LoadNodal(obj,(selection.Object, subSelectionname))
+                        ViewProviderLoadNodal(obj.ViewObject)
+            else:
+                if 'Line' in selection.ObjectName:
+                    if selection.Object.Shape.Length >= 250:
+                        line = selection.Object
+                        edges = line.Shape.Edges
+                        for i in range(len(edges)):
+                            doc = FreeCAD.ActiveDocument
+                            obj = doc.addObject("Part::FeaturePython", "Load_Nodal")
+                            LoadNodal(obj,(selection.Object, 'Edge'+str(i+1)))
+                            ViewProviderLoadNodal(obj.ViewObject)
+                else:
+                    show_error_message('Elements length need to be >= 25cm')
 
-                    doc = FreeCAD.ActiveDocument
-                    obj = doc.addObject("Part::FeaturePython", "Load_Nodal")
-
-                    objLoad = LoadNodal(obj,(selection.Object, subSelectionname))
-                    ViewProviderLoadNodal(obj.ViewObject)
-            
             FreeCAD.ActiveDocument.recompute()
-        except:
-            show_error_message("Seleciona um ponto ou uma barra para adicionar um carregamento.")
-        return
+#        except:
+#            show_error_message("Select a line to apply a modal load.")
+#        return
 
     def IsActive(self):
         """Here you can define if the command must be active or not (greyed) if certain conditions
