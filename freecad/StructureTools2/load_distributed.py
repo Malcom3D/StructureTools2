@@ -314,6 +314,8 @@ class CommandLoadDistributed():
                         obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
                         LoadDistributed(obj,(selection.Object, 'Edge'+str(i+1)))
                         ViewProviderLoadDistributed(obj.ViewObject) 
+                else:
+                    show_error_message('Elements length need to be >= 25cm']
         
         FreeCAD.ActiveDocument.recompute()
         # except:
