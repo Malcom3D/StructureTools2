@@ -90,7 +90,6 @@ class LoadNodal:
 class ViewProviderLoadNodal:
     def __init__(self, obj):
         obj.Proxy = self
-    
 
     def getIcon(self):
         return """
