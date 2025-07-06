@@ -176,7 +176,7 @@ class CommandLoadNodal():
                 "ToolTip" : "Adds loads to the structure"}
 
     def Activated(self):
-        try:
+#        try:
 #            selections = list(FreeCADGui.Selection.getSelectionEx())        
 #            for selection in selections:
 #                for subSelectionname in selection.SubElementNames:
