@@ -61,7 +61,6 @@ class LoadDistributed:
     
     
     def execute(self, obj):
-
         subelement = self.getSubelement(obj, obj.ObjectBase[0][1][0])
         if 'Edge' in obj.ObjectBase[0][1][0]:
             k = 1000000

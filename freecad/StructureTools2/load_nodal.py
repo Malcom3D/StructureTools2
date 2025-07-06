@@ -200,14 +200,16 @@ class CommandLoadNodal():
                 if 'Line' in selection.ObjectName:
                     if selection.Object.Shape.Length >= 250:
                         line = selection.Object
-                        edges = line.Shape.Edges
-                        for i in range(len(edges)):
+                        verts = line.Shape.Vertexes
+#                        edges = line.Shape.Edges
+                        for i in range(len(verts)):
                             doc = FreeCAD.ActiveDocument
                             obj = doc.addObject("Part::FeaturePython", "Load_Nodal")
-                            LoadNodal(obj,(selection.Object, 'Edge'+str(i+1)))
+                            LoadNodal(obj,(selection.Object, 'Vertex'+str(i+1)))
                             ViewProviderLoadNodal(obj.ViewObject)
                 else:
                     show_error_message('Elements length need to be >= 25cm')
+selection.Object.Shape.Vertexes
 
             FreeCAD.ActiveDocument.recompute()
 #        except:
