@@ -14,7 +14,6 @@ def show_error_message(msg):
 
 class LoadDistributed:
     def __init__(self, obj, selection):
-        print(selection)
         obj.Proxy = self
         obj.addProperty("App::PropertyLinkSubList", "ObjectBase", "Base", "Object base")
         obj.addProperty("App::PropertyForce", "InitialLoading", "Distributed", "Initial loading (load per unit length)").InitialLoading = 10000000
@@ -282,27 +281,39 @@ class CommandLoadDistributed():
 
     def Activated(self):
         # try:
-        selections = list(FreeCADGui.Selection.getSelectionEx())
+#        selections = list(FreeCADGui.Selection.getSelectionEx())
     
+#        for selection in selections:
+#            if selection.HasSubObjects: #Valida se a seleção possui sub objetos
+#                for subSelectionname in selection.SubElementNames:
+#                    if 'Line' in subSelectionname.Name:
+#                        if subSelectionname.Length
+#
+#                        doc = FreeCAD.ActiveDocument
+#                        obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
+#
+#                        objLoad = LoadDistributed(obj,(selection.Object, subSelectionname))
+#                        ViewProviderLoadDistributed(obj.ViewObject)
+#            else:
+#                # pass
+#                line = selection.Object
+#                edges = line.Shape.Edges
+#                for i in range(len(edges)):
+#                    doc = FreeCAD.ActiveDocument
+#                    obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
+#                    LoadDistributed(obj,(selection.Object, 'Edge'+str(i+1)))
+#                    ViewProviderLoadDistributed(obj.ViewObject)
+        selections = FreeCADGui.Selection.getSelectionEx()
         for selection in selections:
-            if selection.HasSubObjects: #Valida se a seleção possui sub objetos
-                for subSelectionname in selection.SubElementNames:
-
-                    doc = FreeCAD.ActiveDocument
-                    obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
-
-                    print(subSelectionname)
-                    objLoad = LoadDistributed(obj,(selection.Object, subSelectionname))
-                    ViewProviderLoadDistributed(obj.ViewObject)
-            else:
-                # pass
-                line = selection.Object
-                edges = line.Shape.Edges
-                for i in range(len(edges)):
-                    doc = FreeCAD.ActiveDocument
-                    obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
-                    LoadDistributed(obj,(selection.Object, 'Edge'+str(i+1)))
-                    ViewProviderLoadDistributed(obj.ViewObject)
+            if 'Line' in selection.ObjectName:
+                if selection.Object.Shape.Length >= 250:
+                    line = selection.Object
+                    edges = line.Shape.Edges
+                    for i in range(len(edges)):
+                        doc = FreeCAD.ActiveDocument
+                        obj = doc.addObject("Part::FeaturePython", "Load_Distributed")
+                        LoadDistributed(obj,(selection.Object, 'Edge'+str(i+1)))
+                        ViewProviderLoadDistributed(obj.ViewObject) 
 
         
         FreeCAD.ActiveDocument.recompute()
