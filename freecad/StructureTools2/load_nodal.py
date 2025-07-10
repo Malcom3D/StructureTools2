@@ -17,8 +17,6 @@ class LoadNodal:
         obj.Proxy = self
         obj.addProperty("App::PropertyLinkSubList", "ObjectBase", "Base", "Object base")
         obj.addProperty("App::PropertyForce", "NodalLoading", "Nodal", "Nodal loading").NodalLoading = 10000000
-        obj.addProperty("App::PropertyFloatConstraint", "DistFromVertex", "Load", "Distance from Vertex").DistFromVertex.LowerLimit = 0.0
-        obj.addProperty("App::PropertyFloatConstraint", "DistFromVertex", "Load", "Distance from Vertex").DistFromVertex.UpperLimit = 1.0
         obj.addProperty("App::PropertyFloat", "ScaleDraw", "Load", "Scale from drawing").ScaleDraw = 1
         
         obj.addProperty("App::PropertyEnumeration", "GlobalDirection","Load","Global direction load")
