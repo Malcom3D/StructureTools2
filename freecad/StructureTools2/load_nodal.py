@@ -18,7 +18,7 @@ class LoadNodal:
         obj.addProperty("App::PropertyLinkSubList", "ObjectBase", "Base", "Object base")
         obj.addProperty("App::PropertyForce", "NodalLoading", "Nodal", "Nodal loading").NodalLoading = 10000000
         obj.addProperty("App::PropertyFloat", "ScaleDraw", "Load", "Scale from drawing").ScaleDraw = 1
-        
+        obj.addProperty("App::PropertyFloatConstraint", "DistFromVertex", "Base", "Distance from vertex").DistFromVertex = (obj.ObjectBase[0][0].Length.Value, 0.0, 100.0, 0.1)
         obj.addProperty("App::PropertyEnumeration", "GlobalDirection","Load","Global direction load")
         obj.GlobalDirection = ['+X','-X', '+Y','-Y', '+Z','-Z']
         obj.GlobalDirection = '-Z'

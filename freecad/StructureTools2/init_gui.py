@@ -48,7 +48,7 @@ class StructureTools2(Gui.Workbench):
 		from freecad.StructureTools2 import section
 #		from freecad.StructureTools2 import material
 		from freecad.StructureTools2 import member
-		from freecad.StructureTools2 import newproject
+		from freecad.StructureTools2 import project
 		from freecad.StructureTools2 import sizing
 		from freecad.StructureTools2 import calc
 		from freecad.StructureTools2 import diagram
@@ -62,10 +62,10 @@ class StructureTools2(Gui.Workbench):
 		self.appendToolbar('DraftTools', ["Draft_SelectPlane", "Draft_SetStyle"])
 
 		self.appendToolbar('StructureLoad', ["load_distributed","load_nodal"])
-		self.appendToolbar('StructureProject', ["newproject"])
+		self.appendToolbar('StructureProject', ["project"])
 		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
 		self.appendToolbar('StructureResults', ["sizing","calc","diagram"])
-		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "newproject", "sizing", "calc", "diagram"])
+		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "project", "sizing", "calc", "diagram"])
 
 	def Activated(self):
 		'''

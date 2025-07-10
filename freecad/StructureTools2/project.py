@@ -2,6 +2,8 @@ import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 import requests, json
 
+from freecad.StructureTools2.layer import Layer, LayerViewProvider
+
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
@@ -41,23 +43,23 @@ def get_location(lat, long):
     return  town, county, country, country_code
     
 
-class NewProject:
+class Project:
     def __init__(self, obj):
         self.Cu = 0
         self.Vn = 0
         self.obj = obj
-        self.obj.addProperty("App::PropertyString", "BuildingStandard", "NewProject", "Building standard")
-        self.obj.addProperty("App::PropertyAngle", "Latitude", "NewProject", "Geographic latitude of building site").Latitude = 0
-        self.obj.addProperty("App::PropertyAngle", "Longitude", "NewProject", "Geographic longitude of building site").Longitude = 0
-        self.obj.addProperty("App::PropertyDistance", "Elevation", "NewProject", "Geographic elevation of building site").Elevation = 0
-        self.obj.addProperty("App::PropertyString", "CountryCode", "NewProject", "Country Code").CountryCode = 'None'
-        self.obj.addProperty("App::PropertyString", "Country", "NewProject", "Country").Country = 'None'
-        self.obj.addProperty("App::PropertyString", "County", "NewProject", "County").County = 'None'
-        self.obj.addProperty("App::PropertyString", "Town", "NewProject", "Town").Town = 'None'
-        self.obj.addProperty("App::PropertyString", "NominalLife", "NewProject", "Nominal life time of building").NominalLife = 'None'
-        self.obj.addProperty("App::PropertyInteger", "Vn", "NewProject", "Nominal life time of building").Vn = self.Vn
-        self.obj.addProperty("App::PropertyString", "UseClass", "NewProject", "Use class of building").UseClass = 'None'
-        self.obj.addProperty("App::PropertyFloat", "Cu", "NewProject", "Use class coefficient of building").Cu = self.Cu
+        self.obj.addProperty("App::PropertyString", "BuildingStandard", "Project", "Building standard")
+        self.obj.addProperty("App::PropertyAngle", "Latitude", "Project", "Geographic latitude of building site").Latitude = 0
+        self.obj.addProperty("App::PropertyAngle", "Longitude", "Project", "Geographic longitude of building site").Longitude = 0
+        self.obj.addProperty("App::PropertyDistance", "Elevation", "Project", "Geographic elevation of building site").Elevation = 0
+        self.obj.addProperty("App::PropertyString", "CountryCode", "Project", "Country Code").CountryCode = 'None'
+        self.obj.addProperty("App::PropertyString", "Country", "Project", "Country").Country = 'None'
+        self.obj.addProperty("App::PropertyString", "County", "Project", "County").County = 'None'
+        self.obj.addProperty("App::PropertyString", "Town", "Project", "Town").Town = 'None'
+        self.obj.addProperty("App::PropertyString", "NominalLife", "Project", "Nominal life time of building").NominalLife = 'None'
+        self.obj.addProperty("App::PropertyInteger", "Vn", "Project", "Nominal life time of building").Vn = self.Vn
+        self.obj.addProperty("App::PropertyString", "UseClass", "Project", "Use class of building").UseClass = 'None'
+        self.obj.addProperty("App::PropertyFloat", "Cu", "Project", "Use class coefficient of building").Cu = self.Cu
         self.form = [QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
@@ -417,7 +419,7 @@ static char *sizing[] = {
 		"""
 
 
-class CommandNewProject():
+class CommandProject():
 
     def GetResources(self):
         return {"Pixmap"  : os.path.join(ICONPATH, "icons/sizing.svg"), # the name of a svg file available in the resources
@@ -427,12 +429,12 @@ class CommandNewProject():
     
     def Activated(self):
         doc = FreeCAD.ActiveDocument
-        obj = doc.addObject("Part::FeaturePython", "NewProject")
+        obj = doc.addObject("Part::FeaturePython", "Project")
 
         # what is done when the command is clicked
         # creates a panel with a dialog
-        objSuport = NewProject(obj)
-        # ViewProviderNewProject(obj.ViewObject)
+        objSuport = Project(obj)
+        # ViewProviderProject(obj.ViewObject)
 
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
@@ -445,4 +447,4 @@ class CommandNewProject():
         
         return True
 
-FreeCADGui.addCommand('newproject', CommandNewProject())
+FreeCADGui.addCommand('project', CommandProject())

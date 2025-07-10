@@ -38,7 +38,7 @@ class Sizing:
     def __init__(self, selection):
         self.selection = selection
         for object in self.selection:
-            if 'NewProject' in object.Name:
+            if 'Project' in object.Name:
                 if 'ntc2018' in object.BuildingStandard:
                     self.BuildingStandard = object.BuildingStandard
                     self.Latitude = object.Latitude
@@ -764,7 +764,7 @@ class Sizing:
 
         ListElem = [objSection]
         for objsel in self.selection:
-            if not 'NewProject' in objsel.Name:
+            if not 'Project' in objsel.Name:
                 ListElem.append(objsel)
         Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean, self.PoissonRatio)
         ViewProviderMaterial(objmat.ViewObject)
