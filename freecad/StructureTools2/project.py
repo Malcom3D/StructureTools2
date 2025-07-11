@@ -429,16 +429,15 @@ class CommandProject():
     
     def Activated(self):
         doc = FreeCAD.ActiveDocument
-#        obj = doc.addObject("Part::FeaturePython", "Project")
         obj = doc.addObject("App::GeometryPython","Project")
 
         # what is done when the command is clicked
         # creates a panel with a dialog
         objSuport = Project(obj)
-        Layer(obj)
-        LayerViewProvider(obj)
+        #Layer(obj)
         #LayerViewProvider(obj.ViewObject)
-        # ViewProviderProject(obj.ViewObject)
+        Layer(objSuport)
+        LayerViewProvider(objSuport.ViewObject)
 
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
