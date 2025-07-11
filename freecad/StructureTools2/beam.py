@@ -760,6 +760,7 @@ class Beam:
         objbeam.addObject(objmat)
 
         ViewProviderBeam(objbeam.ViewObject)
+        self.objProject.addObject(objbeam)
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
 
