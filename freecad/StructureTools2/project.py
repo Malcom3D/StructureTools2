@@ -48,6 +48,7 @@ class Project:
         self.Cu = 0
         self.Vn = 0
         self.obj = obj
+        self.obj.Proxy = self.obj
         self.obj.addProperty("App::PropertyString", "BuildingStandard", "Project", "Building standard")
         self.obj.addProperty("App::PropertyAngle", "Latitude", "Project", "Geographic latitude of building site").Latitude = 0
         self.obj.addProperty("App::PropertyAngle", "Longitude", "Project", "Geographic longitude of building site").Longitude = 0
