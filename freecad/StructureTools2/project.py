@@ -438,8 +438,6 @@ class CommandProject():
         # creates a panel with a dialog
         objSuport = Project(obj)
         ViewProviderProject(obj.ViewObject)
-        #Layer(obj)
-        #LayerViewProvider(obj.ViewObject)
 
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
