@@ -430,14 +430,14 @@ class CommandProject():
     def Activated(self):
         doc = FreeCAD.ActiveDocument
         obj = doc.addObject("App::GeometryPython","Project")
+        obj.addExtension("App::GeoFeatureGroupExtensionPython")
+        obj.ViewObject.addExtension("Gui::ViewProviderGeoFeatureGroupExtensionPython")
 
         # what is done when the command is clicked
         # creates a panel with a dialog
         objSuport = Project(obj)
         #Layer(obj)
         #LayerViewProvider(obj.ViewObject)
-        Layer(objSuport)
-        LayerViewProvider(objSuport.ViewObject)
 
         # having a panel with a widget in self.form and the accept and 
         # reject functions (if needed), we can open it:
