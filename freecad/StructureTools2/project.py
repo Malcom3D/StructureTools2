@@ -184,6 +184,9 @@ class Project:
     #def reject(self):
     #   FreeCADGui.Control.closeDialog()
 
+class ViewProviderProject:
+    def __init__(self, obj):
+        obj.Proxy = self
 
     def getIcon(self):
         return """
@@ -436,6 +439,7 @@ class CommandProject():
         # what is done when the command is clicked
         # creates a panel with a dialog
         objSuport = Project(obj)
+        ViewProviderProject(objSuport.ViewObject)
         #Layer(obj)
         #LayerViewProvider(obj.ViewObject)
 
