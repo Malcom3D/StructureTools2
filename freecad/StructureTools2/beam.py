@@ -20,10 +20,6 @@ def show_error_message(msg):
     msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     msg_box.exec_()
 
-def Size(Standard, G1Load, G2Load, Q1Load):
-    doc = FreeCAD.ActiveDocument
-    #print(Standard, G1Load, G2Load, Q1Load)
-
 def set_type(s):
     # Takes a string, inferes the type and returns either a string, int or float.
     if isinstance(s, int) or isinstance(s, float):
@@ -34,7 +30,7 @@ def set_type(s):
         return float(s)
     return s
 
-class Sizing:
+class Beam:
     def __init__(self, selection):
         self.selection = selection
         for object in self.selection:
@@ -1008,13 +1004,13 @@ static char *sizing[] = {
 		"""
 
 
-class CommandSizing():
+class CommandBeam():
 
     def GetResources(self):
         return {"Pixmap"  : os.path.join(ICONPATH, "icons/sizing.svg"), # the name of a svg file available in the resources
                 "Accel"   : "Shift+S", # a default shortcut (optional)
-                "MenuText": "sizing structure",
-                "ToolTip" : "Sizing the structure"}
+                "MenuText": "beam sizing structure",
+                "ToolTip" : "Beam sizing the structure"}
 
     def Activated(self):
         selection = FreeCADGui.Selection.getSelection()
@@ -1022,7 +1018,7 @@ class CommandSizing():
 
         # what is done when the command is clicked
         # creates a panel with a dialog
-        panel = Sizing(selection)
+        panel = Beam(selection)
         # having a panel with a widget in self.form and the accept and
         # reject functions (if needed), we can open it:
         FreeCADGui.Control.showDialog(panel)
@@ -1034,4 +1030,4 @@ class CommandSizing():
 
         return True
 
-FreeCADGui.addCommand('sizing', CommandSizing())
+FreeCADGui.addCommand('beam', CommandBeam())
