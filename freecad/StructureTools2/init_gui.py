@@ -63,7 +63,7 @@ class StructureTools2(Gui.Workbench):
 		self.appendToolbar('DraftTools', ["Draft_SelectPlane", "Draft_SetStyle"])
 
 		self.appendToolbar('StructureLoad', ["load_distributed","load_nodal"])
-		self.appendToolbar('StructureProject', ["project"])
+		self.appendToolbar('StructureProject', ["project", "beam"])
 		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
 		self.appendToolbar('StructureResults', ["sizing","calc","diagram"])
 		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "beam", "project", "sizing", "calc", "diagram"])
