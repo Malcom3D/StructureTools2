@@ -747,7 +747,7 @@ class Beam:
         objSection = self.Section(self.selection, self.B, self.H)
         objbeam.addObject(objSection)
 
-        objmat = obj.addObject("Part::FeaturePython", "Material")
+        objmat = doc.addObject("Part::FeaturePython", "Material")
         WoodType = self.WoodTypeValue.currentText()
         WoodClass = self.WoodClassValue.currentText()
         WoodStrengthClass = self.StrengthValue.currentText()
