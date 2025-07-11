@@ -2,8 +2,6 @@ import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 import requests, json
 
-from freecad.StructureTools2.layer import Layer, LayerViewProvider
-
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
@@ -439,7 +437,7 @@ class CommandProject():
         # what is done when the command is clicked
         # creates a panel with a dialog
         objSuport = Project(obj)
-        ViewProviderProject(objSuport.ViewObject)
+        ViewProviderProject(obj.ViewObject)
         #Layer(obj)
         #LayerViewProvider(obj.ViewObject)
 
