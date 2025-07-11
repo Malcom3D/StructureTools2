@@ -4,8 +4,9 @@ class Layer():
 
 class LayerViewProvider():
       def __init__(self, obj):
-        obj.ViewObject.addExtension("Gui::ViewProviderGeoFeatureGroupExtensionPython")
-        obj.ViewObject.Proxy = self
+        self.obj = obj
+        self.obj.ViewObject.addExtension("Gui::ViewProviderGeoFeatureGroupExtensionPython")
+        self.obj.ViewObject.Proxy = self
 
       def getIcon(self):
-        return obj.getIcon()
+        return self.obj.getIcon()
