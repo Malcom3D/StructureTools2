@@ -739,12 +739,13 @@ class Beam:
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
-        obj = self.objProject.addObject("App::GeometryPython","Beam")
-        obj.addExtension("App::GeoFeatureGroupExtensionPython")
-        obj.ViewObject.addExtension("Gui::ViewProviderGeoFeatureGroupExtensionPython")
+        doc = FreeCAD.ActiveDocument
+        objbeam = doc.addObject("App::GeometryPython","Beam")
+        objbeam.addExtension("App::GeoFeatureGroupExtensionPython")
+        objbeam.ViewObject.addExtension("Gui::ViewProviderGeoFeatureGroupExtensionPython")
 
         objSection = self.Section(self.selection, self.B, self.H)
-        obj.addObject(objSection, "BeamSection")
+        objbeam.addObject(objSection)
 
         objmat = obj.addObject("Part::FeaturePython", "Material")
         WoodType = self.WoodTypeValue.currentText()
@@ -756,8 +757,9 @@ class Beam:
                 ListElem.append(objsel)
         Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean, self.PoissonRatio)
         ViewProviderMaterial(objmat.ViewObject)
+        objbeam.addObject(objmat)
 
-        ViewProviderBeam(obj.ViewObject)
+        ViewProviderBeam(objbeam.ViewObject)
         doc.recompute()
         FreeCADGui.Control.closeDialog() #close the dialog
 
