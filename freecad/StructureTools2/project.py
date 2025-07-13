@@ -167,7 +167,7 @@ class Project:
         self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
         self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
         if self.ShapeFileDialog.exec():
-            filenames = dialog.selectedFiles()
+            filenames = self.ShapeFileDialog.selectedFiles()
             if filenames:
                 self.selectedShapeFile(filenames)
 
