@@ -95,18 +95,16 @@ class Project:
         self.LayoutGeo = QtGui.QHBoxLayout()
         self.form[1].setWindowTitle('GeoLocation')
         self.GeoModeLabel = QtGui.QLabel('Select geolocation mode:')
-        OpenTopographyRadioButton = QtGui.QRadioButton('OpenTopography')
-        OpenTopographyRadioButton.toggled.connect(self.OpenTopography)
-        ShapeFileRadioButton = QtGui.QRadioButton('Shapefile')
-        ShapeFileRadioButton.toggled.connect(self.ShapeFile)
+        self.OpenTopographyRadioButton = QtGui.QRadioButton('OpenTopography')
+        self.OpenTopographyRadioButton.toggled.connect(self.OpenTopography)
+        self.ShapeFileRadioButton = QtGui.QRadioButton('Shapefile')
+        self.ShapeFileRadioButton.toggled.connect(self.ShapeFile)
 
-        self.LayoutGeo.addWidget(self.GeoModeLabel)
-        self.LayoutGeo.addWidget(OpenTopographyRadioButton)
-        self.LayoutGeo.addWidget(ShapeFileRadioButton)
-
+        self.formShapeFile = QtGui.QDialog()
         self.LayoutShapeFile = QtGui.QVBoxLayout()
         self.ShapeFileLabel = QtGui.QLabel('Select Shapefile:')
 
+        self.formShapeFileSelect = QtGui.QDialog()
         self.LayoutShapeFileSelect = QtGui.QHBoxLayout()
         self.ShapeFileValue = QtGui.QLineEdit()
         self.ShapeFileValue.setClearButtonEnabled(True)
@@ -115,12 +113,15 @@ class Project:
 
         self.LayoutShapeFileSelect.addWidget(self.ShapeFileValue)
         self.LayoutShapeFileSelect.addWidget(self.ShapeFileButton)
+        self.formShapeFileSelect.setLayout(self.LayoutShapeFileSelect)
 
         self.LayoutShapeFile.addWidget(self.ShapeFileLabel)
-        self.LayoutShapeFile.addWidget(self.LayoutShapeFileSelect)
+        self.LayoutShapeFile.addWidget(self.formShapeFileSelect)
+        self.formShapeFile.setLayout(self.LayoutShapeFile)
 
         self.LayoutShapeFile.hide()
 
+        self.formOpenTopography = QtGui.QDialog()
         self.LayoutOpenTopography = QtGui.QVBoxLayout()
         self.LocationLabel = QtGui.QLabel('Location [EPSG:4326]:')
         self.LatitudeValue = QtGui.QDoubleSpinBox()
@@ -137,10 +138,27 @@ class Project:
         self.OpenTopographyValue = QtGui.QLineEdit()
         self.OpenTopographyValue.setClearButtonEnabled(True)
 
-        self.LayoutOpenTopography.hide()
+        self.LayoutOpenTopography.addWidget(self.LocationLabel)
+        self.LayoutOpenTopography.addWidget(self.LatitudeValue)
+        self.LayoutOpenTopography.addWidget(self.LongitudeValue)
+        self.LayoutOpenTopography.addWidget(self.NominalLifeLabel)
+        self.LayoutOpenTopography.addWidget(self.NominalLifeValue)
+        self.LayoutOpenTopography.addWidget(self.VnLabel)
+        self.LayoutOpenTopography.addWidget(self.UseClassLabel)
+        self.LayoutOpenTopography.addWidget(self.UseClassValue)
+        self.LayoutOpenTopography.addWidget(self.CuValue)
+        self.LayoutOpenTopography.addWidget(self.OpenTopographyLabel)
+        self.LayoutOpenTopography.addWidget(self.OpenTopographyValue)
 
-        self.LayoutGeo.addWidget(self.LayoutShapeFile)
-        self.LayoutGeo.addWidget(self.LayoutOpenTopography)
+        self.LayoutOpenTopography.hide()
+        self.formOpenTopography.setLayout(self.LayoutOpenTopography)
+
+        self.LayoutGeo.addWidget(self.GeoModeLabel)
+        self.LayoutGeo.addWidget(OpenTopographyRadioButton)
+        self.LayoutGeo.addWidget(ShapeFileRadioButton)
+        self.LayoutGeo.addWidget(self.formShapeFile)
+        self.LayoutGeo.addWidget(self.formOpenTopography)
+
         self.form[1].setLayout(self.LayoutGeo)
 
     def ShapeFileOpen(self):
@@ -200,18 +218,6 @@ class Project:
         self.CuValue = QtGui.QDoubleSpinBox()
         self.CuValue.setValue(0)
         self.CuValue.setPrefix('Cu: ')
-
-        layoutProj.addWidget(self.LocationLabel)
-        layoutProj.addWidget(self.LatitudeValue)
-        layoutProj.addWidget(self.LongitudeValue)
-        layoutProj.addWidget(self.NominalLifeLabel)
-        layoutProj.addWidget(self.NominalLifeValue)
-        layoutProj.addWidget(self.VnLabel)
-        layoutProj.addWidget(self.UseClassLabel)
-        layoutProj.addWidget(self.UseClassValue)
-        layoutProj.addWidget(self.CuValue)
-        layoutProj.addWidget(self.OpenTopographyLabel)
-        layoutProj.addWidget(self.OpenTopographyValue)
 
         self.form[2].setLayout(layoutProj)
 
