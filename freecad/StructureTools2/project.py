@@ -166,7 +166,6 @@ class Project:
         self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
         self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
         self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
-        self.ShapeFileDialog.currentChanged(self.selectedShapeFile)
         if self.ShapeFileDialog.exec():
             filenames = dialog.selectedFiles()
             if filenames:
@@ -246,7 +245,7 @@ class Project:
         self.obj.Longitude = self.LongitudeValue.value()
         lat = str(self.obj.Latitude).strip(' deg')
         long = str(self.obj.Longitude).strip(' deg')
-        api_key = self.OpenTopographyValue.currentText()
+        api_key = self.OpenTopographyValue.text()
         if api_key:
             self.obj.Elevation = get_SRTM1_elevation(lat, long, api_key)
         else:
