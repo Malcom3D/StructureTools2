@@ -104,7 +104,7 @@ class Project:
         LayoutGeo.addWidget(OpenTopographyRadioButton)
         LayoutGeo.addWidget(ShapeFileRadioButton)
 
-        LayoutShapeFile = QtGui.QVBoxLayout()
+        self.LayoutShapeFile = QtGui.QVBoxLayout()
         self.ShapeFileLabel = QtGui.QLabel('Select Shapefile:')
 
         LayoutShapeFileSelect = QtGui.QHBoxLayout()
@@ -115,12 +115,13 @@ class Project:
 
         LayoutShapeFileSelect.addWidget(self.ShapeFileValue)
         LayoutShapeFileSelect.addWidget(self.ShapeFileButton)
+
         LayoutShapeFile.addWidget(self.ShapeFileLabel)
         LayoutShapeFile.addWidget(LayoutShapeFileSelect)
 
-        LayoutShapeFile.hide()
+        self.LayoutShapeFile.hide()
 
-        LayoutOpenTopography = QtGui.QVBoxLayout()
+        self.LayoutOpenTopography = QtGui.QVBoxLayout()
         self.LocationLabel = QtGui.QLabel('Location [EPSG:4326]:')
         self.LatitudeValue = QtGui.QDoubleSpinBox()
         self.LongitudeValue = QtGui.QDoubleSpinBox()
@@ -136,7 +137,7 @@ class Project:
         self.OpenTopographyValue = QtGui.QLineEdit()
         self.OpenTopographyValue.setClearButtonEnabled(True)
 
-        LayoutOpenTopography.hide()
+        self.LayoutOpenTopography.hide()
 
         LayoutGeo.addWidget(LayoutShapeFile)
         LayoutGeo.addWidget(LayoutOpenTopography)
@@ -157,12 +158,12 @@ class Project:
         print(filenames)
 
     def ShapeFile(self):
-        LayoutOpenTopography.hide()
-        LayoutShapeFile.show()
+        self.LayoutOpenTopography.hide()
+        self.LayoutShapeFile.show()
 
     def OpenTopography(self):
-        LayoutShapeFile.hide()
-        LayoutOpenTopography.show()
+        self.LayoutShapeFile.hide()
+        self.LayoutOpenTopography.show()
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
