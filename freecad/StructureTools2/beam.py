@@ -755,7 +755,7 @@ class Beam:
         for objsel in self.selection:
             if not 'Project' in objsel.Name: # for Material class
                 ListElem.append(objsel)
-                elif 'Line' in objsel.Name: # for SolidBeam::Part Sweep object
+                if 'Line' in objsel.Name: # for SolidBeam::Part Sweep object
                     objLine = objsel
             
         Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean, self.PoissonRatio)
