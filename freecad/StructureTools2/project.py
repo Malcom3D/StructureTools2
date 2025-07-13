@@ -26,9 +26,11 @@ def set_type(s):
 # function for return elevation from lat, long, based on python-srtm
 # which in turn is based on Nasa SRTM1
 def get_SRTM1_elevation(lat, long, api_key):
-    srtm1_data = Srtm1HeightMapCollection(Path=.)
-    srtm1_data.build_file_index()
-    elevation = srtm1_data.get_altitude(latitude=lat, longitude=long)
+    print(lat, long, api_key)
+    elevation = 9999
+#    srtm1_data = Srtm1HeightMapCollection(Path=.)
+#    srtm1_data.build_file_index()
+#    elevation = srtm1_data.get_altitude(latitude=lat, longitude=long)
     return elevation
 
 def get_elevation(lat, long):
