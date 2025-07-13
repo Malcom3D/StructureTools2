@@ -92,9 +92,12 @@ class Project:
         # Entry for other standard
 
     def GeoMode(self):
-        self.LayoutGeo = QtGui.QHBoxLayout()
+        self.LayoutGeo = QtGui.QVBoxLayout()
         self.form[1].setWindowTitle('GeoLocation')
         self.GeoModeLabel = QtGui.QLabel('Select geolocation mode:')
+
+        self.formGeoMode = QtGui.QDialog()
+        self.LayoutGeoMode = QtGui.QHBoxLayout()
         self.OpenTopographyRadioButton = QtGui.QRadioButton('OpenTopography')
         self.OpenTopographyRadioButton.toggled.connect(self.OpenTopography)
         self.ShapeFileRadioButton = QtGui.QRadioButton('Shapefile')
@@ -147,9 +150,12 @@ class Project:
         self.formOpenTopography.hide()
         self.formOpenTopography.setLayout(self.LayoutOpenTopography)
 
+        self.LayoutGeoMode.addWidget(self.OpenTopographyRadioButton)
+        self.LayoutGeoMode.addWidget(self.ShapeFileRadioButton)
+        self.formGeoMode.setLayout(self.LayoutGeoMode)
+
         self.LayoutGeo.addWidget(self.GeoModeLabel)
-        self.LayoutGeo.addWidget(self.OpenTopographyRadioButton)
-        self.LayoutGeo.addWidget(self.ShapeFileRadioButton)
+        self.LayoutGeo.addWidget(self.formGeoMode)
         self.LayoutGeo.addWidget(self.formShapeFile)
         self.LayoutGeo.addWidget(self.formOpenTopography)
 
