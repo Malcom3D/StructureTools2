@@ -146,7 +146,7 @@ class Project:
         LayoutOpenTopography.hide()
         LayoutShapeFile.show()
 
-    def OpenToppography(self):
+    def OpenTopography(self):
         LayoutShapeFile.hide()
         LayoutOpenTopography.show()
         
