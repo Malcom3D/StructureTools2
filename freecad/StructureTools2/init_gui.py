@@ -45,12 +45,11 @@ class StructureTools2(Gui.Workbench):
 		from freecad.StructureTools2 import load_distributed
 		from freecad.StructureTools2 import load_nodal
 		from freecad.StructureTools2 import suport
-		from freecad.StructureTools2 import section
+#		from freecad.StructureTools2 import section
 #		from freecad.StructureTools2 import material
-		from freecad.StructureTools2 import member
+#		from freecad.StructureTools2 import member
 		from freecad.StructureTools2 import project
 		from freecad.StructureTools2 import beam
-		from freecad.StructureTools2 import sizing
 		from freecad.StructureTools2 import calc
 		from freecad.StructureTools2 import diagram
 
@@ -62,11 +61,12 @@ class StructureTools2(Gui.Workbench):
 		self.appendToolbar('DraftSnap', ["Draft_Snap_Lock", "Draft_Snap_Endpoint", "Draft_Snap_Midpoint", "Draft_Snap_Center", "Draft_Snap_Angle", "Draft_Snap_Intersection", "Draft_Snap_Perpendicular", "Draft_Snap_Extension", "Draft_Snap_Parallel", "Draft_Snap_Special", "Draft_Snap_Near", "Draft_Snap_Ortho", "Draft_Snap_Grid", "Draft_Snap_WorkingPlane", "Draft_Snap_Dimensions", "Draft_ToggleGrid"])
 		self.appendToolbar('DraftTools', ["Draft_SelectPlane", "Draft_SetStyle"])
 
-		self.appendToolbar('StructureLoad', ["load_distributed","load_nodal"])
+		self.appendToolbar('StructureLoad', ["load_distributed", "load_nodal"])
 		self.appendToolbar('StructureProject', ["project", "beam"])
-		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
-		self.appendToolbar('StructureResults', ["sizing","calc","diagram"])
-		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "beam", "project", "sizing", "calc", "diagram"])
+#		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
+		self.appendToolbar('StructureElements', ["support", "beam"])
+		self.appendToolbar('StructureResults', ["calc","diagram"])
+		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "beam", "project", "calc", "diagram"])
 
 	def Activated(self):
 		'''

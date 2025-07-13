@@ -755,19 +755,19 @@ class Beam:
         for objsel in self.selection:
             if not 'Project' in objsel.Name: # for Material class
                 ListElem.append(objsel)
-                if 'Line' in objsel.Name: # for SolidBeam::Part Sweep object
-                    objLine = objsel
+#                if 'Line' in objsel.Name: # for SolidBeam::Part Sweep object
+#                    objLine = objsel
             
         Material(objmat, ListElem, WoodType, WoodClass, WoodStrengthClass, self.fmk, self.ft0k, self.ft90k, self.fc0k, self.fc90k, self.fvk, self.E0mean, self.E005, self.E90mean, self.Gmean, self.rk, self.rmean, self.PoissonRatio)
         ViewProviderMaterial(objmat.ViewObject)
         objbeam.addObject(objmat)
 
-        SolidBeam = objbeam.addObject(doc.addObject('Part::Sweep','SolidBeam'))[0]
-        SolidBeam.Sections = objSection
-        SolidBeam.Spine = objLine
-        SolidBeam.Solid = True
-        SolidBeam.Frenet = False
-        SolidBeam.recompute()
+#        SolidBeam = objbeam.addObject(doc.addObject('Part::Sweep','SolidBeam'))[0]
+#        SolidBeam.Sections = objSection
+#        SolidBeam.Spine = objLine
+#        SolidBeam.Solid = True
+#        SolidBeam.Frenet = False
+#        SolidBeam.recompute()
 
         ViewProviderBeam(objbeam.ViewObject)
         self.objProject.addObject(objbeam)

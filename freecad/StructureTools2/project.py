@@ -2,6 +2,8 @@ import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 import requests, json
 
+from srtm import Srtm1HeightMapCollection
+
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
@@ -21,8 +23,14 @@ def set_type(s):
     return s
 
 
-# function for return elevation from lat, long, based on open elevation data
-# which in turn is based on SRTM
+# function for return elevation from lat, long, based on python-srtm
+# which in turn is based on Nasa SRTM1
+def get_SRTM1_elevation(lat, long, api_key):
+    srtm1_data = Srtm1HeightMapCollection(Path=.)
+    srtm1_data.build_file_index()
+    elevation = srtm1_data.get_altitude(latitude=lat, longitude=long)
+    return elevation
+
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
@@ -58,7 +66,7 @@ class Project:
         self.obj.addProperty("App::PropertyInteger", "Vn", "Project", "Nominal life time of building").Vn = self.Vn
         self.obj.addProperty("App::PropertyString", "UseClass", "Project", "Use class of building").UseClass = 'None'
         self.obj.addProperty("App::PropertyFloat", "Cu", "Project", "Use class coefficient of building").Cu = self.Cu
-        self.form = [QtGui.QDialog(), QtGui.QDialog()]
+        self.form = [QtGui.QDialog(), QtGui.QDialog(), QtGui.QDialog()]
         self.StandardSelection()
 
     def StandardSelection(self):
@@ -80,10 +88,33 @@ class Project:
         #elif index == 2:
         # Entry for other standard
 
-    def ProjectParam(self):
-        # ntc2018 Project Parameter QDialog
-        layoutProj = QtGui.QVBoxLayout()
-        self.form[1].setWindowTitle('Project Parameter')
+    def GeoMode(self):
+        LayoutGeo = QtGui.QHBoxLayout()
+        self.form[1].setWindowTitle('GeoLocation')
+        self.GeoModeLabel = QtGui.QLabel('Select geolocation mode:')
+        OpenTopographyButton = QtGui.QRadioButton('OpenTopography', self)
+        OpenTopographyButton.toggled.connect(self.OpenTopography)
+        ShapeFileButton = QtGui.QRadioButton('Shapefile', self)
+        ShapeFileButton.toggled.connect(self.ShapeFile)
+
+        LayoutGeo.addWidget(self.GeoModeLabel)
+        LayoutGeo.addWidget(OpenTopographyButton)
+        LayoutGeo.addWidget(ShapeFileButton)
+
+        LayoutShapeFile = QtGui.QVBoxLayout()
+        self.ShapeFileLabel = QtGui.QLabel('Select Shapefile:')
+        self.ShapeFileDialog = QtGui.QFileDialog(self)
+        self.ShapeFileDialog.setFileMode(QFileDialog.AnyFile)
+        self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
+        self.ShapeFileDialog.setViewMode(QFileDialog.Detail)
+        self.ShapeFileDialog.currentChanged(self.selectedShapeFile)
+
+        LayoutShapeFile.addWidget(self.ShapeFileLabel)
+        LayoutShapeFile.addWidget(self.ShapeFileDialog)
+
+        LayoutShapeFile.hide()
+
+        LayoutOpenTopography = QtGui.QVBoxLayout()
         self.LocationLabel = QtGui.QLabel('Location [EPSG:4326]:')
         self.LatitudeValue = QtGui.QDoubleSpinBox()
         self.LongitudeValue = QtGui.QDoubleSpinBox()
@@ -95,6 +126,31 @@ class Project:
         self.LatitudeValue.setMaximum(90.000000)
         self.LongitudeValue.setMinimum(-180.000000)
         self.LongitudeValue.setMaximum(180.000000)
+        self.OpenTopographyLabel = QtGui.QLabel('OpenTopography API key:')
+        self.OpenTopographyValue = QtGui.QLineEdit()
+        self.OpenTopographyValue.clearButtonEnabled
+
+        LayoutOpenTopography.hide()
+
+        LayoutGeo.addWidget(LayoutShapeFile)
+        LayoutGeo.addWidget(LayoutOpenTopography)
+        self.form[1].setLayout(LayoutGeo)
+
+    def selectedShapeFile(self, path):
+        print(path)
+
+    def ShapeFile(self):
+        LayoutOpenTopography.hide()
+        LayoutShapeFile.show()
+
+    def OpenToppography(self):
+        LayoutShapeFile.hide()
+        LayoutOpenTopography.show()
+        
+    def ProjectParam(self):
+        # ntc2018 Project Parameter QDialog
+        layoutProj = QtGui.QVBoxLayout()
+        self.form[2].setWindowTitle('Project Parameter')
 
         # mapped list ['description', Vn]
         self.NomLifeList = [list(map(set_type, ['', '0']))]
@@ -136,8 +192,10 @@ class Project:
         layoutProj.addWidget(self.UseClassLabel)
         layoutProj.addWidget(self.UseClassValue)
         layoutProj.addWidget(self.CuValue)
+        layoutProj.addWidget(self.OpenTopographyLabel)
+        layoutProj.addWidget(self.OpenTopographyValue)
 
-        self.form[1].setLayout(layoutProj)
+        self.form[2].setLayout(layoutProj)
 
     def selectedNomLife(self):
         index = self.NominalLifeValue.currentIndex()
@@ -158,7 +216,12 @@ class Project:
         self.obj.Longitude = self.LongitudeValue.value()
         lat = str(self.obj.Latitude).strip(' deg')
         long = str(self.obj.Longitude).strip(' deg')
-        self.obj.Elevation = get_elevation(lat, long)
+        api_key = self.OpenTopographyValue.currentText()
+        if api_key:
+            self.obj.Elevation = get_SRTM1_elevation(lat, long, api_key)
+        else
+            self.obj.Elevation = get_elevation(lat, long)
+
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
         self.obj.UseClass = self.UseClassValue.currentText()
@@ -172,7 +235,6 @@ class Project:
         self.obj.setEditorMode("UseClass",1) # readOnly
         self.obj.setEditorMode("Cu",1) # readOnly
 
-        print(get_location(lat, long))
         self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(lat, long)
 
         FreeCADGui.Control.closeDialog() #close the dialog
