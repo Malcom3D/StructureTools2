@@ -86,6 +86,7 @@ class Project:
     def selectedStandard(self):
         index = self.StandardValue.currentIndex()
         if index == 1:
+            self.GeoMode()
             self.ProjectParam()
         #elif index == 2:
         # Entry for other standard
