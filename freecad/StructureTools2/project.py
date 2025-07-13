@@ -107,9 +107,9 @@ class Project:
         LayoutShapeFile = QtGui.QVBoxLayout()
         self.ShapeFileLabel = QtGui.QLabel('Select Shapefile:')
         self.ShapeFileDialog = QtGui.QFileDialog()
-        self.ShapeFileDialog.setFileMode(QFileDialog.AnyFile)
+        self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
         self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
-        self.ShapeFileDialog.setViewMode(QFileDialog.Detail)
+        self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
         self.ShapeFileDialog.currentChanged(self.selectedShapeFile)
 
         LayoutShapeFile.addWidget(self.ShapeFileLabel)
