@@ -167,7 +167,7 @@ class Project:
             path = Path(self.ShapeFileValue.text()).as_posix()
         else:
             path = Path.home().as_posix()
-        filename, ok = QtGui.QFileDialog(self, "Select ShapeFile", path, "ShapeFile (*.shp)")
+        filename, ok = QtGui.QFileDialog("Select ShapeFile", path, "ShapeFile (*.shp)")
         if filename:
             self.ShapeFileValue.setText(str(filename))
             self.selectedShapeFile(filename)
