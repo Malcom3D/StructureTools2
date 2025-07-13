@@ -141,12 +141,6 @@ class Project:
         self.LayoutOpenTopography.addWidget(self.LocationLabel)
         self.LayoutOpenTopography.addWidget(self.LatitudeValue)
         self.LayoutOpenTopography.addWidget(self.LongitudeValue)
-        self.LayoutOpenTopography.addWidget(self.NominalLifeLabel)
-        self.LayoutOpenTopography.addWidget(self.NominalLifeValue)
-        self.LayoutOpenTopography.addWidget(self.VnLabel)
-        self.LayoutOpenTopography.addWidget(self.UseClassLabel)
-        self.LayoutOpenTopography.addWidget(self.UseClassValue)
-        self.LayoutOpenTopography.addWidget(self.CuValue)
         self.LayoutOpenTopography.addWidget(self.OpenTopographyLabel)
         self.LayoutOpenTopography.addWidget(self.OpenTopographyValue)
 
@@ -185,7 +179,7 @@ class Project:
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
-        layoutProj = QtGui.QVBoxLayout()
+        self.layoutProj = QtGui.QVBoxLayout()
         self.form[2].setWindowTitle('Project Parameter')
 
         # mapped list ['description', Vn]
@@ -219,7 +213,13 @@ class Project:
         self.CuValue.setValue(0)
         self.CuValue.setPrefix('Cu: ')
 
-        self.form[2].setLayout(layoutProj)
+        self.layoutProj.addWidget(self.NominalLifeLabel)
+        self.layoutProj.addWidget(self.NominalLifeValue)
+        self.layoutProj.addWidget(self.VnLabel)
+        self.layoutProj.addWidget(self.UseClassLabel)
+        self.layoutProj.addWidget(self.UseClassValue)
+        self.layoutProj.addWidget(self.CuValue)
+        self.form[2].setLayout(self.layoutProj)
 
     def selectedNomLife(self):
         index = self.NominalLifeValue.currentIndex()
