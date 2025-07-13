@@ -162,15 +162,22 @@ class Project:
         self.form[1].setLayout(self.LayoutGeo)
 
     def ShapeFileOpen(self):
-        self.ShapeFileDialog = QtGui.QFileDialog()
-        self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-        self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
-        self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
-        if self.ShapeFileDialog.exec():
-            filenames = self.ShapeFileDialog.selectedFiles()
-            if filenames:
-                self.ShapeFileValue.setText(str(filenames))
-                self.selectedShapeFile(filenames)
+        if self.ShapeFileValue.text():
+            from pathlib import Path
+            path = Path(self.ShapeFileValue.text())
+        filename, ok = QtGui.QFileDialog(self, "Select ShapeFile", path, "ShapeFile (*.shp)")
+        if filename:
+            self.ShapeFileValue.setText(str(filename))
+            self.selectedShapeFile(filename)
+
+        #self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
+        #self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
+        #self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
+        #if self.ShapeFileDialog.exec():
+        #    filenames = self.ShapeFileDialog.selectedFiles()
+        #    if filenames:
+        #        self.ShapeFileValue.setText(str(filenames))
+        #        self.selectedShapeFile(filenames)
 
     def selectedShapeFile(self, filenames):
         print(filenames)
