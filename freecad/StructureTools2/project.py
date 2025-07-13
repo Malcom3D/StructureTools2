@@ -109,7 +109,7 @@ class Project:
 
         LayoutShapeFileSelect = QtGui.QHBoxLayout()
         self.ShapeFileValue = QtGui.QLineEdit()
-        self.ShapeFileValue.setClearButtonEnabled(enable)
+        self.ShapeFileValue.setClearButtonEnabled(True)
         self.ShapeFileButton = QtGui.QPushButton('Browse')
         self.ShapeFileButton.clicked.connect(self.ShapeFileOpen)
 
@@ -134,7 +134,7 @@ class Project:
         self.LongitudeValue.setMaximum(180.000000)
         self.OpenTopographyLabel = QtGui.QLabel('OpenTopography API key:')
         self.OpenTopographyValue = QtGui.QLineEdit()
-        self.OpenTopographyValue.setClearButtonEnabled(enable)
+        self.OpenTopographyValue.setClearButtonEnabled(True)
 
         LayoutOpenTopography.hide()
 
