@@ -95,25 +95,28 @@ class Project:
         LayoutGeo = QtGui.QHBoxLayout()
         self.form[1].setWindowTitle('GeoLocation')
         self.GeoModeLabel = QtGui.QLabel('Select geolocation mode:')
-        OpenTopographyButton = QtGui.QRadioButton('OpenTopography')
-        OpenTopographyButton.toggled.connect(self.OpenTopography)
-        ShapeFileButton = QtGui.QRadioButton('Shapefile')
-        ShapeFileButton.toggled.connect(self.ShapeFile)
+        OpenTopographyRadioButton = QtGui.QRadioButton('OpenTopography')
+        OpenTopographyRadioButton.toggled.connect(self.OpenTopography)
+        ShapeFileRadioButton = QtGui.QRadioButton('Shapefile')
+        ShapeFileRadioButton.toggled.connect(self.ShapeFile)
 
         LayoutGeo.addWidget(self.GeoModeLabel)
-        LayoutGeo.addWidget(OpenTopographyButton)
-        LayoutGeo.addWidget(ShapeFileButton)
+        LayoutGeo.addWidget(OpenTopographyRadioButton)
+        LayoutGeo.addWidget(ShapeFileRadioButton)
 
         LayoutShapeFile = QtGui.QVBoxLayout()
         self.ShapeFileLabel = QtGui.QLabel('Select Shapefile:')
-        self.ShapeFileDialog = QtGui.QFileDialog()
-        self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-        self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
-        self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
-        self.ShapeFileDialog.currentChanged(self.selectedShapeFile)
 
+        LayoutShapeFileSelect = QtGui.QHBoxLayout()
+        self.ShapeFileValue = QtGui.QLineEdit()
+        self.ShapeFileValue.clearButtonEnabled
+        self.ShapeFileButton = QtGui.QPushButton('Browse')
+        self.ShapeFileButton.clicked.connect(self.ShapeFileOpen)
+
+        LayoutShapeFileSelect.addWidget(self.ShapeFileValue)
+        LayoutShapeFileSelect.addWidget(self.ShapeFileButton)
         LayoutShapeFile.addWidget(self.ShapeFileLabel)
-        LayoutShapeFile.addWidget(self.ShapeFileDialog)
+        LayoutShapeFile.addWidget(LayoutShapeFileSelect)
 
         LayoutShapeFile.hide()
 
@@ -139,8 +142,19 @@ class Project:
         LayoutGeo.addWidget(LayoutOpenTopography)
         self.form[1].setLayout(LayoutGeo)
 
-    def selectedShapeFile(self, path):
-        print(path)
+    def ShapeFileOpen(self):
+        self.ShapeFileDialog = QtGui.QFileDialog()
+        self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
+        self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
+        self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
+        self.ShapeFileDialog.currentChanged(self.selectedShapeFile)
+        if self.ShapeFileDialog.exec():
+            filenames = dialog.selectedFiles()
+            if filenames:
+                self.selectedShapeFile(filenames)
+
+    def selectedShapeFile(self, filenames):
+        print(filenames)
 
     def ShapeFile(self):
         LayoutOpenTopography.hide()
