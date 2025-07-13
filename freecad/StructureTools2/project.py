@@ -1,6 +1,7 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 import requests, json
+from pathlib import Path
 
 from srtm import Srtm1HeightMapCollection
 
@@ -163,7 +164,6 @@ class Project:
 
     def ShapeFileOpen(self):
         if self.ShapeFileValue.text():
-            from pathlib import Path
             path = Path(self.ShapeFileValue.text())
         else:
             path = Path.home()
