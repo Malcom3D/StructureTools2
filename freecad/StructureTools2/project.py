@@ -173,18 +173,10 @@ class Project:
             self.ShapeFileValue.setText(str(filename))
             self.selectedShapeFile(filename)
 
-        #self.ShapeFileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-        #self.ShapeFileDialog.setNameFilter("ShapeFile (*.shp)")
-        #self.ShapeFileDialog.setViewMode(QtGui.QFileDialog.Detail)
-        #self.ShapeFileDialog.setDirectory(path)
-        #if self.ShapeFileDialog.exec():
-        #    filenames = self.ShapeFileDialog.selectedFiles()
-        #    if filenames:
-        #        self.ShapeFileValue.setText(str(filenames))
-        #        self.selectedShapeFile(filenames)
-
     def selectedShapeFile(self, filename):
         print(filename)
+        self.obj.Latitude = '45.52868 deg'
+        self.obj.Longitude = '9.04425 deg'
 
     def ShapeFile(self):
         self.formOpenTopography.hide()
@@ -253,8 +245,9 @@ class Project:
     # What is done when we click on the ok button.
     def accept(self):
         self.obj.BuildingStandard = self.StandardValue.currentText()
-        self.obj.Latitude = self.LatitudeValue.value()
-        self.obj.Longitude = self.LongitudeValue.value()
+        if not self.obj.Latitude and not self.obj.Longitude:
+            self.obj.Latitude = self.LatitudeValue.value()
+            self.obj.Longitude = self.LongitudeValue.value()
         lat = str(self.obj.Latitude).strip(' deg')
         long = str(self.obj.Longitude).strip(' deg')
         api_key = self.OpenTopographyValue.text()
