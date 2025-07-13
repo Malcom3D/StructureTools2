@@ -764,7 +764,7 @@ class Beam:
 
         SolidBeam = objbeam.addObject(doc.addObject('Part::Sweep','SolidBeam'))[0]
         SolidBeam.Sections = objSection
-        SolidBeam.Spine = objLine[0]
+        SolidBeam.Spine = objLine
         SolidBeam.Solid = True
         SolidBeam.Frenet = False
         SolidBeam.recompute()
