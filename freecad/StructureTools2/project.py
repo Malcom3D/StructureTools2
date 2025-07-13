@@ -119,7 +119,7 @@ class Project:
         self.LayoutShapeFile.addWidget(self.formShapeFileSelect)
         self.formShapeFile.setLayout(self.LayoutShapeFile)
 
-        self.LayoutShapeFile.hide()
+        self.formShapeFile.hide()
 
         self.formOpenTopography = QtGui.QDialog()
         self.LayoutOpenTopography = QtGui.QVBoxLayout()
@@ -150,7 +150,7 @@ class Project:
         self.LayoutOpenTopography.addWidget(self.OpenTopographyLabel)
         self.LayoutOpenTopography.addWidget(self.OpenTopographyValue)
 
-        self.LayoutOpenTopography.hide()
+        self.formOpenTopography.hide()
         self.formOpenTopography.setLayout(self.LayoutOpenTopography)
 
         self.LayoutGeo.addWidget(self.GeoModeLabel)
@@ -176,12 +176,12 @@ class Project:
         print(filenames)
 
     def ShapeFile(self):
-        self.LayoutOpenTopography.hide()
-        self.LayoutShapeFile.show()
+        self.formOpenTopography.hide()
+        self.formShapeFile.show()
 
     def OpenTopography(self):
-        self.LayoutShapeFile.hide()
-        self.LayoutOpenTopography.show()
+        self.formShapeFile.hide()
+        self.formOpenTopography.show()
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
