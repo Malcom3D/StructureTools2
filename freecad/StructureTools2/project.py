@@ -92,7 +92,7 @@ class Project:
         # Entry for other standard
 
     def GeoMode(self):
-        LayoutGeo = QtGui.QHBoxLayout()
+        self.LayoutGeo = QtGui.QHBoxLayout()
         self.form[1].setWindowTitle('GeoLocation')
         self.GeoModeLabel = QtGui.QLabel('Select geolocation mode:')
         OpenTopographyRadioButton = QtGui.QRadioButton('OpenTopography')
@@ -100,24 +100,24 @@ class Project:
         ShapeFileRadioButton = QtGui.QRadioButton('Shapefile')
         ShapeFileRadioButton.toggled.connect(self.ShapeFile)
 
-        LayoutGeo.addWidget(self.GeoModeLabel)
-        LayoutGeo.addWidget(OpenTopographyRadioButton)
-        LayoutGeo.addWidget(ShapeFileRadioButton)
+        self.LayoutGeo.addWidget(self.GeoModeLabel)
+        self.LayoutGeo.addWidget(OpenTopographyRadioButton)
+        self.LayoutGeo.addWidget(ShapeFileRadioButton)
 
         self.LayoutShapeFile = QtGui.QVBoxLayout()
         self.ShapeFileLabel = QtGui.QLabel('Select Shapefile:')
 
-        LayoutShapeFileSelect = QtGui.QHBoxLayout()
+        self.LayoutShapeFileSelect = QtGui.QHBoxLayout()
         self.ShapeFileValue = QtGui.QLineEdit()
         self.ShapeFileValue.setClearButtonEnabled(True)
         self.ShapeFileButton = QtGui.QPushButton('Browse')
         self.ShapeFileButton.clicked.connect(self.ShapeFileOpen)
 
-        LayoutShapeFileSelect.addWidget(self.ShapeFileValue)
-        LayoutShapeFileSelect.addWidget(self.ShapeFileButton)
+        self.LayoutShapeFileSelect.addWidget(self.ShapeFileValue)
+        self.LayoutShapeFileSelect.addWidget(self.ShapeFileButton)
 
-        LayoutShapeFile.addWidget(self.ShapeFileLabel)
-        LayoutShapeFile.addWidget(LayoutShapeFileSelect)
+        self.LayoutShapeFile.addWidget(self.ShapeFileLabel)
+        self.LayoutShapeFile.addWidget(self.LayoutShapeFileSelect)
 
         self.LayoutShapeFile.hide()
 
@@ -139,9 +139,9 @@ class Project:
 
         self.LayoutOpenTopography.hide()
 
-        LayoutGeo.addWidget(LayoutShapeFile)
-        LayoutGeo.addWidget(LayoutOpenTopography)
-        self.form[1].setLayout(LayoutGeo)
+        self.LayoutGeo.addWidget(self.LayoutShapeFile)
+        self.LayoutGeo.addWidget(self.LayoutOpenTopography)
+        self.form[1].setLayout(self.LayoutGeo)
 
     def ShapeFileOpen(self):
         self.ShapeFileDialog = QtGui.QFileDialog()
