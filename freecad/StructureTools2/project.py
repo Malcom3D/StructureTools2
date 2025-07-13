@@ -148,8 +148,8 @@ class Project:
         self.formOpenTopography.setLayout(self.LayoutOpenTopography)
 
         self.LayoutGeo.addWidget(self.GeoModeLabel)
-        self.LayoutGeo.addWidget(OpenTopographyRadioButton)
-        self.LayoutGeo.addWidget(ShapeFileRadioButton)
+        self.LayoutGeo.addWidget(self.OpenTopographyRadioButton)
+        self.LayoutGeo.addWidget(self.ShapeFileRadioButton)
         self.LayoutGeo.addWidget(self.formShapeFile)
         self.LayoutGeo.addWidget(self.formOpenTopography)
 
