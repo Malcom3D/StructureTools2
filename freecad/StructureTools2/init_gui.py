@@ -14,8 +14,6 @@ TRANSLATIONSPATH = os.path.join(os.path.dirname(__file__), "resources", "transla
 Gui.addLanguagePath(TRANSLATIONSPATH)
 Gui.updateLocale()
 
-
-
 from .Pynite_main.FEModel3D import FEModel3D
 
 # from .Pynite_main.FEModel3D import FEModel3D
@@ -64,7 +62,7 @@ class StructureTools2(Gui.Workbench):
 		self.appendToolbar('StructureLoad', ["load_distributed", "load_nodal"])
 		self.appendToolbar('StructureProject', ["project", "beam"])
 #		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
-		self.appendToolbar('StructureElements', ["support", "beam"])
+		self.appendToolbar('StructureElements', ["suport", "beam"])
 		self.appendToolbar('StructureResults', ["calc","diagram"])
 		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "beam", "project", "calc", "diagram"])
 
