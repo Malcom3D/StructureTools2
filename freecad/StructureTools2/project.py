@@ -95,9 +95,9 @@ class Project:
         LayoutGeo = QtGui.QHBoxLayout()
         self.form[1].setWindowTitle('GeoLocation')
         self.GeoModeLabel = QtGui.QLabel('Select geolocation mode:')
-        OpenTopographyButton = QtGui.QRadioButton('OpenTopography', self)
+        OpenTopographyButton = QtGui.QRadioButton('OpenTopography')
         OpenTopographyButton.toggled.connect(self.OpenTopography)
-        ShapeFileButton = QtGui.QRadioButton('Shapefile', self)
+        ShapeFileButton = QtGui.QRadioButton('Shapefile')
         ShapeFileButton.toggled.connect(self.ShapeFile)
 
         LayoutGeo.addWidget(self.GeoModeLabel)
