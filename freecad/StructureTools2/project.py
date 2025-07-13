@@ -169,6 +169,7 @@ class Project:
         if self.ShapeFileDialog.exec():
             filenames = self.ShapeFileDialog.selectedFiles()
             if filenames:
+                self.ShapeFileValue.setText(filenames)
                 self.selectedShapeFile(filenames)
 
     def selectedShapeFile(self, filenames):
