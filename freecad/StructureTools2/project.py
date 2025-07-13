@@ -167,7 +167,8 @@ class Project:
             path = Path(self.ShapeFileValue.text()).as_posix()
         else:
             path = Path.home().as_posix()
-        filename, ok = QtGui.QFileDialog(None, "Select ShapeFile", path, "ShapeFile (*.shp)")
+        filename = QtGui.QFileDialog(None, "Select ShapeFile", path, "ShapeFile (*.shp)")
+        print(filename)
         if filename:
             self.ShapeFileValue.setText(str(filename))
             self.selectedShapeFile(filename)
@@ -181,8 +182,8 @@ class Project:
         #        self.ShapeFileValue.setText(str(filenames))
         #        self.selectedShapeFile(filenames)
 
-    def selectedShapeFile(self, filenames):
-        print(filenames)
+    def selectedShapeFile(self, filename):
+        print(filename)
 
     def ShapeFile(self):
         self.formOpenTopography.hide()
