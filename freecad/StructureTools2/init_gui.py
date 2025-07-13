@@ -64,7 +64,7 @@ class StructureTools2(Gui.Workbench):
 #		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
 		self.appendToolbar('StructureElements', ["suport", "beam"])
 		self.appendToolbar('StructureResults', ["calc","diagram"])
-		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "member" ,"suport", "section", "beam", "project", "calc", "diagram"])
+		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "suport", "beam", "project", "calc", "diagram"])
 
 	def Activated(self):
 		'''
