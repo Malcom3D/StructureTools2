@@ -221,7 +221,7 @@ class Project:
         api_key = self.OpenTopographyValue.currentText()
         if api_key:
             self.obj.Elevation = get_SRTM1_elevation(lat, long, api_key)
-        else
+        else:
             self.obj.Elevation = get_elevation(lat, long)
 
         self.obj.NominalLife = self.NominalLifeValue.currentText()
