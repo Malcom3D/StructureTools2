@@ -216,8 +216,8 @@ class Project:
         self.UseClassValue = QtGui.QComboBox()
         for i in range(0,len(self.UseClassList[:])):
             self.UseClassValue.addItem(self.UseClassList[i][0])
-        #self.UseClassValue.activated.connect(self.selectedUseClass)
-        self.UseClassValue.currentIndexChanged.connect(self.selectedUseClass)
+        self.UseClassValue.activated.connect(self.selectedUseClass)
+        #self.UseClassValue.currentIndexChanged.connect(self.selectedUseClass)
         self.CuValue = QtGui.QDoubleSpinBox()
         self.CuValue.setValue(0.0)
         self.CuValue.setPrefix('Cu: ')
@@ -238,8 +238,8 @@ class Project:
     def selectedUseClass(self):
         index = self.UseClassValue.currentIndex()
         self.Cu = self.UseClassList[index][1]
-        self.CuValue.setValue(self.Cu)
         self.CuValue.setMinimum(self.Cu)
+        self.CuValue.setValue(self.Cu)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
