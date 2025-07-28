@@ -238,9 +238,9 @@ class Project:
     def selectedUseClass(self):
         index = self.UseClassValue.currentIndex()
         self.Cu = self.UseClassList[index][1]
-        print(index, self.Cu)
-        self.CuValue.setValue(self.Cu)
-        self.CuValue.setMinimum(self.Cu)
+        print(type(self.Cu))
+        self.CuValue.setValue(float(self.Cu))
+        self.CuValue.setMinimum(float(self.Cu))
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
