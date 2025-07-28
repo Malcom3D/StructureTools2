@@ -206,7 +206,7 @@ class Project:
         self.VnLabel = QtGui.QLabel('Vn: 0 years')
 
         # mapped list ['description', Cu]
-        self.UseClassList = [list(map(set_type, ['', '0']))]
+        self.UseClassList = [list(map(set_type, ['', '0.0']))]
         self.UseClassList.append(list(map(set_type, ['Class I: Buildings with only occasional presence of people, agricultural buildings', '0.7'])))
         self.UseClassList.append(list(map(set_type, ['Class II: Buildings whose use involves normal crowding', '1.0'])))
         self.UseClassList.append(list(map(set_type, ['Class III: Buildings whose use involves significant crowding', '1.5'])))
@@ -216,10 +216,10 @@ class Project:
         self.UseClassValue = QtGui.QComboBox()
         for i in range(0,len(self.UseClassList[:])):
             self.UseClassValue.addItem(self.UseClassList[i][0])
-        self.UseClassValue.activated.connect(self.selectedUseClass)
-        #self.UseClassValue.currentIndexChanged.connect(self.selectedUseClass)
+        #self.UseClassValue.activated.connect(self.selectedUseClass)
+        self.UseClassValue.currentIndexChanged.connect(self.selectedUseClass)
         self.CuValue = QtGui.QDoubleSpinBox()
-        self.CuValue.setValue(0)
+        self.CuValue.setValue(0.0)
         self.CuValue.setPrefix('Cu: ')
 
         self.layoutProj.addWidget(self.NominalLifeLabel)
@@ -238,7 +238,7 @@ class Project:
     def selectedUseClass(self):
         index = self.UseClassValue.currentIndex()
         self.Cu = self.UseClassList[index][1]
-        self.CuValue.setValue(self.UseClassList[index-1][1])
+        self.CuValue.setValue(self.Cu)
         self.CuValue.setMinimum(self.Cu)
 
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
