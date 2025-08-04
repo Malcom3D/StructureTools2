@@ -271,6 +271,7 @@ class Project:
 
     def surfacePoint(self, center, lats, longs):
         centerZ = get_elevation(center[0],center[1])
+        self.obj.Elevation = centerZ
         r = []
         v = []
         for lat in lats:
@@ -311,12 +312,18 @@ class Project:
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),0.00025)
 
         vectors = self.surfacePoint(self.center,lats,longs)
+        intSurf = Part.BSplineSurface()
+        intSurf.interpolate(vectors)
+        Part.show(intSurf.toShape())
 
-        api_key = self.OpenTopographyValue.text()
-        if api_key:
-            self.obj.Elevation = get_SRTM1_elevation(lat, long, api_key)
-        else:
-            self.obj.Elevation = get_elevation(lat, long)
+        doc = FreeCAD.ActiveDocument
+        objSurface = doc.addObject("Part::FeaturePython", "ShapeSurface")
+
+#        api_key = self.OpenTopographyValue.text()
+#        if api_key:
+#            self.obj.Elevation = get_SRTM1_elevation(self.center[0], self.center[1], api_key)
+#        else:
+#            self.obj.Elevation = get_elevation(self.center[0], self.center[1])
 
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
@@ -331,7 +338,7 @@ class Project:
         self.obj.setEditorMode("UseClass",1) # readOnly
         self.obj.setEditorMode("Cu",1) # readOnly
 
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(lat, long)
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.center[0], self.center[1]))
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
