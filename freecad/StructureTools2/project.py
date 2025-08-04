@@ -1,6 +1,8 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
+from geographiclib.geodesic import Geodesic
 import requests, json
+import numpy
 from pathlib import Path
 
 from srtm import Srtm1HeightMapCollection
@@ -54,6 +56,9 @@ def get_location(lat, long):
 
 class Project:
     def __init__(self, obj):
+        self.center = ()
+        self.NordWest = {}
+        self.SouthEst = {}
         self.Cu = 0
         self.Vn = 0
         self.obj = obj
@@ -130,14 +135,23 @@ class Project:
         self.LocationLabel = QtGui.QLabel('Location [EPSG:4326]:')
         self.LatitudeValue = QtGui.QDoubleSpinBox()
         self.LongitudeValue = QtGui.QDoubleSpinBox()
+        self.LandAreaRadiusValue = QtGui.QDoubleSpinBox()
         self.LatitudeValue.setPrefix('Latitude: ')
         self.LongitudeValue.setPrefix('Longitude: ')
+        self.LandAreaRadiusValue.setPrefix('Land's area radius: ')
+        self.LatitudeValue.setSuffix('deg')
+        self.LongitudeValue.setSuffix('deg')
+        self.LandAreaRadiusValue.setSuffix('m')
         self.LatitudeValue.setDecimals(6)
         self.LongitudeValue.setDecimals(6)
+        self.LandAreaRadiusValue.setDecimals(0)
         self.LatitudeValue.setMinimum(-90.000000)
         self.LatitudeValue.setMaximum(90.000000)
         self.LongitudeValue.setMinimum(-180.000000)
         self.LongitudeValue.setMaximum(180.000000)
+        self.LandAreaRadiusValue.setMinimum(0)
+        self.LandAreaRadiusValue.valueChanged.connect(self.calcArea)
+        self.LandAreaValueLabel = QtGui.QLabel('0 m²')
         self.OpenTopographyLabel = QtGui.QLabel('OpenTopography API key:')
         self.OpenTopographyValue = QtGui.QLineEdit()
         self.OpenTopographyValue.setClearButtonEnabled(True)
@@ -145,6 +159,8 @@ class Project:
         self.LayoutOpenTopography.addWidget(self.LocationLabel)
         self.LayoutOpenTopography.addWidget(self.LatitudeValue)
         self.LayoutOpenTopography.addWidget(self.LongitudeValue)
+        self.LayoutOpenTopography.addWidget(self.LandAreaRadiusValue)
+        self.LayoutOpenTopography.addWidget(self.LandAreaValueLabel)
         self.LayoutOpenTopography.addWidget(self.OpenTopographyLabel)
         self.LayoutOpenTopography.addWidget(self.OpenTopographyValue)
 
@@ -185,6 +201,18 @@ class Project:
     def OpenTopography(self):
         self.formShapeFile.hide()
         self.formOpenTopography.show()
+
+    def calcArea(self):
+        lat = str(self.LatitudeValue.value()).strip(' deg')
+        long = str(self.LongitudeValue.value()).strip(' deg')
+        self.center = (float(lat),float(long))
+        dist = self.LandAreaRadiusValue()/1000
+        self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
+        self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
+        latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
+        latSE, longSE = (format(SouthEst['lat2'])),float(format(SouthEst['lon2'])))
+        LandArea = Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)
+        self.LandAreaValueLabel.setText(LandArea,'m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
@@ -241,6 +269,35 @@ class Project:
         self.CuValue.setMinimum(self.Cu)
         self.CuValue.setValue(self.Cu)
 
+    def surfacePoint(self, center, lats, longs):
+        centerZ = get_elevation(center[0],center[1])
+        r = []
+        v = []
+        for lat in lats:
+            for long in longs:
+                dist_z = get_elevation(float(lat), float(long)) - centerZ
+                dist_x = Geodesic.WGS84.Inverse(float(lat),float(long),center[0],float(long))
+                dist_y = Geodesic.WGS84.Inverse(float(lat),float(long),float(lat),center[1])
+                sign_x = float(format(dist_x['lat1']))-float(format(dist_x['lat2']))
+                sign_y = float(format(dist_y['lon1']))-float(format(dist_y['lon2']))
+                x = float(format(dist_x['s12']))
+                y = float(format(dist_y['s12']))
+                if sign_x < 0:
+                    x = -x
+                if sign_y < 0:
+                    y = -y
+                z = dist_z/1000
+
+                if len(r) != 0:
+                    if x != r[len(r[:])-1][0]:
+                        v.append(r)
+                        r = [FreeCAD.Vector(x,y,z)]
+                    else:
+                        r.append(FreeCAD.Vector(x,y,z))
+                else:
+                    r.append(FreeCAD.Vector(x,y,z))
+        return v
+
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
@@ -248,8 +305,13 @@ class Project:
         if not self.obj.Latitude and not self.obj.Longitude:
             self.obj.Latitude = self.LatitudeValue.value()
             self.obj.Longitude = self.LongitudeValue.value()
-        lat = str(self.obj.Latitude).strip(' deg')
-        long = str(self.obj.Longitude).strip(' deg')
+        print)self.obj.Latitude,self.obj.Longitude)
+
+        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),0.00025)
+        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),0.00025)
+
+        vectors = self.surfacePoint(self.center,lats,longs)
+
         api_key = self.OpenTopographyValue.text()
         if api_key:
             self.obj.Elevation = get_SRTM1_elevation(lat, long, api_key)
