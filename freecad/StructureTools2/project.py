@@ -138,7 +138,7 @@ class Project:
         self.LandAreaRadiusValue = QtGui.QDoubleSpinBox()
         self.LatitudeValue.setPrefix('Latitude: ')
         self.LongitudeValue.setPrefix('Longitude: ')
-        self.LandAreaRadiusValue.setPrefix('Land's area radius: ')
+        self.LandAreaRadiusValue.setPrefix("Land's area radius: ")
         self.LatitudeValue.setSuffix('deg')
         self.LongitudeValue.setSuffix('deg')
         self.LandAreaRadiusValue.setSuffix('m')
