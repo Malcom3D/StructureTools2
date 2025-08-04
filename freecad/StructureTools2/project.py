@@ -338,7 +338,7 @@ class Project:
         self.obj.setEditorMode("UseClass",1) # readOnly
         self.obj.setEditorMode("Cu",1) # readOnly
 
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.center[0], self.center[1]))
+        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.center[0], self.center[1])
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
