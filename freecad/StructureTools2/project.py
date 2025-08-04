@@ -212,7 +212,7 @@ class Project:
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
         LandArea = Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)
-        self.LandAreaValueLabel.setText('Land area: ' + LandArea + ' m²')
+        self.LandAreaValueLabel.setText('Land area: ' + format(LandArea['S12']) + ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
