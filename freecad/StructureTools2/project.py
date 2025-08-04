@@ -139,9 +139,9 @@ class Project:
         self.LatitudeValue.setPrefix('Latitude: ')
         self.LongitudeValue.setPrefix('Longitude: ')
         self.LandAreaRadiusValue.setPrefix("Land's area radius: ")
-        self.LatitudeValue.setSuffix('deg')
-        self.LongitudeValue.setSuffix('deg')
-        self.LandAreaRadiusValue.setSuffix('m')
+        self.LatitudeValue.setSuffix(' deg')
+        self.LongitudeValue.setSuffix(' deg')
+        self.LandAreaRadiusValue.setSuffix(' m')
         self.LatitudeValue.setDecimals(6)
         self.LongitudeValue.setDecimals(6)
         self.LandAreaRadiusValue.setDecimals(0)
@@ -151,7 +151,7 @@ class Project:
         self.LongitudeValue.setMaximum(180.000000)
         self.LandAreaRadiusValue.setMinimum(0)
         self.LandAreaRadiusValue.valueChanged.connect(self.calcArea)
-        self.LandAreaValueLabel = QtGui.QLabel('0 m²')
+        self.LandAreaValueLabel = QtGui.QLabel('Land area: 0 m²')
         self.OpenTopographyLabel = QtGui.QLabel('OpenTopography API key:')
         self.OpenTopographyValue = QtGui.QLineEdit()
         self.OpenTopographyValue.setClearButtonEnabled(True)
@@ -206,13 +206,13 @@ class Project:
         lat = str(self.LatitudeValue.value()).strip(' deg')
         long = str(self.LongitudeValue.value()).strip(' deg')
         self.center = (float(lat),float(long))
-        dist = self.LandAreaRadiusValue()/1000
+        dist = self.LandAreaRadiusValue.value()/1000
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(SouthEst['lat2'])),float(format(SouthEst['lon2'])))
         LandArea = Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)
-        self.LandAreaValueLabel.setText(LandArea,'m²')
+        self.LandAreaValueLabel.setText('Land area: ', LandArea, ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
