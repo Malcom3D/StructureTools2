@@ -305,7 +305,7 @@ class Project:
         if not self.obj.Latitude and not self.obj.Longitude:
             self.obj.Latitude = self.LatitudeValue.value()
             self.obj.Longitude = self.LongitudeValue.value()
-        print)self.obj.Latitude,self.obj.Longitude)
+        print(self.obj.Latitude,self.obj.Longitude)
 
         lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),0.00025)
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),0.00025)
