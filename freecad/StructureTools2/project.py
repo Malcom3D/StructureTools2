@@ -210,7 +210,7 @@ class Project:
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
-        latSE, longSE = (format(SouthEst['lat2'])),float(format(SouthEst['lon2'])))
+        latSE, longSE = (float(format(SouthEst['lat2'])),float(format(SouthEst['lon2'])))
         LandArea = Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)
         self.LandAreaValueLabel.setText(LandArea,'m²')
         
