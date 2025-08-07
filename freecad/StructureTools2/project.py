@@ -213,7 +213,7 @@ class Project:
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
-        LandArea = format(Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)['a12'])
+        LandArea = float(format(Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)['a12']))
         self.LandAreaValueLabel.setText('Land area: ' + round(LandArea, 3) + ' m²')
         
     def ProjectParam(self):
