@@ -28,13 +28,13 @@ def set_type(s):
 
 # function for return elevation from lat, long, based on python-srtm
 # which in turn is based on Nasa SRTM1
-def get_SRTM1_elevation(lat, long, api_key):
-    print(lat, long, api_key)
-    elevation = 9999
+#def get_SRTM1_elevation(lat, long, api_key):
+#    print(lat, long, api_key)
+#    elevation = 9999
 #    srtm1_data = Srtm1HeightMapCollection(Path=.)
 #    srtm1_data.build_file_index()
 #    elevation = srtm1_data.get_altitude(latitude=lat, longitude=long)
-    return elevation
+#    return elevation
 
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
@@ -206,13 +206,13 @@ class Project:
         lat = str(self.LatitudeValue.value()).strip(' deg')
         long = str(self.LongitudeValue.value()).strip(' deg')
         self.center = (float(lat),float(long))
-        dist = self.LandAreaRadiusValue.value()
+        dist = float(self.LandAreaRadiusValue.value().strip(' m')
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
-        LandArea = Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)
-        self.LandAreaValueLabel.setText('Land area: ' + format(LandArea['S12']) + ' m²')
+        LandArea = format(Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)['a12'])
+        self.LandAreaValueLabel.setText('Land area: ' + LandArea + ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
