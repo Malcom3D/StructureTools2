@@ -144,7 +144,7 @@ class Project:
         self.LandAreaRadiusValue.setSuffix(' m')
         self.LatitudeValue.setDecimals(6)
         self.LongitudeValue.setDecimals(6)
-        self.LandAreaRadiusValue.setDecimals(0)
+        self.LandAreaRadiusValue.setDecimals(3)
         self.LatitudeValue.setMinimum(-90.000000)
         self.LatitudeValue.setMaximum(90.000000)
         self.LongitudeValue.setMinimum(-180.000000)
@@ -214,7 +214,7 @@ class Project:
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
         LandArea = format(Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)['a12'])
-        self.LandAreaValueLabel.setText('Land area: ' + LandArea + ' m²')
+        self.LandAreaValueLabel.setText('Land area: ' + round(LandArea, 3) + ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
