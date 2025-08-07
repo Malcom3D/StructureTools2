@@ -216,7 +216,7 @@ class Project:
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
         latNE, longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
         latSW, longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
-        LandPoly = [[latNE, longNE], [latNW, longNW], [latSW, longSW], [latSE, longSE]]
+        LandPoly = [[latNW, longNW], [latSW, longSW], [latSE, longSE], [latNE, longNE]]
 
         p = Geodesic.WGS84.Polygon()
         for pnt in LandPoly:
