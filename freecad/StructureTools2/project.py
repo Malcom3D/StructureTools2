@@ -223,7 +223,7 @@ class Project:
             p.AddPoint(pnt[0], pnt[1])
         num, perim, LandArea = p.Compute()
         print('LandArea: ', format(LandArea))
-        self.LandAreaValueLabel.setText('Land area: ' + str(round(format(LandArea), 3)) + ' m²')
+        self.LandAreaValueLabel.setText('Land area: ' + str(round(float(format(LandArea)), 3)) + ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
