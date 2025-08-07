@@ -222,7 +222,6 @@ class Project:
         for pnt in LandPoly:
             p.AddPoint(pnt[0], pnt[1])
         num, perim, LandArea = p.Compute()
-        print(p.AREA)
         print('Compute: ', p.Compute())
         print('LandArea: ', format(LandArea))
         self.LandAreaValueLabel.setText('Land area: ' + str(round(float(format(LandArea)), 3)) + ' m²')
