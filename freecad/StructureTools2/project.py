@@ -209,12 +209,21 @@ class Project:
         dist = self.LandAreaRadiusValue.value()
         print('dist: ', dist)
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
-        self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
+        self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],135,dist)
+        self.NordEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
+        self.SouthWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],225,dist)
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
-        LandArea = float(format(Geodesic.WGS84.Inverse(latNW, longNW, latSE, longSE, Geodesic.AREA)['a12']))
-        print('LandArea: ', LandArea)
-        self.LandAreaValueLabel.setText('Land area: ' + str(round(LandArea, 3)) + ' m²')
+        latNE, longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
+        latSW, longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
+        LandPoly = [[latNW, longNW], [latSE, longSE], [latNE, longNE], [latSW, longSW]]
+
+        p = geod.Polygon()
+        for pnt in LandPoly:
+            p.AddPoint(pnt[0], pnt[1])
+        num, perim, LandArea = p.Compute()
+        print('LandArea: ', format(LandArea))
+        self.LandAreaValueLabel.setText('Land area: ' + str(round(format(LandArea), 3)) + ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
