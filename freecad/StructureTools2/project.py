@@ -218,7 +218,7 @@ class Project:
         latSW, longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
         LandPoly = [[latNW, longNW], [latSE, longSE], [latNE, longNE], [latSW, longSW]]
 
-        p = geod.Polygon()
+        p = Geodesic.Polygon()
         for pnt in LandPoly:
             p.AddPoint(pnt[0], pnt[1])
         num, perim, LandArea = p.Compute()
