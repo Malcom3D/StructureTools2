@@ -205,9 +205,11 @@ class Project:
     def calcArea(self):
         lat = str(self.LatitudeValue.value()).strip(' deg')
         long = str(self.LongitudeValue.value()).strip(' deg')
+        print(self.LatitudeValue.value)
+        print(self.LongitudeValue.value)
+        print('lat: ', lat, 'long: ', long)
         self.center = (float(lat),float(long))
         dist = self.LandAreaRadiusValue.value()
-        print('dist: ', dist)
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],135,dist)
         self.NordEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
