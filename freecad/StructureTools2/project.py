@@ -1,6 +1,7 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
 from geographiclib.geodesic import Geodesic
+from geographiclib.polygonarea import PolygonArea
 import requests, json
 import numpy
 from pathlib import Path
@@ -205,9 +206,6 @@ class Project:
     def calcArea(self):
         lat = str(self.LatitudeValue.value()).strip(' deg')
         long = str(self.LongitudeValue.value()).strip(' deg')
-        print(self.LatitudeValue.value)
-        print(self.LongitudeValue.value)
-        print('lat: ', lat, 'long: ', long)
         self.center = (float(lat),float(long))
         dist = self.LandAreaRadiusValue.value()
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
@@ -216,16 +214,15 @@ class Project:
         self.SouthWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],225,dist)
         latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
         latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
-        latNE, longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
+        latNE, longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon1'])))
         latSW, longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
         LandPoly = [[latNW, longNW], [latSW, longSW], [latSE, longSE], [latNE, longNE]]
-        print(LandPoly)
 
-        p = Geodesic.WGS84.Polygon()
+        p = PolygonArea(Geodesic.WGS84, False)
         for pnt in LandPoly:
             p.AddPoint(pnt[0], pnt[1])
-        num, perim, LandArea = p.Compute()
-        print('Compute: ', p.Compute(reverse=True), p.polyline)
+        num, perim, LandArea = p.Compute(False, False)
+        print('Compute: ', p.Compute(False, False))
         print('LandArea: ', format(LandArea))
         self.LandAreaValueLabel.setText('Land area: ' + str(round(float(format(LandArea)), 3)) + ' m²')
         
