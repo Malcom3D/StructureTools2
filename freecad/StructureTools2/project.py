@@ -27,16 +27,6 @@ def set_type(s):
     return s
 
 
-# function for return elevation from lat, long, based on python-srtm
-# which in turn is based on Nasa SRTM1
-#def get_SRTM1_elevation(lat, long, api_key):
-#    print(lat, long, api_key)
-#    elevation = 9999
-#    srtm1_data = Srtm1HeightMapCollection(Path=.)
-#    srtm1_data.build_file_index()
-#    elevation = srtm1_data.get_altitude(latitude=lat, longitude=long)
-#    return elevation
-
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
