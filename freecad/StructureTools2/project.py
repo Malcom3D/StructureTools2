@@ -320,6 +320,9 @@ class Project:
         lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), gridSpace)
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), gridSpace)
 
+        print('lats: ', lats)
+        print('lon: ', lon)
+
         vectors = self.surfacePoint(self.center,lats,longs)
         intSurf = Part.BSplineSurface()
         intSurf.interpolate(vectors)
