@@ -49,6 +49,8 @@ class Project:
         self.center = ()
         self.NordWest = {}
         self.SouthEst = {}
+        self.NordEst = {}
+        self.SouthWest = {}
         self.Cu = 0
         self.Vn = 0
         self.obj = obj
@@ -207,6 +209,7 @@ class Project:
         latNE, longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon1'])))
         latSW, longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
         LandPoly = [[latNW, longNW], [latSW, longSW], [latSE, longSE], [latNE, longNE]]
+        print(latNW, longNW, latSE, longSE, latNE, longNE, latSW, longSW)
 
         p = Geodesic.WGS84.Polygon()
         for pnt in LandPoly:
