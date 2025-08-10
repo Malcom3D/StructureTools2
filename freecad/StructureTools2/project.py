@@ -313,6 +313,7 @@ class Project:
             self.obj.Longitude = self.LongitudeValue.value()
         print(self.obj.Latitude,self.obj.Longitude)
 
+        print(self.NordWest, self.NordEst)
         NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
         print(format(self.NordWest['lat2']), format(self.NordEst['lat2']))
         gridSpace = float(format(NWNE['s12']))/2
