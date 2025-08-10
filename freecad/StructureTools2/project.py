@@ -46,10 +46,11 @@ def get_location(lat, long):
 class Project:
     def __init__(self, obj):
         self.center = ()
-        self.NordWest = {}
-        self.SouthEst = {}
-        self.NordEst = {}
-        self.SouthWest = {}
+        #self.NordWest = {}
+        #self.SouthEst = {}
+        #self.NordEst = {}
+        #self.SouthWest = {}
+        self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW = 0
         self.Cu = 0
         self.Vn = 0
         self.obj = obj
@@ -204,12 +205,12 @@ class Project:
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],135,dist)
         self.NordEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
         self.SouthWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],225,dist)
-        latNW, longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
-        latSE, longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
-        latNE, longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon1'])))
-        latSW, longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
-        LandPoly = [[latNW, longNW], [latSW, longSW], [latSE, longSE], [latNE, longNE]]
-        print(latNW, longNW, latSE, longSE, latNE, longNE, latSW, longSW)
+        self.latNW, self.longNW = (float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])))
+        self.latSE, self.longSE = (float(format(self.SouthEst['lat2'])),float(format(self.SouthEst['lon2'])))
+        self.latNE, self.longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon1'])))
+        self.latSW, self.longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
+        LandPoly = [[self.latNW, self.longNW], [self.latSW, self.longSW], [self.latSE, self.longSE], [self.latNE, self.longNE]]
+        print(self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW)
 
         p = Geodesic.WGS84.Polygon()
         for pnt in LandPoly:
@@ -313,15 +314,22 @@ class Project:
         print(self.obj.Latitude,self.obj.Longitude)
 
         print(self.NordWest, self.NordEst)
-        NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
-        print('NordWest: ', format(self.NordWest['lat2']), format(self.NordWest['lon2']))
-        print('NordEst: ', format(self.NordEst['lat2']), format(self.NordEst['lon2']))
-        print('SouthWest: ', format(self.SouthWest['lat2']), format(self.SouthWest['lon2']))
-        print('SouthEst: ', format(self.SouthEst['lat2']), format(self.SouthEst['lon2']))
+        self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW
+        NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(100*1000)
         print('gridSpace: ', gridSpace)
-        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), gridSpace)
-        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), gridSpace)
+        lats = numpy.arange(self.latNW, self.latSE, gridSpace)
+        longs = numpy.arange(self.longNW, self.longSE, gridSpace)
+
+        #NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
+        #print('NordWest: ', format(self.NordWest['lat2']), format(self.NordWest['lon2']))
+        #print('NordEst: ', format(self.NordEst['lat2']), format(self.NordEst['lon2']))
+        #print('SouthWest: ', format(self.SouthWest['lat2']), format(self.SouthWest['lon2']))
+        #print('SouthEst: ', format(self.SouthEst['lat2']), format(self.SouthEst['lon2']))
+        #gridSpace = float(format(NWNE['s12']))/(100*1000)
+        #print('gridSpace: ', gridSpace)
+        #lats = numpy.arange(float(format(self.NordWest['lat2'])), float(format(self.SouthEst['lat2'])), gridSpace)
+        #longs = numpy.arange(float(format(self.NordWest['lon2'])), float(format(self.SouthEst['lon2'])), gridSpace)
 
         print('lats: ', lats)
         print('longs: ', longs)
