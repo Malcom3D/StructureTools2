@@ -25,7 +25,6 @@ def set_type(s):
         return float(s)
     return s
 
-
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
