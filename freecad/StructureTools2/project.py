@@ -309,7 +309,7 @@ class Project:
             self.obj.Longitude = self.LongitudeValue.value()
         print(self.obj.Latitude,self.obj.Longitude)
 
-        NWNE = Geodesic.WGS84.Inverse((float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
+        NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
 
         lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),NWNE/100)
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),NWNE/100)
