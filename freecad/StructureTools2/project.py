@@ -321,11 +321,12 @@ class Project:
         print(self.obj.Latitude,self.obj.Longitude)
 
         print(self.NordWest, self.NordEst)
-        self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(1000*1000)
         print('gridSpace: ', gridSpace)
-        test = (self.latNW-self.latNE,)/gridSpace
+        print(self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW)
+        test = (self.latNW-self.latNE)/gridSpace
+        print(test)
         latitudes = numpy.arange(self.latNW, self.latNE, gridSpace)
         longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
