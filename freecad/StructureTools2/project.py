@@ -139,6 +139,7 @@ class Project:
         self.LatitudeValue.setMaximum(90.000000)
         self.LongitudeValue.setMinimum(-180.000000)
         self.LongitudeValue.setMaximum(180.000000)
+        self.LandAreaRadiusValue.setMaximum(99999999999999999999999999999999999999999)
         self.LandAreaRadiusValue.setMinimum(0)
         self.LandAreaRadiusValue.valueChanged.connect(self.calcArea)
         self.LandAreaValueLabel = QtGui.QLabel('Land area: 0 m²')
