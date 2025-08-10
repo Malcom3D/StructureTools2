@@ -50,7 +50,14 @@ class Project:
         #self.SouthEst = {}
         #self.NordEst = {}
         #self.SouthWest = {}
-        self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW = 0
+        self.latNW = 0
+        self.longNW = 0
+        self.latSE = 0
+        self.longSE = 0
+        self.latNE = 0
+        self.longNE = 0
+        self.latSW = 0
+        self.longSW = 0
         self.Cu = 0
         self.Vn = 0
         self.obj = obj
