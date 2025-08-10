@@ -315,14 +315,15 @@ class Project:
 
         print(self.NordWest, self.NordEst)
         NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
-        print(format(self.NordWest['lat2']), format(self.NordEst['lat2']))
+        print('NordWest: ', format(self.NordWest['lat2']))
+        print('NordEst: ', format(self.NordEst['lat2']))
         gridSpace = float(format(NWNE['s12']))/2
         print('gridSpace: ', gridSpace)
         lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), gridSpace)
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), gridSpace)
 
         print('lats: ', lats)
-        print('lon: ', lon)
+        print('lons: ', lons)
 
         vectors = self.surfacePoint(self.center,lats,longs)
         intSurf = Part.BSplineSurface()
