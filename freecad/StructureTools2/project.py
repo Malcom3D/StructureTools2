@@ -200,6 +200,7 @@ class Project:
         long = str(self.LongitudeValue.value()).strip(' deg')
         self.center = (float(lat),float(long))
         dist = self.LandAreaRadiusValue.value()
+        self.LandAreaRadiusValue.value()
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],135,dist)
         self.NordEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
