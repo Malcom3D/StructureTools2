@@ -1,7 +1,5 @@
 import FreeCAD, App, FreeCADGui, Part, os, math
 from PySide import QtWidgets, QtCore, QtGui
-from geographiclib.geodesic import Geodesic
-from geographiclib.polygonarea import PolygonArea
 import requests, json
 import numpy
 from pathlib import Path
