@@ -213,8 +213,6 @@ class Project:
             p.AddPoint(pnt[0], pnt[1])
 
         num, perim, LandArea = p.Compute()
-        print('Compute: ', p.Compute())
-        print('LandArea: ', format(LandArea))
         self.LandAreaValueLabel.setText('Land area: ' + str(round(float(format(LandArea)), 2)) + ' m²')
         
     def ProjectParam(self):
@@ -311,8 +309,9 @@ class Project:
             self.obj.Longitude = self.LongitudeValue.value()
         print(self.obj.Latitude,self.obj.Longitude)
 
-        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),0.00025)
-        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),0.00025)
+        NWNE = Geodesic.WGS84.Inverse((float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
+        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),NWNE/100)
+        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),NWNE/100)
 
         vectors = self.surfacePoint(self.center,lats,longs)
         intSurf = Part.BSplineSurface()
