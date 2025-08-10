@@ -325,8 +325,8 @@ class Project:
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(1000*1000)
         print('gridSpace: ', gridSpace)
-        lats = numpy.arange(self.latNW, self.latNE, gridSpace)
-        longs = numpy.arange(self.longNW, self.longSE, gridSpace)
+        latitudes = numpy.arange(self.latNW, self.latNE, gridSpace)
+        longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
         #NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
         #print('NordWest: ', format(self.NordWest['lat2']), format(self.NordWest['lon2']))
@@ -338,10 +338,10 @@ class Project:
         #lats = numpy.arange(float(format(self.NordWest['lat2'])), float(format(self.SouthEst['lat2'])), gridSpace)
         #longs = numpy.arange(float(format(self.NordWest['lon2'])), float(format(self.SouthEst['lon2'])), gridSpace)
 
-        print('lats: ', lats)
-        print('longs: ', longs)
+        print('lats: ', latitudes)
+        print('longs: ', longitudes)
 
-        vectors = self.surfacePoint(self.center,lats,longs)
+        vectors = self.surfacePoint(self.center,latitudes,longitudes)
         print(vectors)
         intSurf = Part.BSplineSurface()
         intSurf.interpolate(vectors)
