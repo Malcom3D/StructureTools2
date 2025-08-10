@@ -322,7 +322,7 @@ class Project:
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), gridSpace)
 
         print('lats: ', lats)
-        print('lons: ', lons)
+        print('longs: ', longs)
 
         vectors = self.surfacePoint(self.center,lats,longs)
         intSurf = Part.BSplineSurface()
