@@ -320,13 +320,11 @@ class Project:
             self.obj.Longitude = self.LongitudeValue.value()
         print(self.obj.Latitude,self.obj.Longitude)
 
-        print(self.NordWest, self.NordEst)
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(1000*1000)
-        print('gridSpace: ', gridSpace)
-        print(self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW)
         test = (self.latNW-self.latSE)/gridSpace
-        print(test)
+        print('self.latNW: ', self.latNW)
+        print('self.latSE: ', self.latSE)
         latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
         longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
