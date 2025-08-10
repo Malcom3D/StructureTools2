@@ -3,6 +3,7 @@ from PySide import QtWidgets, QtCore, QtGui
 import requests, json
 import numpy
 from pathlib import Path
+from geographiclib.geodesic import Geodesic
 
 from srtm import Srtm1HeightMapCollection
 
