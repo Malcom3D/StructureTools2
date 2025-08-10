@@ -316,7 +316,7 @@ class Project:
         NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
         print('NordWest: ', format(self.NordWest['lat2']))
         print('NordEst: ', format(self.NordEst['lat2']))
-        gridSpace = float(format(NWNE['s12']))/2
+        gridSpace = float(format(NWNE['s12']))/(100*1000)
         print('gridSpace: ', gridSpace)
         lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), gridSpace)
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), gridSpace)
@@ -325,6 +325,7 @@ class Project:
         print('longs: ', longs)
 
         vectors = self.surfacePoint(self.center,lats,longs)
+        print(vectors)
         intSurf = Part.BSplineSurface()
         intSurf.interpolate(vectors)
         Part.show(intSurf.toShape())
