@@ -323,7 +323,7 @@ class Project:
         print(self.NordWest, self.NordEst)
         self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
-        gridSpace = float(format(NWNE['s12']))/(100*1000)
+        gridSpace = float(format(NWNE['s12']))/(1000*1000)
         print('gridSpace: ', gridSpace)
         lats = numpy.arange(self.latNW, self.latNE, gridSpace)
         longs = numpy.arange(self.longNW, self.longSE, gridSpace)
