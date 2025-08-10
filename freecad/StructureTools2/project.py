@@ -315,7 +315,7 @@ class Project:
 
         NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
         print(format(self.NordWest['lat2']), format(self.NordEst['lat2']))
-        gridSpace = float(format(NWNE['s12']))/(10)
+        gridSpace = float(format(NWNE['s12']))/2
         print('gridSpace: ', gridSpace)
         lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), gridSpace)
         longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), gridSpace)
