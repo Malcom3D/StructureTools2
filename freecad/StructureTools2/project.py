@@ -309,8 +309,11 @@ class Project:
             self.obj.Longitude = self.LongitudeValue.value()
         print(self.obj.Latitude,self.obj.Longitude)
 
-        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), 0.0025)
-        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), 0.0025)
+        NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2']), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2']))
+        gridSpace = float(format(NWNE['s12']))
+        print('gridSpace: ', gridSpace)
+        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])), 0.025)
+        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])), 0.025)
 
         vectors = self.surfacePoint(self.center,lats,longs)
         intSurf = Part.BSplineSurface()
