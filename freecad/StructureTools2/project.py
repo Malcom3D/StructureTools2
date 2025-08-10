@@ -211,10 +211,11 @@ class Project:
         p = PolygonArea(Geodesic.WGS84, False)
         for pnt in LandPoly:
             p.AddPoint(pnt[0], pnt[1])
-        num, perim, LandArea = p.Compute(False, False)
-        print('Compute: ', p.Compute(False, False))
+
+        num, perim, LandArea = p.Compute()
+        print('Compute: ', p.Compute())
         print('LandArea: ', format(LandArea))
-        self.LandAreaValueLabel.setText('Land area: ' + str(round(float(format(LandArea)), 3)) + ' m²')
+        self.LandAreaValueLabel.setText('Land area: ' + str(round(float(format(LandArea)), 2)) + ' m²')
         
     def ProjectParam(self):
         # ntc2018 Project Parameter QDialog
@@ -320,12 +321,6 @@ class Project:
 
         doc = FreeCAD.ActiveDocument
         objSurface = doc.addObject("Part::FeaturePython", "ShapeSurface")
-
-#        api_key = self.OpenTopographyValue.text()
-#        if api_key:
-#            self.obj.Elevation = get_SRTM1_elevation(self.center[0], self.center[1], api_key)
-#        else:
-#            self.obj.Elevation = get_elevation(self.center[0], self.center[1])
 
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
