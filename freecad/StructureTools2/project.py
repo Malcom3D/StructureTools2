@@ -311,8 +311,8 @@ class Project:
 
         NWNE = float(format(Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))['s12']))
 
-        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),NWNE/100)
-        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),NWNE/100)
+        lats = numpy.arange(float(format(self.NordWest['lat2'])),float(format(self.SouthEst['lat2'])),NWNE/50)
+        longs = numpy.arange(float(format(self.NordWest['lon2'])),float(format(self.SouthEst['lon2'])),NWNE/50)
 
         vectors = self.surfacePoint(self.center,lats,longs)
         intSurf = Part.BSplineSurface()
