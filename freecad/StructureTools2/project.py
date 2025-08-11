@@ -5,8 +5,6 @@ import numpy
 from pathlib import Path
 from geographiclib.geodesic import Geodesic
 
-from srtm import Srtm1HeightMapCollection
-
 ICONPATH = os.path.join(os.path.dirname(__file__), 'resources')
 
 def show_error_message(msg):
@@ -207,7 +205,6 @@ class Project:
         long = str(self.LongitudeValue.value()).strip(' deg')
         self.center = (float(lat),float(long))
         dist = self.LandAreaRadiusValue.value()
-        self.LandAreaRadiusValue.value()
         self.NordWest = Geodesic.WGS84.Direct(self.center[0],self.center[1],315,dist)
         self.SouthEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],135,dist)
         self.NordEst = Geodesic.WGS84.Direct(self.center[0],self.center[1],45,dist)
@@ -322,28 +319,16 @@ class Project:
 
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(1000*1000)
-        test = (self.latNW-self.latSE)/gridSpace
-        print('test: ', test)
-        print('self.latNW: ', self.latNW)
-        print('self.latSE: ', self.latSE)
-        latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
-        longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
-
-        #NWNE = Geodesic.WGS84.Inverse(float(format(self.NordWest['lat2'])),float(format(self.NordWest['lon2'])), float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon2'])))
-        #print('NordWest: ', format(self.NordWest['lat2']), format(self.NordWest['lon2']))
-        #print('NordEst: ', format(self.NordEst['lat2']), format(self.NordEst['lon2']))
-        #print('SouthWest: ', format(self.SouthWest['lat2']), format(self.SouthWest['lon2']))
-        #print('SouthEst: ', format(self.SouthEst['lat2']), format(self.SouthEst['lon2']))
-        #gridSpace = float(format(NWNE['s12']))/(100*1000)
-        #print('gridSpace: ', gridSpace)
-        #lats = numpy.arange(float(format(self.NordWest['lat2'])), float(format(self.SouthEst['lat2'])), gridSpace)
-        #longs = numpy.arange(float(format(self.NordWest['lon2'])), float(format(self.SouthEst['lon2'])), gridSpace)
-
-        print('lats: ', latitudes)
-        print('longs: ', longitudes)
+        if self.latNW >= self.latSE:
+            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
+        else:
+            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
+        if self.longNW >= self.longSE:
+            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
+        else:
+            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
-        print(vectors)
         intSurf = Part.BSplineSurface()
         intSurf.interpolate(vectors)
         Part.show(intSurf.toShape())
