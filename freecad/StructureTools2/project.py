@@ -34,11 +34,14 @@ def get_location(lat, long):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36", 'Referer': 'https://none.net'}
     url = (f'https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={long}&zoom=18&format=json')
     data = requests.get(url, headers=headers).json()  # json object, various ways you can extract value
-    town = data['address']['town']
+    if "village" in data['address']:
+        city = data['address']['village']
+    elif "town" in data['address']:
+        city = data['address']['town']
     county = data['address']['county']
     country = data['address']['country']
     country_code = data['address']['country_code']
-    return  town, county, country, country_code
+    return  city, county, country, country_code
     
 
 class Project:
