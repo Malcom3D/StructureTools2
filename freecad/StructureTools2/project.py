@@ -182,13 +182,11 @@ class Project:
         else:
             path = Path.home().as_posix()
         filename, ok = QtGui.QFileDialog.getOpenFileName(None, "Select ShapeFile", path, "ShapeFile (*.shp)")
-        print(filename)
         if filename:
             self.ShapeFileValue.setText(str(filename))
             self.selectedShapeFile(filename)
 
     def selectedShapeFile(self, filename):
-        print(filename)
         self.obj.Latitude = '45.52868 deg'
         self.obj.Longitude = '9.04425 deg'
 
@@ -214,7 +212,6 @@ class Project:
         self.latNE, self.longNE = (float(format(self.NordEst['lat2'])),float(format(self.NordEst['lon1'])))
         self.latSW, self.longSW = (float(format(self.SouthWest['lat2'])),float(format(self.SouthWest['lon2'])))
         LandPoly = [[self.latNW, self.longNW], [self.latSW, self.longSW], [self.latSE, self.longSE], [self.latNE, self.longNE]]
-        print(self.latNW, self.longNW, self.latSE, self.longSE, self.latNE, self.longNE, self.latSW, self.longSW)
 
         p = Geodesic.WGS84.Polygon()
         for pnt in LandPoly:
@@ -315,7 +312,6 @@ class Project:
         if not self.obj.Latitude and not self.obj.Longitude:
             self.obj.Latitude = self.LatitudeValue.value()
             self.obj.Longitude = self.LongitudeValue.value()
-        print(self.obj.Latitude,self.obj.Longitude)
 
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(1000*1000)
