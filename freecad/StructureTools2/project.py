@@ -26,7 +26,7 @@ def set_type(s):
 def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
-    elevation = data['results'][0]['elevation']*1000
+    elevation = data['results'][0]['elevation']
     return elevation
 
 # function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
@@ -281,14 +281,12 @@ class Project:
     def surfacePoint(self, center, lats, longs):
         centerZ = get_elevation(center[0],center[1])
         self.obj.Elevation = centerZ
-        print(centerZ)
         r = []
         v = []
         for lat in lats:
             for long in longs:
                 dist_z = get_elevation(float(lat), float(long)) - centerZ
                 dist_x = Geodesic.WGS84.Inverse(float(lat),float(long),center[0],float(long))
-                print(dist_x)
                 dist_y = Geodesic.WGS84.Inverse(float(lat),float(long),float(lat),center[1])
                 sign_x = float(format(dist_x['lat1']))-float(format(dist_x['lat2']))
                 sign_y = float(format(dist_y['lon1']))-float(format(dist_y['lon2']))
