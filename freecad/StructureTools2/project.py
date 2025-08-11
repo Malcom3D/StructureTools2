@@ -299,7 +299,7 @@ class Project:
                     x = -x
                 if sign_y < 0:
                     y = -y
-                z = dist_z/1000
+                z = dist_z
 
                 if len(r) != 0:
                     if x != r[len(r[:])-1][0]:
@@ -318,6 +318,11 @@ class Project:
         if not self.obj.Latitude and not self.obj.Longitude:
             self.obj.Latitude = self.LatitudeValue.value()
             self.obj.Longitude = self.LongitudeValue.value()
+
+        print('NordWest: ', self.latNW, self.longNW)
+        print('NordEst: ', self.latNE, self.longNE)
+        print('SouthWest: ', self.latSW, self.longSW)
+        print('SouthEst: ', self.latSE, self.longSE)
 
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         gridSpace = float(format(NWNE['s12']))/(1000*1000)
