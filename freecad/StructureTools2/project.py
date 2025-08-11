@@ -325,7 +325,7 @@ class Project:
         print('SouthEst: ', self.latSE, self.longSE)
 
         NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
-        gridSpace = float(format(NWNE['s12']))/(1000*1000)
+        gridSpace = float(format(NWNE['s12']))/(10*1000)
         if self.latNW >= self.latSE:
             latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
         else:
