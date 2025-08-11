@@ -287,6 +287,7 @@ class Project:
         for lat in lats:
             for long in longs:
                 dist_z = get_elevation(float(lat), float(long)) - centerZ
+                print('CenterZ : ', CenterZ)
                 print('dist_z: ', dist_z)
                 dist_x = Geodesic.WGS84.Inverse(float(lat),float(long),center[0],float(long))
                 dist_y = Geodesic.WGS84.Inverse(float(lat),float(long),float(lat),center[1])
