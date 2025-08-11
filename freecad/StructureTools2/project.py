@@ -27,6 +27,7 @@ def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
     elevation = data['results'][0]['elevation']
+    print('elevation: ', elevation)
     return elevation
 
 # function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
@@ -69,7 +70,7 @@ class Project:
         self.obj.addProperty("App::PropertyString", "CountryCode", "Project", "Country Code").CountryCode = 'None'
         self.obj.addProperty("App::PropertyString", "Country", "Project", "Country").Country = 'None'
         self.obj.addProperty("App::PropertyString", "County", "Project", "County").County = 'None'
-        self.obj.addProperty("App::PropertyString", "Town", "Project", "Town").Town = 'None'
+        self.obj.addProperty("App::PropertyString", "City", "Project", "City").City = 'None'
         self.obj.addProperty("App::PropertyString", "NominalLife", "Project", "Nominal life time of building").NominalLife = 'None'
         self.obj.addProperty("App::PropertyInteger", "Vn", "Project", "Nominal life time of building").Vn = self.Vn
         self.obj.addProperty("App::PropertyString", "UseClass", "Project", "Use class of building").UseClass = 'None'
@@ -286,6 +287,7 @@ class Project:
         for lat in lats:
             for long in longs:
                 dist_z = get_elevation(float(lat), float(long)) - centerZ
+                print('dist_z: ', dist_z)
                 dist_x = Geodesic.WGS84.Inverse(float(lat),float(long),center[0],float(long))
                 dist_y = Geodesic.WGS84.Inverse(float(lat),float(long),float(lat),center[1])
                 sign_x = float(format(dist_x['lat1']))-float(format(dist_x['lat2']))
@@ -348,7 +350,7 @@ class Project:
         self.obj.setEditorMode("UseClass",1) # readOnly
         self.obj.setEditorMode("Cu",1) # readOnly
 
-        self.obj.Town, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.center[0], self.center[1])
+        self.obj.City, self.obj.County, self.obj.Country, self.obj.CountryCode = get_location(self.center[0], self.center[1])
 
         FreeCADGui.Control.closeDialog() #close the dialog
 
