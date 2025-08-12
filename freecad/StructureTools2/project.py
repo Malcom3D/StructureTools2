@@ -338,7 +338,7 @@ class Project:
 
         #doc = FreeCAD.ActiveDocument
         #objSurface = doc.addObject("Part::FeaturePython", "Shape")
-        objSurface = obj.addObject("Part::FeaturePython", "Shape")
+        objSurface = self.obj.addObject("Part::FeaturePython", "Shape")
 
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
         #intSurf = Part.BSplineSurface()
