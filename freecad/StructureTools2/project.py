@@ -325,7 +325,7 @@ class Project:
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
         objShape = Part.BSplineSurface()
         objShape.interpolate(vectors)
-        objLandShape = objLand.toShape()
+        objLandShape = objShape.toShape()
 
         return objLandShape
 
