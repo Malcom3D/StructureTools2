@@ -326,7 +326,7 @@ class Project:
 
         #NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         #gridSpace = float(format(NWNE['s12']))/(10*1000)
-        gridSpace = (self.latNW-self.latSE)/3
+        gridSpace = (self.latNW-self.latSE)/5
         if self.latNW >= self.latSE:
             latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
         else:
@@ -342,7 +342,7 @@ class Project:
         Part.show(intSurf.toShape())
 
         doc = FreeCAD.ActiveDocument
-        objSurface = doc.addObject("Part::FeaturePython", "ShapeSurface")
+        objSurface = doc.addObject("Part::FeaturePython", "Shape")
 
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
