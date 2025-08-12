@@ -27,7 +27,6 @@ def get_elevation(lat, long):
     url = (f'https://api.open-elevation.com/api/v1/lookup?locations={lat},{long}')
     data = requests.get(url).json()  # json object, various ways you can extract value
     elevation = data['results'][0]['elevation']
-    print('elevation: ', elevation)
     return elevation
 
 # function for return reverse geocoding from lat, long, based on nominatim.openstreetmap.org api
@@ -287,8 +286,6 @@ class Project:
         for lat in lats:
             for long in longs:
                 dist_z = get_elevation(float(lat), float(long)) - centerZ
-                print('CenterZ : ', centerZ)
-                print('dist_z: ', dist_z)
                 dist_x = Geodesic.WGS84.Inverse(float(lat),float(long),center[0],float(long))
                 dist_y = Geodesic.WGS84.Inverse(float(lat),float(long),float(lat),center[1])
                 sign_x = float(format(dist_x['lat1']))-float(format(dist_x['lat2']))
@@ -312,15 +309,19 @@ class Project:
         return v
 
     def OTshape(self):
-        gridSpace = (self.latNW-self.latSE)/5
-        if self.latNW >= self.latSE:
-            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
-        else:
-            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
-        if self.longNW >= self.longSE:
-            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
-        else: 
-            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
+        latGridSpace = (self.latNW-self.latSE)/5
+        lonGridSpace = (self.longNW-self.longSE)/5
+        latitudes = numpy.arange(self.latSE*1000, self.latNW*1000, latGridSpace*1000)
+        longitudes = numpy.arange(self.longSE*1000, self.longNW*1000, lonGridSpace*1000)
+#        gridSpace = (self.latNW-self.latSE)/5
+#        if self.latNW >= self.latSE:
+#            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
+#        else:
+#            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
+#        if self.longNW >= self.longSE:
+#            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
+#        else: 
+#            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
         objShape = Part.BSplineSurface()
