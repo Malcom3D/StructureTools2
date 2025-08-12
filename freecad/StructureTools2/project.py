@@ -309,28 +309,18 @@ class Project:
         return v
 
     def OTshape(self):
-        latGridSpace = (self.latNW-self.latSE)/5
-        lonGridSpace = (self.longNW-self.longSE)/5
+        gridSpace = (self.latNW-self.latSE)/5
         if self.latNW >= self.latSE:
-            latitudes = numpy.arange(self.latSE, self.latNW, latGridSpace)
+            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
         else:
-            latitudes = numpy.arange(self.latNW, self.latSE, latGridSpace)
+            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
         if self.longNW >= self.longSE:
-            longitudes = numpy.arange(self.longSE, self.longNW, lonGridSpace)
+            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
         else: 
-            longitudes = numpy.arange(self.longNW, self.longSE, lonGridSpace)
-
-#        gridSpace = (self.latNW-self.latSE)/5
-#        if self.latNW >= self.latSE:
-#            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
-#        else:
-#            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
-#        if self.longNW >= self.longSE:
-#            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
-#        else: 
-#            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
+            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
+        print(vectors)
         objShape = Part.BSplineSurface()
         objShape.interpolate(vectors)
         objLandShape = objShape.toShape()
