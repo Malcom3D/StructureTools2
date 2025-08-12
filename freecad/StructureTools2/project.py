@@ -290,13 +290,13 @@ class Project:
                 dist_y = Geodesic.WGS84.Inverse(float(lat),float(long),float(lat),center[1])
                 sign_x = float(format(dist_x['lat1']))-float(format(dist_x['lat2']))
                 sign_y = float(format(dist_y['lon1']))-float(format(dist_y['lon2']))
-                x = float(format(dist_x['s12']))
-                y = float(format(dist_y['s12']))
+                x = float(format(dist_x['s12']))*1000
+                y = float(format(dist_y['s12']))*1000
                 if sign_x < 0:
                     x = -x
                 if sign_y < 0:
                     y = -y
-                z = dist_z
+                z = dist_z*1000
 
                 if len(r) != 0:
                     if x != r[len(r[:])-1][0]:
@@ -311,8 +311,15 @@ class Project:
     def OTshape(self):
         latGridSpace = (self.latNW-self.latSE)/5
         lonGridSpace = (self.longNW-self.longSE)/5
-        latitudes = numpy.arange(self.latSE*1000, self.latNW*1000, latGridSpace*1000)
-        longitudes = numpy.arange(self.longSE*1000, self.longNW*1000, lonGridSpace*1000)
+        if self.latNW >= self.latSE:
+            latitudes = numpy.arange(self.latSE, self.latNW, latGridSpace)
+        else:
+            latitudes = numpy.arange(self.latNW, self.latSE, latGridSpace)
+        if self.longNW >= self.longSE:
+            longitudes = numpy.arange(self.longSE, self.longNW, lonGridSpace)
+        else: 
+            longitudes = numpy.arange(self.longNW, self.longSE, lonGridSpace)
+
 #        gridSpace = (self.latNW-self.latSE)/5
 #        if self.latNW >= self.latSE:
 #            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
