@@ -311,6 +311,24 @@ class Project:
                     r.append(FreeCAD.Vector(x,y,z))
         return v
 
+    def OTshape(self):
+        gridSpace = (self.latNW-self.latSE)/5
+        if self.latNW >= self.latSE:
+            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
+        else:
+            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
+        if self.longNW >= self.longSE:
+            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
+        else: 
+            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
+
+        vectors = self.surfacePoint(self.center,latitudes,longitudes)
+        objShape = Part.BSplineSurface()
+        objShape.interpolate(vectors)
+        objLandShape = objLand.toShape()
+
+        return objLandShape
+
     # Ok and Cancel buttons are created by default in FreeCAD Task Panels
     # What is done when we click on the ok button.
     def accept(self):
@@ -319,32 +337,17 @@ class Project:
             self.obj.Latitude = self.LatitudeValue.value()
             self.obj.Longitude = self.LongitudeValue.value()
 
-        print('NordWest: ', self.latNW, self.longNW)
-        print('NordEst: ', self.latNE, self.longNE)
-        print('SouthWest: ', self.latSW, self.longSW)
-        print('SouthEst: ', self.latSE, self.longSE)
+#        if self.Shapefile.isChecked():
+#            #
+        if self.OpenTopographyRadioButton.isChecked():
+            objLandShape = self.OTshape()
+            self.obj.addObject(objLandShape)
+            Part.show(objLandShape)
 
-        #NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
-        #gridSpace = float(format(NWNE['s12']))/(10*1000)
-        gridSpace = (self.latNW-self.latSE)/5
-        if self.latNW >= self.latSE:
-            latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
-        else:
-            latitudes = numpy.arange(self.latNW, self.latSE, gridSpace)
-        if self.longNW >= self.longSE:
-            longitudes = numpy.arange(self.longSE, self.longNW, gridSpace)
-        else:
-            longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
-
-        doc = FreeCAD.ActiveDocument
-        objLandShape = doc.addObject("Part::FeaturePython", "LandShape")
-        vectors = self.surfacePoint(self.center,latitudes,longitudes)
-        objLand = Part.BSplineSurface()
-        objLand.interpolate(vectors)
-        objLandShape.show(objLand.toShape())
-
-        #objSurface = doc.addObject("Part::FeaturePython", "Shape")
-        self.obj.addObject(objLandShape)
+            #doc = FreeCAD.ActiveDocument
+            #objLandShape = doc.addObject("Part::FeaturePython", "LandShape")
+            #Part.show(objLand.toShape())
+            #objSurface = doc.addObject("Part::FeaturePython", "Shape")
 
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
