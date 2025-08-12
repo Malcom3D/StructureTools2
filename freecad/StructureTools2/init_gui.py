@@ -48,7 +48,6 @@ class StructureTools2(Gui.Workbench):
 #		from freecad.StructureTools2 import member
 		from freecad.StructureTools2 import project
 		from freecad.StructureTools2 import beam
-		from freecad.StructureTools2 import surface
 		from freecad.StructureTools2 import calc
 		from freecad.StructureTools2 import diagram
 
@@ -63,10 +62,10 @@ class StructureTools2(Gui.Workbench):
 		self.appendToolbar('StructureLoad', ["load_distributed", "load_nodal"])
 		self.appendToolbar('StructureProject', ["project"])
 #		self.appendToolbar('StructureTools2', ["member", "suport", "section"])
-		self.appendToolbar('StructureElements', ["suport", "beam", "surface"])
+		self.appendToolbar('StructureElements', ["suport", "beam"])
 #		self.appendToolbar('StructureResults', ["calc","diagram"])
 #		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "suport", "beam", "project", "calc", "diagram"])
-		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "project", "suport", "beam", "surface"])
+		self.appendMenu('StructureTools2',["load_distributed", "load_nodal", "project", "suport", "beam"])
 
 	def Activated(self):
 		'''
