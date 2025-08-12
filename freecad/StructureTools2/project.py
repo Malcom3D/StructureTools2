@@ -336,14 +336,15 @@ class Project:
         else:
             longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
+        objLandShape = doc.addObject("Part::FeaturePython", "LandShape")
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
         objLand = Part.BSplineSurface()
         objLand.interpolate(vectors)
-        Part.show(objLand.toShape())
+        objLandShape.show(objLand.toShape())
 
         #doc = FreeCAD.ActiveDocument
         #objSurface = doc.addObject("Part::FeaturePython", "Shape")
-        self.obj.addObject(objLand)
+        self.obj.addObject(objLandShape)
 
         self.obj.NominalLife = self.NominalLifeValue.currentText()
         self.obj.Vn = self.Vn
