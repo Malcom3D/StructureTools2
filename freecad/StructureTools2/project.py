@@ -151,9 +151,9 @@ class Project:
         self.LongitudeValue.setMinimum(-180.000000)
         self.LongitudeValue.setMaximum(180.000000)
         self.LandAreaRadiusValue.setMaximum(99999999999999)
-        self.LandAreaRadiusValue.setMinimum(0)
+        self.LandAreaRadiusValue.setMinimum(220)
         self.LandAreaRadiusValue.valueChanged.connect(self.calcArea)
-        self.LandAreaValueLabel = QtGui.QLabel('Land area: 0 m²')
+        self.LandAreaValueLabel = QtGui.QLabel('Land area: 96800 m²')
         self.OpenTopographyLabel = QtGui.QLabel('OpenTopography API key:')
         self.OpenTopographyValue = QtGui.QLineEdit()
         self.OpenTopographyValue.setClearButtonEnabled(True)
@@ -326,7 +326,7 @@ class Project:
 
         #NWNE = Geodesic.WGS84.Inverse(self.latNW,self.longNW,self.latNE,self.longNE)
         #gridSpace = float(format(NWNE['s12']))/(10*1000)
-        gridSpace = (self.latNW-self.latSE)/5
+        gridSpace = (self.latNW-self.latSE)/10
         if self.latNW >= self.latSE:
             latitudes = numpy.arange(self.latSE, self.latNW, gridSpace)
         else:
