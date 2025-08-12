@@ -336,13 +336,13 @@ class Project:
         else:
             longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
+        doc = FreeCAD.ActiveDocument
         objLandShape = doc.addObject("Part::FeaturePython", "LandShape")
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
         objLand = Part.BSplineSurface()
         objLand.interpolate(vectors)
         objLandShape.show(objLand.toShape())
 
-        #doc = FreeCAD.ActiveDocument
         #objSurface = doc.addObject("Part::FeaturePython", "Shape")
         self.obj.addObject(objLandShape)
 
