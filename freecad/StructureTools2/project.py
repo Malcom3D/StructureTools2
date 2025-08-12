@@ -337,14 +337,15 @@ class Project:
             self.obj.Latitude = self.LatitudeValue.value()
             self.obj.Longitude = self.LongitudeValue.value()
 
+        doc = FreeCAD.ActiveDocument
 #        if self.Shapefile.isChecked():
 #            #
         if self.OpenTopographyRadioButton.isChecked():
-            objLandShape = self.OTshape()
+            objLandShape = doc.addObject("Part::Feature", "LandShape")
+            objLandShape.Shape = self.OTshape()
             self.obj.addObject(objLandShape)
-            Part.show(objLandShape)
 
-            #doc = FreeCAD.ActiveDocument
+            #Part.show(objLandShape)
             #objLandShape = doc.addObject("Part::FeaturePython", "LandShape")
             #Part.show(objLand.toShape())
             #objSurface = doc.addObject("Part::FeaturePython", "Shape")
