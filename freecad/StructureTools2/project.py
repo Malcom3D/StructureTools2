@@ -320,7 +320,6 @@ class Project:
             longitudes = numpy.arange(self.longNW, self.longSE, gridSpace)
 
         vectors = self.surfacePoint(self.center,latitudes,longitudes)
-        print(vectors)
         objShape = Part.BSplineSurface()
         objShape.interpolate(vectors)
         objLandShape = objShape.toShape()

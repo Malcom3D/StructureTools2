@@ -34,6 +34,7 @@ class Beam:
     def __init__(self, selection):
         self.selection = selection
         for object in self.selection:
+            print(object.Name)
             if 'Project' in object.Name:
                 self.objProject = object
                 if 'ntc2018' in object.BuildingStandard:
